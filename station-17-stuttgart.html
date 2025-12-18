@@ -316,7 +316,7 @@ function showFeedback(isCorrect, msg) { const fb = document.getElementById('feed
 function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
 function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station17_gems', gems); localStorage.setItem('station17_completed', pct >= 50); }
 function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
-function goHome() { window.location.href = 'winterreise-index.html'; }
+function goHome() { window.location.href = 'index.html'; }
 </script>
 </body>
 </html>
