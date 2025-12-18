@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌲 Station 5: Schwarzwald - Feste Präpositionen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ice-blue: #E0F4FF; --deep-blue: #1E3A5F; --winter-blue: #5B9BD5; --snow-white: #FFFFFF; --crystal-cyan: #7DD3FC; --warm-gold: #FFD700; --rubin: #E63946; --smaragd: #06D6A0; --amethyst: #9D4EDD; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .home-btn:hover { background: rgba(255,255,255,0.3); }
+        .section { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.2); }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; font-size: 1.4em; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .story-box em { color: #7DD3FC; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .collapsible:hover { background: rgba(255, 255, 255, 0.2); }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(255, 255, 255, 0.05); border-radius: 0 0 15px 15px; }
+        .collapsible-content.open { max-height: 4000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; transition: transform 0.2s; background: rgba(255,255,255,0.1); }
+        .level-btn:hover { transform: scale(1.05); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .level-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .dot-rubin { background: #E63946; }
+        .dot-smaragd { background: #06D6A0; }
+        .dot-amethyst { background: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .option-btn:hover { background: rgba(255,255,255,0.2); border-color: #7DD3FC; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .option-btn:disabled { cursor: not-allowed; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input:focus { outline: none; border-color: #7DD3FC; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .check-btn:hover { background: #4A8BC4; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .ordering-word:hover { background: rgba(255,215,0,0.4); }
+        .ordering-word.placed { opacity: 0.4; cursor: default; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .matching-item:hover { border-color: #7DD3FC; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); cursor: default; }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; font-weight: 500; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; font-weight: 600; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; margin-bottom: 10px; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        .results-btn:hover { transform: scale(1.05); }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+
+<button class="home-btn" onclick="goHome()">🏠</button>
+
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🌲</div>
+        <h1 class="station-title">Station 5: Schwarzwald</h1>
+        <p class="station-subtitle">Feste Präpositionen - mit, von, zu, für...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p><strong>Mit</strong> vier Kristallen reisen die Freunde weiter. Sie fahren <strong>mit dem Bus</strong> in den Schwarzwald. Die Bäume sind groß und dunkel.</p>
+            <p><strong>Mia:</strong> <em>"Ich habe Angst <strong>vor</strong> dem dunklen Wald!"</em></p>
+            <p><strong>Leon:</strong> <em>"Keine Sorge! Wir sind zusammen. Wir suchen <strong>nach</strong> dem fünften Kristall."</em></p>
+            <p>Im Wald treffen sie einen Förster. Er heißt <strong>Herr Becker</strong> und kommt <strong>aus</strong> einem kleinen Dorf.</p>
+            <p><strong>Herr Becker:</strong> <em>"Guten Tag! Ihr seid nicht <strong>von</strong> hier, oder? Was macht ihr im Wald?"</em></p>
+            <p><strong>Sara:</strong> <em>"Wir suchen <strong>nach</strong> einem Kristall. Können Sie uns helfen?"</em></p>
+            <p><strong>Herr Becker:</strong> <em>"Ah, der alte Kristall! Mein Großvater hat mir <strong>von</strong> ihm erzählt. Er ist <strong>bei</strong> der alten Eiche versteckt."</em></p>
+            <p><strong>Tim:</strong> <em>"Können wir <strong>mit</strong> Ihnen <strong>zu</strong> der Eiche gehen?"</em></p>
+            <p><strong>Herr Becker:</strong> <em>"Natürlich! Aber ihr müsst aufpassen. Der Weg ist schwer <strong>ohne</strong> eine Lampe. Ich habe eine <strong>für</strong> euch."</em></p>
+            <p>Sie gehen <strong>durch</strong> den dunklen Wald. <strong>Nach</strong> einer Stunde kommen sie <strong>zu</strong> einer riesigen Eiche.</p>
+            <p><strong>Herr Becker:</strong> <em>"Hier! Schaut <strong>unter</strong> den Wurzeln!"</em></p>
+            <p><strong>Mia</strong> gräbt <strong>mit</strong> den Händen. Sie findet einen <strong>braunen Kristall</strong>!</p>
+            <p><em>"Der fünfte Kristall!"</em> rufen alle. <em>"Danke <strong>für</strong> Ihre Hilfe, Herr Becker!"</em></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">
+            📚 Grammatik: Feste Präpositionen
+            <span id="grammarArrow">▼</span>
+        </button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was sind feste Präpositionen?</h3>
+                <p>Diese Präpositionen haben <strong>immer denselben Kasus</strong> - egal ob WO oder WOHIN!</p>
+
+                <h3>Präpositionen + DATIV (immer!)</h3>
+                <div class="grammar-note">
+                    <p><strong>aus, bei, mit, nach, seit, von, zu, gegenüber</strong></p>
+                </div>
+                <table class="grammar-table">
+                    <tr><th>Präposition</th><th>Bedeutung</th><th>Beispiel</th></tr>
+                    <tr><td><strong>aus</strong></td><td>Herkunft</td><td>Ich komme <strong>aus</strong> Deutschland.</td></tr>
+                    <tr><td><strong>bei</strong></td><td>Ort (Person/Firma)</td><td>Ich wohne <strong>bei</strong> meinen Eltern.</td></tr>
+                    <tr><td><strong>mit</strong></td><td>Begleitung, Mittel</td><td>Ich fahre <strong>mit</strong> dem Bus.</td></tr>
+                    <tr><td><strong>nach</strong></td><td>Richtung, Zeit</td><td>Ich fahre <strong>nach</strong> Berlin.</td></tr>
+                    <tr><td><strong>seit</strong></td><td>Zeitpunkt (Anfang)</td><td>Ich lerne <strong>seit</strong> einem Jahr Deutsch.</td></tr>
+                    <tr><td><strong>von</strong></td><td>Herkunft, Besitz</td><td>Das Buch ist <strong>von</strong> meinem Bruder.</td></tr>
+                    <tr><td><strong>zu</strong></td><td>Richtung (Person/Ort)</td><td>Ich gehe <strong>zu</strong> meiner Freundin.</td></tr>
+                    <tr><td><strong>gegenüber</strong></td><td>Position</td><td>Das Café ist <strong>gegenüber</strong> dem Bahnhof.</td></tr>
+                </table>
+
+                <h3>Präpositionen + AKKUSATIV (immer!)</h3>
+                <div class="grammar-note">
+                    <p><strong>für, gegen, ohne, um, durch, bis</strong></p>
+                </div>
+                <table class="grammar-table">
+                    <tr><th>Präposition</th><th>Bedeutung</th><th>Beispiel</th></tr>
+                    <tr><td><strong>für</strong></td><td>Zweck, Person</td><td>Das Geschenk ist <strong>für</strong> dich.</td></tr>
+                    <tr><td><strong>gegen</strong></td><td>Opposition, Zeit</td><td>Ich bin <strong>gegen</strong> den Plan.</td></tr>
+                    <tr><td><strong>ohne</strong></td><td>Abwesenheit</td><td>Ich gehe <strong>ohne</strong> meinen Bruder.</td></tr>
+                    <tr><td><strong>um</strong></td><td>Zeit, herum</td><td>Wir treffen uns <strong>um</strong> 8 Uhr.</td></tr>
+                    <tr><td><strong>durch</strong></td><td>Bewegung durch</td><td>Wir gehen <strong>durch</strong> den Park.</td></tr>
+                    <tr><td><strong>bis</strong></td><td>Endpunkt</td><td>Ich arbeite <strong>bis</strong> 18 Uhr.</td></tr>
+                </table>
+
+                <h3>⚠️ Wichtige Kurzformen</h3>
+                <div class="grammar-warning">
+                    <p><strong>zu + dem = zum</strong> → Ich gehe <strong>zum</strong> Arzt.</p>
+                    <p><strong>zu + der = zur</strong> → Ich gehe <strong>zur</strong> Schule.</p>
+                    <p><strong>bei + dem = beim</strong> → Ich bin <strong>beim</strong> Arzt.</p>
+                    <p><strong>von + dem = vom</strong> → Ich komme <strong>vom</strong> Bahnhof.</p>
+                </div>
+
+                <h3>Verben mit festen Präpositionen</h3>
+                <table class="grammar-table">
+                    <tr><th>Verb + Präposition</th><th>Beispiel</th></tr>
+                    <tr><td>warten <strong>auf</strong> + Akk</td><td>Ich warte <strong>auf</strong> den Bus.</td></tr>
+                    <tr><td>suchen <strong>nach</strong> + Dat</td><td>Ich suche <strong>nach</strong> meinem Schlüssel.</td></tr>
+                    <tr><td>Angst haben <strong>vor</strong> + Dat</td><td>Ich habe Angst <strong>vor</strong> Spinnen.</td></tr>
+                    <tr><td>sich freuen <strong>auf</strong> + Akk</td><td>Ich freue mich <strong>auf</strong> den Urlaub.</td></tr>
+                    <tr><td>sich freuen <strong>über</strong> + Akk</td><td>Ich freue mich <strong>über</strong> das Geschenk.</td></tr>
+                    <tr><td>denken <strong>an</strong> + Akk</td><td>Ich denke <strong>an</strong> dich.</td></tr>
+                    <tr><td>träumen <strong>von</strong> + Dat</td><td>Ich träume <strong>von</strong> einer Reise.</td></tr>
+                    <tr><td>danken <strong>für</strong> + Akk</td><td>Ich danke dir <strong>für</strong> deine Hilfe.</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🌲</span><div><div class="vocab-word">der Wald</div><div class="vocab-meaning">viele Bäume zusammen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🌳</span><div><div class="vocab-word">die Eiche</div><div class="vocab-meaning">großer, starker Baum</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">👨‍🌾</span><div><div class="vocab-word">der Förster</div><div class="vocab-meaning">arbeitet im Wald</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔦</span><div><div class="vocab-word">die Lampe</div><div class="vocab-meaning">macht Licht</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🌿</span><div><div class="vocab-word">die Wurzel</div><div class="vocab-meaning">Teil vom Baum, unter der Erde</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">😨</span><div><div class="vocab-word">die Angst</div><div class="vocab-meaning">Gefühl, wenn etwas gefährlich ist</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔍</span><div><div class="vocab-word">suchen nach</div><div class="vocab-meaning">etwas finden wollen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🙏</span><div><div class="vocab-word">danken für</div><div class="vocab-meaning">"Danke" sagen</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <p style="margin-bottom: 20px; color: #E0F4FF;">30 Fragen zu festen Präpositionen!</p>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')"><span class="level-dot dot-rubin"></span>Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')"><span class="level-dot dot-smaragd"></span>Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')"><span class="level-dot dot-amethyst"></span>Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter">Frage 1 von 30</div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore">0 / 30</div>
+        <div class="results-gems" id="resultsGems">+0 Edelsteine 💎</div>
+        <p id="resultsMessage" style="margin-bottom: 20px;"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal spielen</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    // TEXTVERSTÄNDNIS (8)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Womit fahren die Freunde in den Schwarzwald?', options: ['Mit dem Bus', 'Mit dem Zug', 'Mit dem Auto', 'Mit dem Fahrrad'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie heißt der Förster?', options: ['Herr Becker', 'Herr Müller', 'Herr Schmidt', 'Herr Wagner'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wovor hat Mia Angst?', options: ['Vor dem dunklen Wald', 'Vor dem Förster', 'Vor den Tieren', 'Vor dem Wasser'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo ist der Kristall versteckt?', options: ['Bei der alten Eiche', 'Im Fluss', 'Im Haus', 'Auf dem Berg'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Welche Farbe hat der fünfte Kristall?', options: ['Braun', 'Grün', 'Blau', 'Rot'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was gibt der Förster den Freunden?', options: ['Eine Lampe', 'Ein Buch', 'Essen', 'Geld'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie lange gehen sie durch den Wald?', options: ['Eine Stunde', 'Zwei Stunden', '30 Minuten', 'Den ganzen Tag'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Womit gräbt Mia?', options: ['Mit den Händen', 'Mit einer Schaufel', 'Mit einem Stock', 'Mit einem Löffel'], correct: 0 },
+    // DATIV-PRÄPOSITIONEN (10)
+    { type: 'mc', context: '✏️ aus + Dativ', question: 'Ich komme _____ Deutschland.', options: ['aus', 'von', 'mit', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ mit + Dativ', question: 'Ich fahre _____ dem Bus.', options: ['mit', 'von', 'aus', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ bei + Dativ', question: 'Ich wohne _____ meinen Eltern.', options: ['bei', 'mit', 'von', 'aus'], correct: 0 },
+    { type: 'mc', context: '✏️ von + Dativ', question: 'Das Geschenk ist _____ meiner Mutter.', options: ['von', 'aus', 'mit', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ zu + Dativ', question: 'Ich gehe _____ meiner Freundin.', options: ['zu', 'bei', 'mit', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ nach + Dativ', question: 'Ich fahre _____ Berlin.', options: ['nach', 'zu', 'bei', 'in'], correct: 0 },
+    { type: 'mc', context: '✏️ seit + Dativ', question: 'Ich lerne _____ einem Jahr Deutsch.', options: ['seit', 'vor', 'nach', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ Kurzform', question: 'Ich gehe _____ Arzt. (zu + dem)', options: ['zum', 'zur', 'beim', 'vom'], correct: 0 },
+    { type: 'mc', context: '✏️ Kurzform', question: 'Ich gehe _____ Schule. (zu + der)', options: ['zur', 'zum', 'bei', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ Kurzform', question: 'Ich komme _____ Bahnhof. (von + dem)', options: ['vom', 'zum', 'beim', 'zur'], correct: 0 },
+    // AKKUSATIV-PRÄPOSITIONEN (6)
+    { type: 'mc', context: '✏️ für + Akkusativ', question: 'Das Geschenk ist _____ dich.', options: ['für', 'mit', 'von', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ ohne + Akkusativ', question: 'Ich gehe _____ meinen Bruder.', options: ['ohne', 'mit', 'von', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ gegen + Akkusativ', question: 'Ich bin _____ den Plan.', options: ['gegen', 'für', 'mit', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ um + Akkusativ', question: 'Wir treffen uns _____ 8 Uhr.', options: ['um', 'bei', 'mit', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ durch + Akkusativ', question: 'Wir gehen _____ den Park.', options: ['durch', 'mit', 'von', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ bis + Akkusativ', question: 'Ich arbeite _____ 18 Uhr.', options: ['bis', 'um', 'von', 'seit'], correct: 0 },
+    // MIXED (4)
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Danke _____ deine Hilfe!', options: ['für', 'von', 'mit', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Ich suche _____ meinem Schlüssel.', options: ['nach', 'für', 'gegen', 'ohne'], correct: 0 },
+    // ORDERING + MATCHING (2)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'fahre', 'mit', 'dem', 'Bus', '.'], correct: ['Ich', 'fahre', 'mit', 'dem', 'Bus', '.'] },
+    { type: 'match', context: '🔗 Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'aus', right: 'Dativ' }, { left: 'für', right: 'Akkusativ' }, { left: 'mit', right: 'Dativ' }, { left: 'ohne', right: 'Akkusativ' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    // TEXTVERSTÄNDNIS (5)
+    { type: 'gap', context: '📖 Textverständnis', question: 'Die Freunde fahren _____ dem Bus.', answer: 'mit', alternatives: ['Mit'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Mia hat Angst _____ dem dunklen Wald.', answer: 'vor', alternatives: ['Vor'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Der Förster kommt _____ einem kleinen Dorf.', answer: 'aus', alternatives: ['Aus'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Sie suchen _____ dem Kristall.', answer: 'nach', alternatives: ['Nach'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Sie danken _____ seine Hilfe.', answer: 'für', alternatives: ['Für'] },
+    // DATIV MIT ARTIKEL (6)
+    { type: 'mc', context: '✏️ mit + Dativ', question: 'Ich fahre mit _____ Auto. (das)', options: ['dem', 'den', 'das', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ von + Dativ', question: 'Das Buch ist von _____ Lehrer. (der)', options: ['dem', 'den', 'der', 'das'], correct: 0 },
+    { type: 'mc', context: '✏️ bei + Dativ', question: 'Ich arbeite bei _____ Firma. (die)', options: ['der', 'die', 'dem', 'den'], correct: 0 },
+    { type: 'mc', context: '✏️ zu + Dativ', question: 'Ich gehe zu _____ Freundin. (die)', options: ['der', 'die', 'dem', 'den'], correct: 0 },
+    { type: 'gap', context: '✏️ aus + Dativ', question: 'Er kommt aus _____ Schweiz. (die)', answer: 'der', alternatives: ['Der'] },
+    { type: 'gap', context: '✏️ nach + Dativ', question: 'Nach _____ Essen gehen wir spazieren. (das)', answer: 'dem', alternatives: ['Dem'] },
+    // AKKUSATIV MIT ARTIKEL (5)
+    { type: 'mc', context: '✏️ für + Akkusativ', question: 'Das ist für _____ Vater. (der)', options: ['den', 'dem', 'der', 'das'], correct: 0 },
+    { type: 'mc', context: '✏️ ohne + Akkusativ', question: 'Ich gehe ohne _____ Schwester. (die)', options: ['die', 'der', 'dem', 'den'], correct: 0 },
+    { type: 'mc', context: '✏️ gegen + Akkusativ', question: 'Ich bin gegen _____ Idee. (die)', options: ['die', 'der', 'dem', 'den'], correct: 0 },
+    { type: 'gap', context: '✏️ durch + Akkusativ', question: 'Wir gehen durch _____ Wald. (der)', answer: 'den', alternatives: ['Den'] },
+    { type: 'gap', context: '✏️ um + Akkusativ', question: 'Wir sitzen um _____ Tisch. (der)', answer: 'den', alternatives: ['Den'] },
+    // VERBEN MIT PRÄPOSITIONEN (6)
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Ich warte _____ den Bus.', options: ['auf', 'für', 'mit', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Ich freue mich _____ den Urlaub. (Zukunft)', options: ['auf', 'über', 'für', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Ich freue mich _____ das Geschenk. (jetzt)', options: ['über', 'auf', 'für', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Ich denke _____ meine Familie.', options: ['an', 'von', 'über', 'für'], correct: 0 },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Ich träume _____ einer Reise.', options: ['von', 'an', 'über', 'für'], correct: 0 },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Ich habe Angst _____ Spinnen.', options: ['vor', 'von', 'für', 'mit'], correct: 0 },
+    // KURZFORMEN (4)
+    { type: 'mc', context: '✏️ Kurzformen', question: '"zu dem" = ?', options: ['zum', 'zur', 'beim', 'vom'], correct: 0 },
+    { type: 'mc', context: '✏️ Kurzformen', question: '"bei dem" = ?', options: ['beim', 'zum', 'zur', 'vom'], correct: 0 },
+    { type: 'mc', context: '✏️ Kurzformen', question: 'Ich bin _____ Arzt. (bei dem)', options: ['beim', 'zum', 'vom', 'zur'], correct: 0 },
+    { type: 'mc', context: '✏️ Kurzformen', question: 'Ich komme gerade _____ Supermarkt. (von dem)', options: ['vom', 'zum', 'beim', 'zur'], correct: 0 },
+    // ORDERING + MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'warte', 'auf', 'den', 'Bus', '.'], correct: ['Ich', 'warte', 'auf', 'den', 'Bus', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Das', 'Geschenk', 'ist', 'für', 'dich', '.'], correct: ['Das', 'Geschenk', 'ist', 'für', 'dich', '.'] },
+    { type: 'match', context: '🔗 Kurzformen', question: 'Ordne zu:', pairs: [{ left: 'zu + dem', right: 'zum' }, { left: 'zu + der', right: 'zur' }, { left: 'bei + dem', right: 'beim' }, { left: 'von + dem', right: 'vom' }]},
+    { type: 'match', context: '🔗 Verben + Präpositionen', question: 'Ordne zu:', pairs: [{ left: 'warten', right: 'auf' }, { left: 'denken', right: 'an' }, { left: 'träumen', right: 'von' }, { left: 'Angst haben', right: 'vor' }]}
+];
+
+const QUESTIONS_AMETHYST = [
+    // KOMPLEXE TEXTFRAGEN (4)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was bedeutet "Der Weg ist schwer ohne eine Lampe"?', options: ['Man braucht eine Lampe', 'Die Lampe ist kaputt', 'Es ist Tag', 'Der Weg ist kurz'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: '"Nach einer Stunde kommen sie _____ einer riesigen Eiche."', answer: 'zu', alternatives: ['Zu'] },
+    { type: 'mc', context: '📖 Textverständnis', question: '"Ihr seid nicht von hier" bedeutet...', options: ['Ihr kommt aus einem anderen Ort', 'Ihr seid verloren', 'Ihr seid müde', 'Ihr seid Touristen'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Der Förster hat eine Lampe _____ die Freunde.', answer: 'für', alternatives: ['Für'] },
+    // DATIV VS AKKUSATIV KOMPLEX (8)
+    { type: 'mc', context: '✏️ Welche Präposition?', question: 'Ich komme gerade _____ der Arbeit.', options: ['von', 'aus', 'nach', 'zu'], correct: 0 },
+    { type: 'mc', context: '✏️ Welche Präposition?', question: 'Ich gehe _____ der Arbeit. (Richtung)', options: ['zur', 'von', 'bei', 'aus'], correct: 0 },
+    { type: 'mc', context: '✏️ Welche Präposition?', question: 'Ich bin _____ der Arbeit. (Position)', options: ['bei', 'zu', 'von', 'nach'], correct: 0 },
+    { type: 'mc', context: '✏️ aus vs. von', question: '"Ich komme _____ Deutschland" (Herkunft/Land)', options: ['aus', 'von', 'nach', 'zu'], correct: 0 },
+    { type: 'mc', context: '✏️ aus vs. von', question: '"Ich komme gerade _____ meinem Freund" (von einer Person)', options: ['von', 'aus', 'bei', 'zu'], correct: 0 },
+    { type: 'mc', context: '✏️ nach vs. zu', question: '"Ich fahre _____ Paris" (Stadt)', options: ['nach', 'zu', 'in', 'bei'], correct: 0 },
+    { type: 'mc', context: '✏️ nach vs. zu', question: '"Ich gehe _____ meinem Freund" (Person)', options: ['zu', 'nach', 'bei', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ nach vs. zu', question: '"Ich gehe _____ Hause" (Ausnahme!)', options: ['nach', 'zu', 'in', 'bei'], correct: 0 },
+    // VERBEN MIT PRÄPOSITIONEN KOMPLEX (8)
+    { type: 'gap', context: '✏️ Verb + Präposition', question: 'Ich interessiere mich _____ Musik.', answer: 'für', alternatives: ['Für'] },
+    { type: 'gap', context: '✏️ Verb + Präposition', question: 'Ich ärgere mich _____ meinen Bruder.', answer: 'über', alternatives: ['Über'] },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Er hat sich _____ seine Freundin verliebt.', options: ['in', 'an', 'für', 'auf'], correct: 0 },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Wir haben _____ das Problem gesprochen.', options: ['über', 'von', 'für', 'mit'], correct: 0 },
+    { type: 'mc', context: '✏️ Verb + Präposition', question: 'Ich erinnere mich _____ meinen Urlaub.', options: ['an', 'über', 'von', 'für'], correct: 0 },
+    { type: 'mc', context: '✏️ auf vs. über (freuen)', question: '"Ich freue mich _____ den Urlaub" (Zukunft)', options: ['auf', 'über', 'für', 'an'], correct: 0 },
+    { type: 'mc', context: '✏️ auf vs. über (freuen)', question: '"Ich freue mich _____ das Geschenk" (bekommen)', options: ['über', 'auf', 'für', 'an'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Ich warte für den Bus.', 'Ich warte auf den Bus.', 'Ich warte schon lange.', 'Warte auf mich!'], correct: 0 },
+    // FEHLERSUCHE (4)
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Ich fahre mit das Auto.', 'Ich fahre mit dem Auto.', 'Ich fahre mit dem Bus.', 'Ich fahre mit der Bahn.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Das ist für der Mann.', 'Das ist für den Mann.', 'Das ist für die Frau.', 'Das ist für das Kind.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist RICHTIG?', options: ['Ich komme aus der Türkei.', 'Ich komme von der Türkei.', 'Ich komme nach der Türkei.', 'Ich komme zu der Türkei.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist RICHTIG?', options: ['Ich gehe zum Arzt.', 'Ich gehe nach Arzt.', 'Ich gehe bei Arzt.', 'Ich gehe von Arzt.'], correct: 0 },
+    // ORDERING + MATCHING (6)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'freue', 'mich', 'auf', 'den', 'Urlaub', '.'], correct: ['Ich', 'freue', 'mich', 'auf', 'den', 'Urlaub', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Er', 'kommt', 'aus', 'der', 'Schweiz', '.'], correct: ['Er', 'kommt', 'aus', 'der', 'Schweiz', '.'] },
+    { type: 'match', context: '🔗 Dativ-Präpositionen', question: 'Ordne zu:', pairs: [{ left: 'aus', right: 'Herkunft' }, { left: 'bei', right: 'Ort (Person)' }, { left: 'mit', right: 'Begleitung' }, { left: 'seit', right: 'Zeitpunkt' }]},
+    { type: 'match', context: '🔗 Akkusativ-Präpositionen', question: 'Ordne zu:', pairs: [{ left: 'für', right: 'Zweck' }, { left: 'gegen', right: 'Opposition' }, { left: 'ohne', right: 'Abwesenheit' }, { left: 'um', right: 'Uhrzeit' }]}
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+
+function shuffle(array) { const arr = [...array]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { const content = document.getElementById('grammarContent'); const arrow = document.getElementById('grammarArrow'); content.classList.toggle('open'); arrow.textContent = content.classList.contains('open') ? '▲' : '▼'; }
+
+function startQuiz(level) {
+    selectedLevel = level; currentQuestion = 0; score = 0;
+    if (level === 'rubin') currentQuestions = shuffle(QUESTIONS_RUBIN);
+    else if (level === 'smaragd') currentQuestions = shuffle(QUESTIONS_SMARAGD);
+    else currentQuestions = shuffle(QUESTIONS_AMETHYST);
+    document.getElementById('levelSelection').style.display = 'none';
+    document.getElementById('quizArea').classList.add('active');
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = currentQuestions[currentQuestion];
+    const box = document.getElementById('questionBox');
+    document.getElementById('progressFill').style.width = ((currentQuestion) / currentQuestions.length) * 100 + '%';
+    document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`;
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('nextBtn').classList.remove('show');
+
+    let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`;
+
+    if (q.type === 'mc') {
+        html += '<div class="options-grid">';
+        shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach((opt) => {
+            html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`;
+        });
+        html += '</div>';
+    } else if (q.type === 'gap') {
+        html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`;
+    } else if (q.type === 'order') {
+        html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">';
+        shuffle([...q.words]).forEach((word) => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; });
+        html += '</div><p style="text-align:center; color:#7DD3FC;">↓ Klicke die Wörter in der richtigen Reihenfolge ↓</p><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>';
+    } else if (q.type === 'match') {
+        html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>';
+        shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div><div class="matching-column"><h4>Rechts</h4>';
+        shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div></div>';
+    }
+    box.innerHTML = html;
+}
+
+function checkMC(selected, correct, btn) {
+    document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+    if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); }
+}
+
+function checkGap() {
+    const input = document.getElementById('gapInput');
+    const q = currentQuestions[currentQuestion];
+    const userAnswer = input.value.trim().toLowerCase();
+    const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : [];
+    if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { input.classList.add('wrong'); showFeedback(false, `Die richtige Antwort ist: ${q.answer}`); }
+    input.disabled = true;
+}
+
+function moveWord(element, direction) {
+    if (element.classList.contains('placed')) return;
+    const source = document.getElementById('orderSource'), target = document.getElementById('orderTarget');
+    if (direction === 'toTarget') { const clone = element.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; target.appendChild(clone); element.classList.add('placed'); }
+    else { source.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === element.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); element.remove(); }
+}
+
+function checkOrder() {
+    const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word);
+    if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { showFeedback(false, `Richtige Reihenfolge: ${currentQuestions[currentQuestion].correct.join(' ')}`); }
+}
+
+let selectedMatch = null, matchedPairs = 0;
+
+function selectMatch(element) {
+    if (element.classList.contains('matched')) return;
+    if (!selectedMatch) { selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+    else {
+        if (selectedMatch.type === element.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+        else {
+            const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === element.dataset.value) || (p.right === selectedMatch.value && p.left === element.dataset.value));
+            if (pair) { element.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } }
+            else { element.classList.add('wrong'); setTimeout(() => element.classList.remove('wrong'), 500); }
+            selectedMatch.element.classList.remove('selected'); selectedMatch = null;
+        }
+    }
+}
+
+function showFeedback(isCorrect, message) { const feedback = document.getElementById('feedback'); feedback.textContent = message; feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+
+function showResults() {
+    document.getElementById('quizArea').classList.remove('active');
+    document.getElementById('resultsSection').classList.add('active');
+    const percentage = Math.round((score / currentQuestions.length) * 100);
+    let gems = 0, icon = '🏆', message = '';
+    if (percentage >= 90) { gems = selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10; icon = '🏆'; message = 'Ausgezeichnet! Du hast den fünften Kristall gefunden! 💎'; }
+    else if (percentage >= 70) { gems = selectedLevel === 'amethyst' ? 20 : selectedLevel === 'smaragd' ? 15 : 8; icon = '⭐'; message = 'Sehr gut!'; }
+    else if (percentage >= 50) { gems = selectedLevel === 'amethyst' ? 10 : selectedLevel === 'smaragd' ? 8 : 5; icon = '💪'; message = 'Gut gemacht!'; }
+    else { gems = 2; icon = '📚'; message = 'Lies die Grammatik nochmal!'; }
+    document.getElementById('resultsIcon').textContent = icon;
+    document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`;
+    document.getElementById('resultsGems').textContent = `+${gems} Edelsteine 💎`;
+    document.getElementById('resultsMessage').textContent = message;
+    localStorage.setItem('station5_gems', gems);
+    localStorage.setItem('station5_completed', percentage >= 50);
+}
+
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+
+</body>
+</html>

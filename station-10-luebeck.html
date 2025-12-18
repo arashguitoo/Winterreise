@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 Station 10: Leipzig - Komparativ & Superlativ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 4000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🔄</div>
+        <h1 class="station-title">Station 10: Leipzig</h1>
+        <p class="station-subtitle">Komparativ & Superlativ - größer, am größten</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde kommen nach Leipzig. Diese Stadt ist <strong>größer</strong> als das kleine Bergdorf, aber <strong>kleiner</strong> als München.</p>
+            <p><strong>Leon:</strong> <em>"Leipzig ist eine der <strong>ältesten</strong> Städte Deutschlands!"</em></p>
+            <p><strong>Sara:</strong> <em>"Ja, und die Universität hier ist <strong>berühmter</strong> als viele andere."</em></p>
+            <p>Sie treffen einen Bibliothekar namens <strong>Herr Richter</strong>. Er arbeitet in der <strong>größten</strong> Bibliothek der Stadt.</p>
+            <p><strong>Herr Richter:</strong> <em>"Willkommen! Sucht ihr etwas <strong>Besonderes</strong>?"</em></p>
+            <p><strong>Mia:</strong> <em>"Ja, wir suchen einen Kristall. Wissen Sie, wo er ist?"</em></p>
+            <p><strong>Herr Richter:</strong> <em>"Hmm, der Kristall ist im <strong>höchsten</strong> Regal. Ihr müsst die <strong>längste</strong> Leiter nehmen."</em></p>
+            <p><strong>Tim:</strong> <em>"Das ist <strong>schwieriger</strong> als ich dachte!"</em></p>
+            <p><strong>Herr Richter:</strong> <em>"Keine Sorge! Je <strong>höher</strong> ihr steigt, desto <strong>näher</strong> seid ihr dem Kristall!"</em></p>
+            <p>Tim klettert die Leiter hinauf. Ganz oben, im <strong>dunkelsten</strong> Regal, findet er einen <strong>violetten Kristall</strong>!</p>
+            <p><strong>Sara:</strong> <em>"Das war die <strong>beste</strong> Idee, hierher zu kommen!"</em></p>
+            <p><em>"Der zehnte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Komparativ & Superlativ <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Grundform → Komparativ → Superlativ</h3>
+                <table class="grammar-table">
+                    <tr><th>Positiv</th><th>Komparativ</th><th>Superlativ</th></tr>
+                    <tr><td>klein</td><td>klein<strong>er</strong></td><td>am klein<strong>sten</strong></td></tr>
+                    <tr><td>schnell</td><td>schnell<strong>er</strong></td><td>am schnell<strong>sten</strong></td></tr>
+                    <tr><td>schön</td><td>schön<strong>er</strong></td><td>am schön<strong>sten</strong></td></tr>
+                </table>
+                <div class="grammar-note"><p><strong>Regel:</strong> Komparativ = +er | Superlativ = am ...sten</p></div>
+
+                <h3>Mit Umlaut (a→ä, o→ö, u→ü)</h3>
+                <table class="grammar-table">
+                    <tr><th>Positiv</th><th>Komparativ</th><th>Superlativ</th></tr>
+                    <tr><td>alt</td><td><strong>ä</strong>lter</td><td>am <strong>ä</strong>ltesten</td></tr>
+                    <tr><td>groß</td><td>gr<strong>ö</strong>ßer</td><td>am gr<strong>ö</strong>ßten</td></tr>
+                    <tr><td>jung</td><td>j<strong>ü</strong>nger</td><td>am j<strong>ü</strong>ngsten</td></tr>
+                    <tr><td>kalt</td><td>k<strong>ä</strong>lter</td><td>am k<strong>ä</strong>ltesten</td></tr>
+                    <tr><td>warm</td><td>w<strong>ä</strong>rmer</td><td>am w<strong>ä</strong>rmsten</td></tr>
+                    <tr><td>lang</td><td>l<strong>ä</strong>nger</td><td>am l<strong>ä</strong>ngsten</td></tr>
+                    <tr><td>kurz</td><td>k<strong>ü</strong>rzer</td><td>am k<strong>ü</strong>rzesten</td></tr>
+                </table>
+
+                <h3>Unregelmäßige Formen</h3>
+                <table class="grammar-table">
+                    <tr><th>Positiv</th><th>Komparativ</th><th>Superlativ</th></tr>
+                    <tr><td>gut</td><td><strong>besser</strong></td><td>am <strong>besten</strong></td></tr>
+                    <tr><td>viel</td><td><strong>mehr</strong></td><td>am <strong>meisten</strong></td></tr>
+                    <tr><td>gern</td><td><strong>lieber</strong></td><td>am <strong>liebsten</strong></td></tr>
+                    <tr><td>hoch</td><td><strong>höher</strong></td><td>am <strong>höchsten</strong></td></tr>
+                    <tr><td>nah</td><td><strong>näher</strong></td><td>am <strong>nächsten</strong></td></tr>
+                </table>
+
+                <h3>Vergleiche</h3>
+                <div class="grammar-note">
+                    <p><strong>so ... wie</strong> = gleich: Er ist <strong>so</strong> groß <strong>wie</strong> ich.</p>
+                    <p><strong>...er als</strong> = mehr: Er ist größ<strong>er als</strong> ich.</p>
+                    <p><strong>je ... desto</strong>: <strong>Je</strong> mehr ich lerne, <strong>desto</strong> besser verstehe ich.</p>
+                </div>
+
+                <h3>⚠️ Superlativ vor Nomen</h3>
+                <div class="grammar-warning">
+                    <p>Der <strong>größte</strong> Mann (mit Artikel + Adjektivendung)</p>
+                    <p>Das <strong>schönste</strong> Bild</p>
+                    <p>Die <strong>beste</strong> Idee</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">📚</span><div><div class="vocab-word">die Bibliothek</div><div class="vocab-meaning">Ort mit vielen Büchern</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📖</span><div><div class="vocab-word">das Regal</div><div class="vocab-meaning">Möbel für Bücher</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🪜</span><div><div class="vocab-word">die Leiter</div><div class="vocab-meaning">zum Hochklettern</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🎓</span><div><div class="vocab-word">die Universität</div><div class="vocab-meaning">Hochschule</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⬆️</span><div><div class="vocab-word">hoch</div><div class="vocab-meaning">nach oben</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📏</span><div><div class="vocab-word">vergleichen</div><div class="vocab-meaning">A und B prüfen</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Wie ist Leipzig im Vergleich zu München?', options: ['Kleiner', 'Größer', 'Gleich groß', 'Viel größer'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wo ist der Kristall?', options: ['Im höchsten Regal', 'Im Keller', 'Am Eingang', 'Im Garten'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der zehnte Kristall?', options: ['Violett', 'Blau', 'Grün', 'Rot'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'klein → _____', options: ['kleiner', 'kleinerer', 'am kleinsten', 'kleinst'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'schnell → _____', options: ['schneller', 'schnellerer', 'am schnellsten', 'schnellst'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'schön → _____', options: ['schöner', 'schönerer', 'am schönsten', 'schönst'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'alt → _____', options: ['älter', 'alter', 'älterer', 'altest'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'groß → _____', options: ['größer', 'grosser', 'größerer', 'großest'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'jung → _____', options: ['jünger', 'junger', 'jüngerer', 'jungest'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ', question: 'klein → am _____', options: ['kleinsten', 'kleinersten', 'kleinst', 'kleineren'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ', question: 'alt → am _____', options: ['ältesten', 'altesten', 'ältersten', 'altest'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ', question: 'groß → am _____', options: ['größten', 'grossten', 'größesten', 'großest'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'gut → _____', options: ['besser', 'guter', 'güter', 'am besten'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'viel → _____', options: ['mehr', 'vieler', 'vielst', 'am meisten'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'gern → _____', options: ['lieber', 'gerner', 'gernst', 'am liebsten'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'gut → am _____', options: ['besten', 'gutsten', 'bessersten', 'güten'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'viel → am _____', options: ['meisten', 'vielsten', 'mehrsten', 'vielen'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'gern → am _____', options: ['liebsten', 'gernsten', 'liebersten', 'gernen'], correct: 0 },
+    { type: 'mc', context: '✏️ Vergleich', question: 'Er ist so groß _____ ich.', options: ['wie', 'als', 'dass', 'ob'], correct: 0 },
+    { type: 'mc', context: '✏️ Vergleich', question: 'Er ist größer _____ ich.', options: ['als', 'wie', 'dass', 'ob'], correct: 0 },
+    { type: 'mc', context: '✏️ Vergleich', question: 'Das Buch ist interessanter _____ der Film.', options: ['als', 'wie', 'dass', 'ob'], correct: 0 },
+    { type: 'mc', context: '✏️ Vergleich', question: 'Sie ist genauso alt _____ er.', options: ['wie', 'als', 'dass', 'ob'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'kalt → _____', options: ['kälter', 'kalter', 'kälterer', 'kaltest'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'warm → _____', options: ['wärmer', 'warmer', 'wärmerer', 'warmest'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'lang → _____', options: ['länger', 'langer', 'längerer', 'langest'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'kurz → _____', options: ['kürzer', 'kurzer', 'kürzerer', 'kurzest'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'hoch → _____', options: ['höher', 'hocher', 'höcherer', 'hochest'], correct: 0 },
+    { type: 'mc', context: '✏️ Unregelmäßig', question: 'nah → _____', options: ['näher', 'naher', 'näherer', 'nahest'], correct: 0 },
+    { type: 'order', context: '🔀 Reihenfolge', question: 'Ordne: klein → ? → am kleinsten', words: ['klein', 'kleiner', 'am kleinsten'], correct: ['klein', 'kleiner', 'am kleinsten'] },
+    { type: 'match', context: '🔗 Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'gut', right: 'besser' }, { left: 'viel', right: 'mehr' }, { left: 'gern', right: 'lieber' }, { left: 'hoch', right: 'höher' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Leipzig ist _____ als das kleine Bergdorf. (groß)', answer: 'größer', alternatives: ['Größer'] },
+    { type: 'gap', context: '📖 Text', question: 'Die Universität hier ist _____ als viele andere. (berühmt)', answer: 'berühmter', alternatives: ['Berühmter'] },
+    { type: 'gap', context: '📖 Text', question: 'Das war die _____ Idee! (gut)', answer: 'beste', alternatives: ['Beste'] },
+    { type: 'mc', context: '✏️ Komparativ', question: 'Das Auto ist _____ als das Fahrrad. (schnell)', options: ['schneller', 'schnellerer', 'schnellsten', 'schnellst'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'Der Winter ist _____ als der Sommer. (kalt)', options: ['kälter', 'kalter', 'kälterer', 'am kältesten'], correct: 0 },
+    { type: 'gap', context: '✏️ Komparativ', question: 'Dieses Buch ist _____ als das andere. (interessant)', answer: 'interessanter', alternatives: ['Interessanter'] },
+    { type: 'gap', context: '✏️ Komparativ', question: 'Sie ist _____ als ihre Schwester. (alt)', answer: 'älter', alternatives: ['Älter'] },
+    { type: 'mc', context: '✏️ Superlativ', question: 'Das ist der _____ Berg der Welt. (hoch)', options: ['höchste', 'höchster', 'höchstes', 'höchsten'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ', question: 'Sie ist die _____ Schülerin. (gut)', options: ['beste', 'bester', 'bestes', 'besten'], correct: 0 },
+    { type: 'gap', context: '✏️ Superlativ', question: 'Das ist das _____ Haus in der Stadt. (alt)', answer: 'älteste', alternatives: ['Älteste'] },
+    { type: 'gap', context: '✏️ Superlativ', question: 'Er läuft am _____. (schnell)', answer: 'schnellsten', alternatives: ['Schnellsten'] },
+    { type: 'mc', context: '✏️ Vergleich', question: 'Das Essen schmeckt _____ als gestern.', options: ['besser', 'gut', 'am besten', 'guter'], correct: 0 },
+    { type: 'mc', context: '✏️ Vergleich', question: 'Ich trinke _____ Kaffee als Tee.', options: ['lieber', 'gern', 'am liebsten', 'gerner'], correct: 0 },
+    { type: 'mc', context: '✏️ Vergleich', question: 'Er verdient _____ Geld als ich.', options: ['mehr', 'viel', 'am meisten', 'vieler'], correct: 0 },
+    { type: 'gap', context: '✏️ Vergleich', question: 'Sie singt genauso schön _____ ihre Mutter.', answer: 'wie', alternatives: ['Wie'] },
+    { type: 'gap', context: '✏️ Vergleich', question: 'Mein Bruder ist größer _____ ich.', answer: 'als', alternatives: ['Als'] },
+    { type: 'mc', context: '✏️ je...desto', question: '_____ mehr ich lerne, desto besser verstehe ich.', options: ['Je', 'Desto', 'So', 'Als'], correct: 0 },
+    { type: 'mc', context: '✏️ je...desto', question: 'Je höher wir steigen, _____ kälter wird es.', options: ['desto', 'je', 'so', 'als'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ vor Nomen', question: 'Das ist der _____ Tag meines Lebens. (schön)', options: ['schönste', 'schönster', 'schönstes', 'schönsten'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ vor Nomen', question: 'Sie kauft das _____ Kleid. (teuer)', options: ['teuerste', 'teuerster', 'teuerstes', 'teuersten'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'nah → _____ → am nächsten', options: ['näher', 'naher', 'naherer', 'nahster'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Er ist größer wie ich.', 'Er ist größer als ich.', 'Er ist so groß wie ich.', 'Er ist genauso groß wie ich.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist RICHTIG?', options: ['Das ist das beste Buch.', 'Das ist das besserste Buch.', 'Das ist das gutste Buch.', 'Das ist das am besten Buch.'], correct: 0 },
+    { type: 'order', context: '🔀 Reihenfolge', question: 'Ordne: gut → ? → am besten', words: ['gut', 'besser', 'am besten'], correct: ['gut', 'besser', 'am besten'] },
+    { type: 'order', context: '🔀 Reihenfolge', question: 'Ordne: viel → ? → am meisten', words: ['viel', 'mehr', 'am meisten'], correct: ['viel', 'mehr', 'am meisten'] },
+    { type: 'match', context: '🔗 Superlativ', question: 'Ordne zu:', pairs: [{ left: 'gut', right: 'am besten' }, { left: 'viel', right: 'am meisten' }, { left: 'gern', right: 'am liebsten' }, { left: 'hoch', right: 'am höchsten' }]},
+    { type: 'match', context: '🔗 Komparativ', question: 'Ordne zu:', pairs: [{ left: 'alt', right: 'älter' }, { left: 'groß', right: 'größer' }, { left: 'jung', right: 'jünger' }, { left: 'kalt', right: 'kälter' }]},
+    { type: 'mc', context: '✏️ Komparativ', question: 'teuer → _____', options: ['teurer', 'teuerer', 'teuererer', 'teurest'], correct: 0 },
+    { type: 'mc', context: '✏️ Komparativ', question: 'dunkel → _____', options: ['dunkler', 'dunkeler', 'dunklerer', 'dunkelst'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ', question: 'dunkel → am _____', options: ['dunkelsten', 'dunklersten', 'dunkelst', 'dunklen'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Je _____ ihr steigt, desto _____ seid ihr dem Kristall. (hoch, nah)', answer: 'höher', alternatives: ['Höher'] },
+    { type: 'mc', context: '📖 Text', question: 'Warum "im dunkelsten Regal"?', options: ['Superlativ + Dativ', 'Komparativ + Akkusativ', 'Positiv + Dativ', 'Superlativ + Nominativ'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Das ist das _____ Buch, das ich je gelesen habe. (gut)', answer: 'beste', alternatives: ['Beste'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Je _____ du arbeitest, desto _____ verdienst du. (viel, viel)', answer: 'mehr', alternatives: ['Mehr'] },
+    { type: 'mc', context: '✏️ Komplex', question: 'Er ist einer der _____ Schauspieler. (berühmt)', options: ['berühmtesten', 'berühmteste', 'berühmter', 'berühmtster'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Das war das _____, was ich je gesehen habe. (schön)', options: ['Schönste', 'Schönstes', 'Schönster', 'Schönsten'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Er spricht Deutsch am _____ von allen. (gut)', answer: 'besten', alternatives: ['Besten'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Sie hat die _____ Punkte bekommen. (viel)', answer: 'meisten', alternatives: ['Meisten'] },
+    { type: 'mc', context: '✏️ Deklination', question: 'Ich kaufe den _____ Pullover. (warm)', options: ['wärmeren', 'wärmerer', 'wärmere', 'wärmer'], correct: 0 },
+    { type: 'mc', context: '✏️ Deklination', question: 'Er wohnt in einem _____ Haus. (groß)', options: ['größeren', 'größerer', 'größere', 'größer'], correct: 0 },
+    { type: 'mc', context: '✏️ Deklination', question: 'Wir brauchen eine _____ Lösung. (gut)', options: ['bessere', 'besserer', 'besseres', 'besseren'], correct: 0 },
+    { type: 'mc', context: '✏️ Deklination', question: 'Das ist das Haus des _____ Mannes. (reich)', options: ['reichsten', 'reichster', 'reichste', 'reichstem'], correct: 0 },
+    { type: 'mc', context: '✏️ je...desto', question: 'Je schneller du fährst, desto _____ ist es.', options: ['gefährlicher', 'gefährlich', 'am gefährlichsten', 'gefährlichste'], correct: 0 },
+    { type: 'mc', context: '✏️ je...desto', question: 'Je _____ die Aufgabe, desto länger brauche ich.', options: ['schwieriger', 'schwierig', 'am schwierigsten', 'schwierigste'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das ist der besserste Film.', 'Das ist der beste Film.', 'Dieser Film ist besser.', 'Dieser Film ist am besten.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Er ist der älteste als sein Bruder.', 'Er ist älter als sein Bruder.', 'Er ist der Älteste.', 'Er ist am ältesten.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Je mehr, desto besser.', 'Desto mehr, je besser.', 'Je mehr, je besser.', 'Desto mehr, desto besser.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er ist größer als ich.', 'Er ist größer wie ich.', 'Er ist größer dass ich.', 'Er ist größer ob ich.'], correct: 0 },
+    { type: 'gap', context: '✏️ Lücke', question: 'Das Essen ist heute _____ als gestern. (gut)', answer: 'besser', alternatives: ['Besser'] },
+    { type: 'gap', context: '✏️ Lücke', question: 'Sie arbeitet am _____ von allen. (fleißig)', answer: 'fleißigsten', alternatives: ['Fleißigsten'] },
+    { type: 'gap', context: '✏️ Lücke', question: 'Der Mount Everest ist der _____ Berg der Welt. (hoch)', answer: 'höchste', alternatives: ['Höchste'] },
+    { type: 'gap', context: '✏️ Lücke', question: 'Ich esse _____ Kuchen als Brot. (gern)', answer: 'lieber', alternatives: ['Lieber'] },
+    { type: 'mc', context: '✏️ Fein', question: '"immer + Komparativ" bedeutet...', options: ['Steigerung', 'Vergleich', 'Gleichheit', 'Superlativ'], correct: 0 },
+    { type: 'mc', context: '✏️ Fein', question: 'Es wird immer _____. (kalt)', options: ['kälter', 'am kältesten', 'kälteste', 'kalt'], correct: 0 },
+    { type: 'order', context: '🔀 Satz', question: 'Ordne den Satz:', words: ['Je', 'mehr', 'ich', 'lerne', ',', 'desto', 'besser', 'verstehe', 'ich', '.'], correct: ['Je', 'mehr', 'ich', 'lerne', ',', 'desto', 'besser', 'verstehe', 'ich', '.'] },
+    { type: 'order', context: '🔀 Satz', question: 'Ordne den Satz:', words: ['Das', 'ist', 'der', 'schönste', 'Tag', 'meines', 'Lebens', '.'], correct: ['Das', 'ist', 'der', 'schönste', 'Tag', 'meines', 'Lebens', '.'] },
+    { type: 'match', context: '🔗 Komplex', question: 'Ordne zu:', pairs: [{ left: 'so...wie', right: 'gleich' }, { left: '...er als', right: 'mehr' }, { left: 'je...desto', right: 'Steigerung' }, { left: 'am ...sten', right: 'Maximum' }]},
+    { type: 'match', context: '🔗 Unregelm.', question: 'Ordne zu:', pairs: [{ left: 'nah', right: 'näher' }, { left: 'hoch', right: 'höher' }, { left: 'gut', right: 'besser' }, { left: 'viel', right: 'mehr' }]},
+    { type: 'mc', context: '✏️ Ausnahme', question: 'Welches Adjektiv hat KEINEN Umlaut?', options: ['schnell → schneller', 'alt → älter', 'groß → größer', 'jung → jünger'], correct: 0 },
+    { type: 'mc', context: '✏️ Ausnahme', question: 'Welches ist KEIN korrekter Superlativ?', options: ['am gutsten', 'am besten', 'am schönsten', 'am größten'], correct: 0 }
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station10_gems', gems); localStorage.setItem('station10_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

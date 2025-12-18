@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔗 Station 16: Frankfurt - Relativsätze</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 5000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🔗</div>
+        <h1 class="station-title">Station 16: Frankfurt</h1>
+        <p class="station-subtitle">Relativsätze - der, die, das, den, dem...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde sind in Frankfurt, der Stadt, <strong>die</strong> für ihre Skyline bekannt ist.</p>
+            <p><strong>Sara:</strong> <em>"Das ist die Stadt, <strong>die</strong> ich immer sehen wollte! Die Hochhäuser, <strong>die</strong> man hier sieht, sind beeindruckend!"</em></p>
+            <p><strong>Leon:</strong> <em>"Ich kenne einen Mann, <strong>der</strong> hier arbeitet. Er ist Banker, <strong>den</strong> ich letztes Jahr kennengelernt habe."</em></p>
+            <p>Sie treffen <strong>Herrn Weber</strong>, den Banker, <strong>den</strong> Leon kennt.</p>
+            <p><strong>Herr Weber:</strong> <em>"Das ist das Gebäude, in <strong>dem</strong> ich arbeite. Und dort ist der Turm, auf <strong>dem</strong> etwas Besonderes liegt!"</em></p>
+            <p><strong>Mia:</strong> <em>"Ist das der Kristall, <strong>den</strong> wir suchen?"</em></p>
+            <p><strong>Herr Weber:</strong> <em>"Ja! Es gibt eine alte Legende, <strong>die</strong> davon erzählt. Der Kristall wurde von einem Künstler versteckt, <strong>dessen</strong> Name vergessen wurde."</em></p>
+            <p><strong>Tim:</strong> <em>"Das ist genau das, <strong>was</strong> wir brauchen!"</em></p>
+            <p>Sie steigen auf den Turm und finden einen <strong>türkisfarbenen Kristall</strong>!</p>
+            <p><strong>Leon:</strong> <em>"Das war die schönste Aussicht, <strong>die</strong> ich je gesehen habe!"</em></p>
+            <p><em>"Der sechzehnte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Relativsätze <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was sind Relativsätze?</h3>
+                <p>Relativsätze geben zusätzliche Informationen über ein Nomen. Sie beginnen mit einem <strong>Relativpronomen</strong>.</p>
+                <div class="grammar-note">
+                    <p>Das ist <strong>der Mann</strong>, <strong>der</strong> dort steht.</p>
+                    <p>Ich sehe <strong>die Frau</strong>, <strong>die</strong> ich kenne.</p>
+                </div>
+
+                <h3>Relativpronomen</h3>
+                <table class="grammar-table">
+                    <tr><th></th><th>Maskulin</th><th>Feminin</th><th>Neutral</th><th>Plural</th></tr>
+                    <tr><td><strong>Nominativ</strong></td><td>der</td><td>die</td><td>das</td><td>die</td></tr>
+                    <tr><td><strong>Akkusativ</strong></td><td>den</td><td>die</td><td>das</td><td>die</td></tr>
+                    <tr><td><strong>Dativ</strong></td><td>dem</td><td>der</td><td>dem</td><td>denen</td></tr>
+                    <tr><td><strong>Genitiv</strong></td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+                </table>
+
+                <h3>Welcher Kasus?</h3>
+                <div class="grammar-warning">
+                    <p>Der Kasus hängt von der Funktion im <strong>Relativsatz</strong> ab, nicht vom Hauptsatz!</p>
+                </div>
+                <div class="grammar-note">
+                    <p><strong>Nominativ:</strong> Der Mann, <strong>der</strong> dort steht... (der = Subjekt)</p>
+                    <p><strong>Akkusativ:</strong> Der Mann, <strong>den</strong> ich sehe... (den = Objekt)</p>
+                    <p><strong>Dativ:</strong> Der Mann, <strong>dem</strong> ich helfe... (dem = Dativobjekt)</p>
+                </div>
+
+                <h3>Mit Präposition</h3>
+                <div class="grammar-note">
+                    <p>Das ist das Haus, <strong>in dem</strong> ich wohne.</p>
+                    <p>Das ist die Stadt, <strong>aus der</strong> ich komme.</p>
+                    <p>→ Präposition + Relativpronomen im passenden Kasus</p>
+                </div>
+
+                <h3>Satzstellung</h3>
+                <div class="grammar-warning">
+                    <p>Im Relativsatz steht das Verb am <strong>Ende</strong>!</p>
+                    <p>Das ist der Film, den ich gestern <strong>gesehen habe</strong>.</p>
+                </div>
+
+                <h3>Sonderfälle: was, wo</h3>
+                <table class="grammar-table">
+                    <tr><th>Pronomen</th><th>Verwendung</th><th>Beispiel</th></tr>
+                    <tr><td><strong>was</strong></td><td>nach: alles, nichts, etwas, das</td><td>Das ist alles, <strong>was</strong> ich weiß.</td></tr>
+                    <tr><td><strong>wo</strong></td><td>für Orte</td><td>Die Stadt, <strong>wo</strong> ich wohne...</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🏙️</span><div><div class="vocab-word">die Skyline</div><div class="vocab-meaning">Stadtsilhouette</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏢</span><div><div class="vocab-word">das Hochhaus</div><div class="vocab-meaning">sehr hohes Gebäude</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏦</span><div><div class="vocab-word">der Banker</div><div class="vocab-meaning">Bankarbeiter</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📜</span><div><div class="vocab-word">die Legende</div><div class="vocab-meaning">alte Geschichte</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🎨</span><div><div class="vocab-word">der Künstler</div><div class="vocab-meaning">macht Kunst</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">👁️</span><div><div class="vocab-word">die Aussicht</div><div class="vocab-meaning">was man sieht</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏗️</span><div><div class="vocab-word">das Gebäude</div><div class="vocab-meaning">Haus, Bau</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🗼</span><div><div class="vocab-word">der Turm</div><div class="vocab-meaning">hohe Struktur</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der sechzehnte Kristall?', options: ['Türkisfarben', 'Gold', 'Silber', 'Bronze'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wofür ist Frankfurt bekannt?', options: ['Skyline', 'Berge', 'Strände', 'Seen'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Was ist Herr Weber von Beruf?', options: ['Banker', 'Lehrer', 'Arzt', 'Koch'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ m', question: 'Der Mann, _____ dort steht, ist mein Freund.', options: ['der', 'den', 'dem', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ f', question: 'Die Frau, _____ dort sitzt, ist meine Mutter.', options: ['die', 'der', 'den', 'deren'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ n', question: 'Das Kind, _____ dort spielt, ist fünf Jahre alt.', options: ['das', 'der', 'die', 'dem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ Pl', question: 'Die Leute, _____ hier wohnen, sind nett.', options: ['die', 'der', 'das', 'den'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ m', question: 'Der Mann, _____ ich sehe, ist groß.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ f', question: 'Die Frau, _____ ich kenne, ist Ärztin.', options: ['die', 'der', 'den', 'deren'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ n', question: 'Das Buch, _____ ich lese, ist interessant.', options: ['das', 'der', 'die', 'dem'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ Pl', question: 'Die Filme, _____ ich mag, sind lustig.', options: ['die', 'der', 'das', 'denen'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ m', question: 'Der Mann, _____ ich helfe, ist alt.', options: ['dem', 'der', 'den', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ f', question: 'Die Frau, _____ ich danke, ist nett.', options: ['der', 'die', 'den', 'deren'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ n', question: 'Das Kind, _____ ich helfe, lernt gut.', options: ['dem', 'das', 'der', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ Pl', question: 'Die Leute, _____ ich gratuliere, sind glücklich.', options: ['denen', 'die', 'der', 'den'], correct: 0 },
+    { type: 'mc', context: '✏️ Satzstellung', question: 'Wo steht das Verb im Relativsatz?', options: ['Am Ende', 'Am Anfang', 'In der Mitte', 'Vor dem Relativpronomen'], correct: 0 },
+    { type: 'mc', context: '✏️ Genus', question: 'Das Relativpronomen richtet sich nach...', options: ['dem Bezugswort', 'dem Hauptsatz', 'dem Subjekt', 'dem Objekt'], correct: 0 },
+    { type: 'mc', context: '✏️ Kasus', question: 'Der Kasus des Relativpronomens hängt ab von...', options: ['seiner Funktion im Relativsatz', 'dem Hauptsatz', 'dem Bezugswort', 'der Satzstellung'], correct: 0 },
+    { type: 'mc', context: '✏️ Nom vs. Akk', question: '"Der Mann, ___ ich bin" - Nominativ oder Akkusativ?', options: ['Nominativ (der)', 'Akkusativ (den)', 'Dativ (dem)', 'Genitiv (dessen)'], correct: 0 },
+    { type: 'mc', context: '✏️ Nom vs. Akk', question: '"Der Mann, ___ ich sehe" - Nominativ oder Akkusativ?', options: ['Akkusativ (den)', 'Nominativ (der)', 'Dativ (dem)', 'Genitiv (dessen)'], correct: 0 },
+    { type: 'mc', context: '✏️ was', question: 'Das ist alles, _____ ich weiß.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ was', question: 'Das ist nichts, _____ mich interessiert.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ was', question: 'Das ist etwas, _____ ich nicht verstehe.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ wo', question: 'Die Stadt, _____ ich wohne, ist groß.', options: ['wo', 'was', 'wer', 'wen'], correct: 0 },
+    { type: 'mc', context: '✏️ wo', question: 'Das Haus, _____ ich geboren bin, steht noch.', options: ['wo', 'was', 'wer', 'wen'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Das ist der Film, _____ ich gestern gesehen habe.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Das ist die Frau, _____ mir geholfen hat.', options: ['die', 'der', 'den', 'deren'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'ist', 'der', 'Mann', ',', 'der', 'hier', 'wohnt', '.'], correct: ['Das', 'ist', 'der', 'Mann', ',', 'der', 'hier', 'wohnt', '.'] },
+    { type: 'match', context: '🔗 Nominativ', question: 'Ordne zu:', pairs: [{ left: 'der Mann', right: 'der' }, { left: 'die Frau', right: 'die' }, { left: 'das Kind', right: 'das' }, { left: 'die Leute', right: 'die' }]},
+    { type: 'match', context: '🔗 Akkusativ', question: 'Ordne zu:', pairs: [{ left: 'der Mann', right: 'den' }, { left: 'die Frau', right: 'die' }, { left: 'das Kind', right: 'das' }, { left: 'die Leute', right: 'die' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Das ist die Stadt, _____ ich immer sehen wollte.', answer: 'die', alternatives: ['Die'] },
+    { type: 'gap', context: '📖 Text', question: 'Das ist das Gebäude, in _____ ich arbeite.', answer: 'dem', alternatives: ['Dem'] },
+    { type: 'gap', context: '📖 Text', question: 'Das ist genau das, _____ wir brauchen.', answer: 'was', alternatives: ['Was'] },
+    { type: 'mc', context: '✏️ Präp + Akk', question: 'Das ist der Mann, für _____ ich arbeite.', options: ['den', 'dem', 'der', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Präp + Akk', question: 'Das ist die Firma, für _____ sie arbeitet.', options: ['die', 'der', 'den', 'deren'], correct: 0 },
+    { type: 'mc', context: '✏️ Präp + Dat', question: 'Das ist das Haus, in _____ ich wohne.', options: ['dem', 'das', 'der', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Präp + Dat', question: 'Das ist die Stadt, aus _____ ich komme.', options: ['der', 'die', 'dem', 'deren'], correct: 0 },
+    { type: 'gap', context: '✏️ Präp + Dat', question: 'Das ist der Freund, mit _____ ich gereist bin.', answer: 'dem', alternatives: ['Dem'] },
+    { type: 'gap', context: '✏️ Präp + Dat', question: 'Das ist die Frau, bei _____ ich wohne.', answer: 'der', alternatives: ['Der'] },
+    { type: 'mc', context: '✏️ Dativ Pl', question: 'Das sind die Leute, mit _____ ich arbeite.', options: ['denen', 'die', 'den', 'deren'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ Pl', question: 'Das sind die Kinder, _____ ich helfe.', options: ['denen', 'die', 'der', 'den'], correct: 0 },
+    { type: 'mc', context: '✏️ Genitiv m', question: 'Der Mann, _____ Auto dort steht, ist reich.', options: ['dessen', 'der', 'dem', 'den'], correct: 0 },
+    { type: 'mc', context: '✏️ Genitiv f', question: 'Die Frau, _____ Tasche rot ist, ist meine Freundin.', options: ['deren', 'die', 'der', 'dessen'], correct: 0 },
+    { type: 'gap', context: '✏️ Genitiv', question: 'Das Kind, _____ Eltern ich kenne, ist nett.', answer: 'dessen', alternatives: ['Dessen'] },
+    { type: 'mc', context: '✏️ Komplex', question: 'Der Film, _____ ich letzte Woche gesehen habe, war gut.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Die Frau, _____ ich gestern geholfen habe, hat sich bedankt.', options: ['der', 'die', 'den', 'deren'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Das Restaurant, in _____ wir gegessen haben, war teuer.', options: ['dem', 'das', 'der', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Der Mann, der ich sehe, ist groß.', 'Der Mann, den ich sehe, ist groß.', 'Der Mann, der dort steht, ist groß.', 'Das ist der Mann, den ich kenne.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Die Frau, der ich helfe, ist nett.', 'Die Frau, die ich helfe, ist nett.', 'Die Frau, den ich helfe, ist nett.', 'Die Frau, dem ich helfe, ist nett.'], correct: 0 },
+    { type: 'mc', context: '✏️ was/wo', question: 'Das ist das Beste, _____ mir je passiert ist.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ was/wo', question: 'Das Hotel, _____ wir übernachtet haben, war schön.', options: ['wo', 'was', 'in dem', 'Beide: wo/in dem'], correct: 3 },
+    { type: 'mc', context: '✏️ Superlativ', question: 'Das ist das schönste Buch, _____ ich je gelesen habe.', options: ['das', 'was', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ Superlativ', question: 'Er ist der netteste Mensch, _____ ich kenne.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'ist', 'die', 'Frau', ',', 'der', 'ich', 'geholfen', 'habe', '.'], correct: ['Das', 'ist', 'die', 'Frau', ',', 'der', 'ich', 'geholfen', 'habe', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'ist', 'das', 'Haus', ',', 'in', 'dem', 'ich', 'wohne', '.'], correct: ['Das', 'ist', 'das', 'Haus', ',', 'in', 'dem', 'ich', 'wohne', '.'] },
+    { type: 'match', context: '🔗 Dativ', question: 'Ordne zu:', pairs: [{ left: 'der Mann', right: 'dem' }, { left: 'die Frau', right: 'der' }, { left: 'das Kind', right: 'dem' }, { left: 'die Leute', right: 'denen' }]},
+    { type: 'match', context: '🔗 Präposition', question: 'Ordne zu:', pairs: [{ left: 'in + das Haus', right: 'in dem' }, { left: 'mit + der Mann', right: 'mit dem' }, { left: 'für + die Frau', right: 'für die' }, { left: 'aus + die Stadt', right: 'aus der' }]},
+    { type: 'mc', context: '✏️ Schwer', question: 'Ich kenne einen Mann, _____ Schwester Ärztin ist.', options: ['dessen', 'der', 'dem', 'den'], correct: 0 },
+    { type: 'mc', context: '✏️ Schwer', question: 'Das ist die Kollegin, mit _____ Hilfe ich das geschafft habe.', options: ['deren', 'die', 'der', 'dessen'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Der Kristall wurde von einem Künstler versteckt, _____ Name vergessen wurde.', answer: 'dessen', alternatives: ['Dessen'] },
+    { type: 'mc', context: '✏️ Genitiv Komplex', question: 'Die Firma, _____ Chef ich kenne, ist erfolgreich.', options: ['deren', 'die', 'der', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Genitiv Komplex', question: 'Die Studenten, _____ Arbeiten ich korrigiert habe, haben gut geschrieben.', options: ['deren', 'denen', 'die', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ Genitiv Komplex', question: 'Das ist das Land, _____ Hauptstadt sehr schön ist.', options: ['dessen', 'das', 'dem', 'deren'], correct: 0 },
+    { type: 'gap', context: '✏️ Genitiv', question: 'Die Autorin, _____ Bücher ich liebe, kommt morgen.', answer: 'deren', alternatives: ['Deren'] },
+    { type: 'gap', context: '✏️ Genitiv', question: 'Der Politiker, _____ Rede ich gehört habe, war überzeugend.', answer: 'dessen', alternatives: ['Dessen'] },
+    { type: 'mc', context: '✏️ Präp + Gen', question: 'Das ist der Mann, wegen _____ ich gekommen bin.', options: ['dessen', 'dem', 'den', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ Präp + Gen', question: 'Das ist die Frau, wegen _____ er den Job verloren hat.', options: ['deren', 'der', 'die', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ was nach Superlativ', question: 'Das ist das Schönste, _____ ich je erlebt habe.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ was nach Pronomen', question: 'Es gibt vieles, _____ ich nicht verstehe.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '✏️ was nach Satz', question: 'Er kam zu spät, _____ mich sehr geärgert hat.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'gap', context: '✏️ was', question: 'Alles, _____ er sagte, war gelogen.', answer: 'was', alternatives: ['Was'] },
+    { type: 'mc', context: '✏️ Verschachtelt', question: 'Der Mann, den die Frau, _____ dort steht, kennt, ist Arzt.', options: ['die', 'der', 'den', 'dem'], correct: 0 },
+    { type: 'mc', context: '✏️ Verschachtelt', question: 'Das Buch, das der Autor, _____ ich bewundere, geschrieben hat, ist toll.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 },
+    { type: 'mc', context: '✏️ wo/in dem', question: 'Das Zimmer, _____ ich schlafe, ist klein. (beide möglich?)', options: ['wo / in dem', 'nur wo', 'nur in dem', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ worauf/auf das', question: 'Das ist das, _____ ich mich freue. (umgangssprachlich)', options: ['worauf', 'auf das', 'auf dem', 'was'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Der Mann, dessen ich kenne, ist nett.', 'Der Mann, dessen Auto rot ist, ist reich.', 'Der Mann, den ich kenne, ist nett.', 'Der Mann, dem ich helfe, ist alt.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das ist alles, das ich weiß.', 'Das ist alles, was ich weiß.', 'Das ist nichts, was mich interessiert.', 'Er kam zu spät, was mich ärgerte.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Die Leute, denen ich gratuliert habe, waren froh.', 'Die Leute, die ich gratuliert habe, waren froh.', 'Die Leute, den ich gratuliert habe, waren froh.', 'Die Leute, der ich gratuliert habe, waren froh.'], correct: 0 },
+    { type: 'mc', context: '✏️ Passiv', question: 'Das ist das Haus, das letztes Jahr _____ wurde.', options: ['gebaut', 'bauen', 'gebauen', 'baut'], correct: 0 },
+    { type: 'mc', context: '✏️ Passiv', question: 'Der Brief, der gestern _____ wurde, ist wichtig.', options: ['geschrieben', 'schreiben', 'geschreiben', 'schreibt'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Die Stadt, in _____ ich aufgewachsen bin, hat sich sehr verändert.', answer: 'der', alternatives: ['Der'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Das ist der Kollege, ohne _____ Hilfe ich das nicht geschafft hätte.', answer: 'dessen', alternatives: ['Dessen'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Der', 'Mann', ',', 'dessen', 'Auto', 'rot', 'ist', ',', 'wohnt', 'hier', '.'], correct: ['Der', 'Mann', ',', 'dessen', 'Auto', 'rot', 'ist', ',', 'wohnt', 'hier', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'ist', 'alles', ',', 'was', 'ich', 'weiß', '.'], correct: ['Das', 'ist', 'alles', ',', 'was', 'ich', 'weiß', '.'] },
+    { type: 'match', context: '🔗 Genitiv', question: 'Ordne zu:', pairs: [{ left: 'der Mann', right: 'dessen' }, { left: 'die Frau', right: 'deren' }, { left: 'das Kind', right: 'dessen' }, { left: 'die Leute', right: 'deren' }]},
+    { type: 'match', context: '🔗 was/wo', question: 'Ordne zu:', pairs: [{ left: 'nach alles/nichts/etwas', right: 'was' }, { left: 'nach Superlativ', right: 'was' }, { left: 'für Orte', right: 'wo' }, { left: 'nach ganzen Sätzen', right: 'was' }]},
+    { type: 'mc', context: '✏️ Sehr schwer', question: 'Die Frau, mit _____ Mann ich gesprochen habe, ist Lehrerin.', options: ['deren', 'dessen', 'der', 'dem'], correct: 0 },
+    { type: 'mc', context: '✏️ Sehr schwer', question: 'Das ist etwas, _____ ich mich nicht erinnern kann.', options: ['woran', 'an das', 'was', 'Alle richtig'], correct: 0 }
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station16_gems', gems); localStorage.setItem('station16_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

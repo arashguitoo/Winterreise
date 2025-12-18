@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🪞 Station 11: Dresden - Reflexivverben</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 4000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🪞</div>
+        <h1 class="station-title">Station 11: Dresden</h1>
+        <p class="station-subtitle">Reflexivverben - sich waschen, sich freuen...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde kommen müde in Dresden an. Sie brauchen eine Pause!</p>
+            <p><strong>Sara:</strong> <em>"Ich muss <strong>mich</strong> erst mal <strong>ausruhen</strong>. Ich <strong>freue mich</strong> auf ein warmes Bett!"</em></p>
+            <p><strong>Leon:</strong> <em>"Und ich möchte <strong>mich duschen</strong>. Ich fühle <strong>mich</strong> so schmutzig nach der langen Reise."</em></p>
+            <p>Sie finden ein kleines Hotel. Die Besitzerin heißt <strong>Frau Schumann</strong>.</p>
+            <p><strong>Frau Schumann:</strong> <em>"Willkommen! <strong>Setzt euch</strong>! Möchtet ihr <strong>euch</strong> etwas <strong>ausruhen</strong>?"</em></p>
+            <p><strong>Mia:</strong> <em>"Ja, sehr gern! Aber wir <strong>interessieren uns</strong> auch für einen Kristall. <strong>Erinnern Sie sich</strong> an einen besonderen Stein?"</em></p>
+            <p><strong>Frau Schumann:</strong> <em>"Oh ja! Ich <strong>erinnere mich</strong> gut! Der Kristall befindet <strong>sich</strong> im alten Schloss. Aber <strong>beeilt euch</strong>! Das Schloss schließt um 18 Uhr."</em></p>
+            <p><strong>Tim:</strong> <em>"Dann müssen wir <strong>uns</strong> schnell <strong>fertig machen</strong>!"</em></p>
+            <p>Die Freunde waschen <strong>sich</strong>, ziehen <strong>sich</strong> um und laufen zum Schloss. Dort finden sie einen <strong>goldenen Kristall</strong>!</p>
+            <p><strong>Leon:</strong> <em>"Ich <strong>freue mich</strong> so sehr! Wir haben es geschafft!"</em></p>
+            <p><em>"Der elfte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Reflexivverben <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was sind Reflexivverben?</h3>
+                <p>Bei Reflexivverben bezieht sich die Handlung auf das Subjekt selbst. Man braucht ein <strong>Reflexivpronomen</strong>.</p>
+                <div class="grammar-note">
+                    <p>Ich wasche <strong>mich</strong>. (= Ich wasche mich selbst)</p>
+                    <p>Er freut <strong>sich</strong>. (= Er ist froh)</p>
+                </div>
+
+                <h3>Reflexivpronomen im Akkusativ</h3>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>Reflexivpronomen</th><th>Beispiel</th></tr>
+                    <tr><td>ich</td><td><strong>mich</strong></td><td>Ich wasche <strong>mich</strong>.</td></tr>
+                    <tr><td>du</td><td><strong>dich</strong></td><td>Du wäschst <strong>dich</strong>.</td></tr>
+                    <tr><td>er/sie/es</td><td><strong>sich</strong></td><td>Er wäscht <strong>sich</strong>.</td></tr>
+                    <tr><td>wir</td><td><strong>uns</strong></td><td>Wir waschen <strong>uns</strong>.</td></tr>
+                    <tr><td>ihr</td><td><strong>euch</strong></td><td>Ihr wascht <strong>euch</strong>.</td></tr>
+                    <tr><td>sie/Sie</td><td><strong>sich</strong></td><td>Sie waschen <strong>sich</strong>.</td></tr>
+                </table>
+
+                <h3>Reflexivpronomen im Dativ</h3>
+                <div class="grammar-warning">
+                    <p>Wenn es ein <strong>Akkusativobjekt</strong> gibt, steht das Reflexivpronomen im <strong>Dativ</strong>!</p>
+                </div>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>Dativ</th><th>Beispiel</th></tr>
+                    <tr><td>ich</td><td><strong>mir</strong></td><td>Ich wasche <strong>mir</strong> die Hände.</td></tr>
+                    <tr><td>du</td><td><strong>dir</strong></td><td>Du wäschst <strong>dir</strong> die Hände.</td></tr>
+                    <tr><td>er/sie/es</td><td><strong>sich</strong></td><td>Er wäscht <strong>sich</strong> die Hände.</td></tr>
+                    <tr><td>wir</td><td><strong>uns</strong></td><td>Wir waschen <strong>uns</strong> die Hände.</td></tr>
+                    <tr><td>ihr</td><td><strong>euch</strong></td><td>Ihr wascht <strong>euch</strong> die Hände.</td></tr>
+                    <tr><td>sie/Sie</td><td><strong>sich</strong></td><td>Sie waschen <strong>sich</strong> die Hände.</td></tr>
+                </table>
+
+                <h3>Wichtige Reflexivverben</h3>
+                <table class="grammar-table">
+                    <tr><th>Verb</th><th>Bedeutung</th></tr>
+                    <tr><td>sich freuen (auf/über)</td><td>glücklich sein</td></tr>
+                    <tr><td>sich ärgern (über)</td><td>wütend sein</td></tr>
+                    <tr><td>sich erinnern (an)</td><td>nicht vergessen</td></tr>
+                    <tr><td>sich interessieren (für)</td><td>mögen, wichtig finden</td></tr>
+                    <tr><td>sich fühlen</td><td>empfinden</td></tr>
+                    <tr><td>sich ausruhen</td><td>relaxen</td></tr>
+                    <tr><td>sich beeilen</td><td>schnell machen</td></tr>
+                    <tr><td>sich treffen (mit)</td><td>zusammenkommen</td></tr>
+                    <tr><td>sich befinden</td><td>sein (Ort)</td></tr>
+                    <tr><td>sich setzen</td><td>Platz nehmen</td></tr>
+                </table>
+
+                <h3>⚠️ Akkusativ oder Dativ?</h3>
+                <div class="grammar-note">
+                    <p><strong>Akkusativ:</strong> Ich wasche <strong>mich</strong>. (kein anderes Objekt)</p>
+                    <p><strong>Dativ:</strong> Ich wasche <strong>mir</strong> die Hände. (die Hände = Akk.)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🪞</span><div><div class="vocab-word">sich waschen</div><div class="vocab-meaning">den Körper reinigen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">😊</span><div><div class="vocab-word">sich freuen</div><div class="vocab-meaning">glücklich sein</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">😤</span><div><div class="vocab-word">sich ärgern</div><div class="vocab-meaning">wütend sein</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🧠</span><div><div class="vocab-word">sich erinnern</div><div class="vocab-meaning">nicht vergessen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⏰</span><div><div class="vocab-word">sich beeilen</div><div class="vocab-meaning">schnell machen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🛋️</span><div><div class="vocab-word">sich ausruhen</div><div class="vocab-meaning">relaxen, Pause machen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🪥</span><div><div class="vocab-word">sich die Zähne putzen</div><div class="vocab-meaning">Zähne reinigen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">👕</span><div><div class="vocab-word">sich anziehen</div><div class="vocab-meaning">Kleidung anziehen</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Was möchte Sara machen?', options: ['Sich ausruhen', 'Essen', 'Tanzen', 'Lesen'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wo befindet sich der Kristall?', options: ['Im alten Schloss', 'Im Hotel', 'Am Fluss', 'Im Berg'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der elfte Kristall?', options: ['Golden', 'Silber', 'Bronze', 'Rot'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Ich wasche _____.', options: ['mich', 'mir', 'mein', 'ich'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Du wäschst _____.', options: ['dich', 'dir', 'dein', 'du'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Er wäscht _____.', options: ['sich', 'ihm', 'sein', 'er'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Wir waschen _____.', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Ihr wascht _____.', options: ['euch', 'ihr', 'euer', 'eure'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Sie waschen _____.', options: ['sich', 'sie', 'ihr', 'ihnen'], correct: 0 },
+    { type: 'mc', context: '✏️ sich freuen', question: 'Ich _____ mich auf die Party.', options: ['freue', 'freut', 'freuen', 'freust'], correct: 0 },
+    { type: 'mc', context: '✏️ sich freuen', question: 'Er _____ sich über das Geschenk.', options: ['freut', 'freue', 'freuen', 'freust'], correct: 0 },
+    { type: 'mc', context: '✏️ sich freuen', question: 'Wir _____ uns auf den Urlaub.', options: ['freuen', 'freut', 'freue', 'freust'], correct: 0 },
+    { type: 'mc', context: '✏️ sich beeilen', question: 'Du musst _____ beeilen!', options: ['dich', 'dir', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ sich beeilen', question: 'Wir müssen _____ beeilen!', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ sich setzen', question: '_____ euch bitte!', options: ['Setzt', 'Setzen', 'Setz', 'Setze'], correct: 0 },
+    { type: 'mc', context: '✏️ sich setzen', question: 'Ich _____ mich auf den Stuhl.', options: ['setze', 'setzt', 'setzen', 'setzst'], correct: 0 },
+    { type: 'mc', context: '✏️ sich fühlen', question: 'Wie _____ du dich heute?', options: ['fühlst', 'fühle', 'fühlt', 'fühlen'], correct: 0 },
+    { type: 'mc', context: '✏️ sich fühlen', question: 'Ich _____ mich gut.', options: ['fühle', 'fühlst', 'fühlt', 'fühlen'], correct: 0 },
+    { type: 'mc', context: '✏️ sich erinnern', question: 'Er _____ sich an die Reise.', options: ['erinnert', 'erinnere', 'erinnerst', 'erinnern'], correct: 0 },
+    { type: 'mc', context: '✏️ sich erinnern', question: '_____ du dich an mich?', options: ['Erinnerst', 'Erinnere', 'Erinnert', 'Erinnern'], correct: 0 },
+    { type: 'mc', context: '✏️ sich ärgern', question: 'Sie _____ sich über den Fehler.', options: ['ärgert', 'ärgere', 'ärgerst', 'ärgern'], correct: 0 },
+    { type: 'mc', context: '✏️ sich ärgern', question: 'Ich _____ mich nicht!', options: ['ärgere', 'ärgerst', 'ärgert', 'ärgern'], correct: 0 },
+    { type: 'mc', context: '✏️ sich ausruhen', question: 'Wir _____ uns nach der Arbeit aus.', options: ['ruhen', 'ruhe', 'ruhst', 'ruht'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Welches Reflexivpronomen für "ich"?', options: ['mich', 'dich', 'sich', 'uns'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Welches Reflexivpronomen für "du"?', options: ['dich', 'mich', 'sich', 'euch'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Welches Reflexivpronomen für "er/sie/es"?', options: ['sich', 'mich', 'dich', 'uns'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Welches Reflexivpronomen für "wir"?', options: ['uns', 'euch', 'sich', 'mich'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'freue', 'mich', 'auf', 'dich', '.'], correct: ['Ich', 'freue', 'mich', 'auf', 'dich', '.'] },
+    { type: 'match', context: '🔗 Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'mich' }, { left: 'du', right: 'dich' }, { left: 'er', right: 'sich' }, { left: 'wir', right: 'uns' }]},
+    { type: 'match', context: '🔗 Bedeutung', question: 'Ordne zu:', pairs: [{ left: 'sich freuen', right: 'glücklich sein' }, { left: 'sich ärgern', right: 'wütend sein' }, { left: 'sich beeilen', right: 'schnell machen' }, { left: 'sich ausruhen', right: 'relaxen' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Ich muss _____ erst mal ausruhen.', answer: 'mich', alternatives: ['Mich'] },
+    { type: 'gap', context: '📖 Text', question: 'Er fühlt _____ so schmutzig.', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'gap', context: '📖 Text', question: 'Der Kristall befindet _____ im Schloss.', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'mc', context: '✏️ Dativ', question: 'Ich wasche _____ die Hände.', options: ['mir', 'mich', 'mein', 'ich'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ', question: 'Du wäschst _____ die Haare.', options: ['dir', 'dich', 'dein', 'du'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ', question: 'Er putzt _____ die Zähne.', options: ['sich', 'ihn', 'ihm', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Akk vs. Dat', question: 'Ich wasche _____. (nur waschen)', options: ['mich', 'mir', 'mein', 'ich'], correct: 0 },
+    { type: 'mc', context: '✏️ Akk vs. Dat', question: 'Ich wasche _____ das Gesicht.', options: ['mir', 'mich', 'mein', 'ich'], correct: 0 },
+    { type: 'gap', context: '✏️ Dativ', question: 'Wir waschen _____ die Hände.', answer: 'uns', alternatives: ['Uns'] },
+    { type: 'gap', context: '✏️ Dativ', question: 'Sie putzt _____ die Zähne.', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'mc', context: '✏️ sich interessieren', question: 'Er interessiert _____ für Musik.', options: ['sich', 'ihn', 'ihm', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ sich interessieren', question: 'Wofür interessierst du _____?', options: ['dich', 'dir', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ sich treffen', question: 'Wir treffen _____ um 8 Uhr.', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ sich treffen', question: 'Ich treffe _____ mit Freunden.', options: ['mich', 'mir', 'ich', 'mein'], correct: 0 },
+    { type: 'gap', context: '✏️ sich befinden', question: 'Wo befindet _____ der Bahnhof?', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'gap', context: '✏️ sich befinden', question: 'Das Hotel befindet _____ im Zentrum.', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'mc', context: '✏️ sich anziehen', question: 'Ich _____ mich schnell an.', options: ['ziehe', 'ziehst', 'zieht', 'ziehen'], correct: 0 },
+    { type: 'mc', context: '✏️ sich anziehen', question: 'Er _____ sich warm an.', options: ['zieht', 'ziehe', 'ziehst', 'ziehen'], correct: 0 },
+    { type: 'mc', context: '✏️ Präposition', question: 'Ich freue mich _____ den Urlaub.', options: ['auf', 'über', 'für', 'an'], correct: 0 },
+    { type: 'mc', context: '✏️ Präposition', question: 'Er freut sich _____ das Geschenk.', options: ['über', 'auf', 'für', 'an'], correct: 0 },
+    { type: 'mc', context: '✏️ Präposition', question: 'Ich erinnere mich _____ dich.', options: ['an', 'über', 'auf', 'für'], correct: 0 },
+    { type: 'mc', context: '✏️ Präposition', question: 'Er ärgert sich _____ den Fehler.', options: ['über', 'auf', 'an', 'für'], correct: 0 },
+    { type: 'mc', context: '✏️ Präposition', question: 'Ich interessiere mich _____ Sport.', options: ['für', 'auf', 'über', 'an'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich wasche mich die Hände.', 'Ich wasche mir die Hände.', 'Ich wasche mich.', 'Er wäscht sich.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er freut sich auf die Party.', 'Er freut sich auf die Party mich.', 'Er freut mich auf die Party.', 'Er sich freut auf die Party.'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'wasche', 'mir', 'die', 'Hände', '.'], correct: ['Ich', 'wasche', 'mir', 'die', 'Hände', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Er', 'interessiert', 'sich', 'für', 'Musik', '.'], correct: ['Er', 'interessiert', 'sich', 'für', 'Musik', '.'] },
+    { type: 'match', context: '🔗 Dativ', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'mir' }, { left: 'du', right: 'dir' }, { left: 'er', right: 'sich' }, { left: 'wir', right: 'uns' }]},
+    { type: 'match', context: '🔗 Präposition', question: 'Ordne zu:', pairs: [{ left: 'sich freuen', right: 'auf/über' }, { left: 'sich erinnern', right: 'an' }, { left: 'sich ärgern', right: 'über' }, { left: 'sich interessieren', right: 'für' }]},
+    { type: 'mc', context: '✏️ Komplex', question: 'Kannst du _____ an sie erinnern?', options: ['dich', 'dir', 'du', 'dein'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Beeilt _____! Das Schloss schließt bald.', answer: 'euch', alternatives: ['Euch'] },
+    { type: 'gap', context: '📖 Text', question: 'Wir müssen _____ schnell fertig machen.', answer: 'uns', alternatives: ['Uns'] },
+    { type: 'mc', context: '✏️ Akk vs. Dat', question: 'Ich ziehe _____ an. (nur anziehen)', options: ['mich', 'mir', 'mein', 'ich'], correct: 0 },
+    { type: 'mc', context: '✏️ Akk vs. Dat', question: 'Ich ziehe _____ den Mantel an.', options: ['mir', 'mich', 'mein', 'ich'], correct: 0 },
+    { type: 'mc', context: '✏️ Akk vs. Dat', question: 'Du kämmst _____. (nur kämmen)', options: ['dich', 'dir', 'dein', 'du'], correct: 0 },
+    { type: 'mc', context: '✏️ Akk vs. Dat', question: 'Du kämmst _____ die Haare.', options: ['dir', 'dich', 'dein', 'du'], correct: 0 },
+    { type: 'gap', context: '✏️ Akk vs. Dat', question: 'Er rasiert _____. (nur rasieren)', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'gap', context: '✏️ Akk vs. Dat', question: 'Er rasiert _____ den Bart.', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Ich weiß, dass er _____ freut.', options: ['sich', 'ihn', 'ihm', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Weil ich _____ beeilen muss, gehe ich jetzt.', options: ['mich', 'mir', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Wenn du _____ nicht wohl fühlst, bleib zu Hause.', options: ['dich', 'dir', 'du', 'dein'], correct: 0 },
+    { type: 'gap', context: '✏️ Nebensatz', question: 'Ich hoffe, dass wir _____ bald treffen.', answer: 'uns', alternatives: ['Uns'] },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Du musst _____ die Zähne putzen.', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Ich möchte _____ ausruhen.', options: ['mich', 'mir', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Kannst du _____ das vorstellen?', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'gap', context: '✏️ Modalverb', question: 'Wir müssen _____ beeilen.', answer: 'uns', alternatives: ['Uns'] },
+    { type: 'mc', context: '✏️ Reziprok', question: 'Wir lieben _____. (gegenseitig)', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ Reziprok', question: 'Sie treffen _____ jeden Freitag.', options: ['sich', 'sie', 'ihr', 'ihnen'], correct: 0 },
+    { type: 'mc', context: '✏️ Imperativ', question: '_____ dich! (sich beeilen, du)', options: ['Beeil', 'Beeile', 'Beeilt', 'Beeilen'], correct: 0 },
+    { type: 'mc', context: '✏️ Imperativ', question: '_____ euch! (sich setzen, ihr)', options: ['Setzt', 'Setz', 'Setze', 'Setzen'], correct: 0 },
+    { type: 'mc', context: '✏️ Imperativ', question: '_____ Sie sich! (sich setzen, Sie)', options: ['Setzen', 'Setzt', 'Setz', 'Setze'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich freue über das Geschenk.', 'Ich freue mich über das Geschenk.', 'Er freut sich auf morgen.', 'Wir freuen uns.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich wasche mich die Haare.', 'Ich wasche mir die Haare.', 'Ich wasche mich.', 'Er wäscht sich die Haare.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Ich erinnere mich an dich.', 'Ich erinnere an dich.', 'Ich erinnere mich dich.', 'Ich erinnere an mich dich.'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Wenn du _____ nicht wohl fühlst, ruf mich an.', answer: 'dich', alternatives: ['Dich'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Obwohl er _____ beeilt hat, kam er zu spät.', answer: 'sich', alternatives: ['Sich'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Weil', 'ich', 'mich', 'beeilen', 'muss', ',', 'gehe', 'ich', 'jetzt', '.'], correct: ['Weil', 'ich', 'mich', 'beeilen', 'muss', ',', 'gehe', 'ich', 'jetzt', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'hoffe', ',', 'dass', 'du', 'dich', 'freust', '.'], correct: ['Ich', 'hoffe', ',', 'dass', 'du', 'dich', 'freust', '.'] },
+    { type: 'match', context: '🔗 Akk vs. Dat', question: 'Ordne zu:', pairs: [{ left: 'Ich wasche mich', right: 'Akkusativ' }, { left: 'Ich wasche mir die Hände', right: 'Dativ' }, { left: 'Er zieht sich an', right: 'Akkusativ' }, { left: 'Er zieht sich den Mantel an', right: 'Dativ' }]},
+    { type: 'match', context: '🔗 Imperativ', question: 'Ordne zu:', pairs: [{ left: 'du', right: 'Beeil dich!' }, { left: 'ihr', right: 'Beeilt euch!' }, { left: 'Sie', right: 'Beeilen Sie sich!' }, { left: 'wir', right: 'Beeilen wir uns!' }]}
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station11_gems', gems); localStorage.setItem('station11_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

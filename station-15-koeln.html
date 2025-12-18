@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏪ Station 15: Köln - Plusquamperfekt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 5000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">⏪</div>
+        <h1 class="station-title">Station 15: Köln</h1>
+        <p class="station-subtitle">Plusquamperfekt - hatte gemacht, war gegangen...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde sind in Köln und besuchen den berühmten Dom. Sie erzählen von früher.</p>
+            <p><strong>Sara:</strong> <em>"<strong>Bevor</strong> wir nach München <strong>gefahren waren</strong>, <strong>hatte</strong> ich noch nie einen Kristall <strong>gesehen</strong>!"</em></p>
+            <p><strong>Leon:</strong> <em>"Stimmt! Und <strong>nachdem</strong> wir den ersten Kristall <strong>gefunden hatten</strong>, wussten wir, dass wir es schaffen können."</em></p>
+            <p><strong>Mia:</strong> <em>"Ich <strong>hatte</strong> vorher nie so viel <strong>gereist</strong>. Das war eine tolle Erfahrung!"</em></p>
+            <p>Ein Priester namens <strong>Pater Johannes</strong> kommt zu ihnen.</p>
+            <p><strong>Pater Johannes:</strong> <em>"Ich sehe, ihr sucht etwas Besonderes. <strong>Nachdem</strong> ich eure Geschichte <strong>gehört hatte</strong>, wusste ich sofort Bescheid."</em></p>
+            <p><strong>Tim:</strong> <em>"<strong>Hatten</strong> Sie den Kristall schon <strong>gesehen</strong>?"</em></p>
+            <p><strong>Pater Johannes:</strong> <em>"Ja! <strong>Bevor</strong> ihr <strong>gekommen wart</strong>, <strong>hatte</strong> ich ihn im Glockenturm <strong>versteckt</strong>. Er war dort sicher."</em></p>
+            <p>Die Freunde steigen auf den Turm. Dort finden sie einen <strong>bernsteinfarbenen Kristall</strong>!</p>
+            <p><strong>Sara:</strong> <em>"<strong>Nachdem</strong> wir so viel <strong>erlebt hatten</strong>, ist das ein besonderer Moment!"</em></p>
+            <p><em>"Der fünfzehnte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Plusquamperfekt <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was ist das Plusquamperfekt?</h3>
+                <p>Das Plusquamperfekt beschreibt eine Handlung, die <strong>vor</strong> einer anderen Handlung in der Vergangenheit passiert ist.</p>
+                <div class="grammar-note">
+                    <p>🕐 Zuerst: Plusquamperfekt (hatte gemacht)</p>
+                    <p>🕑 Danach: Präteritum/Perfekt (machte / hat gemacht)</p>
+                </div>
+
+                <h3>Bildung</h3>
+                <table class="grammar-table">
+                    <tr><th colspan="2">Plusquamperfekt = hatte/war + Partizip II</th></tr>
+                    <tr><td><strong>mit "haben"</strong></td><td>Ich <strong>hatte</strong> gegessen.</td></tr>
+                    <tr><td><strong>mit "sein"</strong></td><td>Ich <strong>war</strong> gegangen.</td></tr>
+                </table>
+
+                <h3>Konjugation von "hatte" und "war"</h3>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>hatte</th><th>war</th></tr>
+                    <tr><td>ich</td><td>hatte</td><td>war</td></tr>
+                    <tr><td>du</td><td>hattest</td><td>warst</td></tr>
+                    <tr><td>er/sie/es</td><td>hatte</td><td>war</td></tr>
+                    <tr><td>wir</td><td>hatten</td><td>waren</td></tr>
+                    <tr><td>ihr</td><td>hattet</td><td>wart</td></tr>
+                    <tr><td>sie/Sie</td><td>hatten</td><td>waren</td></tr>
+                </table>
+
+                <h3>Wann "haben", wann "sein"?</h3>
+                <div class="grammar-warning">
+                    <p><strong>sein:</strong> Bewegung (gehen, fahren, fliegen...) + Zustandsänderung (werden, sterben, aufwachen...)</p>
+                    <p><strong>haben:</strong> alle anderen Verben</p>
+                </div>
+
+                <h3>Typische Signalwörter</h3>
+                <table class="grammar-table">
+                    <tr><th>Wort</th><th>Beispiel</th></tr>
+                    <tr><td><strong>nachdem</strong></td><td><strong>Nachdem</strong> ich gegessen <strong>hatte</strong>, ging ich spazieren.</td></tr>
+                    <tr><td><strong>bevor</strong></td><td><strong>Bevor</strong> er kam, <strong>hatte</strong> ich aufgeräumt.</td></tr>
+                    <tr><td><strong>als</strong></td><td><strong>Als</strong> ich ankam, <strong>war</strong> er schon gegangen.</td></tr>
+                </table>
+
+                <h3>Satzstellung mit "nachdem"</h3>
+                <div class="grammar-note">
+                    <p><strong>Nachdem</strong> ich gegessen <strong>hatte</strong>, <strong>ging</strong> ich nach Hause.</p>
+                    <p>→ Nebensatz (Verb am Ende) + Hauptsatz (Verb am Anfang)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">⏪</span><div><div class="vocab-word">vorher</div><div class="vocab-meaning">früher, davor</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⏩</span><div><div class="vocab-word">nachdem</div><div class="vocab-meaning">after (Konj.)</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⏮️</span><div><div class="vocab-word">bevor</div><div class="vocab-meaning">before (Konj.)</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⛪</span><div><div class="vocab-word">der Dom</div><div class="vocab-meaning">große Kirche</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔔</span><div><div class="vocab-word">der Glockenturm</div><div class="vocab-meaning">Turm mit Glocken</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🙏</span><div><div class="vocab-word">der Priester</div><div class="vocab-meaning">Mann der Kirche</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔒</span><div><div class="vocab-word">verstecken</div><div class="vocab-meaning">geheim halten</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">✨</span><div><div class="vocab-word">erleben</div><div class="vocab-meaning">erfahren</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der fünfzehnte Kristall?', options: ['Bernsteinfarben', 'Gold', 'Silber', 'Bronze'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wo war der Kristall versteckt?', options: ['Im Glockenturm', 'Im Keller', 'Im Altar', 'Im Brunnen'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wer hilft den Freunden?', options: ['Pater Johannes', 'Herr Müller', 'Frau Schmidt', 'Der Bürgermeister'], correct: 0 },
+    { type: 'mc', context: '✏️ Bildung', question: 'Plusquamperfekt = ?', options: ['hatte/war + Partizip II', 'habe/bin + Partizip II', 'hat/ist + Partizip II', 'haben/sein + Infinitiv'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Ich _____ gegessen. (Plusquamperfekt)', options: ['hatte', 'habe', 'hat', 'haben'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Du _____ gearbeitet. (Plusquamperfekt)', options: ['hattest', 'hast', 'hatte', 'hatten'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Er _____ geschlafen. (Plusquamperfekt)', options: ['hatte', 'hat', 'hattest', 'hatten'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Wir _____ gelernt. (Plusquamperfekt)', options: ['hatten', 'haben', 'hatte', 'hattet'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Ihr _____ gespielt. (Plusquamperfekt)', options: ['hattet', 'habt', 'hatten', 'hatte'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Ich _____ gegangen. (Plusquamperfekt)', options: ['war', 'bin', 'ist', 'waren'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Du _____ gefahren. (Plusquamperfekt)', options: ['warst', 'bist', 'war', 'waren'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Sie (Sg.) _____ gekommen. (Plusquamperfekt)', options: ['war', 'ist', 'warst', 'waren'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Wir _____ geflogen. (Plusquamperfekt)', options: ['waren', 'sind', 'war', 'wart'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Ihr _____ gelaufen. (Plusquamperfekt)', options: ['wart', 'seid', 'waren', 'war'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"essen" - mit haben oder sein?', options: ['haben', 'sein', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"gehen" - mit haben oder sein?', options: ['sein', 'haben', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"fahren" - mit haben oder sein?', options: ['sein', 'haben', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"arbeiten" - mit haben oder sein?', options: ['haben', 'sein', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"kommen" - mit haben oder sein?', options: ['sein', 'haben', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ Zeitfolge', question: 'Was passiert zuerst? Plusquamperfekt oder Präteritum?', options: ['Plusquamperfekt', 'Präteritum', 'Gleichzeitig', 'Egal'], correct: 0 },
+    { type: 'mc', context: '✏️ Signalwort', question: 'Welches Wort zeigt oft Plusquamperfekt an?', options: ['nachdem', 'weil', 'obwohl', 'damit'], correct: 0 },
+    { type: 'mc', context: '✏️ Signalwort', question: 'Welches Wort zeigt oft Plusquamperfekt an?', options: ['bevor', 'wenn', 'dass', 'ob'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Er _____ schon gegessen, als ich kam.', options: ['hatte', 'hat', 'ist', 'war'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Sie _____ schon gegangen, als ich ankam.', options: ['war', 'ist', 'hatte', 'hat'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Nachdem ich gegessen _____, ging ich spazieren.', options: ['hatte', 'habe', 'bin', 'war'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Bevor er kam, _____ ich aufgeräumt.', options: ['hatte', 'habe', 'bin', 'war'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Nachdem wir angekommen _____, ruhten wir uns aus.', options: ['waren', 'hatten', 'sind', 'haben'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'hatte', 'schon', 'gegessen', '.'], correct: ['Ich', 'hatte', 'schon', 'gegessen', '.'] },
+    { type: 'match', context: '🔗 haben/sein', question: 'Ordne zu:', pairs: [{ left: 'essen', right: 'hatte gegessen' }, { left: 'gehen', right: 'war gegangen' }, { left: 'arbeiten', right: 'hatte gearbeitet' }, { left: 'kommen', right: 'war gekommen' }]},
+    { type: 'match', context: '🔗 Zeitfolge', question: 'Was passiert zuerst?', pairs: [{ left: 'Plusquamperfekt', right: 'Zuerst' }, { left: 'Präteritum', right: 'Danach' }, { left: 'Perfekt', right: 'Danach' }, { left: 'hatte gemacht', right: 'Zuerst' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Bevor wir nach München gefahren _____, hatte ich noch nie einen Kristall gesehen.', answer: 'waren', alternatives: ['Waren'] },
+    { type: 'gap', context: '📖 Text', question: 'Nachdem wir den ersten Kristall gefunden _____, wussten wir, dass wir es schaffen.', answer: 'hatten', alternatives: ['Hatten'] },
+    { type: 'gap', context: '📖 Text', question: 'Bevor ihr gekommen _____, hatte ich ihn versteckt.', answer: 'wart', alternatives: ['Wart'] },
+    { type: 'mc', context: '✏️ nachdem', question: '_____ ich gegessen hatte, ging ich nach Hause.', options: ['Nachdem', 'Bevor', 'Weil', 'Obwohl'], correct: 0 },
+    { type: 'mc', context: '✏️ bevor', question: '_____ er kam, hatte ich aufgeräumt.', options: ['Bevor', 'Nachdem', 'Weil', 'Obwohl'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Nachdem sie aufgestanden _____, frühstückte sie.', options: ['war', 'hatte', 'ist', 'hat'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Nachdem er die E-Mail geschrieben _____, schickte er sie ab.', options: ['hatte', 'war', 'hat', 'ist'], correct: 0 },
+    { type: 'gap', context: '✏️ Satz', question: 'Nachdem ich den Film gesehen _____, ging ich ins Bett.', answer: 'hatte', alternatives: ['Hatte'] },
+    { type: 'gap', context: '✏️ Satz', question: 'Bevor wir losgefahren _____, hatten wir gepackt.', answer: 'waren', alternatives: ['Waren'] },
+    { type: 'mc', context: '✏️ Satzstellung', question: 'Nachdem ich gegessen hatte, _____ ich nach Hause.', options: ['ging', 'gehe', 'gegangen', 'gingen'], correct: 0 },
+    { type: 'mc', context: '✏️ Satzstellung', question: 'Nachdem er angekommen war, _____ er sofort an.', options: ['rief', 'ruft', 'gerufen', 'rufen'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Er _____ schon _____, als ich ins Büro kam.', options: ['war / gegangen', 'ist / gegangen', 'hatte / gegangen', 'hat / gegangen'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Sie _____ gerade _____, als das Telefon klingelte.', options: ['hatte / geduscht', 'ist / geduscht', 'war / geduscht', 'hat / geduscht'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Wir _____ alles _____, bevor die Gäste kamen.', options: ['hatten / vorbereitet', 'haben / vorbereitet', 'waren / vorbereitet', 'sind / vorbereitet'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Er _____ das Buch schon gelesen, bevor der Film herauskam.', answer: 'hatte', alternatives: ['Hatte'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Sie _____ schon eingeschlafen, als ich nach Hause kam.', answer: 'war', alternatives: ['War'] },
+    { type: 'mc', context: '✏️ haben/sein', question: '"einschlafen" - mit haben oder sein?', options: ['sein', 'haben', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"aufwachen" - mit haben oder sein?', options: ['sein', 'haben', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"bleiben" - mit haben oder sein?', options: ['sein', 'haben', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ haben/sein', question: '"werden" - mit haben oder sein?', options: ['sein', 'haben', 'beide', 'keins'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Nachdem ich gegessen habe, ging ich.', 'Nachdem ich gegessen hatte, ging ich.', 'Bevor ich ging, hatte ich gegessen.', 'Ich hatte gegessen, bevor ich ging.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Nachdem er angekommen war, rief er an.', 'Nachdem er angekommen ist, rief er an.', 'Nachdem er ankam, hatte er angerufen.', 'Nachdem er ankommt, ruft er an.'], correct: 0 },
+    { type: 'mc', context: '✏️ Kontext', question: 'Wann benutzt man das Plusquamperfekt?', options: ['Für etwas, das vor etwas anderem in der Vergangenheit passiert ist', 'Für die Gegenwart', 'Für die Zukunft', 'Für Gewohnheiten'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Nachdem', 'ich', 'gegessen', 'hatte', ',', 'ging', 'ich', '.'], correct: ['Nachdem', 'ich', 'gegessen', 'hatte', ',', 'ging', 'ich', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Bevor', 'sie', 'kam', ',', 'hatte', 'er', 'aufgeräumt', '.'], correct: ['Bevor', 'sie', 'kam', ',', 'hatte', 'er', 'aufgeräumt', '.'] },
+    { type: 'match', context: '🔗 Konjugation', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'hatte/war' }, { left: 'du', right: 'hattest/warst' }, { left: 'wir', right: 'hatten/waren' }, { left: 'ihr', right: 'hattet/wart' }]},
+    { type: 'match', context: '🔗 Signalwörter', question: 'Ordne zu:', pairs: [{ left: 'nachdem', right: 'Plusquamperfekt im Nebensatz' }, { left: 'bevor', right: 'Präteritum im Nebensatz' }, { left: 'als', right: 'Plusquamperfekt möglich' }, { left: 'vorher', right: 'frühere Handlung' }]},
+    { type: 'mc', context: '✏️ Schwer', question: 'Ich war müde, weil ich die ganze Nacht _____ _____.', options: ['gearbeitet hatte', 'gearbeitet habe', 'arbeiten war', 'gearbeitet war'], correct: 0 },
+    { type: 'mc', context: '✏️ Schwer', question: 'Er konnte nicht essen, weil er schon _____ _____.', options: ['gegessen hatte', 'gegessen hat', 'gegessen war', 'essen hatte'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Nachdem wir so viel erlebt _____, ist das ein besonderer Moment!', answer: 'hatten', alternatives: ['Hatten'] },
+    { type: 'mc', context: '✏️ Komplex', question: 'Nachdem sie _____ _____, machte sie sich auf den Weg.', options: ['gefrühstückt hatte', 'gefrühstückt hat', 'frühstücken war', 'gefrühstückt war'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Bevor das Konzert begann, _____ die Musiker schon zwei Stunden _____.', options: ['hatten / geprobt', 'haben / geprobt', 'waren / geprobt', 'sind / geprobt'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Als ich ihn traf, _____ er gerade aus Paris _____.', options: ['war / zurückgekommen', 'ist / zurückgekommen', 'hatte / zurückgekommen', 'hat / zurückgekommen'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Nachdem die Sonne untergegangen _____, wurde es kalt.', answer: 'war', alternatives: ['War'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Bevor ich den Job bekam, _____ ich viele Bewerbungen geschrieben.', answer: 'hatte', alternatives: ['Hatte'] },
+    { type: 'mc', context: '✏️ Kausal', question: 'Er war traurig, weil seine Freundin _____ _____.', options: ['weggegangen war', 'weggegangen ist', 'weggehen hatte', 'weggegangen hatte'], correct: 0 },
+    { type: 'mc', context: '✏️ Kausal', question: 'Sie freute sich, weil sie die Prüfung _____ _____.', options: ['bestanden hatte', 'bestanden hat', 'bestanden war', 'bestehen hatte'], correct: 0 },
+    { type: 'mc', context: '✏️ Indirekte Rede', question: 'Er sagte, dass er schon _____ _____.', options: ['gegessen hatte', 'gegessen hat', 'essen war', 'gegessen war'], correct: 0 },
+    { type: 'mc', context: '✏️ Indirekte Rede', question: 'Sie erzählte, dass sie vorher nie in Deutschland _____ _____.', options: ['gewesen war', 'gewesen ist', 'sein hatte', 'gewesen hatte'], correct: 0 },
+    { type: 'gap', context: '✏️ Indirekte Rede', question: 'Er fragte, ob ich den Film schon gesehen _____.', answer: 'hatte', alternatives: ['Hatte'] },
+    { type: 'mc', context: '✏️ Passiv Plusquamperfekt', question: 'Das Haus _____ schon _____ worden, als wir ankamen.', options: ['war / verkauft', 'hatte / verkauft', 'ist / verkauft', 'hat / verkauft'], correct: 0 },
+    { type: 'mc', context: '✏️ Passiv Plusquamperfekt', question: 'Der Brief _____ schon _____ worden, bevor er kam.', options: ['war / geschrieben', 'hatte / geschrieben', 'ist / geschrieben', 'hat / geschrieben'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Er _____ nicht kommen _____, weil er arbeiten musste.', options: ['hatte / können', 'war / können', 'hatte / gekonnt', 'war / gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Sie _____ es nicht _____, obwohl sie es versucht hatte.', options: ['hatte / schaffen können', 'war / schaffen können', 'hatte / geschafft können', 'war / geschafft können'], correct: 0 },
+    { type: 'mc', context: '✏️ Doppelte Vergangenheit', question: 'Nachdem ich erfahren hatte, dass er gegangen war, _____ ich traurig.', options: ['war', 'bin', 'wurde', 'werde'], correct: 0 },
+    { type: 'mc', context: '✏️ Doppelte Vergangenheit', question: 'Bevor ich wusste, dass sie angekommen war, _____ ich sie schon gesehen.', options: ['hatte', 'habe', 'war', 'bin'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Nachdem ich angekommen war, hatte ich angerufen.', 'Nachdem ich angekommen war, rief ich an.', 'Bevor ich anrief, war ich angekommen.', 'Ich war angekommen, bevor ich anrief.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er war müde, weil er schlecht geschlafen hatte.', 'Er war müde, weil er schlecht geschlafen war.', 'Er war müde, weil er schlecht hatte geschlafen.', 'Er war müde, weil er schlecht schlafen hatte.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Nachdem der Zug abgefahren war, kam ich am Bahnhof an.', 'Nachdem der Zug abgefahren hatte, kam ich am Bahnhof an.', 'Nachdem der Zug abfuhr, war ich angekommen.', 'Nachdem der Zug abfahren war, kam ich an.'], correct: 0 },
+    { type: 'gap', context: '✏️ Schwer', question: 'Obwohl er schon viel getrunken _____, bestellte er noch ein Bier.', answer: 'hatte', alternatives: ['Hatte'] },
+    { type: 'gap', context: '✏️ Schwer', question: 'Als ich aufwachte, _____ der Schnee schon geschmolzen.', answer: 'war', alternatives: ['War'] },
+    { type: 'mc', context: '✏️ Schwer', question: 'Ich hätte nicht so viel gegessen, wenn ich _____, dass es noch Dessert gibt.', options: ['gewusst hätte', 'gewusst hatte', 'wissen hätte', 'gewusst habe'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Nachdem', 'er', 'angekommen', 'war', ',', 'rief', 'er', 'seine', 'Mutter', 'an', '.'], correct: ['Nachdem', 'er', 'angekommen', 'war', ',', 'rief', 'er', 'seine', 'Mutter', 'an', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Er', 'war', 'traurig', ',', 'weil', 'sie', 'gegangen', 'war', '.'], correct: ['Er', 'war', 'traurig', ',', 'weil', 'sie', 'gegangen', 'war', '.'] },
+    { type: 'match', context: '🔗 Zeitfolge', question: 'Ordne zu:', pairs: [{ left: 'Er hatte gegessen', right: 'Zuerst' }, { left: 'Er ging spazieren', right: 'Danach' }, { left: 'Sie war angekommen', right: 'Zuerst' }, { left: 'Sie rief an', right: 'Danach' }]},
+    { type: 'match', context: '🔗 Verben mit sein', question: 'Plusquamperfekt mit "war":', pairs: [{ left: 'gehen', right: 'war gegangen' }, { left: 'fahren', right: 'war gefahren' }, { left: 'sterben', right: 'war gestorben' }, { left: 'aufwachen', right: 'war aufgewacht' }]},
+    { type: 'mc', context: '✏️ Sehr schwer', question: 'Nachdem ich erfahren _____, dass er die Prüfung bestanden _____, gratulierte ich ihm.', options: ['hatte / hatte', 'hatte / war', 'habe / hat', 'war / hatte'], correct: 0 },
+    { type: 'mc', context: '✏️ Sehr schwer', question: 'Bevor sie nach Hause ging, _____ sie noch einkaufen _____.', options: ['war / gegangen', 'hatte / gegangen', 'ist / gegangen', 'hat / gegangen'], correct: 0 }
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station15_gems', gems); localStorage.setItem('station15_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

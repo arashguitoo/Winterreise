@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 Station 3: Schloss - Lokalpräpositionen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ice-blue: #E0F4FF; --deep-blue: #1E3A5F; --winter-blue: #5B9BD5; --snow-white: #FFFFFF; --crystal-cyan: #7DD3FC; --warm-gold: #FFD700; --rubin: #E63946; --smaragd: #06D6A0; --amethyst: #9D4EDD; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .home-btn:hover { background: rgba(255,255,255,0.3); }
+        .section { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.2); }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; font-size: 1.4em; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .story-box em { color: #7DD3FC; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .collapsible:hover { background: rgba(255, 255, 255, 0.2); }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(255, 255, 255, 0.05); border-radius: 0 0 15px 15px; }
+        .collapsible-content.open { max-height: 4000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; transition: transform 0.2s; background: rgba(255,255,255,0.1); }
+        .level-btn:hover { transform: scale(1.05); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .level-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .dot-rubin { background: #E63946; }
+        .dot-smaragd { background: #06D6A0; }
+        .dot-amethyst { background: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .option-btn:hover { background: rgba(255,255,255,0.2); border-color: #7DD3FC; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .option-btn:disabled { cursor: not-allowed; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input:focus { outline: none; border-color: #7DD3FC; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .check-btn:hover { background: #4A8BC4; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .ordering-word:hover { background: rgba(255,215,0,0.4); }
+        .ordering-word.placed { opacity: 0.4; cursor: default; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .matching-item:hover { border-color: #7DD3FC; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); cursor: default; }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; font-weight: 500; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; font-weight: 600; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; margin-bottom: 10px; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        .results-btn:hover { transform: scale(1.05); }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+
+<button class="home-btn" onclick="goHome()">🏠</button>
+
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🏰</div>
+        <h1 class="station-title">Station 3: Altes Schloss</h1>
+        <p class="station-subtitle">Lokalpräpositionen - Wo? Wohin?</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die vier Freunde <strong>sind</strong> zu einem alten Schloss <strong>gekommen</strong>. Das Schloss steht <strong>auf einem Berg</strong>. Die Mauern sind mit Schnee bedeckt.</p>
+            <p><strong>Am Eingang</strong> steht ein Burgführer. Er heißt <strong>Herr Wagner</strong> und trägt einen langen Mantel.</p>
+            <p><strong>Herr Wagner:</strong> <em>"Willkommen <strong>im Schloss</strong>! Ihr sucht etwas Besonderes, nicht wahr?"</em></p>
+            <p><strong>Mia:</strong> <em>"Ja! Wir suchen den dritten Kristall. Können Sie uns helfen?"</em></p>
+            <p><strong>Herr Wagner:</strong> <em>"Der Kristall ist hier, das ist sicher. Mein Großvater hat mir erzählt: Er liegt <strong>im alten Turm</strong>, tief <strong>unter den Steinen</strong>. Aber der Weg ist nicht einfach!"</em></p>
+            <p>Die Freunde folgen dem Burgführer. Sie gehen <strong>durch den großen Hof</strong>, vorbei <strong>an</strong> alten Statuen. Dann gehen sie <strong>über eine schmale Brücke</strong>.</p>
+            <p><strong>Tim:</strong> <em>"Die Brücke sieht alt aus. Ist sie sicher?"</em></p>
+            <p><strong>Herr Wagner:</strong> <em>"Sie ist stärker, als sie aussieht. Kommt, wir müssen <strong>in den Turm</strong> gehen."</em></p>
+            <p><strong>Im Turm</strong> ist es dunkel und kalt. Sie steigen eine Treppe hinauf. <strong>Auf dem höchsten Stockwerk</strong> zeigt Herr Wagner <strong>auf den Boden</strong>.</p>
+            <p><strong>Herr Wagner:</strong> <em>"Hier! <strong>Unter diesen Steinen</strong>!"</em></p>
+            <p><strong>Leon</strong> und <strong>Sara</strong> heben die schweren Steine. <strong>Zwischen den alten Fundamenten</strong> liegt ein <strong>silberner Kristall</strong>!</p>
+            <p><em>"Der dritte Kristall!"</em> rufen alle. Die Reise geht weiter!</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">
+            📚 Grammatik: Wechselpräpositionen
+            <span id="grammarArrow">▼</span>
+        </button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was sind Wechselpräpositionen?</h3>
+                <p>Diese 9 Präpositionen können <strong>Dativ</strong> oder <strong>Akkusativ</strong> haben:</p>
+                <div class="grammar-note">
+                    <p><strong>in, an, auf, unter, über, vor, hinter, neben, zwischen</strong></p>
+                </div>
+
+                <h3>Die wichtige Frage: WO oder WOHIN?</h3>
+                <table class="grammar-table">
+                    <tr><th>Frage</th><th>Kasus</th><th>Bedeutung</th><th>Beispiel</th></tr>
+                    <tr><td><strong>Wo?</strong></td><td><strong>DATIV</strong></td><td>Position, Ort</td><td>Ich bin <strong>im</strong> Schloss. (in dem)</td></tr>
+                    <tr><td><strong>Wohin?</strong></td><td><strong>AKKUSATIV</strong></td><td>Bewegung, Richtung</td><td>Ich gehe <strong>ins</strong> Schloss. (in das)</td></tr>
+                </table>
+
+                <h3>Dativ - WO? (Position)</h3>
+                <table class="grammar-table">
+                    <tr><th>Präposition</th><th>+ Dativ</th><th>Beispiel</th></tr>
+                    <tr><td>in</td><td>in dem = <strong>im</strong></td><td>Der Kristall ist <strong>im</strong> Turm.</td></tr>
+                    <tr><td>an</td><td>an dem = <strong>am</strong></td><td>Er steht <strong>am</strong> Eingang.</td></tr>
+                    <tr><td>auf</td><td>auf dem</td><td>Das Buch liegt <strong>auf dem</strong> Tisch.</td></tr>
+                    <tr><td>unter</td><td>unter dem</td><td>Die Katze ist <strong>unter dem</strong> Bett.</td></tr>
+                    <tr><td>über</td><td>über dem</td><td>Das Bild hängt <strong>über dem</strong> Sofa.</td></tr>
+                    <tr><td>vor</td><td>vor dem</td><td>Das Auto steht <strong>vor dem</strong> Haus.</td></tr>
+                    <tr><td>hinter</td><td>hinter dem</td><td>Der Garten ist <strong>hinter dem</strong> Haus.</td></tr>
+                    <tr><td>neben</td><td>neben dem</td><td>Sie sitzt <strong>neben dem</strong> Fenster.</td></tr>
+                    <tr><td>zwischen</td><td>zwischen den</td><td>Er steht <strong>zwischen den</strong> Bäumen.</td></tr>
+                </table>
+
+                <h3>Akkusativ - WOHIN? (Bewegung)</h3>
+                <table class="grammar-table">
+                    <tr><th>Präposition</th><th>+ Akkusativ</th><th>Beispiel</th></tr>
+                    <tr><td>in</td><td>in das = <strong>ins</strong></td><td>Ich gehe <strong>ins</strong> Schloss.</td></tr>
+                    <tr><td>an</td><td>an das = <strong>ans</strong></td><td>Er geht <strong>ans</strong> Fenster.</td></tr>
+                    <tr><td>auf</td><td>auf den</td><td>Ich lege das Buch <strong>auf den</strong> Tisch.</td></tr>
+                    <tr><td>unter</td><td>unter das</td><td>Die Katze läuft <strong>unter das</strong> Bett.</td></tr>
+                    <tr><td>über</td><td>über das</td><td>Der Vogel fliegt <strong>über das</strong> Haus.</td></tr>
+                    <tr><td>vor</td><td>vor das</td><td>Ich stelle das Auto <strong>vor das</strong> Haus.</td></tr>
+                    <tr><td>hinter</td><td>hinter das</td><td>Er geht <strong>hinter das</strong> Haus.</td></tr>
+                    <tr><td>neben</td><td>neben das</td><td>Ich setze mich <strong>neben das</strong> Fenster.</td></tr>
+                    <tr><td>zwischen</td><td>zwischen die</td><td>Er stellt sich <strong>zwischen die</strong> Bäume.</td></tr>
+                </table>
+
+                <h3>⚠️ Wichtige Verben</h3>
+                <div class="grammar-warning">
+                    <p><strong>WO? (Dativ)</strong> → sein, liegen, stehen, sitzen, hängen, stecken</p>
+                    <p><strong>WOHIN? (Akkusativ)</strong> → gehen, kommen, legen, stellen, setzen, hängen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🏰</span><div><div class="vocab-word">das Schloss</div><div class="vocab-meaning">großes, altes Gebäude</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🗼</span><div><div class="vocab-word">der Turm</div><div class="vocab-meaning">hoch, schmal, Teil vom Schloss</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🚪</span><div><div class="vocab-word">der Eingang</div><div class="vocab-meaning">wo man hineingeht</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🌉</span><div><div class="vocab-word">die Brücke</div><div class="vocab-meaning">Weg über Wasser/Graben</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🪨</span><div><div class="vocab-word">der Stein</div><div class="vocab-meaning">hart, aus der Erde</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🧱</span><div><div class="vocab-word">die Mauer</div><div class="vocab-meaning">Wand aus Steinen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📍</span><div><div class="vocab-word">der Boden</div><div class="vocab-meaning">unten, wo man steht</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔦</span><div><div class="vocab-word">dunkel</div><div class="vocab-meaning">kein Licht, schwarz</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <p style="margin-bottom: 20px; color: #E0F4FF;">30 Fragen zu Wechselpräpositionen!</p>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')"><span class="level-dot dot-rubin"></span>Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')"><span class="level-dot dot-smaragd"></span>Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')"><span class="level-dot dot-amethyst"></span>Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter">Frage 1 von 30</div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore">0 / 30</div>
+        <div class="results-gems" id="resultsGems">+0 Edelsteine 💎</div>
+        <p id="resultsMessage" style="margin-bottom: 20px;"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal spielen</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    // TEXTVERSTÄNDNIS (8)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo steht das Schloss?', options: ['Auf einem Berg', 'Am Meer', 'Im Wald', 'In der Stadt'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie heißt der Burgführer?', options: ['Herr Wagner', 'Herr Müller', 'Herr Schmidt', 'Herr Winter'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo liegt der Kristall versteckt?', options: ['Im alten Turm', 'Im Keller', 'Im Garten', 'In der Küche'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo gehen die Freunde durch?', options: ['Durch den großen Hof', 'Durch den Wald', 'Durch die Stadt', 'Durch den Fluss'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Welche Farbe hat der dritte Kristall?', options: ['Silber', 'Gold', 'Blau', 'Rot'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo liegt der Kristall genau?', options: ['Unter den Steinen', 'Auf dem Tisch', 'In der Truhe', 'Hinter der Tür'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie ist es im Turm?', options: ['Dunkel und kalt', 'Hell und warm', 'Groß und laut', 'Klein und gemütlich'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wer hebt die Steine?', options: ['Leon und Sara', 'Mia und Tim', 'Herr Wagner', 'Alle zusammen'], correct: 0 },
+    // WO? DATIV - in (4)
+    { type: 'mc', context: '✏️ Wo? + Dativ: in', question: 'Der Kristall ist _____ Turm.', options: ['im', 'ins', 'in den', 'in die'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: in', question: 'Wir sind _____ Schloss.', options: ['im', 'ins', 'in den', 'in die'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: in', question: 'Die Kinder spielen _____ Garten.', options: ['im', 'ins', 'in den', 'in die'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: in', question: 'Das Buch liegt _____ Tasche.', options: ['in der', 'in die', 'im', 'ins'], correct: 0 },
+    // WO? DATIV - auf, unter (4)
+    { type: 'mc', context: '✏️ Wo? + Dativ: auf', question: 'Das Buch liegt _____ Tisch.', options: ['auf dem', 'auf den', 'auf die', 'auf das'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: auf', question: 'Die Katze sitzt _____ Stuhl.', options: ['auf dem', 'auf den', 'auf die', 'auf das'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: unter', question: 'Der Hund liegt _____ Bett.', options: ['unter dem', 'unter das', 'unter den', 'unter die'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: unter', question: 'Der Ball ist _____ Auto.', options: ['unter dem', 'unter das', 'unter den', 'unter die'], correct: 0 },
+    // WO? DATIV - an, vor, hinter, neben (6)
+    { type: 'mc', context: '✏️ Wo? + Dativ: an', question: 'Er steht _____ Fenster.', options: ['am', 'ans', 'an den', 'an die'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: an', question: 'Das Bild hängt _____ Wand.', options: ['an der', 'an die', 'am', 'ans'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: vor', question: 'Das Auto steht _____ Haus.', options: ['vor dem', 'vor das', 'vor den', 'vor die'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: hinter', question: 'Der Garten ist _____ Haus.', options: ['hinter dem', 'hinter das', 'hinter den', 'hinter die'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: neben', question: 'Sie sitzt _____ Tür.', options: ['neben der', 'neben die', 'neben dem', 'neben das'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo? + Dativ: zwischen', question: 'Er steht _____ Bäumen.', options: ['zwischen den', 'zwischen die', 'zwischen dem', 'zwischen das'], correct: 0 },
+    // WOHIN? AKKUSATIV - einfach (6)
+    { type: 'mc', context: '✏️ Wohin? + Akkusativ: in', question: 'Ich gehe _____ Schloss.', options: ['ins', 'im', 'in dem', 'in der'], correct: 0 },
+    { type: 'mc', context: '✏️ Wohin? + Akkusativ: in', question: 'Er geht _____ Zimmer.', options: ['ins', 'im', 'in dem', 'in der'], correct: 0 },
+    { type: 'mc', context: '✏️ Wohin? + Akkusativ: auf', question: 'Ich lege das Buch _____ Tisch.', options: ['auf den', 'auf dem', 'auf die', 'auf der'], correct: 0 },
+    { type: 'mc', context: '✏️ Wohin? + Akkusativ: unter', question: 'Die Katze läuft _____ Bett.', options: ['unter das', 'unter dem', 'unter den', 'unter der'], correct: 0 },
+    { type: 'mc', context: '✏️ Wohin? + Akkusativ: an', question: 'Er geht _____ Fenster.', options: ['ans', 'am', 'an dem', 'an der'], correct: 0 },
+    { type: 'mc', context: '✏️ Wohin? + Akkusativ: vor', question: 'Ich stelle das Auto _____ Haus.', options: ['vor das', 'vor dem', 'vor den', 'vor der'], correct: 0 },
+    // ORDERING + MATCHING (2)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Das', 'Buch', 'liegt', 'auf', 'dem', 'Tisch', '.'], correct: ['Das', 'Buch', 'liegt', 'auf', 'dem', 'Tisch', '.'] },
+    { type: 'match', context: '🔗 Zuordnung: Wo?', question: 'Ordne zu:', pairs: [{ left: 'in + dem', right: 'im' }, { left: 'an + dem', right: 'am' }, { left: 'auf + dem', right: 'auf dem' }, { left: 'unter + dem', right: 'unter dem' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    // TEXTVERSTÄNDNIS (5)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Worüber gehen die Freunde?', options: ['Über eine schmale Brücke', 'Über einen Berg', 'Über einen Fluss', 'Über eine Mauer'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Der Kristall liegt _____ den Steinen.', answer: 'unter', alternatives: ['Unter'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Die Freunde gehen _____ den großen Hof.', answer: 'durch', alternatives: ['Durch'] },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo zeigt Herr Wagner hin?', options: ['Auf den Boden', 'An die Wand', 'Aus dem Fenster', 'In die Ecke'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo liegt der Kristall zwischen?', options: ['Zwischen den Fundamenten', 'Zwischen den Bäumen', 'Zwischen den Steinen', 'Zwischen den Türen'], correct: 0 },
+    // WO ODER WOHIN? (8)
+    { type: 'mc', context: '✏️ Wo oder Wohin?', question: 'Das Bild hängt _____ der Wand. (Position)', options: ['an', 'auf', 'in', 'unter'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo oder Wohin?', question: 'Ich hänge das Bild _____ die Wand. (Bewegung)', options: ['an', 'auf', 'in', 'unter'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo oder Wohin?', question: 'Die Lampe hängt _____ dem Tisch.', options: ['über', 'auf', 'unter', 'neben'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo oder Wohin?', question: 'Er setzt sich _____ den Stuhl.', options: ['auf', 'an', 'in', 'unter'], correct: 0 },
+    { type: 'gap', context: '✏️ Wo oder Wohin?', question: 'Sie sitzt _____ dem Stuhl. (Position)', answer: 'auf', alternatives: ['Auf'] },
+    { type: 'gap', context: '✏️ Wo oder Wohin?', question: 'Er stellt die Vase _____ den Tisch.', answer: 'auf', alternatives: ['Auf'] },
+    { type: 'mc', context: '✏️ Wo oder Wohin?', question: 'Die Kinder spielen _____ dem Haus. (Position)', options: ['vor', 'in', 'auf', 'durch'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo oder Wohin?', question: 'Er läuft _____ das Haus. (Bewegung)', options: ['vor', 'in', 'auf', 'durch'], correct: 0 },
+    // DATIV VS AKKUSATIV (8)
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Das Auto steht _____ Garage. (Wo?)', options: ['in der', 'in die', 'ins', 'im'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Er fährt das Auto _____ Garage. (Wohin?)', options: ['in die', 'in der', 'ins', 'im'], correct: 0 },
+    { type: 'gap', context: '✏️ Dativ oder Akkusativ?', question: 'Die Katze springt _____ den Schrank. (auf + Akk)', answer: 'auf', alternatives: ['Auf'] },
+    { type: 'gap', context: '✏️ Dativ oder Akkusativ?', question: 'Die Katze sitzt _____ dem Schrank. (auf + Dat)', answer: 'auf', alternatives: ['Auf'] },
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Ich lege mich _____ Bett. (Wohin?)', options: ['ins', 'im', 'in dem', 'in der'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Ich liege _____ Bett. (Wo?)', options: ['im', 'ins', 'in das', 'in die'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Er hängt den Mantel _____ Schrank.', options: ['in den', 'in dem', 'im', 'in der'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ oder Akkusativ?', question: 'Der Mantel hängt _____ Schrank.', options: ['im', 'in den', 'ins', 'in die'], correct: 0 },
+    // VERBEN: stehen/stellen, liegen/legen, sitzen/setzen (5)
+    { type: 'mc', context: '✏️ Verben', question: 'Die Vase _____ auf dem Tisch. (Position)', options: ['steht', 'stellt', 'legt', 'liegt'], correct: 0 },
+    { type: 'mc', context: '✏️ Verben', question: 'Ich _____ die Vase auf den Tisch. (Aktion)', options: ['stelle', 'stehe', 'lege', 'liege'], correct: 0 },
+    { type: 'mc', context: '✏️ Verben', question: 'Das Buch _____ auf dem Tisch. (Position)', options: ['liegt', 'legt', 'steht', 'stellt'], correct: 0 },
+    { type: 'mc', context: '✏️ Verben', question: 'Ich _____ das Buch auf den Tisch. (Aktion)', options: ['lege', 'liege', 'stelle', 'stehe'], correct: 0 },
+    { type: 'mc', context: '✏️ Verben', question: 'Er _____ sich auf den Stuhl. (Aktion)', options: ['setzt', 'sitzt', 'stellt', 'steht'], correct: 0 },
+    // ORDERING + MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'lege', 'das', 'Buch', 'auf', 'den', 'Tisch', '.'], correct: ['Ich', 'lege', 'das', 'Buch', 'auf', 'den', 'Tisch', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Er', 'geht', 'ins', 'Schloss', '.'], correct: ['Er', 'geht', 'ins', 'Schloss', '.'] },
+    { type: 'match', context: '🔗 Position vs. Bewegung', question: 'Ordne zu:', pairs: [{ left: 'stehen', right: 'stellen' }, { left: 'liegen', right: 'legen' }, { left: 'sitzen', right: 'setzen' }, { left: 'hängen (Dat)', right: 'hängen (Akk)' }]},
+    { type: 'match', context: '🔗 Wohin? + Akkusativ', question: 'Ordne zu:', pairs: [{ left: 'in + das', right: 'ins' }, { left: 'an + das', right: 'ans' }, { left: 'auf + den', right: 'auf den' }, { left: 'in + die', right: 'in die' }]}
+];
+
+const QUESTIONS_AMETHYST = [
+    // KOMPLEXE TEXTFRAGEN (4)
+    { type: 'gap', context: '📖 Textverständnis', question: 'Die Freunde gehen _____ eine schmale Brücke.', answer: 'über', alternatives: ['Über'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Der Kristall liegt _____ den alten Fundamenten.', answer: 'zwischen', alternatives: ['Zwischen'] },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Welche Präposition passt NICHT? "Sie gehen _____ den Hof."', options: ['auf', 'durch', 'über', 'in'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was bedeutet "am Eingang"?', options: ['an dem Eingang', 'an den Eingang', 'auf dem Eingang', 'in dem Eingang'], correct: 0 },
+    // KOMPLEXE WO/WOHIN (8)
+    { type: 'gap', context: '✏️ Wo/Wohin komplex', question: 'Die Katze springt _____ den Tisch und sitzt dann _____ dem Tisch. (auf/auf)', answer: 'auf', alternatives: ['Auf'] },
+    { type: 'mc', context: '✏️ Wo/Wohin komplex', question: 'Er _____ das Bild an die Wand. (Aktion)', options: ['hängt', 'hängen', 'gehängt', 'hingen'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo/Wohin komplex', question: 'Das Bild _____ an der Wand. (Zustand)', options: ['hängt', 'hängen', 'gehängt', 'hingen'], correct: 0 },
+    { type: 'gap', context: '✏️ Wo/Wohin komplex', question: 'Sie stellt die Blumen _____ die Vase.', answer: 'in', alternatives: ['In'] },
+    { type: 'gap', context: '✏️ Wo/Wohin komplex', question: 'Die Blumen stehen _____ der Vase.', answer: 'in', alternatives: ['In'] },
+    { type: 'mc', context: '✏️ Wo/Wohin komplex', question: 'Der Vogel fliegt _____ das Dach.', options: ['auf', 'über', 'unter', 'an'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo/Wohin komplex', question: 'Der Vogel sitzt _____ dem Dach.', options: ['auf', 'über', 'unter', 'an'], correct: 0 },
+    { type: 'mc', context: '✏️ Wo/Wohin komplex', question: 'Er versteckt sich _____ dem Schrank.', options: ['hinter', 'auf', 'über', 'unter'], correct: 0 },
+    // WELCHER SATZ IST RICHTIG/FALSCH? (6)
+    { type: 'mc', context: '✏️ Richtig oder falsch?', question: 'Welcher Satz ist RICHTIG?', options: ['Das Buch liegt auf dem Tisch.', 'Das Buch liegt auf den Tisch.', 'Das Buch liegt auf der Tisch.', 'Das Buch liegt auf die Tisch.'], correct: 0 },
+    { type: 'mc', context: '✏️ Richtig oder falsch?', question: 'Welcher Satz ist RICHTIG?', options: ['Ich lege das Buch auf den Tisch.', 'Ich lege das Buch auf dem Tisch.', 'Ich lege das Buch auf der Tisch.', 'Ich lege das Buch auf die Tisch.'], correct: 0 },
+    { type: 'mc', context: '✏️ Richtig oder falsch?', question: 'Welcher Satz ist FALSCH?', options: ['Er geht in dem Zimmer.', 'Er geht ins Zimmer.', 'Er ist im Zimmer.', 'Er geht in das Zimmer.'], correct: 0 },
+    { type: 'mc', context: '✏️ Richtig oder falsch?', question: 'Welcher Satz ist FALSCH?', options: ['Die Katze sitzt auf den Stuhl.', 'Die Katze sitzt auf dem Stuhl.', 'Die Katze springt auf den Stuhl.', 'Die Katze ist auf dem Stuhl.'], correct: 0 },
+    { type: 'mc', context: '✏️ Richtig oder falsch?', question: 'Welcher Satz ist RICHTIG?', options: ['Sie stellt die Vase auf den Tisch.', 'Sie steht die Vase auf den Tisch.', 'Sie stellt die Vase auf dem Tisch.', 'Sie steht die Vase auf dem Tisch.'], correct: 0 },
+    { type: 'mc', context: '✏️ Richtig oder falsch?', question: 'Welcher Satz ist RICHTIG?', options: ['Er setzt sich neben seine Frau.', 'Er sitzt sich neben seine Frau.', 'Er setzt sich neben seiner Frau.', 'Er sitzt sich neben seiner Frau.'], correct: 0 },
+    // GEMISCHTE SCHWERE (8)
+    { type: 'gap', context: '✏️ Lückentext', question: 'Die Kinder laufen _____ den Park und spielen dann _____ dem Park.', answer: 'in', alternatives: ['In'] },
+    { type: 'gap', context: '✏️ Lückentext', question: 'Er stellt sein Fahrrad _____ die Garage.', answer: 'in', alternatives: ['In'] },
+    { type: 'mc', context: '✏️ Gemischt', question: 'Wo ist die Lampe? Sie hängt _____ dem Tisch.', options: ['über', 'auf', 'unter', 'neben'], correct: 0 },
+    { type: 'mc', context: '✏️ Gemischt', question: 'Wohin gehst du? Ich gehe _____ die Schule.', options: ['in', 'im', 'an', 'am'], correct: 0 },
+    { type: 'mc', context: '✏️ Gemischt', question: '"Steck den Schlüssel _____ das Schloss!" - Welche Präposition?', options: ['in', 'an', 'auf', 'vor'], correct: 0 },
+    { type: 'mc', context: '✏️ Gemischt', question: '"Der Schlüssel steckt _____ dem Schloss." - Welche Präposition?', options: ['in', 'an', 'auf', 'vor'], correct: 0 },
+    { type: 'gap', context: '✏️ Lückentext', question: 'Er hängt seinen Mantel _____ den Haken.', answer: 'an', alternatives: ['An'] },
+    { type: 'gap', context: '✏️ Lückentext', question: 'Der Mantel hängt _____ dem Haken.', answer: 'an', alternatives: ['An'] },
+    // ORDERING + MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Sie', 'setzt', 'sich', 'neben', 'ihren', 'Mann', '.'], correct: ['Sie', 'setzt', 'sich', 'neben', 'ihren', 'Mann', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Der', 'Hund', 'läuft', 'unter', 'den', 'Tisch', '.'], correct: ['Der', 'Hund', 'läuft', 'unter', 'den', 'Tisch', '.'] },
+    { type: 'match', context: '🔗 Wo? (Dativ)', question: 'Ordne zu:', pairs: [{ left: 'in + dem (m)', right: 'im' }, { left: 'in + der (f)', right: 'in der' }, { left: 'an + dem', right: 'am' }, { left: 'auf + dem', right: 'auf dem' }]},
+    { type: 'match', context: '🔗 Wohin? (Akkusativ)', question: 'Ordne zu:', pairs: [{ left: 'in + das', right: 'ins' }, { left: 'in + die', right: 'in die' }, { left: 'an + das', right: 'ans' }, { left: 'auf + den', right: 'auf den' }]}
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+
+function shuffle(array) { const arr = [...array]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function toggleGrammar() { const content = document.getElementById('grammarContent'); const arrow = document.getElementById('grammarArrow'); content.classList.toggle('open'); arrow.textContent = content.classList.contains('open') ? '▲' : '▼'; }
+
+function startQuiz(level) {
+    selectedLevel = level; currentQuestion = 0; score = 0;
+    if (level === 'rubin') currentQuestions = shuffle(QUESTIONS_RUBIN);
+    else if (level === 'smaragd') currentQuestions = shuffle(QUESTIONS_SMARAGD);
+    else currentQuestions = shuffle(QUESTIONS_AMETHYST);
+    document.getElementById('levelSelection').style.display = 'none';
+    document.getElementById('quizArea').classList.add('active');
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = currentQuestions[currentQuestion];
+    const box = document.getElementById('questionBox');
+    document.getElementById('progressFill').style.width = ((currentQuestion) / currentQuestions.length) * 100 + '%';
+    document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`;
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('nextBtn').classList.remove('show');
+
+    let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`;
+
+    if (q.type === 'mc') {
+        html += '<div class="options-grid">';
+        shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach((opt) => {
+            html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`;
+        });
+        html += '</div>';
+    } else if (q.type === 'gap') {
+        html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`;
+    } else if (q.type === 'order') {
+        html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">';
+        shuffle([...q.words]).forEach((word) => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; });
+        html += '</div><p style="text-align:center; color:#7DD3FC;">↓ Klicke die Wörter in der richtigen Reihenfolge ↓</p><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>';
+    } else if (q.type === 'match') {
+        html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>';
+        shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div><div class="matching-column"><h4>Rechts</h4>';
+        shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div></div>';
+    }
+    box.innerHTML = html;
+}
+
+function checkMC(selected, correct, btn) {
+    document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+    if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); }
+}
+
+function checkGap() {
+    const input = document.getElementById('gapInput');
+    const q = currentQuestions[currentQuestion];
+    const userAnswer = input.value.trim().toLowerCase();
+    const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : [];
+    if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { input.classList.add('wrong'); showFeedback(false, `Die richtige Antwort ist: ${q.answer}`); }
+    input.disabled = true;
+}
+
+function moveWord(element, direction) {
+    if (element.classList.contains('placed')) return;
+    const source = document.getElementById('orderSource'), target = document.getElementById('orderTarget');
+    if (direction === 'toTarget') { const clone = element.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; target.appendChild(clone); element.classList.add('placed'); }
+    else { source.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === element.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); element.remove(); }
+}
+
+function checkOrder() {
+    const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word);
+    if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { showFeedback(false, `Richtige Reihenfolge: ${currentQuestions[currentQuestion].correct.join(' ')}`); }
+}
+
+let selectedMatch = null, matchedPairs = 0;
+
+function selectMatch(element) {
+    if (element.classList.contains('matched')) return;
+    if (!selectedMatch) { selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+    else {
+        if (selectedMatch.type === element.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+        else {
+            const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === element.dataset.value) || (p.right === selectedMatch.value && p.left === element.dataset.value));
+            if (pair) { element.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } }
+            else { element.classList.add('wrong'); setTimeout(() => element.classList.remove('wrong'), 500); }
+            selectedMatch.element.classList.remove('selected'); selectedMatch = null;
+        }
+    }
+}
+
+function showFeedback(isCorrect, message) { const feedback = document.getElementById('feedback'); feedback.textContent = message; feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+
+function showResults() {
+    document.getElementById('quizArea').classList.remove('active');
+    document.getElementById('resultsSection').classList.add('active');
+    const percentage = Math.round((score / currentQuestions.length) * 100);
+    let gems = 0, icon = '🏆', message = '';
+    if (percentage >= 90) { gems = selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10; icon = '🏆'; message = 'Ausgezeichnet! Du hast den dritten Kristall gefunden! 💎'; }
+    else if (percentage >= 70) { gems = selectedLevel === 'amethyst' ? 20 : selectedLevel === 'smaragd' ? 15 : 8; icon = '⭐'; message = 'Sehr gut!'; }
+    else if (percentage >= 50) { gems = selectedLevel === 'amethyst' ? 10 : selectedLevel === 'smaragd' ? 8 : 5; icon = '💪'; message = 'Gut gemacht!'; }
+    else { gems = 2; icon = '📚'; message = 'Lies die Grammatik nochmal!'; }
+    document.getElementById('resultsIcon').textContent = icon;
+    document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`;
+    document.getElementById('resultsGems').textContent = `+${gems} Edelsteine 💎`;
+    document.getElementById('resultsMessage').textContent = message;
+    localStorage.setItem('station3_gems', gems);
+    localStorage.setItem('station3_completed', percentage >= 50);
+}
+
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+
+</body>
+</html>

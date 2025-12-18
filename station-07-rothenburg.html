@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏔️ Station 7: Alpen - Nebensätze</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ice-blue: #E0F4FF; --deep-blue: #1E3A5F; --winter-blue: #5B9BD5; --snow-white: #FFFFFF; --crystal-cyan: #7DD3FC; --warm-gold: #FFD700; --rubin: #E63946; --smaragd: #06D6A0; --amethyst: #9D4EDD; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .home-btn:hover { background: rgba(255,255,255,0.3); }
+        .section { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.2); }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; font-size: 1.4em; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .story-box em { color: #7DD3FC; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .collapsible:hover { background: rgba(255, 255, 255, 0.2); }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(255, 255, 255, 0.05); border-radius: 0 0 15px 15px; }
+        .collapsible-content.open { max-height: 4000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; transition: transform 0.2s; background: rgba(255,255,255,0.1); }
+        .level-btn:hover { transform: scale(1.05); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .level-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .dot-rubin { background: #E63946; }
+        .dot-smaragd { background: #06D6A0; }
+        .dot-amethyst { background: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .option-btn:hover { background: rgba(255,255,255,0.2); border-color: #7DD3FC; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .option-btn:disabled { cursor: not-allowed; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input:focus { outline: none; border-color: #7DD3FC; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .check-btn:hover { background: #4A8BC4; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .ordering-word:hover { background: rgba(255,215,0,0.4); }
+        .ordering-word.placed { opacity: 0.4; cursor: default; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .matching-item:hover { border-color: #7DD3FC; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); cursor: default; }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; font-weight: 500; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; font-weight: 600; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; margin-bottom: 10px; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        .results-btn:hover { transform: scale(1.05); }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+
+<button class="home-btn" onclick="goHome()">🏠</button>
+
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🏔️</div>
+        <h1 class="station-title">Station 7: Alpen</h1>
+        <p class="station-subtitle">Nebensätze - weil, dass, wenn, ob...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde fahren in die Alpen, <strong>weil</strong> der siebte Kristall dort sein soll. Die Berge sind hoch und mit Schnee bedeckt.</p>
+            <p><strong>Leon:</strong> <em>"Ich glaube, <strong>dass</strong> der Kristall auf dem Gipfel ist."</em></p>
+            <p><strong>Sara:</strong> <em>"<strong>Wenn</strong> wir den Gipfel erreichen wollen, <strong>müssen</strong> wir früh aufstehen."</em></p>
+            <p>Sie treffen einen Bergführer namens <strong>Herr Hofer</strong>. Er fragt: <em>"Wisst ihr, <strong>ob</strong> ihr genug warme Kleidung habt?"</em></p>
+            <p><strong>Mia:</strong> <em>"Ja! Wir haben alles dabei, <strong>obwohl</strong> unsere Rucksäcke sehr schwer sind."</em></p>
+            <p><strong>Herr Hofer:</strong> <em>"Gut! <strong>Als</strong> ich jung war, habe ich den Kristall gesehen. Er liegt in einer Höhle, <strong>die</strong> sehr versteckt ist."</em></p>
+            <p><strong>Tim:</strong> <em>"Können Sie uns zeigen, <strong>wo</strong> die Höhle ist?"</em></p>
+            <p><strong>Herr Hofer:</strong> <em>"Natürlich! <strong>Bevor</strong> wir losgehen, müssen wir frühstücken. <strong>Nachdem</strong> wir gegessen haben, starten wir."</em></p>
+            <p><strong>Während</strong> sie den Berg hinaufsteigen, erzählt Herr Hofer Geschichten. <strong>Obwohl</strong> der Weg schwer ist, geben die Freunde nicht auf.</p>
+            <p><strong>Als</strong> sie endlich die Höhle erreichen, sehen sie einen <strong>weißen Kristall</strong>, der im Licht funkelt!</p>
+            <p><strong>Sara:</strong> <em>"Ich bin so glücklich, <strong>dass</strong> wir ihn gefunden haben!"</em></p>
+            <p><em>"Der siebte Kristall!"</em> rufen alle. Die Reise geht weiter!</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">
+            📚 Grammatik: Nebensätze
+            <span id="grammarArrow">▼</span>
+        </button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was sind Nebensätze?</h3>
+                <p>Nebensätze sind Sätze, die nicht allein stehen können. Sie beginnen mit einer <strong>Konjunktion</strong> und das <strong>Verb steht am Ende</strong>.</p>
+
+                <div class="grammar-warning">
+                    <p><strong>Hauptsatz:</strong> Das Verb steht auf Position 2.</p>
+                    <p><strong>Nebensatz:</strong> Das Verb steht am <strong>ENDE</strong>.</p>
+                </div>
+
+                <h3>Wichtige Konjunktionen</h3>
+                <table class="grammar-table">
+                    <tr><th>Konjunktion</th><th>Bedeutung</th><th>Beispiel</th></tr>
+                    <tr><td><strong>weil</strong></td><td>Grund (kausal)</td><td>Ich lerne, <strong>weil</strong> ich eine Prüfung <strong>habe</strong>.</td></tr>
+                    <tr><td><strong>dass</strong></td><td>Inhalt</td><td>Ich weiß, <strong>dass</strong> du recht <strong>hast</strong>.</td></tr>
+                    <tr><td><strong>wenn</strong></td><td>Bedingung/Zeit</td><td><strong>Wenn</strong> es regnet, bleibe ich zu Hause.</td></tr>
+                    <tr><td><strong>ob</strong></td><td>indirekte Ja/Nein-Frage</td><td>Ich frage, <strong>ob</strong> du kommst.</td></tr>
+                    <tr><td><strong>obwohl</strong></td><td>Gegensatz (konzessiv)</td><td>Ich gehe, <strong>obwohl</strong> ich müde <strong>bin</strong>.</td></tr>
+                    <tr><td><strong>als</strong></td><td>Vergangenheit (einmal)</td><td><strong>Als</strong> ich Kind <strong>war</strong>, spielte ich viel.</td></tr>
+                    <tr><td><strong>während</strong></td><td>gleichzeitig</td><td><strong>Während</strong> ich esse, lese ich.</td></tr>
+                    <tr><td><strong>bevor</strong></td><td>vorher</td><td><strong>Bevor</strong> ich gehe, rufe ich an.</td></tr>
+                    <tr><td><strong>nachdem</strong></td><td>nachher</td><td><strong>Nachdem</strong> ich gegessen habe, gehe ich.</td></tr>
+                </table>
+
+                <h3>Satzstellung</h3>
+                <div class="grammar-note">
+                    <p><strong>Nebensatz + Hauptsatz:</strong></p>
+                    <p><strong>Wenn</strong> ich Zeit <strong>habe</strong>, <strong>komme</strong> ich. (Verb-Verb)</p>
+                    <p><strong>Hauptsatz + Nebensatz:</strong></p>
+                    <p>Ich <strong>komme</strong>, <strong>wenn</strong> ich Zeit <strong>habe</strong>.</p>
+                </div>
+
+                <h3>als vs. wenn</h3>
+                <table class="grammar-table">
+                    <tr><th>als</th><th>wenn</th></tr>
+                    <tr><td>Vergangenheit, <strong>einmal</strong></td><td>Gegenwart/Zukunft ODER Vergangenheit <strong>mehrmals</strong></td></tr>
+                    <tr><td><strong>Als</strong> ich 18 war...</td><td><strong>Wenn</strong> ich Zeit habe...</td></tr>
+                    <tr><td>(ein Moment)</td><td>(immer wenn)</td></tr>
+                </table>
+
+                <h3>weil vs. obwohl</h3>
+                <table class="grammar-table">
+                    <tr><th>weil (Grund)</th><th>obwohl (Gegensatz)</th></tr>
+                    <tr><td>Ich bleibe zu Hause, <strong>weil</strong> es regnet.</td><td>Ich gehe raus, <strong>obwohl</strong> es regnet.</td></tr>
+                    <tr><td>(logisch)</td><td>(überraschend)</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🏔️</span><div><div class="vocab-word">der Berg</div><div class="vocab-meaning">hoch, aus Stein</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⛰️</span><div><div class="vocab-word">der Gipfel</div><div class="vocab-meaning">ganz oben auf dem Berg</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🕳️</span><div><div class="vocab-word">die Höhle</div><div class="vocab-meaning">Loch im Berg</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🎒</span><div><div class="vocab-word">der Rucksack</div><div class="vocab-meaning">Tasche für den Rücken</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🧗</span><div><div class="vocab-word">klettern</div><div class="vocab-meaning">nach oben gehen (schwer)</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🥾</span><div><div class="vocab-word">wandern</div><div class="vocab-meaning">lange in der Natur gehen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">💪</span><div><div class="vocab-word">aufgeben</div><div class="vocab-meaning">stoppen, nicht weitermachen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">✨</span><div><div class="vocab-word">funkeln</div><div class="vocab-meaning">glänzen, Licht reflektieren</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <p style="margin-bottom: 20px; color: #E0F4FF;">30 Fragen zu Nebensätzen!</p>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')"><span class="level-dot dot-rubin"></span>Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')"><span class="level-dot dot-smaragd"></span>Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')"><span class="level-dot dot-amethyst"></span>Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter">Frage 1 von 30</div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore">0 / 30</div>
+        <div class="results-gems" id="resultsGems">+0 Edelsteine 💎</div>
+        <p id="resultsMessage" style="margin-bottom: 20px;"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal spielen</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    // TEXTVERSTÄNDNIS (8)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Warum fahren die Freunde in die Alpen?', options: ['Weil der Kristall dort sein soll', 'Weil sie Urlaub machen', 'Weil sie wandern wollen', 'Weil es warm ist'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie heißt der Bergführer?', options: ['Herr Hofer', 'Herr Müller', 'Herr Schmidt', 'Herr Becker'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo liegt der Kristall?', options: ['In einer Höhle', 'Auf dem Gipfel', 'Im Tal', 'Im See'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Welche Farbe hat der siebte Kristall?', options: ['Weiß', 'Blau', 'Rot', 'Grün'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was müssen sie machen, bevor sie losgehen?', options: ['Frühstücken', 'Schlafen', 'Packen', 'Duschen'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie sind die Rucksäcke?', options: ['Sehr schwer', 'Sehr leicht', 'Sehr klein', 'Sehr alt'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was macht der Kristall im Licht?', options: ['Er funkelt', 'Er singt', 'Er fliegt', 'Er schmilzt'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was macht Herr Hofer während sie wandern?', options: ['Er erzählt Geschichten', 'Er singt', 'Er schläft', 'Er isst'], correct: 0 },
+    // WEIL (5)
+    { type: 'mc', context: '✏️ weil', question: 'Ich lerne Deutsch, _____ ich in Deutschland arbeiten möchte.', options: ['weil', 'dass', 'ob', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ weil', question: 'Er bleibt zu Hause, _____ er krank ist.', options: ['weil', 'dass', 'ob', 'obwohl'], correct: 0 },
+    { type: 'mc', context: '✏️ weil', question: 'Wir fahren mit dem Bus, _____ unser Auto kaputt ist.', options: ['weil', 'dass', 'ob', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ weil', question: 'Sie ist müde, _____ sie wenig geschlafen hat.', options: ['weil', 'dass', 'ob', 'obwohl'], correct: 0 },
+    { type: 'mc', context: '✏️ weil', question: 'Ich esse nichts, _____ ich keinen Hunger habe.', options: ['weil', 'dass', 'wenn', 'ob'], correct: 0 },
+    // DASS (5)
+    { type: 'mc', context: '✏️ dass', question: 'Ich weiß, _____ du recht hast.', options: ['dass', 'weil', 'ob', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ dass', question: 'Er glaubt, _____ sie kommen wird.', options: ['dass', 'weil', 'ob', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ dass', question: 'Ich hoffe, _____ das Wetter gut ist.', options: ['dass', 'weil', 'ob', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ dass', question: 'Sie sagt, _____ sie müde ist.', options: ['dass', 'weil', 'ob', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ dass', question: 'Ich finde, _____ der Film gut ist.', options: ['dass', 'weil', 'ob', 'obwohl'], correct: 0 },
+    // WENN (4)
+    { type: 'mc', context: '✏️ wenn', question: '_____ es regnet, bleibe ich zu Hause.', options: ['Wenn', 'Weil', 'Dass', 'Ob'], correct: 0 },
+    { type: 'mc', context: '✏️ wenn', question: 'Ich rufe dich an, _____ ich Zeit habe.', options: ['wenn', 'weil', 'dass', 'ob'], correct: 0 },
+    { type: 'mc', context: '✏️ wenn', question: '_____ du Hilfe brauchst, sag Bescheid.', options: ['Wenn', 'Weil', 'Dass', 'Ob'], correct: 0 },
+    { type: 'mc', context: '✏️ wenn', question: 'Ich bin glücklich, _____ die Sonne scheint.', options: ['wenn', 'weil', 'dass', 'ob'], correct: 0 },
+    // OB (4)
+    { type: 'mc', context: '✏️ ob', question: 'Ich weiß nicht, _____ er kommt.', options: ['ob', 'dass', 'weil', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ ob', question: 'Kannst du mir sagen, _____ der Zug pünktlich ist?', options: ['ob', 'dass', 'weil', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ ob', question: 'Ich frage mich, _____ sie mich mag.', options: ['ob', 'dass', 'weil', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ ob', question: 'Er fragt, _____ wir morgen kommen.', options: ['ob', 'dass', 'weil', 'wenn'], correct: 0 },
+    // ORDERING + MATCHING (2)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'lerne', ',', 'weil', 'ich', 'eine', 'Prüfung', 'habe', '.'], correct: ['Ich', 'lerne', ',', 'weil', 'ich', 'eine', 'Prüfung', 'habe', '.'] },
+    { type: 'match', context: '🔗 Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'weil', right: 'Grund' }, { left: 'dass', right: 'Inhalt' }, { left: 'wenn', right: 'Bedingung' }, { left: 'ob', right: 'Ja/Nein-Frage' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    // TEXTVERSTÄNDNIS (5)
+    { type: 'gap', context: '📖 Textverständnis', question: 'Die Freunde fahren in die Alpen, _____ der Kristall dort sein soll.', answer: 'weil', alternatives: ['Weil'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Leon glaubt, _____ der Kristall auf dem Gipfel ist.', answer: 'dass', alternatives: ['Dass'] },
+    { type: 'gap', context: '📖 Textverständnis', question: '_____ ich jung war, habe ich den Kristall gesehen.', answer: 'Als', alternatives: ['als'] },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was bedeutet "obwohl unsere Rucksäcke schwer sind"?', options: ['Trotz der schweren Rucksäcke', 'Wegen der schweren Rucksäcke', 'Ohne die Rucksäcke', 'Mit leichten Rucksäcken'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was passiert zuerst: Essen oder Losgehen?', options: ['Zuerst Essen, dann Losgehen', 'Zuerst Losgehen, dann Essen', 'Beides gleichzeitig', 'Keins von beiden'], correct: 0 },
+    // VERBPOSITION (6)
+    { type: 'mc', context: '✏️ Verbposition', question: 'Welcher Satz ist richtig?', options: ['Ich komme, weil ich Zeit habe.', 'Ich komme, weil ich habe Zeit.', 'Ich komme, weil habe ich Zeit.', 'Ich komme weil ich Zeit habe.'], correct: 0 },
+    { type: 'mc', context: '✏️ Verbposition', question: 'Welcher Satz ist richtig?', options: ['Er sagt, dass er müde ist.', 'Er sagt, dass er ist müde.', 'Er sagt dass er müde ist.', 'Er sagt, dass ist er müde.'], correct: 0 },
+    { type: 'mc', context: '✏️ Verbposition', question: 'Welcher Satz ist FALSCH?', options: ['Wenn ich habe Zeit, komme ich.', 'Wenn ich Zeit habe, komme ich.', 'Ich komme, wenn ich Zeit habe.', 'Ich komme wenn ich Zeit habe.'], correct: 0 },
+    { type: 'gap', context: '✏️ Verbposition', question: 'Ich weiß nicht, ob er heute kommen _____. (können)', answer: 'kann', alternatives: ['Kann'] },
+    { type: 'gap', context: '✏️ Verbposition', question: 'Sie fragt, wann der Zug _____. (abfahren)', answer: 'abfährt', alternatives: ['Abfährt'] },
+    { type: 'mc', context: '✏️ Verbposition', question: 'Wo steht das Verb im Nebensatz?', options: ['Am Ende', 'Am Anfang', 'In der Mitte', 'Position 2'], correct: 0 },
+    // ALS VS. WENN (5)
+    { type: 'mc', context: '✏️ als vs. wenn', question: '_____ ich ein Kind war, spielte ich viel. (Vergangenheit, einmal)', options: ['Als', 'Wenn', 'Weil', 'Dass'], correct: 0 },
+    { type: 'mc', context: '✏️ als vs. wenn', question: '_____ ich Zeit habe, lese ich. (Gegenwart, immer)', options: ['Wenn', 'Als', 'Weil', 'Dass'], correct: 0 },
+    { type: 'mc', context: '✏️ als vs. wenn', question: '_____ ich jung war, lebte ich in Berlin. (einmaliger Zeitraum)', options: ['Als', 'Wenn', 'Weil', 'Dass'], correct: 0 },
+    { type: 'mc', context: '✏️ als vs. wenn', question: 'Immer _____ es regnete, blieben wir zu Hause. (Vergangenheit, mehrmals)', options: ['wenn', 'als', 'weil', 'dass'], correct: 0 },
+    { type: 'mc', context: '✏️ als vs. wenn', question: '_____ ich 18 wurde, bekam ich ein Auto. (Vergangenheit, einmal)', options: ['Als', 'Wenn', 'Weil', 'Dass'], correct: 0 },
+    // OBWOHL (4)
+    { type: 'mc', context: '✏️ obwohl', question: 'Ich gehe raus, _____ es regnet. (Gegensatz)', options: ['obwohl', 'weil', 'wenn', 'dass'], correct: 0 },
+    { type: 'mc', context: '✏️ obwohl', question: 'Er arbeitet weiter, _____ er müde ist.', options: ['obwohl', 'weil', 'wenn', 'dass'], correct: 0 },
+    { type: 'gap', context: '✏️ obwohl', question: 'Sie kommt zur Party, _____ sie krank ist.', answer: 'obwohl', alternatives: ['Obwohl'] },
+    { type: 'mc', context: '✏️ obwohl', question: 'Was ist der Unterschied zwischen "weil" und "obwohl"?', options: ['weil = Grund, obwohl = Gegensatz', 'weil = Gegensatz, obwohl = Grund', 'Kein Unterschied', 'weil = Zeit, obwohl = Ort'], correct: 0 },
+    // BEVOR, NACHDEM, WÄHREND (4)
+    { type: 'mc', context: '✏️ Zeit-Konjunktionen', question: '_____ ich esse, wasche ich meine Hände.', options: ['Bevor', 'Nachdem', 'Während', 'Weil'], correct: 0 },
+    { type: 'mc', context: '✏️ Zeit-Konjunktionen', question: '_____ ich gegessen habe, mache ich einen Spaziergang.', options: ['Nachdem', 'Bevor', 'Während', 'Weil'], correct: 0 },
+    { type: 'mc', context: '✏️ Zeit-Konjunktionen', question: '_____ ich dusche, höre ich Musik.', options: ['Während', 'Bevor', 'Nachdem', 'Weil'], correct: 0 },
+    { type: 'mc', context: '✏️ Zeit-Konjunktionen', question: 'Was passiert zuerst? "Bevor ich gehe, rufe ich an."', options: ['Anrufen', 'Gehen', 'Beides gleichzeitig', 'Keins'], correct: 0 },
+    // ORDERING + MATCHING (6)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Wenn', 'ich', 'Zeit', 'habe', ',', 'komme', 'ich', '.'], correct: ['Wenn', 'ich', 'Zeit', 'habe', ',', 'komme', 'ich', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'weiß', 'nicht', ',', 'ob', 'er', 'kommt', '.'], correct: ['Ich', 'weiß', 'nicht', ',', 'ob', 'er', 'kommt', '.'] },
+    { type: 'match', context: '🔗 Bedeutung', question: 'Ordne zu:', pairs: [{ left: 'obwohl', right: 'Gegensatz' }, { left: 'während', right: 'gleichzeitig' }, { left: 'bevor', right: 'vorher' }, { left: 'nachdem', right: 'nachher' }]},
+    { type: 'match', context: '🔗 als vs. wenn', question: 'Ordne zu:', pairs: [{ left: 'als', right: 'Vergangenheit (1x)' }, { left: 'wenn (Gegenwart)', right: 'immer wenn' }, { left: 'wenn (Vergangen.)', right: 'mehrmals' }, { left: 'als', right: 'einmaliges Ereignis' }]}
+];
+
+const QUESTIONS_AMETHYST = [
+    // KOMPLEXE TEXTFRAGEN (4)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was bedeutet: "Obwohl der Weg schwer ist, geben die Freunde nicht auf"?', options: ['Sie machen weiter trotz der Schwierigkeit', 'Sie stoppen wegen der Schwierigkeit', 'Der Weg ist leicht', 'Sie haben aufgegeben'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Herr Hofer erzählt Geschichten, _____ sie den Berg hinaufsteigen.', answer: 'während', alternatives: ['Während'] },
+    { type: 'mc', context: '📖 Textverständnis', question: '"Bevor wir losgehen, müssen wir frühstücken" - Was ist die Reihenfolge?', options: ['1. Frühstücken 2. Losgehen', '1. Losgehen 2. Frühstücken', 'Gleichzeitig', 'Egal'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Warum verwendet man "als" in "Als ich jung war"?', options: ['Einmaliger Zeitraum in der Vergangenheit', 'Sich wiederholend', 'Gegenwart', 'Zukunft'], correct: 0 },
+    // KOMPLEXE NEBENSÄTZE (6)
+    { type: 'mc', context: '✏️ Komplexe Sätze', question: 'Welcher Satz ist korrekt?', options: ['Ich denke, dass er kommt, wenn er Zeit hat.', 'Ich denke, dass er kommt wenn er Zeit hat.', 'Ich denke dass er kommt, wenn er Zeit hat.', 'Ich denke, dass er kommt, wenn er hat Zeit.'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplexe Sätze', question: 'Ich weiß nicht, _____ er das gemacht hat, _____ er krank war. (ob, obwohl)', answer: 'ob', alternatives: ['Ob'] },
+    { type: 'mc', context: '✏️ Komplexe Sätze', question: '"Nachdem er gegessen hatte, ging er spazieren." - Welches Tempus steht im Nebensatz?', options: ['Plusquamperfekt', 'Perfekt', 'Präteritum', 'Präsens'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplexe Sätze', question: 'Welcher Satz ist FALSCH?', options: ['Weil ich bin müde, gehe ich schlafen.', 'Weil ich müde bin, gehe ich schlafen.', 'Ich gehe schlafen, weil ich müde bin.', 'Da ich müde bin, gehe ich schlafen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplexe Sätze', question: '"Da" und "weil" sind...', options: ['Synonyme (gleiche Bedeutung)', 'Antonyme (Gegenteil)', 'Völlig verschieden', 'Nur in der Schweiz gleich'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplexe Sätze', question: 'Was ist richtig nach "Ich frage mich, ..."?', options: ['ob er kommt', 'dass er kommt', 'weil er kommt', 'wenn er kommt'], correct: 0 },
+    // NEBENSATZ AM ANFANG (4)
+    { type: 'mc', context: '✏️ Nebensatz am Anfang', question: '"Wenn ich Zeit habe, _____ ich." - Welches Verb?', options: ['komme', 'kommen', 'ich komme', 'komme ich'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz am Anfang', question: '"Weil er krank ist, _____ er nicht." (kommen)', options: ['kommt', 'kommen', 'er kommt', 'kommt er'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz am Anfang', question: 'Was ist die Wortstellung nach dem Komma, wenn ein Nebensatz am Anfang steht?', options: ['Verb - Subjekt', 'Subjekt - Verb', 'Verb am Ende', 'Egal'], correct: 0 },
+    { type: 'gap', context: '✏️ Nebensatz am Anfang', question: 'Obwohl es regnet, _____ wir spazieren. (gehen)', answer: 'gehen', alternatives: ['Gehen'] },
+    // INDIREKTE FRAGEN (4)
+    { type: 'mc', context: '✏️ Indirekte Fragen', question: '"Wo wohnt er?" → "Ich weiß nicht, _____ er wohnt."', options: ['wo', 'ob', 'dass', 'wenn'], correct: 0 },
+    { type: 'mc', context: '✏️ Indirekte Fragen', question: '"Kommt er?" → "Ich weiß nicht, _____ er kommt."', options: ['ob', 'wo', 'dass', 'wann'], correct: 0 },
+    { type: 'mc', context: '✏️ Indirekte Fragen', question: '"Wann fährt der Zug?" → "Können Sie mir sagen, _____?"', options: ['wann der Zug fährt', 'wann fährt der Zug', 'der Zug wann fährt', 'fährt wann der Zug'], correct: 0 },
+    { type: 'mc', context: '✏️ Indirekte Fragen', question: 'Was ist der Unterschied zwischen "ob" und "dass"?', options: ['ob = Ja/Nein-Frage, dass = sicher', 'ob = sicher, dass = Frage', 'Kein Unterschied', 'ob = Grund, dass = Zeit'], correct: 0 },
+    // FEHLERSUCHE (4)
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Ich gehe, weil ich bin müde.', 'Ich gehe, weil ich müde bin.', 'Weil ich müde bin, gehe ich.', 'Ich gehe nach Hause, weil ich müde bin.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Als ich habe Zeit, lese ich.', 'Wenn ich Zeit habe, lese ich.', 'Als ich Zeit hatte, las ich.', 'Ich lese, wenn ich Zeit habe.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist RICHTIG?', options: ['Er fragt, ob ich komme.', 'Er fragt, ob komme ich.', 'Er fragt ob ich komme.', 'Er fragt, ob ich komme ich.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist RICHTIG?', options: ['Nachdem ich gegessen habe, gehe ich.', 'Nachdem ich habe gegessen, gehe ich.', 'Nachdem ich gegessen habe, ich gehe.', 'Nachdem gegessen ich habe, gehe ich.'], correct: 0 },
+    // ORDERING + MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Obwohl', 'es', 'regnet', ',', 'gehen', 'wir', 'spazieren', '.'], correct: ['Obwohl', 'es', 'regnet', ',', 'gehen', 'wir', 'spazieren', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'frage', 'mich', ',', 'ob', 'er', 'die', 'Wahrheit', 'sagt', '.'], correct: ['Ich', 'frage', 'mich', ',', 'ob', 'er', 'die', 'Wahrheit', 'sagt', '.'] },
+    { type: 'match', context: '🔗 Konjunktionen', question: 'Ordne zu:', pairs: [{ left: 'weil/da', right: 'Grund' }, { left: 'obwohl', right: 'Gegensatz' }, { left: 'wenn/falls', right: 'Bedingung' }, { left: 'damit', right: 'Zweck' }]},
+    { type: 'match', context: '🔗 Indirekte Fragen', question: 'Ordne zu:', pairs: [{ left: 'Wo?', right: 'wo' }, { left: 'Ja/Nein?', right: 'ob' }, { left: 'Wann?', right: 'wann' }, { left: 'Warum?', right: 'warum' }]}
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+
+function shuffle(array) { const arr = [...array]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { const content = document.getElementById('grammarContent'); const arrow = document.getElementById('grammarArrow'); content.classList.toggle('open'); arrow.textContent = content.classList.contains('open') ? '▲' : '▼'; }
+
+function startQuiz(level) {
+    selectedLevel = level; currentQuestion = 0; score = 0;
+    if (level === 'rubin') currentQuestions = shuffle(QUESTIONS_RUBIN);
+    else if (level === 'smaragd') currentQuestions = shuffle(QUESTIONS_SMARAGD);
+    else currentQuestions = shuffle(QUESTIONS_AMETHYST);
+    document.getElementById('levelSelection').style.display = 'none';
+    document.getElementById('quizArea').classList.add('active');
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = currentQuestions[currentQuestion];
+    const box = document.getElementById('questionBox');
+    document.getElementById('progressFill').style.width = ((currentQuestion) / currentQuestions.length) * 100 + '%';
+    document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`;
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('nextBtn').classList.remove('show');
+
+    let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`;
+
+    if (q.type === 'mc') {
+        html += '<div class="options-grid">';
+        shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach((opt) => {
+            html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`;
+        });
+        html += '</div>';
+    } else if (q.type === 'gap') {
+        html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`;
+    } else if (q.type === 'order') {
+        html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">';
+        shuffle([...q.words]).forEach((word) => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; });
+        html += '</div><p style="text-align:center; color:#7DD3FC;">↓ Klicke die Wörter in der richtigen Reihenfolge ↓</p><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>';
+    } else if (q.type === 'match') {
+        html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>';
+        shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div><div class="matching-column"><h4>Rechts</h4>';
+        shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div></div>';
+    }
+    box.innerHTML = html;
+}
+
+function checkMC(selected, correct, btn) {
+    document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+    if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); }
+}
+
+function checkGap() {
+    const input = document.getElementById('gapInput');
+    const q = currentQuestions[currentQuestion];
+    const userAnswer = input.value.trim().toLowerCase();
+    const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : [];
+    if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { input.classList.add('wrong'); showFeedback(false, `Die richtige Antwort ist: ${q.answer}`); }
+    input.disabled = true;
+}
+
+function moveWord(element, direction) {
+    if (element.classList.contains('placed')) return;
+    const source = document.getElementById('orderSource'), target = document.getElementById('orderTarget');
+    if (direction === 'toTarget') { const clone = element.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; target.appendChild(clone); element.classList.add('placed'); }
+    else { source.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === element.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); element.remove(); }
+}
+
+function checkOrder() {
+    const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word);
+    if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { showFeedback(false, `Richtige Reihenfolge: ${currentQuestions[currentQuestion].correct.join(' ')}`); }
+}
+
+let selectedMatch = null, matchedPairs = 0;
+
+function selectMatch(element) {
+    if (element.classList.contains('matched')) return;
+    if (!selectedMatch) { selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+    else {
+        if (selectedMatch.type === element.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+        else {
+            const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === element.dataset.value) || (p.right === selectedMatch.value && p.left === element.dataset.value));
+            if (pair) { element.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } }
+            else { element.classList.add('wrong'); setTimeout(() => element.classList.remove('wrong'), 500); }
+            selectedMatch.element.classList.remove('selected'); selectedMatch = null;
+        }
+    }
+}
+
+function showFeedback(isCorrect, message) { const feedback = document.getElementById('feedback'); feedback.textContent = message; feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+
+function showResults() {
+    document.getElementById('quizArea').classList.remove('active');
+    document.getElementById('resultsSection').classList.add('active');
+    const percentage = Math.round((score / currentQuestions.length) * 100);
+    let gems = 0, icon = '🏆', message = '';
+    if (percentage >= 90) { gems = selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10; icon = '🏆'; message = 'Ausgezeichnet! Du hast den siebten Kristall gefunden! 💎'; }
+    else if (percentage >= 70) { gems = selectedLevel === 'amethyst' ? 20 : selectedLevel === 'smaragd' ? 15 : 8; icon = '⭐'; message = 'Sehr gut!'; }
+    else if (percentage >= 50) { gems = selectedLevel === 'amethyst' ? 10 : selectedLevel === 'smaragd' ? 8 : 5; icon = '💪'; message = 'Gut gemacht!'; }
+    else { gems = 2; icon = '📚'; message = 'Lies die Grammatik nochmal!'; }
+    document.getElementById('resultsIcon').textContent = icon;
+    document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`;
+    document.getElementById('resultsGems').textContent = `+${gems} Edelsteine 💎`;
+    document.getElementById('resultsMessage').textContent = message;
+    localStorage.setItem('station7_gems', gems);
+    localStorage.setItem('station7_completed', percentage >= 50);
+}
+
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+
+</body>
+</html>

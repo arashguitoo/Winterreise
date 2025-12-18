@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏰ Station 14: Hannover - Modalverben Präteritum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 5000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">⏰</div>
+        <h1 class="station-title">Station 14: Hannover</h1>
+        <p class="station-subtitle">Modalverben Präteritum - konnte, musste, wollte...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde erinnern sich an ihre Reise. Sie sind jetzt in Hannover.</p>
+            <p><strong>Sara:</strong> <em>"Erinnerst du dich an München? Ich <strong>wollte</strong> unbedingt das Schloss sehen!"</em></p>
+            <p><strong>Leon:</strong> <em>"Ja! Aber wir <strong>konnten</strong> nicht lange bleiben, weil wir weiter <strong>mussten</strong>."</em></p>
+            <p><strong>Mia:</strong> <em>"Und in den Alpen <strong>durften</strong> wir die Höhle besuchen. Das war toll!"</em></p>
+            <p><strong>Tim:</strong> <em>"Ich <strong>sollte</strong> eigentlich zu Hause bleiben, aber ich <strong>wollte</strong> unbedingt mitkommen."</em></p>
+            <p>Sie treffen einen alten Herrn namens <strong>Herr Lehmann</strong>. Er arbeitet im Museum.</p>
+            <p><strong>Herr Lehmann:</strong> <em>"Als ich jung war, <strong>konnte</strong> ich auch so viel reisen. Aber ich <strong>musste</strong> arbeiten."</em></p>
+            <p><strong>Sara:</strong> <em>"<strong>Wollten</strong> Sie auch Kristalle suchen?"</em></p>
+            <p><strong>Herr Lehmann:</strong> <em>"Ja! Aber ich <strong>konnte</strong> sie nie finden. Ihr habt mehr Glück! Der letzte Kristall ist hier im Museum. Früher <strong>durfte</strong> niemand ihn sehen."</em></p>
+            <p>Die Freunde finden einen <strong>kupferfarbenen Kristall</strong> in einer alten Vitrine!</p>
+            <p><strong>Leon:</strong> <em>"Wir <strong>konnten</strong> es schaffen! Alle Kristalle!"</em></p>
+            <p><em>"Der vierzehnte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Modalverben im Präteritum <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Modalverben - Präteritum Formen</h3>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>ich/er/sie/es</th><th>du</th><th>wir/sie/Sie</th><th>ihr</th></tr>
+                    <tr><td><strong>können</strong></td><td>konnte</td><td>konntest</td><td>konnten</td><td>konntet</td></tr>
+                    <tr><td><strong>müssen</strong></td><td>musste</td><td>musstest</td><td>mussten</td><td>musstet</td></tr>
+                    <tr><td><strong>wollen</strong></td><td>wollte</td><td>wolltest</td><td>wollten</td><td>wolltet</td></tr>
+                    <tr><td><strong>sollen</strong></td><td>sollte</td><td>solltest</td><td>sollten</td><td>solltet</td></tr>
+                    <tr><td><strong>dürfen</strong></td><td>durfte</td><td>durftest</td><td>durften</td><td>durftet</td></tr>
+                    <tr><td><strong>mögen</strong></td><td>mochte</td><td>mochtest</td><td>mochten</td><td>mochtet</td></tr>
+                </table>
+
+                <div class="grammar-warning">
+                    <p><strong>Wichtig:</strong> Im Präteritum haben Modalverben <strong>keinen Umlaut</strong>!</p>
+                    <p>können → k<strong>o</strong>nnte (nicht: könnte)</p>
+                    <p>müssen → m<strong>u</strong>sste (nicht: müsste)</p>
+                </div>
+
+                <h3>Satzstellung</h3>
+                <div class="grammar-note">
+                    <p>Modalverb (Präteritum) auf Position 2, Infinitiv am Ende:</p>
+                    <p>Ich <strong>konnte</strong> nicht <strong>kommen</strong>.</p>
+                    <p>Er <strong>musste</strong> früh <strong>aufstehen</strong>.</p>
+                    <p>Sie <strong>wollte</strong> ein Buch <strong>lesen</strong>.</p>
+                </div>
+
+                <h3>Bedeutungen</h3>
+                <table class="grammar-table">
+                    <tr><th>Verb</th><th>Bedeutung</th><th>Beispiel</th></tr>
+                    <tr><td>konnte</td><td>Fähigkeit/Möglichkeit</td><td>Ich konnte schwimmen.</td></tr>
+                    <tr><td>musste</td><td>Notwendigkeit</td><td>Ich musste arbeiten.</td></tr>
+                    <tr><td>wollte</td><td>Wunsch/Absicht</td><td>Ich wollte reisen.</td></tr>
+                    <tr><td>sollte</td><td>Empfehlung/Auftrag</td><td>Ich sollte lernen.</td></tr>
+                    <tr><td>durfte</td><td>Erlaubnis</td><td>Ich durfte spielen.</td></tr>
+                    <tr><td>mochte</td><td>Vorliebe</td><td>Ich mochte Pizza.</td></tr>
+                </table>
+
+                <h3>⚠️ Präteritum vs. Konjunktiv II</h3>
+                <div class="grammar-warning">
+                    <p><strong>Präteritum</strong> (Vergangenheit): konnte, musste, wollte</p>
+                    <p><strong>Konjunktiv II</strong> (würde/hätte): könnte, müsste, wollte</p>
+                    <p>Ich <strong>konnte</strong> nicht kommen. (= Es war nicht möglich.)</p>
+                    <p>Ich <strong>könnte</strong> kommen. (= Es wäre möglich.)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">💪</span><div><div class="vocab-word">können</div><div class="vocab-meaning">Fähigkeit haben</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">❗</span><div><div class="vocab-word">müssen</div><div class="vocab-meaning">notwendig sein</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">💭</span><div><div class="vocab-word">wollen</div><div class="vocab-meaning">den Wunsch haben</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">👆</span><div><div class="vocab-word">sollen</div><div class="vocab-meaning">empfohlen werden</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">✅</span><div><div class="vocab-word">dürfen</div><div class="vocab-meaning">die Erlaubnis haben</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">❤️</span><div><div class="vocab-word">mögen</div><div class="vocab-meaning">gern haben</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏛️</span><div><div class="vocab-word">das Museum</div><div class="vocab-meaning">Ort für Kunst/Geschichte</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🗄️</span><div><div class="vocab-word">die Vitrine</div><div class="vocab-meaning">Glasschrank</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der vierzehnte Kristall?', options: ['Kupferfarben', 'Gold', 'Silber', 'Bronze'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wo arbeitet Herr Lehmann?', options: ['Im Museum', 'Im Rathaus', 'Im Hotel', 'Im Bahnhof'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Was wollte Sara in München sehen?', options: ['Das Schloss', 'Den Dom', 'Den Zoo', 'Das Stadion'], correct: 0 },
+    { type: 'mc', context: '✏️ können', question: 'können → Präteritum (ich)', options: ['konnte', 'könnte', 'kann', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ können', question: 'können → Präteritum (du)', options: ['konntest', 'könntest', 'kannst', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ können', question: 'können → Präteritum (wir)', options: ['konnten', 'könnten', 'können', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ müssen', question: 'müssen → Präteritum (ich)', options: ['musste', 'müsste', 'muss', 'gemusst'], correct: 0 },
+    { type: 'mc', context: '✏️ müssen', question: 'müssen → Präteritum (er)', options: ['musste', 'müsste', 'muss', 'gemusst'], correct: 0 },
+    { type: 'mc', context: '✏️ müssen', question: 'müssen → Präteritum (sie Pl.)', options: ['mussten', 'müssten', 'müssen', 'gemusst'], correct: 0 },
+    { type: 'mc', context: '✏️ wollen', question: 'wollen → Präteritum (ich)', options: ['wollte', 'will', 'wollten', 'gewollt'], correct: 0 },
+    { type: 'mc', context: '✏️ wollen', question: 'wollen → Präteritum (du)', options: ['wolltest', 'willst', 'wollten', 'gewollt'], correct: 0 },
+    { type: 'mc', context: '✏️ wollen', question: 'wollen → Präteritum (ihr)', options: ['wolltet', 'wollt', 'wollten', 'gewollt'], correct: 0 },
+    { type: 'mc', context: '✏️ sollen', question: 'sollen → Präteritum (ich)', options: ['sollte', 'soll', 'sollten', 'gesollt'], correct: 0 },
+    { type: 'mc', context: '✏️ sollen', question: 'sollen → Präteritum (wir)', options: ['sollten', 'sollen', 'sollte', 'gesollt'], correct: 0 },
+    { type: 'mc', context: '✏️ dürfen', question: 'dürfen → Präteritum (ich)', options: ['durfte', 'dürfte', 'darf', 'gedurft'], correct: 0 },
+    { type: 'mc', context: '✏️ dürfen', question: 'dürfen → Präteritum (er)', options: ['durfte', 'dürfte', 'darf', 'gedurft'], correct: 0 },
+    { type: 'mc', context: '✏️ dürfen', question: 'dürfen → Präteritum (sie Pl.)', options: ['durften', 'dürften', 'dürfen', 'gedurft'], correct: 0 },
+    { type: 'mc', context: '✏️ mögen', question: 'mögen → Präteritum (ich)', options: ['mochte', 'möchte', 'mag', 'gemocht'], correct: 0 },
+    { type: 'mc', context: '✏️ mögen', question: 'mögen → Präteritum (wir)', options: ['mochten', 'möchten', 'mögen', 'gemocht'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Ich _____ nicht kommen. (können, Prät.)', options: ['konnte', 'könnte', 'kann', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Er _____ früh aufstehen. (müssen, Prät.)', options: ['musste', 'müsste', 'muss', 'gemusst'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Sie _____ ein Buch lesen. (wollen, Prät.)', options: ['wollte', 'will', 'wollten', 'gewollt'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Wir _____ dort nicht parken. (dürfen, Prät.)', options: ['durften', 'dürften', 'dürfen', 'gedurft'], correct: 0 },
+    { type: 'mc', context: '✏️ Regel', question: 'Haben Modalverben im Präteritum einen Umlaut?', options: ['Nein', 'Ja', 'Manchmal', 'Nur bei können'], correct: 0 },
+    { type: 'mc', context: '✏️ Bedeutung', question: '"konnte" bedeutet...', options: ['Fähigkeit/Möglichkeit in der Vergangenheit', 'Fähigkeit jetzt', 'Hypothetisch', 'Zukunft'], correct: 0 },
+    { type: 'mc', context: '✏️ Bedeutung', question: '"musste" bedeutet...', options: ['Notwendigkeit in der Vergangenheit', 'Notwendigkeit jetzt', 'Hypothetisch', 'Zukunft'], correct: 0 },
+    { type: 'mc', context: '✏️ Bedeutung', question: '"wollte" bedeutet...', options: ['Wunsch in der Vergangenheit', 'Wunsch jetzt', 'Hypothetisch', 'Zukunft'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'konnte', 'nicht', 'kommen', '.'], correct: ['Ich', 'konnte', 'nicht', 'kommen', '.'] },
+    { type: 'match', context: '🔗 Präteritum', question: 'Ordne zu:', pairs: [{ left: 'können', right: 'konnte' }, { left: 'müssen', right: 'musste' }, { left: 'wollen', right: 'wollte' }, { left: 'dürfen', right: 'durfte' }]},
+    { type: 'match', context: '🔗 Bedeutung', question: 'Ordne zu:', pairs: [{ left: 'konnte', right: 'Fähigkeit' }, { left: 'musste', right: 'Notwendigkeit' }, { left: 'wollte', right: 'Wunsch' }, { left: 'durfte', right: 'Erlaubnis' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Ich _____ unbedingt das Schloss sehen! (wollen, Prät.)', answer: 'wollte', alternatives: ['Wollte'] },
+    { type: 'gap', context: '📖 Text', question: 'Wir _____ nicht lange bleiben. (können, Prät.)', answer: 'konnten', alternatives: ['Konnten'] },
+    { type: 'gap', context: '📖 Text', question: 'Wir _____ die Höhle besuchen. (dürfen, Prät.)', answer: 'durften', alternatives: ['Durften'] },
+    { type: 'mc', context: '✏️ Konjugation', question: 'Du _____ gestern nicht kommen. (können, Prät.)', options: ['konntest', 'könntest', 'kannst', 'konnte'], correct: 0 },
+    { type: 'mc', context: '✏️ Konjugation', question: 'Ihr _____ früher aufstehen. (müssen, Prät.)', options: ['musstet', 'müsstet', 'müsst', 'mussten'], correct: 0 },
+    { type: 'mc', context: '✏️ Konjugation', question: 'Sie (Sg.) _____ das nicht. (wollen, Prät.)', options: ['wollte', 'wollten', 'will', 'wolltest'], correct: 0 },
+    { type: 'gap', context: '✏️ Konjugation', question: 'Wir _____ das Buch lesen. (sollen, Prät.)', answer: 'sollten', alternatives: ['Sollten'] },
+    { type: 'gap', context: '✏️ Konjugation', question: 'Er _____ Pizza. (mögen, Prät.)', answer: 'mochte', alternatives: ['Mochte'] },
+    { type: 'mc', context: '✏️ Satz', question: 'Als Kind _____ ich nicht schwimmen.', options: ['konnte', 'könnte', 'kann', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Gestern _____ ich früh aufstehen.', options: ['musste', 'müsste', 'muss', 'gemusst'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Letzte Woche _____ wir ins Kino gehen.', options: ['wollten', 'wollen', 'wollte', 'gewollt'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Früher _____ man hier nicht rauchen.', options: ['durfte', 'dürfte', 'darf', 'gedurft'], correct: 0 },
+    { type: 'gap', context: '✏️ Satz', question: 'Ich _____ ihm helfen, aber ich hatte keine Zeit. (wollen, Prät.)', answer: 'wollte', alternatives: ['Wollte'] },
+    { type: 'gap', context: '✏️ Satz', question: 'Sie _____ nicht ins Konzert gehen, weil sie arbeiten _____. (können, müssen, Prät.)', answer: 'konnte', alternatives: ['Konnte'] },
+    { type: 'mc', context: '✏️ Unterschied', question: '"konnte" vs. "könnte" - Was ist Vergangenheit?', options: ['konnte', 'könnte', 'beide', 'keine'], correct: 0 },
+    { type: 'mc', context: '✏️ Unterschied', question: '"musste" vs. "müsste" - Was ist Konjunktiv II?', options: ['müsste', 'musste', 'beide', 'keine'], correct: 0 },
+    { type: 'mc', context: '✏️ Unterschied', question: 'Welcher Satz ist Präteritum?', options: ['Ich konnte nicht kommen.', 'Ich könnte kommen.', 'Ich kann kommen.', 'Ich werde kommen können.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich könnte nicht kommen. (= Vergangenheit)', 'Ich konnte nicht kommen. (= Vergangenheit)', 'Ich könnte kommen. (= Hypothetisch)', 'Ich wollte kommen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er musste gestern arbeiten.', 'Er müsste gestern arbeiten.', 'Er gemusst gestern arbeiten.', 'Er musst gestern arbeiten.'], correct: 0 },
+    { type: 'mc', context: '✏️ Negation', question: 'Ich _____ es leider nicht machen. (können, Prät.)', options: ['konnte', 'könnte', 'kann', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ Frage', question: '_____ du gestern nicht kommen? (können, Prät.)', options: ['Konntest', 'Könntest', 'Kannst', 'Gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ Frage', question: '_____ ihr das Buch lesen? (müssen, Prät.)', options: ['Musstet', 'Müsstet', 'Müsst', 'Gemusst'], correct: 0 },
+    { type: 'mc', context: '✏️ Frage', question: 'Warum _____ sie nicht mitkommen? (wollen, Prät.)', options: ['wollte', 'will', 'wollten', 'gewollt'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Er', 'musste', 'gestern', 'früh', 'aufstehen', '.'], correct: ['Er', 'musste', 'gestern', 'früh', 'aufstehen', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Wir', 'konnten', 'das', 'nicht', 'verstehen', '.'], correct: ['Wir', 'konnten', 'das', 'nicht', 'verstehen', '.'] },
+    { type: 'match', context: '🔗 du-Form', question: 'Ordne zu:', pairs: [{ left: 'können', right: 'konntest' }, { left: 'müssen', right: 'musstest' }, { left: 'wollen', right: 'wolltest' }, { left: 'dürfen', right: 'durftest' }]},
+    { type: 'match', context: '🔗 ihr-Form', question: 'Ordne zu:', pairs: [{ left: 'können', right: 'konntet' }, { left: 'müssen', right: 'musstet' }, { left: 'wollen', right: 'wolltet' }, { left: 'dürfen', right: 'durftet' }]},
+    { type: 'mc', context: '✏️ Komplex', question: 'Als Kind _____ ich nicht Fahrrad fahren, aber jetzt _____ ich es.', options: ['konnte / kann', 'könnte / kann', 'kann / konnte', 'könnte / könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Gestern _____ wir nicht ins Kino gehen, weil wir lernen _____.', options: ['konnten / mussten', 'könnten / müssten', 'können / müssen', 'konnten / müssten'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Ich _____ eigentlich zu Hause bleiben, aber ich _____ unbedingt mitkommen. (sollen, wollen, Prät.)', answer: 'sollte', alternatives: ['Sollte'] },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Ich weiß, dass er nicht kommen _____. (können, Prät.)', options: ['konnte', 'könnte', 'kann', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Weil ich arbeiten _____, _____ ich nicht kommen.', options: ['musste / konnte', 'müsste / könnte', 'muss / kann', 'musste / könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Obwohl er krank war, _____ er arbeiten.', options: ['musste', 'müsste', 'muss', 'gemusst'], correct: 0 },
+    { type: 'gap', context: '✏️ Nebensatz', question: 'Als ich jung war, _____ ich viel reisen. (können, Prät.)', answer: 'konnte', alternatives: ['Konnte'] },
+    { type: 'gap', context: '✏️ Nebensatz', question: 'Weil sie keine Zeit hatte, _____ sie nicht kommen. (können, Prät.)', answer: 'konnte', alternatives: ['Konnte'] },
+    { type: 'mc', context: '✏️ Indirekte Rede', question: 'Er sagte, dass er nicht kommen _____. (können, Prät.)', options: ['konnte', 'könnte', 'kann', 'gekonnt'], correct: 0 },
+    { type: 'mc', context: '✏️ Indirekte Rede', question: 'Sie fragte, ob ich mitkommen _____. (wollen, Prät.)', options: ['wollte', 'will', 'wollten', 'gewollt'], correct: 0 },
+    { type: 'mc', context: '✏️ Kontrast', question: 'Früher _____ ich nicht schwimmen, aber jetzt _____ ich es gut.', options: ['konnte / kann', 'könnte / kann', 'kann / konnte', 'konnte / konnte'], correct: 0 },
+    { type: 'mc', context: '✏️ Kontrast', question: 'Letztes Jahr _____ wir nicht in den Urlaub fahren. Dieses Jahr _____ wir es.', options: ['konnten / können', 'könnten / können', 'können / konnten', 'konnten / konnten'], correct: 0 },
+    { type: 'mc', context: '✏️ Kontrast', question: 'Als Student _____ ich viel arbeiten. Jetzt _____ ich mehr Freizeit.', options: ['musste / habe', 'müsste / habe', 'muss / hatte', 'musste / hatte'], correct: 0 },
+    { type: 'gap', context: '✏️ Kontrast', question: 'Als Kind _____ ich kein Gemüse. Jetzt _____ ich es. (mögen, Prät. + Präs.)', answer: 'mochte', alternatives: ['Mochte'] },
+    { type: 'mc', context: '✏️ Alle Modalverben', question: 'Er _____ kommen, _____ es aber nicht, weil er arbeiten _____.', options: ['wollte / konnte / musste', 'will / kann / muss', 'wollte / könnte / müsste', 'will / konnte / musste'], correct: 0 },
+    { type: 'mc', context: '✏️ Alle Modalverben', question: 'Wir _____ pünktlich sein, aber wir _____ den Bus nicht finden.', options: ['sollten / konnten', 'sollen / können', 'sollten / könnten', 'sollen / konnten'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich könnte gestern nicht kommen.', 'Ich konnte gestern nicht kommen.', 'Gestern konnte ich nicht kommen.', 'Ich konnte nicht kommen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Er müsste gestern arbeiten.', 'Er musste gestern arbeiten.', 'Gestern musste er arbeiten.', 'Er musste arbeiten.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Wir wollten gestern ins Kino gehen.', 'Wir wollte gestern ins Kino gehen.', 'Wir wollen gestern ins Kino gehen.', 'Wir gewollt gestern ins Kino gehen.'], correct: 0 },
+    { type: 'mc', context: '✏️ ohne Infinitiv', question: 'Ich _____ das nicht. (wollen, Prät., ohne Infinitiv)', options: ['wollte', 'will', 'gewollt', 'wollten'], correct: 0 },
+    { type: 'mc', context: '✏️ ohne Infinitiv', question: 'Er _____ nach Hause. (müssen, Prät., ohne Infinitiv)', options: ['musste', 'muss', 'gemusst', 'müsste'], correct: 0 },
+    { type: 'mc', context: '✏️ ohne Infinitiv', question: 'Sie _____ Pizza. (mögen, Prät.)', options: ['mochte', 'mag', 'möchte', 'gemocht'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Obwohl er nicht _____, _____ er die Prüfung bestehen. (wollen, können, Prät.)', answer: 'wollte', alternatives: ['Wollte'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Weil sie krank war, _____ sie im Bett bleiben. (müssen, Prät.)', answer: 'musste', alternatives: ['Musste'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Weil', 'ich', 'arbeiten', 'musste', ',', 'konnte', 'ich', 'nicht', 'kommen', '.'], correct: ['Weil', 'ich', 'arbeiten', 'musste', ',', 'konnte', 'ich', 'nicht', 'kommen', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Als', 'ich', 'jung', 'war', ',', 'konnte', 'ich', 'gut', 'tanzen', '.'], correct: ['Als', 'ich', 'jung', 'war', ',', 'konnte', 'ich', 'gut', 'tanzen', '.'] },
+    { type: 'match', context: '🔗 wir-Form', question: 'Ordne zu:', pairs: [{ left: 'können', right: 'konnten' }, { left: 'müssen', right: 'mussten' }, { left: 'wollen', right: 'wollten' }, { left: 'sollen', right: 'sollten' }]},
+    { type: 'match', context: '🔗 Prät. vs. Konj. II', question: 'Ordne zu:', pairs: [{ left: 'konnte (Prät.)', right: 'Vergangenheit' }, { left: 'könnte (Konj.)', right: 'Hypothetisch' }, { left: 'musste (Prät.)', right: 'Vergangenheit' }, { left: 'müsste (Konj.)', right: 'Hypothetisch' }]},
+    { type: 'mc', context: '✏️ Schwer', question: 'Er sagte, er _____ nicht kommen, weil er arbeiten _____. (können, müssen, Prät.)', options: ['konnte / musste', 'könnte / müsste', 'kann / muss', 'konnte / müsste'], correct: 0 },
+    { type: 'mc', context: '✏️ Schwer', question: 'Wir _____ den Film sehen, aber wir _____ keine Karten bekommen. (wollen, können, Prät.)', options: ['wollten / konnten', 'wollen / können', 'wollten / könnten', 'wollen / konnten'], correct: 0 },
+    { type: 'mc', context: '✏️ Schwer', question: 'Als Kind _____ ich früh ins Bett gehen, obwohl ich nicht _____.', options: ['musste / wollte', 'muss / will', 'müsste / wollte', 'musste / will'], correct: 0 }
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station14_gems', gems); localStorage.setItem('station14_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

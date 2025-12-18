@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏡 Station 1: Bergdorf - Präsens</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ice-blue: #E0F4FF;
+            --deep-blue: #1E3A5F;
+            --winter-blue: #5B9BD5;
+            --snow-white: #FFFFFF;
+            --crystal-cyan: #7DD3FC;
+            --warm-gold: #FFD700;
+            --rubin: #E63946;
+            --smaragd: #06D6A0;
+            --amethyst: #9D4EDD;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%);
+            min-height: 100vh;
+            color: #FFFFFF;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        .station-header {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+
+        .home-btn {
+            position: fixed; top: 20px; left: 20px;
+            background: rgba(255,255,255,0.2); border: none;
+            padding: 10px 15px; border-radius: 10px;
+            color: white; cursor: pointer; font-size: 1.2em; z-index: 1000;
+        }
+        .home-btn:hover { background: rgba(255,255,255,0.3); }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; font-size: 1.4em; }
+
+        .story-box {
+            background: rgba(255, 215, 0, 0.15);
+            border-left: 4px solid #FFD700;
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            line-height: 1.8;
+        }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .story-box em { color: #7DD3FC; }
+
+        .collapsible {
+            background: rgba(255, 255, 255, 0.1);
+            border: none; padding: 15px 20px; width: 100%;
+            text-align: left; color: #FFD700; font-size: 1.2em;
+            font-family: 'Fredoka', sans-serif; cursor: pointer;
+            border-radius: 15px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .collapsible:hover { background: rgba(255, 255, 255, 0.2); }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(255, 255, 255, 0.05); border-radius: 0 0 15px 15px; }
+        .collapsible-content.open { max-height: 3000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+
+        .level-selection { text-align: center; }
+        .level-btn {
+            display: inline-block; padding: 20px 40px; margin: 10px;
+            border-radius: 15px; border: 3px solid; cursor: pointer;
+            font-family: 'Fredoka', sans-serif; font-size: 1.2em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: rgba(255,255,255,0.1);
+        }
+        .level-btn:hover { transform: scale(1.05); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        
+        .level-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .dot-rubin { background: #E63946; }
+        .dot-smaragd { background: #06D6A0; }
+        .dot-amethyst { background: #9D4EDD; }
+
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
+
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn {
+            background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px; border-radius: 12px; color: white;
+            cursor: pointer; font-size: 1.1em; transition: all 0.2s;
+        }
+        .option-btn:hover { background: rgba(255,255,255,0.2); border-color: #7DD3FC; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .option-btn:disabled { cursor: not-allowed; }
+
+        .gap-input {
+            background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3);
+            padding: 12px 20px; border-radius: 10px; color: white;
+            font-size: 1.2em; width: 200px; text-align: center;
+        }
+        .gap-input:focus { outline: none; border-color: #7DD3FC; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .check-btn:hover { background: #4A8BC4; }
+
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .ordering-word:hover { background: rgba(255,215,0,0.4); }
+        .ordering-word.placed { opacity: 0.4; cursor: default; }
+
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .matching-item:hover { border-color: #7DD3FC; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); cursor: default; }
+
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; font-weight: 500; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; font-weight: 600; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; margin-bottom: 10px; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        .results-btn:hover { transform: scale(1.05); }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+            .matching-container { grid-template-columns: 1fr; }
+            .level-btn { display: block; margin: 10px auto; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="home-btn" onclick="goHome()">🏠</button>
+
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🏡</div>
+        <h1 class="station-title">Station 1: Bergdorf</h1>
+        <p class="station-subtitle">Präsens - Die Gegenwart</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p><strong>Mia, Leon, Sara und Tim</strong> sind vier Freunde. Sie <strong>treffen</strong> sich in einem kleinen <strong>Bergdorf</strong>. Der Berg ist sehr hoch und schön.</p>
+            <p><em>"Ich bin so glücklich!"</em> sagt Mia. <em>"Wir sind endlich zusammen!"</em></p>
+            <p>Leon sagt: <em>"Ja! Und wir haben eine wichtige Mission. Wir <strong>suchen</strong> die magischen Kristalle!"</em></p>
+            <p>Im Dorf <strong>wohnt</strong> eine alte Frau. Sie <strong>heißt</strong> Frau Bergmann. Sie <strong>hat</strong> ein Geheimnis.</p>
+            <p><strong>Frau Bergmann:</strong> <em>"Willkommen, Kinder! Ich <strong>weiß</strong>, warum ihr hier <strong>seid</strong>. Ihr <strong>sucht</strong> die Kristalle, nicht wahr?"</em></p>
+            <p><strong>Sara:</strong> <em>"Ja! <strong>Wissen</strong> Sie, wo der erste Kristall ist?"</em></p>
+            <p>Frau Bergmann lächelt: <em>"Der erste Kristall <strong>liegt</strong> unter dem großen Baum. Aber zuerst <strong>müsst</strong> ihr die Dorfbewohner kennenlernen. <strong>Sprecht</strong> mit ihnen, <strong>lernt</strong> ihre Geschichten..."</em></p>
+            <p>Die Freunde <strong>gehen</strong> durch das Dorf. Sie <strong>sprechen</strong> mit den Menschen. Der Bäcker <strong>gibt</strong> ihnen Brot. Die Lehrerin <strong>liest</strong> ihnen eine alte Geschichte vor. Der Fischer <strong>fährt</strong> sie über den See.</p>
+            <p>Am Abend <strong>finden</strong> sie den Baum. Tim <strong>gräbt</strong> in der Erde. Da! Ein <strong>blauer leuchtender Kristall</strong>!</p>
+            <p><em>"Der erste Kristall!"</em> <strong>rufen</strong> alle zusammen. <em>"Die Winterreise <strong>beginnt</strong>!"</em></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">
+            📚 Grammatik: Präsens
+            <span id="grammarArrow">▼</span>
+        </button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was ist Präsens?</h3>
+                <p>Präsens = <strong>Jetzt</strong>. Was passiert <strong>in diesem Moment</strong>.</p>
+                
+                <h3>Verb "sein"</h3>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>sein</th><th>Beispiel</th></tr>
+                    <tr><td>ich</td><td><strong>bin</strong></td><td>Ich bin Mia.</td></tr>
+                    <tr><td>du</td><td><strong>bist</strong></td><td>Du bist mein Freund.</td></tr>
+                    <tr><td>er/sie/es</td><td><strong>ist</strong></td><td>Der Berg ist hoch.</td></tr>
+                    <tr><td>wir</td><td><strong>sind</strong></td><td>Wir sind zusammen.</td></tr>
+                    <tr><td>ihr</td><td><strong>seid</strong></td><td>Ihr seid toll!</td></tr>
+                    <tr><td>sie/Sie</td><td><strong>sind</strong></td><td>Sie sind freundlich.</td></tr>
+                </table>
+
+                <h3>Verb "haben"</h3>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>haben</th><th>Beispiel</th></tr>
+                    <tr><td>ich</td><td><strong>habe</strong></td><td>Ich habe einen Plan.</td></tr>
+                    <tr><td>du</td><td><strong>hast</strong></td><td>Du hast eine Idee.</td></tr>
+                    <tr><td>er/sie/es</td><td><strong>hat</strong></td><td>Sie hat ein Geheimnis.</td></tr>
+                    <tr><td>wir</td><td><strong>haben</strong></td><td>Wir haben den Kristall!</td></tr>
+                    <tr><td>ihr</td><td><strong>habt</strong></td><td>Ihr habt Glück!</td></tr>
+                    <tr><td>sie/Sie</td><td><strong>haben</strong></td><td>Sie haben Zeit.</td></tr>
+                </table>
+
+                <h3>Regelmäßige Verben</h3>
+                <p>Beispiel: <strong>wohnen</strong></p>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>Endung</th><th>wohnen</th></tr>
+                    <tr><td>ich</td><td>-e</td><td>wohn<strong>e</strong></td></tr>
+                    <tr><td>du</td><td>-st</td><td>wohn<strong>st</strong></td></tr>
+                    <tr><td>er/sie/es</td><td>-t</td><td>wohn<strong>t</strong></td></tr>
+                    <tr><td>wir</td><td>-en</td><td>wohn<strong>en</strong></td></tr>
+                    <tr><td>ihr</td><td>-t</td><td>wohn<strong>t</strong></td></tr>
+                    <tr><td>sie/Sie</td><td>-en</td><td>wohn<strong>en</strong></td></tr>
+                </table>
+
+                <h3>⚠️ Unregelmäßige Verben - Vokalwechsel!</h3>
+                <div class="grammar-note">
+                    <p><strong>Wichtig:</strong> Bei <strong>du</strong> und <strong>er/sie/es</strong> ändert sich der Vokal!</p>
+                </div>
+                
+                <p><strong>e → i</strong></p>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>ich</th><th>du</th><th>er/sie/es</th></tr>
+                    <tr><td>sprechen</td><td>spreche</td><td>spr<strong>i</strong>chst</td><td>spr<strong>i</strong>cht</td></tr>
+                    <tr><td>geben</td><td>gebe</td><td>g<strong>i</strong>bst</td><td>g<strong>i</strong>bt</td></tr>
+                    <tr><td>nehmen</td><td>nehme</td><td>n<strong>i</strong>mmst</td><td>n<strong>i</strong>mmt</td></tr>
+                    <tr><td>essen</td><td>esse</td><td><strong>i</strong>sst</td><td><strong>i</strong>sst</td></tr>
+                    <tr><td>helfen</td><td>helfe</td><td>h<strong>i</strong>lfst</td><td>h<strong>i</strong>lft</td></tr>
+                    <tr><td>treffen</td><td>treffe</td><td>tr<strong>i</strong>ffst</td><td>tr<strong>i</strong>fft</td></tr>
+                </table>
+
+                <p><strong>e → ie</strong></p>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>ich</th><th>du</th><th>er/sie/es</th></tr>
+                    <tr><td>lesen</td><td>lese</td><td>l<strong>ie</strong>st</td><td>l<strong>ie</strong>st</td></tr>
+                    <tr><td>sehen</td><td>sehe</td><td>s<strong>ie</strong>hst</td><td>s<strong>ie</strong>ht</td></tr>
+                    <tr><td>empfehlen</td><td>empfehle</td><td>empf<strong>ie</strong>hlst</td><td>empf<strong>ie</strong>hlt</td></tr>
+                </table>
+
+                <p><strong>a → ä</strong></p>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>ich</th><th>du</th><th>er/sie/es</th></tr>
+                    <tr><td>fahren</td><td>fahre</td><td>f<strong>ä</strong>hrst</td><td>f<strong>ä</strong>hrt</td></tr>
+                    <tr><td>schlafen</td><td>schlafe</td><td>schl<strong>ä</strong>fst</td><td>schl<strong>ä</strong>ft</td></tr>
+                    <tr><td>tragen</td><td>trage</td><td>tr<strong>ä</strong>gst</td><td>tr<strong>ä</strong>gt</td></tr>
+                    <tr><td>laufen</td><td>laufe</td><td>l<strong>ä</strong>ufst</td><td>l<strong>ä</strong>uft</td></tr>
+                </table>
+
+                <p><strong>Ganz besonders: wissen</strong></p>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>wissen</th></tr>
+                    <tr><td>ich</td><td><strong>weiß</strong></td></tr>
+                    <tr><td>du</td><td><strong>weißt</strong></td></tr>
+                    <tr><td>er/sie/es</td><td><strong>weiß</strong></td></tr>
+                    <tr><td>wir</td><td>wissen</td></tr>
+                    <tr><td>ihr</td><td>wisst</td></tr>
+                    <tr><td>sie/Sie</td><td>wissen</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item">
+                <span class="vocab-emoji">🏔️</span>
+                <div><div class="vocab-word">der Berg</div><div class="vocab-meaning">hoch, mit Schnee oben</div></div>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-emoji">🏘️</span>
+                <div><div class="vocab-word">das Dorf</div><div class="vocab-meaning">kleiner Ort, wenige Häuser</div></div>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-emoji">🌳</span>
+                <div><div class="vocab-word">der Baum</div><div class="vocab-meaning">Pflanze, groß, mit Blättern</div></div>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-emoji">💎</span>
+                <div><div class="vocab-word">der Kristall</div><div class="vocab-meaning">Stein, leuchtet, magisch</div></div>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-emoji">🔍</span>
+                <div><div class="vocab-word">suchen</div><div class="vocab-meaning">etwas finden wollen</div></div>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-emoji">🏠</span>
+                <div><div class="vocab-word">wohnen</div><div class="vocab-meaning">dort leben, dort sein</div></div>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-emoji">🤝</span>
+                <div><div class="vocab-word">treffen</div><div class="vocab-meaning">zusammenkommen, sehen</div></div>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-emoji">🗣️</span>
+                <div><div class="vocab-word">sprechen</div><div class="vocab-meaning">reden, Wörter sagen</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <p style="margin-bottom: 20px; color: #E0F4FF;">30 Fragen warten auf dich!</p>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">
+            <span class="level-dot dot-rubin"></span>Rubin<br><small>Einfach</small>
+        </button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">
+            <span class="level-dot dot-smaragd"></span>Smaragd<br><small>Mittel</small>
+        </button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">
+            <span class="level-dot dot-amethyst"></span>Amethyst<br><small>Schwer</small>
+        </button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter">Frage 1 von 30</div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore">0 / 30</div>
+        <div class="results-gems" id="resultsGems">+0 Edelsteine 💎</div>
+        <p id="resultsMessage" style="margin-bottom: 20px;"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal spielen</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    // TEXTVERSTÄNDNIS (8)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie viele Freunde sind zusammen?', options: ['Vier', 'Drei', 'Fünf', 'Zwei'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo treffen sich die Freunde?', options: ['In einem Bergdorf', 'In der Stadt', 'Am Meer', 'Im Wald'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie heißt die alte Frau?', options: ['Frau Bergmann', 'Frau Müller', 'Frau Schmidt', 'Frau Weber'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Welche Farbe hat der erste Kristall?', options: ['Blau', 'Rot', 'Grün', 'Gelb'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo liegt der Kristall versteckt?', options: ['Unter einem Baum', 'Im Haus', 'Am Berg', 'Im Fluss'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wer sagt "Ich bin so glücklich"?', options: ['Mia', 'Leon', 'Sara', 'Tim'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was hat Frau Bergmann?', options: ['Ein Geheimnis', 'Einen Hund', 'Ein Auto', 'Ein Buch'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wer gräbt in der Erde?', options: ['Tim', 'Mia', 'Leon', 'Sara'], correct: 0 },
+    // SEIN (4)
+    { type: 'mc', context: '✏️ sein', question: 'Ich _____ Mia.', options: ['bin', 'bist', 'ist', 'sind'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Du _____ mein Freund.', options: ['bist', 'bin', 'ist', 'sind'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Der Berg _____ sehr hoch.', options: ['ist', 'bin', 'bist', 'sind'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Die Menschen _____ freundlich.', options: ['sind', 'ist', 'bin', 'bist'], correct: 0 },
+    // HABEN (4)
+    { type: 'mc', context: '✏️ haben', question: 'Ich _____ einen Plan.', options: ['habe', 'hast', 'hat', 'haben'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Du _____ eine Idee.', options: ['hast', 'habe', 'hat', 'haben'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Frau Bergmann _____ ein Geheimnis.', options: ['hat', 'habe', 'hast', 'haben'], correct: 0 },
+    { type: 'mc', context: '✏️ haben', question: 'Wir _____ den Kristall!', options: ['haben', 'hat', 'habe', 'habt'], correct: 0 },
+    // REGELMÄSSIG (6)
+    { type: 'mc', context: '✏️ wohnen', question: 'Die alte Frau _____ im Dorf.', options: ['wohnt', 'wohne', 'wohnst', 'wohnen'], correct: 0 },
+    { type: 'mc', context: '✏️ suchen', question: 'Wir _____ die Kristalle.', options: ['suchen', 'sucht', 'suchst', 'suche'], correct: 0 },
+    { type: 'mc', context: '✏️ lernen', question: 'Ich _____ Deutsch.', options: ['lerne', 'lernst', 'lernt', 'lernen'], correct: 0 },
+    { type: 'mc', context: '✏️ kommen', question: 'Leon _____ aus Deutschland.', options: ['kommt', 'komme', 'kommst', 'kommen'], correct: 0 },
+    { type: 'mc', context: '✏️ machen', question: 'Was _____ ihr heute?', options: ['macht', 'mache', 'machst', 'machen'], correct: 0 },
+    { type: 'mc', context: '✏️ gehen', question: 'Wir _____ durch das Dorf.', options: ['gehen', 'geht', 'gehst', 'gehe'], correct: 0 },
+    // UNREGELMÄSSIG EINFACH (6)
+    { type: 'mc', context: '✏️ sprechen', question: 'Er _____ Deutsch.', options: ['spricht', 'sprecht', 'spreche', 'sprechen'], correct: 0 },
+    { type: 'mc', context: '✏️ sehen', question: 'Sie _____ den Berg.', options: ['sieht', 'seht', 'sehe', 'sehen'], correct: 0 },
+    { type: 'mc', context: '✏️ lesen', question: 'Das Kind _____ ein Buch.', options: ['liest', 'lest', 'lese', 'lesen'], correct: 0 },
+    { type: 'mc', context: '✏️ fahren', question: 'Der Bus _____ schnell.', options: ['fährt', 'fahrt', 'fahre', 'fahren'], correct: 0 },
+    { type: 'mc', context: '✏️ schlafen', question: 'Das Baby _____ gut.', options: ['schläft', 'schlaft', 'schlafe', 'schlafen'], correct: 0 },
+    { type: 'mc', context: '✏️ geben', question: 'Der Bäcker _____ Brot.', options: ['gibt', 'gebt', 'gebe', 'geben'], correct: 0 },
+    // ORDERING + MATCHING (2)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'bin', 'glücklich', '.'], correct: ['Ich', 'bin', 'glücklich', '.'] },
+    { type: 'match', context: '🔗 Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'bin' }, { left: 'du', right: 'bist' }, { left: 'er', right: 'ist' }, { left: 'wir', right: 'sind' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    // TEXTVERSTÄNDNIS (6)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was gibt der Bäcker den Freunden?', options: ['Brot', 'Kuchen', 'Wasser', 'Geld'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was macht die Lehrerin?', options: ['Sie liest eine Geschichte vor', 'Sie kocht Essen', 'Sie singt ein Lied', 'Sie tanzt'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wohin fährt der Fischer die Freunde?', options: ['Über den See', 'Zum Berg', 'Nach Hause', 'Zum Markt'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was sollen die Freunde zuerst machen?', options: ['Die Dorfbewohner kennenlernen', 'Den Kristall suchen', 'Essen', 'Schlafen'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wann finden sie den Kristall?', options: ['Am Abend', 'Am Morgen', 'Am Mittag', 'In der Nacht'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was rufen alle am Ende?', options: ['Die Winterreise beginnt!', 'Wir gehen nach Hause!', 'Das ist toll!', 'Guten Tag!'], correct: 0 },
+    // SEIN + HABEN GEMISCHT (4)
+    { type: 'gap', context: '✏️ sein/haben', question: 'Wir _____ vier Freunde.', answer: 'sind', alternatives: ['Sind'] },
+    { type: 'gap', context: '✏️ sein/haben', question: 'Sie _____ ein Geheimnis.', answer: 'hat', alternatives: ['Hat'] },
+    { type: 'mc', context: '✏️ sein/haben', question: '_____ ihr müde?', options: ['Seid', 'Habt', 'Sind', 'Haben'], correct: 0 },
+    { type: 'mc', context: '✏️ sein/haben', question: '_____ du Hunger?', options: ['Hast', 'Bist', 'Hat', 'Ist'], correct: 0 },
+    // REGELMÄSSIG (4)
+    { type: 'gap', context: '✏️ regelmäßig', question: 'Die Kinder _____ im Park. (spielen)', answer: 'spielen', alternatives: ['Spielen'] },
+    { type: 'gap', context: '✏️ regelmäßig', question: 'Er _____ in Berlin. (arbeiten)', answer: 'arbeitet', alternatives: ['Arbeitet'] },
+    { type: 'mc', context: '✏️ regelmäßig', question: 'Ihr _____ sehr gut! (tanzen)', options: ['tanzt', 'tanzen', 'tanze', 'tanzst'], correct: 0 },
+    { type: 'mc', context: '✏️ regelmäßig', question: 'Sie _____ den Tisch. (öffnen)', options: ['öffnet', 'öffnen', 'öffne', 'öffnest'], correct: 0 },
+    // UNREGELMÄSSIG e→i (5)
+    { type: 'gap', context: '✏️ e→i', question: 'Er _____ sehr schnell. (sprechen)', answer: 'spricht', alternatives: ['Spricht'] },
+    { type: 'mc', context: '✏️ e→i', question: 'Was _____ du? (essen)', options: ['isst', 'esst', 'esse', 'essen'], correct: 0 },
+    { type: 'mc', context: '✏️ e→i', question: '_____ du mir bitte? (helfen)', options: ['Hilfst', 'Helfst', 'Helft', 'Helfe'], correct: 0 },
+    { type: 'gap', context: '✏️ e→i', question: 'Sie _____ mir das Buch. (geben)', answer: 'gibt', alternatives: ['Gibt'] },
+    { type: 'mc', context: '✏️ e→i', question: 'Er _____ seinen Freund. (treffen)', options: ['trifft', 'trefft', 'treffe', 'treffen'], correct: 0 },
+    // UNREGELMÄSSIG e→ie (3)
+    { type: 'mc', context: '✏️ e→ie', question: 'Was _____ du? (lesen)', options: ['liest', 'lest', 'lese', 'lesen'], correct: 0 },
+    { type: 'gap', context: '✏️ e→ie', question: 'Er _____ einen Film. (sehen)', answer: 'sieht', alternatives: ['Sieht'] },
+    { type: 'mc', context: '✏️ e→ie', question: 'Der Kellner _____ das Restaurant. (empfehlen)', options: ['empfiehlt', 'empfehlt', 'empfehle', 'empfehlen'], correct: 0 },
+    // UNREGELMÄSSIG a→ä (4)
+    { type: 'mc', context: '✏️ a→ä', question: 'Er _____ nach Berlin. (fahren)', options: ['fährt', 'fahrt', 'fahre', 'fahren'], correct: 0 },
+    { type: 'gap', context: '✏️ a→ä', question: 'Das Kind _____ noch. (schlafen)', answer: 'schläft', alternatives: ['Schläft'] },
+    { type: 'mc', context: '✏️ a→ä', question: 'Sie _____ eine Tasche. (tragen)', options: ['trägt', 'tragt', 'trage', 'tragen'], correct: 0 },
+    { type: 'mc', context: '✏️ a→ä', question: 'Der Hund _____ schnell. (laufen)', options: ['läuft', 'lauft', 'laufe', 'laufen'], correct: 0 },
+    // WISSEN (2)
+    { type: 'mc', context: '✏️ wissen', question: 'Ich _____ das nicht.', options: ['weiß', 'wisse', 'wisst', 'wissen'], correct: 0 },
+    { type: 'mc', context: '✏️ wissen', question: '_____ du, wo er ist?', options: ['Weißt', 'Wissest', 'Wisst', 'Wissen'], correct: 0 },
+    // ORDERING + MATCHING (2)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Er', 'spricht', 'gut', 'Deutsch', '.'], correct: ['Er', 'spricht', 'gut', 'Deutsch', '.'] },
+    { type: 'match', context: '🔗 e→i Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'sprechen', right: 'spricht' }, { left: 'geben', right: 'gibt' }, { left: 'nehmen', right: 'nimmt' }, { left: 'essen', right: 'isst' }]}
+];
+
+const QUESTIONS_AMETHYST = [
+    // TEXTVERSTÄNDNIS KOMPLEX (4)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Warum sollen die Freunde zuerst mit den Dorfbewohnern sprechen?', options: ['Um sie kennenzulernen', 'Um Essen zu bekommen', 'Um Geld zu bekommen', 'Um nach Hause zu gehen'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was bedeutet "Die Winterreise beginnt"?', options: ['Das Abenteuer fängt an', 'Es wird kalt', 'Sie fahren nach Hause', 'Der Winter kommt'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Der Kristall _____ unter dem Baum. (liegen)', answer: 'liegt', alternatives: ['Liegt'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Tim _____ in der Erde. (graben)', answer: 'gräbt', alternatives: ['Gräbt'] },
+    // SEIN/HABEN IN KONTEXT (4)
+    { type: 'gap', context: '✏️ sein/haben', question: 'Meine Schwester _____ Ärztin von Beruf.', answer: 'ist', alternatives: ['Ist'] },
+    { type: 'gap', context: '✏️ sein/haben', question: 'Wir _____ leider keine Zeit heute.', answer: 'haben', alternatives: ['Haben'] },
+    { type: 'mc', context: '✏️ sein/haben', question: '_____ Sie aus Deutschland?', options: ['Sind', 'Haben', 'Ist', 'Hat'], correct: 0 },
+    { type: 'mc', context: '✏️ sein/haben', question: 'Das Buch _____ sehr interessant.', options: ['ist', 'hat', 'sind', 'haben'], correct: 0 },
+    // KOMPLEXE UNREGELMÄSSIGE (8)
+    { type: 'gap', context: '✏️ Vokalwechsel', question: 'Der Lehrer _____ die Aufgabe. (geben)', answer: 'gibt', alternatives: ['Gibt'] },
+    { type: 'gap', context: '✏️ Vokalwechsel', question: 'Das Kind _____ ein Eis. (nehmen)', answer: 'nimmt', alternatives: ['Nimmt'] },
+    { type: 'mc', context: '✏️ Vokalwechsel', question: 'Die Katze _____ die Maus. (fressen)', options: ['frisst', 'fresst', 'fresse', 'fressen'], correct: 0 },
+    { type: 'mc', context: '✏️ Vokalwechsel', question: 'Der Vogel _____ davon. (fliegen)', options: ['fliegt', 'fliegst', 'fliege', 'fliegen'], correct: 0 },
+    { type: 'gap', context: '✏️ Vokalwechsel', question: '_____ du das Bild dort? (sehen)', answer: 'Siehst', alternatives: ['siehst'] },
+    { type: 'mc', context: '✏️ Vokalwechsel', question: 'Das Essen _____ sehr gut! (riechen)', options: ['riecht', 'riechst', 'rieche', 'riechen'], correct: 0 },
+    { type: 'gap', context: '✏️ Vokalwechsel', question: 'Er _____ immer die Wahrheit. (sprechen)', answer: 'spricht', alternatives: ['Spricht'] },
+    { type: 'mc', context: '✏️ Vokalwechsel', question: 'Der Dieb _____ das Geld. (stehlen)', options: ['stiehlt', 'stehlt', 'stehle', 'stehlen'], correct: 0 },
+    // WISSEN VS KENNEN (3)
+    { type: 'mc', context: '✏️ wissen/kennen', question: 'Ich _____ seinen Namen nicht.', options: ['weiß', 'kenne', 'weißt', 'kennst'], correct: 0 },
+    { type: 'mc', context: '✏️ wissen/kennen', question: '_____ du Berlin?', options: ['Kennst', 'Weißt', 'Kennt', 'Weiß'], correct: 0 },
+    { type: 'mc', context: '✏️ wissen/kennen', question: 'Er _____ nicht, wo sie wohnt.', options: ['weiß', 'kennt', 'weißt', 'kennst'], correct: 0 },
+    // GEMISCHTE SCHWERE (7)
+    { type: 'gap', context: '✏️ gemischt', question: 'Der Zug _____ um 8 Uhr. (abfahren)', answer: 'fährt ab', alternatives: ['fährt ab', 'Fährt ab'] },
+    { type: 'gap', context: '✏️ gemischt', question: 'Sie _____ das Fenster. (aufmachen)', answer: 'macht auf', alternatives: ['macht auf', 'Macht auf'] },
+    { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist richtig?', options: ['Er liest gern Bücher.', 'Er lest gern Bücher.', 'Er lesen gern Bücher.', 'Er lese gern Bücher.'], correct: 0 },
+    { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist richtig?', options: ['Du fährst zu schnell!', 'Du fahrst zu schnell!', 'Du fahrt zu schnell!', 'Du fahren zu schnell!'], correct: 0 },
+    { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist FALSCH?', options: ['Er sprecht Deutsch.', 'Er spricht Deutsch.', 'Sie spricht Deutsch.', 'Wir sprechen Deutsch.'], correct: 0 },
+    { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist FALSCH?', options: ['Das Kind schlaft.', 'Das Kind schläft.', 'Die Kinder schlafen.', 'Ich schlafe.'], correct: 0 },
+    { type: 'mc', context: '✏️ gemischt', question: 'Er _____ jeden Morgen früh _____. (aufstehen)', options: ['steht ... auf', 'steht ... auf', 'aufsteht', 'stehen ... auf'], correct: 0 },
+    // ORDERING + MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Der', 'Zug', 'fährt', 'um', '8', 'Uhr', 'ab', '.'], correct: ['Der', 'Zug', 'fährt', 'um', '8', 'Uhr', 'ab', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Siehst', 'du', 'das', 'Haus', 'dort', '?'], correct: ['Siehst', 'du', 'das', 'Haus', 'dort', '?'] },
+    { type: 'match', context: '🔗 a→ä Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'fahren', right: 'fährt' }, { left: 'schlafen', right: 'schläft' }, { left: 'tragen', right: 'trägt' }, { left: 'laufen', right: 'läuft' }]},
+    { type: 'match', context: '🔗 e→ie Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'lesen', right: 'liest' }, { left: 'sehen', right: 'sieht' }, { left: 'stehlen', right: 'stiehlt' }, { left: 'empfehlen', right: 'empfiehlt' }]}
+];
+
+let currentQuestion = 0;
+let score = 0;
+let selectedLevel = '';
+let currentQuestions = [];
+
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function toggleGrammar() {
+    const content = document.getElementById('grammarContent');
+    const arrow = document.getElementById('grammarArrow');
+    content.classList.toggle('open');
+    arrow.textContent = content.classList.contains('open') ? '▲' : '▼';
+}
+
+function startQuiz(level) {
+    selectedLevel = level;
+    currentQuestion = 0;
+    score = 0;
+    
+    if (level === 'rubin') currentQuestions = shuffle(QUESTIONS_RUBIN);
+    else if (level === 'smaragd') currentQuestions = shuffle(QUESTIONS_SMARAGD);
+    else currentQuestions = shuffle(QUESTIONS_AMETHYST);
+    
+    document.getElementById('levelSelection').style.display = 'none';
+    document.getElementById('quizArea').classList.add('active');
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = currentQuestions[currentQuestion];
+    const box = document.getElementById('questionBox');
+    const progress = ((currentQuestion) / currentQuestions.length) * 100;
+    
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`;
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('nextBtn').classList.remove('show');
+
+    let html = `<div class="question-context">${q.context}</div>`;
+    html += `<div class="question-text">${q.question}</div>`;
+
+    if (q.type === 'mc') {
+        html += '<div class="options-grid">';
+        const shuffledOptions = shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx })));
+        shuffledOptions.forEach((opt) => {
+            html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`;
+        });
+        html += '</div>';
+    } else if (q.type === 'gap') {
+        html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()">`;
+        html += `<br><button class="check-btn" onclick="checkGap()">Prüfen</button>`;
+    } else if (q.type === 'order') {
+        const shuffledWords = shuffle([...q.words]);
+        html += '<div class="ordering-container">';
+        html += '<div class="ordering-source" id="orderSource">';
+        shuffledWords.forEach((word) => {
+            html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`;
+        });
+        html += '</div>';
+        html += '<p style="text-align:center; color:#7DD3FC;">↓ Klicke die Wörter in der richtigen Reihenfolge ↓</p>';
+        html += '<div class="ordering-target" id="orderTarget"></div>';
+        html += `<button class="check-btn" onclick="checkOrder()">Prüfen</button>`;
+        html += '</div>';
+    } else if (q.type === 'match') {
+        const leftItems = shuffle(q.pairs.map(p => p.left));
+        const rightItems = shuffle(q.pairs.map(p => p.right));
+        html += '<div class="matching-container">';
+        html += '<div class="matching-column"><h4>Infinitiv</h4>';
+        leftItems.forEach(item => {
+            html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`;
+        });
+        html += '</div>';
+        html += '<div class="matching-column"><h4>er/sie/es</h4>';
+        rightItems.forEach(item => {
+            html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`;
+        });
+        html += '</div></div>';
+    }
+
+    box.innerHTML = html;
+}
+
+function checkMC(selected, correct, btn) {
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    if (selected === correct) {
+        btn.classList.add('correct');
+        showFeedback(true, 'Richtig! 🎉');
+        score++;
+    } else {
+        btn.classList.add('wrong');
+        buttons.forEach(b => {
+            const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]);
+            if (idx === correct) b.classList.add('correct');
+        });
+        showFeedback(false, 'Leider falsch.');
+    }
+}
+
+function checkGap() {
+    const input = document.getElementById('gapInput');
+    const q = currentQuestions[currentQuestion];
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = q.answer.toLowerCase();
+    const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : [];
+    
+    if (userAnswer === correctAnswer || alternatives.includes(userAnswer)) {
+        input.classList.add('correct');
+        showFeedback(true, 'Richtig! 🎉');
+        score++;
+    } else {
+        input.classList.add('wrong');
+        showFeedback(false, `Die richtige Antwort ist: ${q.answer}`);
+    }
+    input.disabled = true;
+}
+
+function moveWord(element, direction) {
+    if (element.classList.contains('placed')) return;
+    const source = document.getElementById('orderSource');
+    const target = document.getElementById('orderTarget');
+    
+    if (direction === 'toTarget') {
+        const clone = element.cloneNode(true);
+        clone.onclick = function() { moveWord(this, 'toSource'); };
+        target.appendChild(clone);
+        element.classList.add('placed');
+    } else {
+        const originalWord = element.dataset.word;
+        const sourceWords = source.querySelectorAll('.ordering-word');
+        sourceWords.forEach(sw => {
+            if (sw.dataset.word === originalWord && sw.classList.contains('placed')) {
+                sw.classList.remove('placed');
+            }
+        });
+        element.remove();
+    }
+}
+
+function checkOrder() {
+    const target = document.getElementById('orderTarget');
+    const words = Array.from(target.querySelectorAll('.ordering-word')).map(w => w.dataset.word);
+    const q = currentQuestions[currentQuestion];
+    
+    if (JSON.stringify(words) === JSON.stringify(q.correct)) {
+        showFeedback(true, 'Richtig! 🎉');
+        score++;
+    } else {
+        showFeedback(false, `Richtige Reihenfolge: ${q.correct.join(' ')}`);
+    }
+}
+
+let selectedMatch = null;
+let matchedPairs = 0;
+
+function selectMatch(element) {
+    if (element.classList.contains('matched')) return;
+    
+    const type = element.dataset.type;
+    const value = element.dataset.value;
+    
+    if (!selectedMatch) {
+        selectedMatch = { element, type, value };
+        element.classList.add('selected');
+    } else {
+        if (selectedMatch.type === type) {
+            selectedMatch.element.classList.remove('selected');
+            selectedMatch = { element, type, value };
+            element.classList.add('selected');
+        } else {
+            const q = currentQuestions[currentQuestion];
+            const pair = q.pairs.find(p => 
+                (p.left === selectedMatch.value && p.right === value) ||
+                (p.right === selectedMatch.value && p.left === value)
+            );
+            
+            if (pair) {
+                element.classList.add('matched');
+                selectedMatch.element.classList.remove('selected');
+                selectedMatch.element.classList.add('matched');
+                matchedPairs++;
+                
+                if (matchedPairs === q.pairs.length) {
+                    showFeedback(true, 'Alle richtig! 🎉');
+                    score++;
+                    matchedPairs = 0;
+                }
+            } else {
+                element.classList.add('wrong');
+                setTimeout(() => element.classList.remove('wrong'), 500);
+            }
+            selectedMatch.element.classList.remove('selected');
+            selectedMatch = null;
+        }
+    }
+}
+
+function showFeedback(isCorrect, message) {
+    const feedback = document.getElementById('feedback');
+    feedback.textContent = message;
+    feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    selectedMatch = null;
+    matchedPairs = 0;
+    
+    if (currentQuestion >= currentQuestions.length) {
+        showResults();
+    } else {
+        showQuestion();
+    }
+}
+
+function showResults() {
+    document.getElementById('quizArea').classList.remove('active');
+    document.getElementById('resultsSection').classList.add('active');
+    
+    const percentage = Math.round((score / currentQuestions.length) * 100);
+    let gems = 0, icon = '🏆', message = '';
+    
+    if (percentage >= 90) {
+        gems = selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10;
+        icon = '🏆'; message = 'Ausgezeichnet! Du hast den ersten Kristall gefunden! 💎';
+    } else if (percentage >= 70) {
+        gems = selectedLevel === 'amethyst' ? 20 : selectedLevel === 'smaragd' ? 15 : 8;
+        icon = '⭐'; message = 'Sehr gut! Du bist auf dem richtigen Weg!';
+    } else if (percentage >= 50) {
+        gems = selectedLevel === 'amethyst' ? 10 : selectedLevel === 'smaragd' ? 8 : 5;
+        icon = '💪'; message = 'Gut gemacht! Übung macht den Meister!';
+    } else {
+        gems = 2; icon = '📚'; message = 'Lies die Grammatik nochmal und versuche es wieder!';
+    }
+    
+    document.getElementById('resultsIcon').textContent = icon;
+    document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`;
+    document.getElementById('resultsGems').textContent = `+${gems} Edelsteine 💎`;
+    document.getElementById('resultsMessage').textContent = message;
+    
+    localStorage.setItem('station1_gems', gems);
+    localStorage.setItem('station1_completed', percentage >= 50);
+}
+
+function restartQuiz() {
+    document.getElementById('resultsSection').classList.remove('active');
+    document.getElementById('levelSelection').style.display = 'block';
+}
+
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+
+</body>
+</html>

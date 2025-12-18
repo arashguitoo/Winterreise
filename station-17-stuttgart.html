@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 Station 17: Stuttgart - Passiv</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 5000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🔄</div>
+        <h1 class="station-title">Station 17: Stuttgart</h1>
+        <p class="station-subtitle">Passiv - wird gemacht, wurde gebaut...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde kommen in Stuttgart an, der Autostadt Deutschlands!</p>
+            <p><strong>Sara:</strong> <em>"Hier <strong>werden</strong> viele Autos <strong>gebaut</strong>! Mercedes und Porsche!"</em></p>
+            <p><strong>Leon:</strong> <em>"Stimmt! Jedes Jahr <strong>werden</strong> Millionen Autos <strong>produziert</strong>."</em></p>
+            <p>Sie besuchen das Mercedes-Museum. Ein Mitarbeiter namens <strong>Herr Klein</strong> führt sie.</p>
+            <p><strong>Herr Klein:</strong> <em>"Dieses Museum <strong>wurde</strong> 2006 <strong>eröffnet</strong>. Es <strong>wird</strong> von vielen Touristen <strong>besucht</strong>."</em></p>
+            <p><strong>Mia:</strong> <em>"Wir suchen einen Kristall. <strong>Wurde</strong> hier etwas Besonderes <strong>versteckt</strong>?"</em></p>
+            <p><strong>Herr Klein:</strong> <em>"Ja! Der Kristall <strong>wurde</strong> vor langer Zeit hier <strong>gefunden</strong>. Er <strong>wird</strong> im geheimen Tresor <strong>aufbewahrt</strong>."</em></p>
+            <p><strong>Tim:</strong> <em>"Kann er uns <strong>gezeigt werden</strong>?"</em></p>
+            <p><strong>Herr Klein:</strong> <em>"Normalerweise <strong>darf</strong> er nicht <strong>gezeigt werden</strong>. Aber für euch mache ich eine Ausnahme!"</em></p>
+            <p>Im Tresor finden sie einen <strong>platinfarbenen Kristall</strong>!</p>
+            <p><strong>Sara:</strong> <em>"Er ist wunderschön! Er <strong>wird</strong> sicher gut <strong>gepflegt</strong>!"</em></p>
+            <p><em>"Der siebzehnte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Passiv <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was ist Passiv?</h3>
+                <p>Im Passiv steht die <strong>Handlung</strong> im Mittelpunkt, nicht die Person.</p>
+                <div class="grammar-note">
+                    <p><strong>Aktiv:</strong> Der Mann baut das Haus. (Wer?)</p>
+                    <p><strong>Passiv:</strong> Das Haus wird gebaut. (Was passiert?)</p>
+                </div>
+
+                <h3>Bildung: Passiv Präsens</h3>
+                <table class="grammar-table">
+                    <tr><th colspan="2">werden + Partizip II</th></tr>
+                    <tr><td>ich</td><td>werde gefragt</td></tr>
+                    <tr><td>du</td><td>wirst gefragt</td></tr>
+                    <tr><td>er/sie/es</td><td>wird gefragt</td></tr>
+                    <tr><td>wir</td><td>werden gefragt</td></tr>
+                    <tr><td>ihr</td><td>werdet gefragt</td></tr>
+                    <tr><td>sie/Sie</td><td>werden gefragt</td></tr>
+                </table>
+
+                <h3>Bildung: Passiv Präteritum</h3>
+                <table class="grammar-table">
+                    <tr><th colspan="2">wurde + Partizip II</th></tr>
+                    <tr><td>ich</td><td>wurde gefragt</td></tr>
+                    <tr><td>du</td><td>wurdest gefragt</td></tr>
+                    <tr><td>er/sie/es</td><td>wurde gefragt</td></tr>
+                    <tr><td>wir</td><td>wurden gefragt</td></tr>
+                    <tr><td>ihr</td><td>wurdet gefragt</td></tr>
+                    <tr><td>sie/Sie</td><td>wurden gefragt</td></tr>
+                </table>
+
+                <h3>von + Dativ</h3>
+                <div class="grammar-note">
+                    <p>Wer macht die Handlung? → <strong>von + Dativ</strong></p>
+                    <p>Das Buch wird <strong>von dem Autor</strong> geschrieben.</p>
+                    <p>Das Auto wurde <strong>von einem Mechaniker</strong> repariert.</p>
+                </div>
+
+                <h3>Passiv mit Modalverben</h3>
+                <div class="grammar-warning">
+                    <p>Modalverb + Partizip II + <strong>werden</strong></p>
+                    <p>Das <strong>muss</strong> gemacht <strong>werden</strong>.</p>
+                    <p>Das <strong>kann</strong> nicht geändert <strong>werden</strong>.</p>
+                </div>
+
+                <h3>Wann kein Passiv?</h3>
+                <div class="grammar-warning">
+                    <p>Kein Passiv bei: haben, sein, bekommen, kennen, wissen, kosten, wiegen...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🚗</span><div><div class="vocab-word">bauen</div><div class="vocab-meaning">konstruieren</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏭</span><div><div class="vocab-word">produzieren</div><div class="vocab-meaning">herstellen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔧</span><div><div class="vocab-word">reparieren</div><div class="vocab-meaning">wieder heilen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏛️</span><div><div class="vocab-word">eröffnen</div><div class="vocab-meaning">öffnen (neu)</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔒</span><div><div class="vocab-word">der Tresor</div><div class="vocab-meaning">sicherer Schrank</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📦</span><div><div class="vocab-word">aufbewahren</div><div class="vocab-meaning">sicher lagern</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🌱</span><div><div class="vocab-word">pflegen</div><div class="vocab-meaning">sich kümmern um</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔍</span><div><div class="vocab-word">finden</div><div class="vocab-meaning">entdecken</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der siebzehnte Kristall?', options: ['Platinfarben', 'Gold', 'Silber', 'Bronze'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Was wird in Stuttgart gebaut?', options: ['Autos', 'Flugzeuge', 'Schiffe', 'Züge'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wann wurde das Mercedes-Museum eröffnet?', options: ['2006', '2000', '2010', '1990'], correct: 0 },
+    { type: 'mc', context: '✏️ Bildung', question: 'Passiv Präsens = ?', options: ['werden + Partizip II', 'sein + Partizip II', 'haben + Partizip II', 'werden + Infinitiv'], correct: 0 },
+    { type: 'mc', context: '✏️ Bildung', question: 'Passiv Präteritum = ?', options: ['wurde + Partizip II', 'war + Partizip II', 'hatte + Partizip II', 'wird + Partizip II'], correct: 0 },
+    { type: 'mc', context: '✏️ werden', question: 'ich _____ gefragt (Präsens)', options: ['werde', 'wird', 'werden', 'wirst'], correct: 0 },
+    { type: 'mc', context: '✏️ werden', question: 'du _____ gefragt (Präsens)', options: ['wirst', 'werde', 'wird', 'werden'], correct: 0 },
+    { type: 'mc', context: '✏️ werden', question: 'er _____ gefragt (Präsens)', options: ['wird', 'werde', 'wirst', 'werden'], correct: 0 },
+    { type: 'mc', context: '✏️ werden', question: 'wir _____ gefragt (Präsens)', options: ['werden', 'wird', 'werde', 'werdet'], correct: 0 },
+    { type: 'mc', context: '✏️ werden', question: 'ihr _____ gefragt (Präsens)', options: ['werdet', 'werden', 'wird', 'werde'], correct: 0 },
+    { type: 'mc', context: '✏️ wurde', question: 'ich _____ gefragt (Präteritum)', options: ['wurde', 'wird', 'wurden', 'wurdest'], correct: 0 },
+    { type: 'mc', context: '✏️ wurde', question: 'du _____ gefragt (Präteritum)', options: ['wurdest', 'wurde', 'wurden', 'wurdet'], correct: 0 },
+    { type: 'mc', context: '✏️ wurde', question: 'er _____ gefragt (Präteritum)', options: ['wurde', 'wurdest', 'wurden', 'wurdet'], correct: 0 },
+    { type: 'mc', context: '✏️ wurde', question: 'wir _____ gefragt (Präteritum)', options: ['wurden', 'wurde', 'wurdest', 'wurdet'], correct: 0 },
+    { type: 'mc', context: '✏️ wurde', question: 'ihr _____ gefragt (Präteritum)', options: ['wurdet', 'wurden', 'wurde', 'wurdest'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Das Haus _____ gebaut.', options: ['wird', 'werde', 'wirst', 'werden'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Die Autos _____ produziert.', options: ['werden', 'wird', 'werde', 'werdet'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Das Museum _____ 2006 eröffnet.', options: ['wurde', 'wird', 'werden', 'wurden'], correct: 0 },
+    { type: 'mc', context: '✏️ Satz', question: 'Die Briefe _____ gestern geschickt.', options: ['wurden', 'wurde', 'wird', 'werden'], correct: 0 },
+    { type: 'mc', context: '✏️ von', question: 'Das Buch wird _____ dem Autor geschrieben.', options: ['von', 'mit', 'bei', 'für'], correct: 0 },
+    { type: 'mc', context: '✏️ von', question: 'Das Auto wurde _____ einem Mechaniker repariert.', options: ['von', 'mit', 'bei', 'für'], correct: 0 },
+    { type: 'mc', context: '✏️ Aktiv vs Passiv', question: '"Der Mann baut das Haus" ist...', options: ['Aktiv', 'Passiv', 'Beides', 'Keins'], correct: 0 },
+    { type: 'mc', context: '✏️ Aktiv vs Passiv', question: '"Das Haus wird gebaut" ist...', options: ['Passiv', 'Aktiv', 'Beides', 'Keins'], correct: 0 },
+    { type: 'mc', context: '✏️ Fokus', question: 'Im Passiv steht was im Mittelpunkt?', options: ['Die Handlung', 'Die Person', 'Das Subjekt', 'Das Objekt'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'bauen → ?', options: ['gebaut', 'gebauen', 'gebauet', 'bauen'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'machen → ?', options: ['gemacht', 'gemachen', 'gemachet', 'machen'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'schreiben → ?', options: ['geschrieben', 'geschreibt', 'schreiben', 'geschreiben'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'Haus', 'wird', 'gebaut', '.'], correct: ['Das', 'Haus', 'wird', 'gebaut', '.'] },
+    { type: 'match', context: '🔗 werden', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'werde' }, { left: 'du', right: 'wirst' }, { left: 'er', right: 'wird' }, { left: 'wir', right: 'werden' }]},
+    { type: 'match', context: '🔗 wurde', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'wurde' }, { left: 'du', right: 'wurdest' }, { left: 'er', right: 'wurde' }, { left: 'wir', right: 'wurden' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Hier _____ viele Autos gebaut.', answer: 'werden', alternatives: ['Werden'] },
+    { type: 'gap', context: '📖 Text', question: 'Dieses Museum _____ 2006 eröffnet.', answer: 'wurde', alternatives: ['Wurde'] },
+    { type: 'gap', context: '📖 Text', question: 'Der Kristall _____ im Tresor aufbewahrt.', answer: 'wird', alternatives: ['Wird'] },
+    { type: 'mc', context: '✏️ Umformung', question: 'Der Koch kocht das Essen. → Das Essen _____ gekocht.', options: ['wird', 'wurde', 'werden', 'worden'], correct: 0 },
+    { type: 'mc', context: '✏️ Umformung', question: 'Der Mann reparierte das Auto. → Das Auto _____ repariert.', options: ['wurde', 'wird', 'werden', 'worden'], correct: 0 },
+    { type: 'mc', context: '✏️ Umformung', question: 'Die Arbeiter bauen das Haus. → Das Haus _____ gebaut.', options: ['wird', 'wurde', 'werden', 'worden'], correct: 0 },
+    { type: 'gap', context: '✏️ Umformung', question: 'Man spricht hier Deutsch. → Hier _____ Deutsch gesprochen.', answer: 'wird', alternatives: ['Wird'] },
+    { type: 'gap', context: '✏️ Umformung', question: 'Man hat das Problem gelöst. → Das Problem _____ gelöst.', answer: 'wurde', alternatives: ['Wurde'] },
+    { type: 'mc', context: '✏️ von + Dativ', question: 'Das Buch wird _____ Autor geschrieben.', options: ['vom', 'von der', 'von dem', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ von + Dativ', question: 'Das Haus wurde _____ Firma gebaut.', options: ['von der', 'vom', 'von dem', 'von'], correct: 0 },
+    { type: 'mc', context: '✏️ von + Dativ', question: 'Die Kinder werden _____ Eltern abgeholt.', options: ['von den', 'von der', 'vom', 'von dem'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Das muss _____ werden.', options: ['gemacht', 'machen', 'macht', 'machend'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Das kann nicht _____ werden.', options: ['geändert', 'ändern', 'ändert', 'ändernd'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Das Paket muss morgen _____ werden.', options: ['geschickt', 'schicken', 'schickt', 'schickend'], correct: 0 },
+    { type: 'gap', context: '✏️ Modalverb', question: 'Das Auto kann heute nicht repariert _____.', answer: 'werden', alternatives: ['Werden'] },
+    { type: 'gap', context: '✏️ Modalverb', question: 'Die Rechnung muss bezahlt _____.', answer: 'werden', alternatives: ['Werden'] },
+    { type: 'mc', context: '✏️ Perfekt Passiv', question: 'Das Haus ist gebaut _____.', options: ['worden', 'werden', 'wurde', 'wird'], correct: 0 },
+    { type: 'mc', context: '✏️ Perfekt Passiv', question: 'Die E-Mail ist geschickt _____.', options: ['worden', 'werden', 'wurde', 'wird'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das Haus wird gebaut werden.', 'Das Haus wird gebaut.', 'Das Haus wurde gebaut.', 'Das Haus ist gebaut worden.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welches Verb hat KEIN Passiv?', options: ['haben', 'bauen', 'schreiben', 'lesen'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welches Verb hat KEIN Passiv?', options: ['sein', 'machen', 'kochen', 'reparieren'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Das Buch wird von mir gelesen.', 'Das Buch wird gelesen von mir.', 'Das Buch gelesen wird von mir.', 'Gelesen wird das Buch mir von.'], correct: 0 },
+    { type: 'mc', context: '✏️ Satzstellung', question: 'Wo steht "werden" im Hauptsatz?', options: ['Position 2', 'Am Ende', 'Am Anfang', 'Position 3'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'Auto', 'wurde', 'von', 'dem', 'Mechaniker', 'repariert', '.'], correct: ['Das', 'Auto', 'wurde', 'von', 'dem', 'Mechaniker', 'repariert', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'muss', 'heute', 'gemacht', 'werden', '.'], correct: ['Das', 'muss', 'heute', 'gemacht', 'werden', '.'] },
+    { type: 'match', context: '🔗 Aktiv → Passiv', question: 'Ordne zu:', pairs: [{ left: 'Man baut', right: 'wird gebaut' }, { left: 'Man baute', right: 'wurde gebaut' }, { left: 'Man hat gebaut', right: 'ist gebaut worden' }, { left: 'Man muss bauen', right: 'muss gebaut werden' }]},
+    { type: 'match', context: '🔗 Partizip II', question: 'Ordne zu:', pairs: [{ left: 'bauen', right: 'gebaut' }, { left: 'schreiben', right: 'geschrieben' }, { left: 'finden', right: 'gefunden' }, { left: 'öffnen', right: 'geöffnet' }]},
+    { type: 'mc', context: '✏️ Schwer', question: 'Das Paket _____ morgen _____ werden. (können, schicken)', options: ['kann / geschickt', 'kann / schicken', 'können / geschickt', 'kann / schickt'], correct: 0 },
+    { type: 'mc', context: '✏️ Schwer', question: 'Die Arbeit _____ bis Freitag _____ werden. (müssen, erledigen)', options: ['muss / erledigt', 'muss / erledigen', 'müssen / erledigt', 'muss / erledigte'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Kann er uns _____ werden? (zeigen)', answer: 'gezeigt', alternatives: ['Gezeigt'] },
+    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Präsens: Das Haus _____ gebaut.', options: ['wird', 'wurde', 'ist...worden', 'war...worden'], correct: 0 },
+    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Präteritum: Das Haus _____ gebaut.', options: ['wurde', 'wird', 'ist...worden', 'war...worden'], correct: 0 },
+    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Perfekt: Das Haus _____ gebaut _____.', options: ['ist / worden', 'hat / worden', 'wird / worden', 'wurde / worden'], correct: 0 },
+    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Plusquamperfekt: Das Haus _____ gebaut _____.', options: ['war / worden', 'ist / worden', 'hatte / worden', 'wurde / worden'], correct: 0 },
+    { type: 'gap', context: '✏️ Perfekt', question: 'Das Problem ist gelöst _____. (Perfekt Passiv)', answer: 'worden', alternatives: ['Worden'] },
+    { type: 'gap', context: '✏️ Plusquamperfekt', question: 'Das Haus war schon gebaut _____, als wir kamen.', answer: 'worden', alternatives: ['Worden'] },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Ich weiß, dass das Buch _____ wird.', options: ['gelesen', 'lesen', 'liest', 'lesend'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Weil das Auto _____ wurde, funktioniert es jetzt.', options: ['repariert', 'reparieren', 'repariert werden', 'reparierend'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Obwohl die Arbeit erledigt _____ musste, hat er es nicht gemacht.', options: ['werden', 'worden', 'wird', 'wurde'], correct: 0 },
+    { type: 'gap', context: '✏️ Nebensatz', question: 'Er sagte, dass die E-Mail schon geschickt _____ ist.', answer: 'worden', alternatives: ['Worden'] },
+    { type: 'mc', context: '✏️ Passiv + Konjunktiv', question: 'Das könnte _____ werden.', options: ['gemacht', 'machen', 'macht', 'machend'], correct: 0 },
+    { type: 'mc', context: '✏️ Passiv + Konjunktiv', question: 'Das sollte sofort _____ werden.', options: ['erledigt', 'erledigen', 'erledigt werden', 'erledige'], correct: 0 },
+    { type: 'mc', context: '✏️ Zustandspassiv', question: 'Das Fenster ist geöffnet. (= Zustandspassiv) Das bedeutet...', options: ['Das Fenster ist offen.', 'Jemand öffnet das Fenster jetzt.', 'Das Fenster wurde gerade geöffnet.', 'Man wird das Fenster öffnen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Zustandspassiv', question: 'Die Arbeit ist erledigt. (= Zustandspassiv) Das bedeutet...', options: ['Die Arbeit ist fertig.', 'Jemand erledigt die Arbeit jetzt.', 'Die Arbeit wurde gerade erledigt.', 'Man wird die Arbeit erledigen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Vorgangs- vs Zustandspassiv', question: '"Das Fenster wird geöffnet" ist...', options: ['Vorgangspassiv', 'Zustandspassiv', 'Aktiv', 'Kein Passiv'], correct: 0 },
+    { type: 'mc', context: '✏️ Vorgangs- vs Zustandspassiv', question: '"Das Fenster ist geöffnet" ist...', options: ['Zustandspassiv', 'Vorgangspassiv', 'Aktiv', 'Kein Passiv'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Das Haus, das letztes Jahr _____ _____, ist schön.', options: ['gebaut wurde', 'gebaut wird', 'bauen wurde', 'gebaut werden'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Nachdem die Arbeit _____ _____ war, gingen alle nach Hause.', options: ['erledigt worden', 'erledigt werden', 'erledigen worden', 'erledigt wurde'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das Haus ist gebaut geworden.', 'Das Haus ist gebaut worden.', 'Das Haus wurde gebaut.', 'Das Haus wird gebaut.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich werde gehabt.', 'Ich werde gefragt.', 'Ich werde eingeladen.', 'Ich werde angerufen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Die Aufgabe muss heute erledigt werden.', 'Die Aufgabe muss heute werden erledigt.', 'Die Aufgabe erledigt werden muss heute.', 'Die Aufgabe muss heute erledigen werden.'], correct: 0 },
+    { type: 'gap', context: '✏️ Schwer', question: 'Das Problem hätte früher gelöst werden _____. (sollen, Konj. II)', answer: 'sollen', alternatives: ['Sollen'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'Buch', 'ist', 'von', 'dem', 'Autor', 'geschrieben', 'worden', '.'], correct: ['Das', 'Buch', 'ist', 'von', 'dem', 'Autor', 'geschrieben', 'worden', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'weiß', ',', 'dass', 'das', 'Problem', 'gelöst', 'wurde', '.'], correct: ['Ich', 'weiß', ',', 'dass', 'das', 'Problem', 'gelöst', 'wurde', '.'] },
+    { type: 'match', context: '🔗 Zeiten', question: 'Ordne zu:', pairs: [{ left: 'wird gebaut', right: 'Präsens' }, { left: 'wurde gebaut', right: 'Präteritum' }, { left: 'ist gebaut worden', right: 'Perfekt' }, { left: 'war gebaut worden', right: 'Plusquamperfekt' }]},
+    { type: 'match', context: '🔗 Passivarten', question: 'Ordne zu:', pairs: [{ left: 'wird geöffnet', right: 'Vorgangspassiv' }, { left: 'ist geöffnet', right: 'Zustandspassiv' }, { left: 'muss gemacht werden', right: 'Passiv mit Modalverb' }, { left: 'von + Dativ', right: 'Agens (Handelnder)' }]},
+    { type: 'mc', context: '✏️ Sehr schwer', question: 'Nachdem das Auto _____ _____ war, konnte ich wieder fahren.', options: ['repariert worden', 'repariert werden', 'reparieren worden', 'repariert wurde'], correct: 0 },
+    { type: 'mc', context: '✏️ Sehr schwer', question: 'Die Arbeit hätte _____ _____ sollen.', options: ['früher erledigt werden', 'früher erledigt worden', 'früher erledigen werden', 'erledigt früher werden'], correct: 0 }
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station17_gems', gems); localStorage.setItem('station17_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

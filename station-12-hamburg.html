@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👨‍👩‍👧‍👦 Station 12: Hamburg - Possessivpronomen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 5000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 6px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">👨‍👩‍👧‍👦</div>
+        <h1 class="station-title">Station 12: Hamburg</h1>
+        <p class="station-subtitle">Possessivpronomen - mein, dein, sein, ihr...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde kommen in Hamburg an. Der große Hafen ist beeindruckend!</p>
+            <p><strong>Sara:</strong> <em>"Ich habe <strong>meine</strong> Kamera dabei. Ich möchte <strong>meinen</strong> Eltern Fotos schicken!"</em></p>
+            <p><strong>Leon:</strong> <em>"Gute Idee! Und ich rufe <strong>meinen</strong> Bruder an. Er war schon mal hier."</em></p>
+            <p>Sie treffen einen Fischer namens <strong>Herr Petersen</strong>. Er sitzt auf <strong>seinem</strong> Boot.</p>
+            <p><strong>Herr Petersen:</strong> <em>"Guten Tag! Ist das <strong>euer</strong> erster Besuch in Hamburg?"</em></p>
+            <p><strong>Mia:</strong> <em>"Ja! Wir suchen einen Kristall. Kennen Sie <strong>seine</strong> Geschichte?"</em></p>
+            <p><strong>Herr Petersen:</strong> <em>"Oh ja! <strong>Mein</strong> Großvater hat mir davon erzählt. Der Kristall liegt auf einer kleinen Insel. Ich kann euch mit <strong>meinem</strong> Boot hinbringen."</em></p>
+            <p><strong>Tim:</strong> <em>"Das ist sehr nett von <strong>Ihnen</strong>! Wir sind <strong>Ihnen</strong> sehr dankbar!"</em></p>
+            <p><strong>Herr Petersen:</strong> <em>"<strong>Unsere</strong> Familie hat den Kristall seit Generationen beschützt. Jetzt ist es Zeit, ihn weiterzugeben."</em></p>
+            <p>Auf der Insel finden sie den <strong>silbernen Kristall</strong>. Herr Petersen lächelt: <em>"Er gehört jetzt <strong>euch</strong>!"</em></p>
+            <p><em>"Der zwölfte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Possessivpronomen <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Possessivpronomen - Übersicht</h3>
+                <table class="grammar-table">
+                    <tr><th>Person</th><th>Possessivpronomen</th></tr>
+                    <tr><td>ich</td><td><strong>mein</strong></td></tr>
+                    <tr><td>du</td><td><strong>dein</strong></td></tr>
+                    <tr><td>er/es</td><td><strong>sein</strong></td></tr>
+                    <tr><td>sie (Sg.)</td><td><strong>ihr</strong></td></tr>
+                    <tr><td>wir</td><td><strong>unser</strong></td></tr>
+                    <tr><td>ihr</td><td><strong>euer</strong></td></tr>
+                    <tr><td>sie (Pl.)/Sie</td><td><strong>ihr/Ihr</strong></td></tr>
+                </table>
+
+                <h3>Deklination im Nominativ</h3>
+                <table class="grammar-table">
+                    <tr><th></th><th>Maskulin</th><th>Feminin</th><th>Neutral</th><th>Plural</th></tr>
+                    <tr><td>ich</td><td>mein</td><td>mein<strong>e</strong></td><td>mein</td><td>mein<strong>e</strong></td></tr>
+                    <tr><td>du</td><td>dein</td><td>dein<strong>e</strong></td><td>dein</td><td>dein<strong>e</strong></td></tr>
+                    <tr><td>er/es</td><td>sein</td><td>sein<strong>e</strong></td><td>sein</td><td>sein<strong>e</strong></td></tr>
+                    <tr><td>sie</td><td>ihr</td><td>ihr<strong>e</strong></td><td>ihr</td><td>ihr<strong>e</strong></td></tr>
+                </table>
+
+                <h3>Deklination im Akkusativ</h3>
+                <table class="grammar-table">
+                    <tr><th></th><th>Maskulin</th><th>Feminin</th><th>Neutral</th><th>Plural</th></tr>
+                    <tr><td>ich</td><td>mein<strong>en</strong></td><td>mein<strong>e</strong></td><td>mein</td><td>mein<strong>e</strong></td></tr>
+                    <tr><td>du</td><td>dein<strong>en</strong></td><td>dein<strong>e</strong></td><td>dein</td><td>dein<strong>e</strong></td></tr>
+                    <tr><td>er/es</td><td>sein<strong>en</strong></td><td>sein<strong>e</strong></td><td>sein</td><td>sein<strong>e</strong></td></tr>
+                    <tr><td>sie</td><td>ihr<strong>en</strong></td><td>ihr<strong>e</strong></td><td>ihr</td><td>ihr<strong>e</strong></td></tr>
+                </table>
+
+                <h3>Deklination im Dativ</h3>
+                <table class="grammar-table">
+                    <tr><th></th><th>Maskulin</th><th>Feminin</th><th>Neutral</th><th>Plural</th></tr>
+                    <tr><td>ich</td><td>mein<strong>em</strong></td><td>mein<strong>er</strong></td><td>mein<strong>em</strong></td><td>mein<strong>en</strong></td></tr>
+                    <tr><td>du</td><td>dein<strong>em</strong></td><td>dein<strong>er</strong></td><td>dein<strong>em</strong></td><td>dein<strong>en</strong></td></tr>
+                    <tr><td>er/es</td><td>sein<strong>em</strong></td><td>sein<strong>er</strong></td><td>sein<strong>em</strong></td><td>sein<strong>en</strong></td></tr>
+                    <tr><td>sie</td><td>ihr<strong>em</strong></td><td>ihr<strong>er</strong></td><td>ihr<strong>em</strong></td><td>ihr<strong>en</strong></td></tr>
+                </table>
+
+                <div class="grammar-warning">
+                    <p><strong>Tipp:</strong> Die Endungen sind wie bei "ein/eine"!</p>
+                    <p>ein → mein, dein, sein...</p>
+                    <p>eine → meine, deine, seine...</p>
+                    <p>einen → meinen, deinen, seinen...</p>
+                </div>
+
+                <h3>⚠️ Besonderheit: euer</h3>
+                <div class="grammar-note">
+                    <p>Bei "euer" fällt das -e- oft weg:</p>
+                    <p>euer Haus, eu<strong>re</strong> Schwester, eu<strong>ren</strong> Bruder</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">⚓</span><div><div class="vocab-word">der Hafen</div><div class="vocab-meaning">wo Schiffe ankommen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🚤</span><div><div class="vocab-word">das Boot</div><div class="vocab-meaning">kleines Schiff</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🎣</span><div><div class="vocab-word">der Fischer</div><div class="vocab-meaning">fängt Fische</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏝️</span><div><div class="vocab-word">die Insel</div><div class="vocab-meaning">Land im Wasser</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">👴</span><div><div class="vocab-word">der Großvater</div><div class="vocab-meaning">Vater vom Vater/Mutter</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🛡️</span><div><div class="vocab-word">beschützen</div><div class="vocab-meaning">sicher halten</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">👨‍👩‍👧</span><div><div class="vocab-word">die Familie</div><div class="vocab-meaning">Eltern, Kinder...</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🙏</span><div><div class="vocab-word">dankbar</div><div class="vocab-meaning">danke sagen wollen</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Was hat Sara dabei?', options: ['Ihre Kamera', 'Ihr Buch', 'Ihren Hund', 'Ihre Tasche'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der zwölfte Kristall?', options: ['Silber', 'Gold', 'Bronze', 'Rot'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wer bringt die Freunde zur Insel?', options: ['Herr Petersen', 'Herr Müller', 'Herr Schmidt', 'Herr Weber'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Bruder ist groß. (ich)', options: ['Mein', 'Meinen', 'Meinem', 'Meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Schwester ist nett. (ich)', options: ['Meine', 'Mein', 'Meinen', 'Meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Kind spielt. (ich)', options: ['Mein', 'Meine', 'Meinen', 'Meinem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Eltern sind nett. (ich)', options: ['Meine', 'Mein', 'Meinen', 'Meinem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Hund ist süß. (du)', options: ['Dein', 'Deinen', 'Deinem', 'Deiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Katze ist schön. (du)', options: ['Deine', 'Dein', 'Deinen', 'Deiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Auto ist neu. (er)', options: ['Sein', 'Seine', 'Seinen', 'Seinem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Tasche ist groß. (sie Sg.)', options: ['Ihre', 'Ihr', 'Ihren', 'Ihrem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Haus ist alt. (wir)', options: ['Unser', 'Unsere', 'Unseren', 'Unserem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Schule ist neu. (wir)', options: ['Unsere', 'Unser', 'Unseren', 'Unserem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Lehrer ist nett. (ihr)', options: ['Euer', 'Eure', 'Euren', 'Eurem'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ', question: '_____ Lehrerin ist nett. (ihr)', options: ['Eure', 'Euer', 'Euren', 'Eurem'], correct: 0 },
+    { type: 'mc', context: '✏️ Person', question: 'Welches Possessivpronomen für "ich"?', options: ['mein', 'dein', 'sein', 'ihr'], correct: 0 },
+    { type: 'mc', context: '✏️ Person', question: 'Welches Possessivpronomen für "du"?', options: ['dein', 'mein', 'sein', 'ihr'], correct: 0 },
+    { type: 'mc', context: '✏️ Person', question: 'Welches Possessivpronomen für "er"?', options: ['sein', 'mein', 'dein', 'ihr'], correct: 0 },
+    { type: 'mc', context: '✏️ Person', question: 'Welches Possessivpronomen für "sie" (Sg.)?', options: ['ihr', 'sein', 'mein', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ Person', question: 'Welches Possessivpronomen für "wir"?', options: ['unser', 'euer', 'ihr', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Person', question: 'Welches Possessivpronomen für "ihr"?', options: ['euer', 'unser', 'ihr', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Ich sehe _____ Bruder. (ich)', options: ['meinen', 'mein', 'meinem', 'meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Ich sehe _____ Schwester. (ich)', options: ['meine', 'mein', 'meinen', 'meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Er ruft _____ Mutter an. (er)', options: ['seine', 'sein', 'seinen', 'seinem'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Sie liebt _____ Mann. (sie Sg.)', options: ['ihren', 'ihr', 'ihre', 'ihrem'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ', question: 'Ich helfe _____ Bruder. (ich)', options: ['meinem', 'mein', 'meinen', 'meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ', question: 'Ich helfe _____ Schwester. (ich)', options: ['meiner', 'meine', 'meinen', 'meinem'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'ist', 'mein', 'Bruder', '.'], correct: ['Das', 'ist', 'mein', 'Bruder', '.'] },
+    { type: 'match', context: '🔗 Person', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'mein' }, { left: 'du', right: 'dein' }, { left: 'er', right: 'sein' }, { left: 'sie (Sg.)', right: 'ihr' }]},
+    { type: 'match', context: '🔗 Genus', question: 'Ordne zu:', pairs: [{ left: 'der Bruder', right: 'mein' }, { left: 'die Schwester', right: 'meine' }, { left: 'das Kind', right: 'mein' }, { left: 'die Eltern', right: 'meine' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Ich habe _____ Kamera dabei. (ich)', answer: 'meine', alternatives: ['Meine'] },
+    { type: 'gap', context: '📖 Text', question: 'Er sitzt auf _____ Boot. (er)', answer: 'seinem', alternatives: ['Seinem'] },
+    { type: 'gap', context: '📖 Text', question: '_____ Familie hat den Kristall beschützt. (wir)', answer: 'Unsere', alternatives: ['unsere'] },
+    { type: 'mc', context: '✏️ Akkusativ m', question: 'Ich rufe _____ Vater an. (ich)', options: ['meinen', 'mein', 'meinem', 'meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ m', question: 'Er besucht _____ Freund. (er)', options: ['seinen', 'sein', 'seinem', 'seiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ m', question: 'Wir treffen _____ Lehrer. (wir)', options: ['unseren', 'unser', 'unserem', 'unserer'], correct: 0 },
+    { type: 'gap', context: '✏️ Akkusativ', question: 'Sie sucht _____ Schlüssel. (sie Sg.)', answer: 'ihren', alternatives: ['Ihren'] },
+    { type: 'gap', context: '✏️ Akkusativ', question: 'Ihr findet _____ Weg. (ihr)', answer: 'euren', alternatives: ['Euren'] },
+    { type: 'mc', context: '✏️ Dativ m', question: 'Ich helfe _____ Vater. (ich)', options: ['meinem', 'meinen', 'mein', 'meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ f', question: 'Er dankt _____ Mutter. (er)', options: ['seiner', 'seine', 'seinen', 'seinem'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ n', question: 'Sie gibt _____ Kind Essen. (sie Sg.)', options: ['ihrem', 'ihr', 'ihren', 'ihrer'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ Pl', question: 'Wir helfen _____ Eltern. (wir)', options: ['unseren', 'unsere', 'unserem', 'unserer'], correct: 0 },
+    { type: 'gap', context: '✏️ Dativ', question: 'Ich spreche mit _____ Freundin. (ich)', answer: 'meiner', alternatives: ['Meiner'] },
+    { type: 'gap', context: '✏️ Dativ', question: 'Er wohnt bei _____ Eltern. (er)', answer: 'seinen', alternatives: ['Seinen'] },
+    { type: 'mc', context: '✏️ Gemischt', question: '_____ Hund ist süß. (wir) - Nominativ', options: ['Unser', 'Unseren', 'Unserem', 'Unserer'], correct: 0 },
+    { type: 'mc', context: '✏️ Gemischt', question: 'Ich füttere _____ Hund. (wir) - Akkusativ', options: ['unseren', 'unser', 'unserem', 'unserer'], correct: 0 },
+    { type: 'mc', context: '✏️ Gemischt', question: 'Ich spiele mit _____ Hund. (wir) - Dativ', options: ['unserem', 'unseren', 'unser', 'unserer'], correct: 0 },
+    { type: 'mc', context: '✏️ euer', question: 'Das ist _____ Haus. (ihr)', options: ['euer', 'eure', 'euren', 'eurem'], correct: 0 },
+    { type: 'mc', context: '✏️ euer', question: 'Das ist _____ Schwester. (ihr)', options: ['eure', 'euer', 'euren', 'eurem'], correct: 0 },
+    { type: 'mc', context: '✏️ euer', question: 'Ich kenne _____ Bruder. (ihr)', options: ['euren', 'euer', 'eure', 'eurem'], correct: 0 },
+    { type: 'mc', context: '✏️ sein vs. ihr', question: 'Er liebt _____ Frau. (er)', options: ['seine', 'ihre', 'sein', 'ihr'], correct: 0 },
+    { type: 'mc', context: '✏️ sein vs. ihr', question: 'Sie liebt _____ Mann. (sie Sg.)', options: ['ihren', 'seinen', 'ihr', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das ist mein Schwester.', 'Das ist meine Schwester.', 'Meine Schwester ist nett.', 'Ich liebe meine Schwester.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Ich rufe meinen Bruder an.', 'Ich rufe mein Bruder an.', 'Ich rufe meinem Bruder an.', 'Ich rufe meiner Bruder an.'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'rufe', 'meinen', 'Bruder', 'an', '.'], correct: ['Ich', 'rufe', 'meinen', 'Bruder', 'an', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Er', 'hilft', 'seiner', 'Mutter', '.'], correct: ['Er', 'hilft', 'seiner', 'Mutter', '.'] },
+    { type: 'match', context: '🔗 Akkusativ m', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'meinen' }, { left: 'du', right: 'deinen' }, { left: 'er', right: 'seinen' }, { left: 'wir', right: 'unseren' }]},
+    { type: 'match', context: '🔗 Dativ f', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'meiner' }, { left: 'du', right: 'deiner' }, { left: 'er', right: 'seiner' }, { left: 'sie', right: 'ihrer' }]},
+    { type: 'mc', context: '✏️ Komplex', question: 'Er gibt _____ Freundin ein Geschenk. (er)', options: ['seiner', 'seine', 'seinen', 'seinem'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Sie schreibt _____ Eltern einen Brief. (sie)', options: ['ihren', 'ihre', 'ihrem', 'ihrer'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Ich möchte _____ Eltern Fotos schicken. (ich)', answer: 'meinen', alternatives: ['Meinen'] },
+    { type: 'gap', context: '📖 Text', question: 'Mein Großvater hat mir von _____ Geschichte erzählt. (er)', answer: 'seiner', alternatives: ['Seiner'] },
+    { type: 'mc', context: '✏️ Komplex', question: 'Er erzählt _____ Kindern eine Geschichte. (er)', options: ['seinen', 'seine', 'seinem', 'seiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Sie kauft _____ Tochter ein Kleid. (sie)', options: ['ihrer', 'ihre', 'ihren', 'ihrem'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Wir zeigen _____ Gästen das Haus. (wir)', options: ['unseren', 'unsere', 'unserem', 'unserer'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Er schenkt _____ Freund ein Buch. (er)', answer: 'seinem', alternatives: ['Seinem'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Sie gibt _____ Schwester den Schlüssel. (sie)', answer: 'ihrer', alternatives: ['Ihrer'] },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Ich weiß, dass _____ Bruder kommt. (ich)', options: ['mein', 'meinen', 'meinem', 'meiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Er sagt, dass er _____ Mutter besucht. (er)', options: ['seine', 'seinen', 'seinem', 'seiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Weil ich _____ Schlüssel vergessen habe, kann ich nicht rein. (ich)', options: ['meinen', 'mein', 'meinem', 'meiner'], correct: 0 },
+    { type: 'gap', context: '✏️ Nebensatz', question: 'Obwohl _____ Auto kaputt ist, fährt er zur Arbeit. (er)', answer: 'sein', alternatives: ['Sein'] },
+    { type: 'mc', context: '✏️ Präposition', question: 'Er wohnt bei _____ Eltern. (er)', options: ['seinen', 'seine', 'seinem', 'seiner'], correct: 0 },
+    { type: 'mc', context: '✏️ Präposition', question: 'Sie fährt mit _____ Auto. (sie)', options: ['ihrem', 'ihr', 'ihren', 'ihrer'], correct: 0 },
+    { type: 'mc', context: '✏️ Präposition', question: 'Wir sprechen über _____ Probleme. (wir)', options: ['unsere', 'unser', 'unseren', 'unserem'], correct: 0 },
+    { type: 'gap', context: '✏️ Präposition', question: 'Er sitzt neben _____ Freundin. (er)', answer: 'seiner', alternatives: ['Seiner'] },
+    { type: 'gap', context: '✏️ Präposition', question: 'Sie wartet auf _____ Bruder. (sie)', answer: 'ihren', alternatives: ['Ihren'] },
+    { type: 'mc', context: '✏️ ihr vs. Ihr', question: '_____ Tasche ist schön. (sie Sg.)', options: ['Ihre', 'Ihr', 'Ihren', 'Ihrem'], correct: 0 },
+    { type: 'mc', context: '✏️ ihr vs. Ihr', question: 'Frau Müller, ist das _____ Auto? (Sie)', options: ['Ihr', 'Ihre', 'Ihren', 'Ihrem'], correct: 0 },
+    { type: 'mc', context: '✏️ ihr vs. Ihr', question: '_____ Kinder spielen im Garten. (sie Pl.)', options: ['Ihre', 'Ihr', 'Ihren', 'Ihrem'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich helfe mein Bruder.', 'Ich helfe meinem Bruder.', 'Mein Bruder hilft mir.', 'Ich sehe meinen Bruder.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Sie liebt sein Mann.', 'Sie liebt ihren Mann.', 'Ihr Mann ist nett.', 'Sie hilft ihrem Mann.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er gibt seiner Freundin Blumen.', 'Er gibt seine Freundin Blumen.', 'Er gibt seinen Freundin Blumen.', 'Er gibt seinem Freundin Blumen.'], correct: 0 },
+    { type: 'mc', context: '✏️ sein vs. ihr', question: 'Maria liebt _____ Hund. (Maria)', options: ['ihren', 'seinen', 'ihr', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ sein vs. ihr', question: 'Peter liebt _____ Katze. (Peter)', options: ['seine', 'ihre', 'sein', 'ihr'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Weil er _____ Freundin liebt, kauft er ihr Blumen. (er)', answer: 'seine', alternatives: ['Seine'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Wenn du _____ Hausaufgaben machst, darfst du spielen. (du)', answer: 'deine', alternatives: ['Deine'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Er', 'gibt', 'seiner', 'Mutter', 'ein', 'Geschenk', '.'], correct: ['Er', 'gibt', 'seiner', 'Mutter', 'ein', 'Geschenk', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Weil', 'ich', 'meinen', 'Schlüssel', 'vergessen', 'habe', '.'], correct: ['Weil', 'ich', 'meinen', 'Schlüssel', 'vergessen', 'habe', '.'] },
+    { type: 'match', context: '🔗 Dativ m', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'meinem' }, { left: 'du', right: 'deinem' }, { left: 'er', right: 'seinem' }, { left: 'wir', right: 'unserem' }]},
+    { type: 'match', context: '🔗 Alle Fälle', question: 'Ordne zu:', pairs: [{ left: 'Nominativ m', right: 'mein' }, { left: 'Akkusativ m', right: 'meinen' }, { left: 'Dativ m', right: 'meinem' }, { left: 'Dativ f', right: 'meiner' }]}
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station12_gems', gems); localStorage.setItem('station12_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

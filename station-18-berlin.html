@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Station 18: Berlin - Das Große Finale!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: linear-gradient(135deg, rgba(255,215,0,0.3), rgba(255,165,0,0.2)); backdrop-filter: blur(15px); border-radius: 30px; padding: 40px; margin-bottom: 30px; text-align: center; border: 3px solid #FFD700; box-shadow: 0 0 30px rgba(255,215,0,0.3); }
+        .station-icon { font-size: 5em; margin-bottom: 10px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.5em; color: #FFD700; margin-bottom: 5px; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+        .station-subtitle { font-size: 1.2em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,165,0,0.1)); border-left: 4px solid #FFD700; padding: 25px; border-radius: 0 15px 15px 0; line-height: 1.9; }
+        .story-box p { margin-bottom: 15px; }
+        .story-box strong { color: #FFD700; }
+        .crystal-collection { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 20px 0; }
+        .crystal { font-size: 2em; text-align: center; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .journey-summary { background: rgba(125,211,252,0.15); padding: 20px; border-radius: 15px; margin: 20px 0; }
+        .journey-item { display: flex; align-items: center; gap: 15px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .journey-item:last-child { border-bottom: none; }
+        .journey-num { background: #FFD700; color: #1a1a2e; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 25px 50px; margin: 10px; border-radius: 20px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.3em; background: rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+        .level-btn:hover { transform: scale(1.05); }
+        .level-rubin { border-color: #E63946; color: #E63946; box-shadow: 0 0 20px rgba(230,57,70,0.3); }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; box-shadow: 0 0 20px rgba(6,214,160,0.3); }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; box-shadow: 0 0 20px rgba(157,78,221,0.3); }
+        .level-diamant { border-color: #FFD700; color: #FFD700; box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #E63946, #06D6A0, #9D4EDD, #FFD700); border-radius: 8px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; font-size: 1.1em; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 1em; margin-bottom: 12px; }
+        .question-text { font-size: 1.4em; margin-bottom: 25px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 18px; border-radius: 15px; color: white; cursor: pointer; font-size: 1.1em; transition: all 0.3s; }
+        .option-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.02); }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.4); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.4); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px 25px; border-radius: 12px; color: white; font-size: 1.3em; width: 220px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: linear-gradient(135deg, #5B9BD5, #7DD3FC); border: none; padding: 15px 35px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 55px; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 1.05em; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; font-size: 1.1em; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; margin-bottom: 12px; cursor: pointer; text-align: center; font-size: 1.05em; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 18px; border-radius: 12px; margin-top: 15px; display: none; font-size: 1.1em; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.25); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.25); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #FFD700, #FFA500); border: none; padding: 18px 50px; border-radius: 15px; color: #1a1a2e; font-size: 1.3em; font-weight: bold; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 6em; margin-bottom: 20px; animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3.5em; color: #FFD700; text-shadow: 0 0 30px rgba(255,215,0,0.5); }
+        .results-gems { font-size: 1.8em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-message { font-size: 1.3em; margin-bottom: 20px; }
+        .certificate { background: linear-gradient(135deg, rgba(255,215,0,0.3), rgba(255,165,0,0.2)); border: 3px solid #FFD700; border-radius: 20px; padding: 30px; margin: 20px 0; }
+        .certificate h3 { font-family: 'Fredoka', sans-serif; color: #FFD700; font-size: 1.8em; margin-bottom: 15px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 18px 45px; border-radius: 15px; color: white; font-size: 1.2em; cursor: pointer; margin: 10px; }
+        .confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } .crystal-collection { grid-template-columns: repeat(3, 1fr); } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🏆</div>
+        <h1 class="station-title">Station 18: Berlin</h1>
+        <p class="station-subtitle">Das Große Finale - Die Meisterprüfung!</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die letzte Geschichte</h2>
+        <div class="story-box">
+            <p>Die vier Freunde <strong>Sara, Leon, Mia und Tim</strong> stehen vor dem <strong>Brandenburger Tor</strong> in Berlin!</p>
+            <p><strong>Sara:</strong> <em>"Ich kann es nicht glauben! Wir haben alle 17 Kristalle gefunden!"</em></p>
+            <p><strong>Leon:</strong> <em>"Es war eine unglaubliche Reise durch ganz Deutschland!"</em></p>
+            <p><strong>Mia:</strong> <em>"Von München bis Berlin, von den Alpen bis zur Nordsee!"</em></p>
+            <p><strong>Tim:</strong> <em>"Und wir haben so viel Deutsch gelernt!"</em></p>
+            <p>Plötzlich leuchten alle 17 Kristalle auf. Sie schweben in die Luft und bilden einen Kreis!</p>
+            <p>Ein wunderschönes Licht erscheint, und aus dem Licht kommt eine Stimme:</p>
+            <p><strong>Die Stimme:</strong> <em>"Ihr habt es geschafft! Ihr habt nicht nur die Kristalle gefunden, sondern auch die deutsche Grammatik gemeistert. Präsens, Perfekt, Dativ, Akkusativ, Nebensätze, Passiv... Ihr seid wahre Meister!"</em></p>
+            <p>Die 17 Kristalle verschmelzen zu einem einzigen, riesigen <strong>diamantenen Kristall</strong>!</p>
+            <p><strong>Alle zusammen:</strong> <em>"Der achtzehnte Kristall - der Diamant der deutschen Sprache!"</em></p>
+            <p>🎆 <strong>HERZLICHEN GLÜCKWUNSCH!</strong> 🎆</p>
+            <p>Jetzt ist es Zeit für die <strong>Meisterprüfung</strong> - eine Wiederholung aller Grammatikthemen!</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>💎 Deine Kristallsammlung</h2>
+        <div class="crystal-collection">
+            <div class="crystal" title="München">💎</div>
+            <div class="crystal" title="Alpen">❄️</div>
+            <div class="crystal" title="Nürnberg">🔶</div>
+            <div class="crystal" title="Heidelberg">💜</div>
+            <div class="crystal" title="Schwarzwald">🌲</div>
+            <div class="crystal" title="Bodensee">💙</div>
+            <div class="crystal" title="Rothenburg">🔴</div>
+            <div class="crystal" title="Leipzig">🟡</div>
+            <div class="crystal" title="Potsdam">🟢</div>
+            <div class="crystal" title="Lübeck">🩷</div>
+            <div class="crystal" title="Dresden">🪙</div>
+            <div class="crystal" title="Hamburg">🩶</div>
+            <div class="crystal" title="Bremen">🥉</div>
+            <div class="crystal" title="Hannover">🧡</div>
+            <div class="crystal" title="Köln">🟠</div>
+            <div class="crystal" title="Frankfurt">🩵</div>
+            <div class="crystal" title="Stuttgart">⬜</div>
+            <div class="crystal" title="Berlin">💎</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🗺️ Deine Reise</h2>
+        <div class="journey-summary">
+            <div class="journey-item"><span class="journey-num">1</span> München - Präsens</div>
+            <div class="journey-item"><span class="journey-num">2</span> Alpen - Perfekt</div>
+            <div class="journey-item"><span class="journey-num">3</span> Nürnberg - Präteritum</div>
+            <div class="journey-item"><span class="journey-num">4</span> Heidelberg - Akkusativ</div>
+            <div class="journey-item"><span class="journey-num">5</span> Schwarzwald - Dativ</div>
+            <div class="journey-item"><span class="journey-num">6</span> Bodensee - Wechselpräpositionen</div>
+            <div class="journey-item"><span class="journey-num">7</span> Rothenburg - Nebensätze (weil, dass, wenn)</div>
+            <div class="journey-item"><span class="journey-num">8</span> Leipzig - Konjunktiv II</div>
+            <div class="journey-item"><span class="journey-num">9</span> Potsdam - Futur I</div>
+            <div class="journey-item"><span class="journey-num">10</span> Lübeck - Komparativ & Superlativ</div>
+            <div class="journey-item"><span class="journey-num">11</span> Dresden - Reflexivverben</div>
+            <div class="journey-item"><span class="journey-num">12</span> Hamburg - Possessivpronomen</div>
+            <div class="journey-item"><span class="journey-num">13</span> Bremen - Verben mit Dativ & Akkusativ</div>
+            <div class="journey-item"><span class="journey-num">14</span> Hannover - Modalverben Präteritum</div>
+            <div class="journey-item"><span class="journey-num">15</span> Köln - Plusquamperfekt</div>
+            <div class="journey-item"><span class="journey-num">16</span> Frankfurt - Relativsätze</div>
+            <div class="journey-item"><span class="journey-num">17</span> Stuttgart - Passiv</div>
+            <div class="journey-item"><span class="journey-num">18</span> Berlin - 🏆 FINALE!</div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle deine Meisterprüfung</h2>
+        <p style="margin-bottom: 20px; color: #E0F4FF;">Alle Grammatikthemen gemischt!</p>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Grundlagen</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Fortgeschritten</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Experte</small></button>
+        <button class="level-btn level-diamant" onclick="startQuiz('diamant')">💎 Diamant<br><small>Meister</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p class="results-message" id="resultsMessage"></p>
+        <div class="certificate" id="certificate">
+            <h3>🎓 ZERTIFIKAT 🎓</h3>
+            <p>Hiermit wird bestätigt, dass du die</p>
+            <p style="font-size: 1.5em; color: #FFD700; font-weight: bold;">Winterreise Meisterprüfung</p>
+            <p>erfolgreich bestanden hast!</p>
+            <p style="margin-top: 15px;">🏆 Grammatik-Meister 🏆</p>
+        </div>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+<canvas class="confetti" id="confetti"></canvas>
+
+<script>
+const QUESTIONS_RUBIN = [
+    // Präsens
+    { type: 'mc', context: '🏔️ Präsens', question: 'Er _____ jeden Tag Deutsch. (lernen)', options: ['lernt', 'lerne', 'lernst', 'lernen'], correct: 0 },
+    { type: 'mc', context: '🏔️ Präsens', question: 'Sie _____ gern Bücher. (lesen)', options: ['liest', 'lese', 'lest', 'lesen'], correct: 0 },
+    // Perfekt
+    { type: 'mc', context: '⛷️ Perfekt', question: 'Ich _____ gestern viel _____. (arbeiten)', options: ['habe / gearbeitet', 'bin / gearbeitet', 'habe / arbeiten', 'bin / arbeiten'], correct: 0 },
+    { type: 'mc', context: '⛷️ Perfekt', question: 'Er _____ nach Berlin _____. (fahren)', options: ['ist / gefahren', 'hat / gefahren', 'ist / fahren', 'hat / fahren'], correct: 0 },
+    // Präteritum
+    { type: 'mc', context: '🏰 Präteritum', question: 'Ich _____ gestern im Kino. (sein)', options: ['war', 'bin', 'ist', 'waren'], correct: 0 },
+    { type: 'mc', context: '🏰 Präteritum', question: 'Er _____ keine Zeit. (haben)', options: ['hatte', 'hat', 'haben', 'hatten'], correct: 0 },
+    // Akkusativ
+    { type: 'mc', context: '📚 Akkusativ', question: 'Ich sehe _____ Mann. (der)', options: ['den', 'der', 'dem', 'des'], correct: 0 },
+    { type: 'mc', context: '📚 Akkusativ', question: 'Sie kauft _____ Buch. (ein)', options: ['ein', 'einen', 'einem', 'einer'], correct: 0 },
+    // Dativ
+    { type: 'mc', context: '🌲 Dativ', question: 'Ich helfe _____ Frau. (die)', options: ['der', 'die', 'den', 'das'], correct: 0 },
+    { type: 'mc', context: '🌲 Dativ', question: 'Er gibt _____ Kind einen Ball. (das)', options: ['dem', 'das', 'den', 'der'], correct: 0 },
+    // Wechselpräpositionen
+    { type: 'mc', context: '🌊 Wechselpräp.', question: 'Das Buch liegt auf _____ Tisch. (Wo?)', options: ['dem', 'den', 'der', 'das'], correct: 0 },
+    { type: 'mc', context: '🌊 Wechselpräp.', question: 'Ich lege das Buch auf _____ Tisch. (Wohin?)', options: ['den', 'dem', 'der', 'das'], correct: 0 },
+    // Nebensätze
+    { type: 'mc', context: '🏘️ Nebensätze', question: 'Ich weiß, _____ er krank ist.', options: ['dass', 'weil', 'wenn', 'ob'], correct: 0 },
+    { type: 'mc', context: '🏘️ Nebensätze', question: 'Ich bleibe zu Hause, _____ es regnet.', options: ['weil', 'dass', 'wenn', 'ob'], correct: 0 },
+    // Konjunktiv II
+    { type: 'mc', context: '🎭 Konjunktiv II', question: 'Ich _____ gern nach Japan reisen.', options: ['würde', 'werde', 'will', 'wollen'], correct: 0 },
+    { type: 'mc', context: '🎭 Konjunktiv II', question: 'Wenn ich reich _____, würde ich ein Haus kaufen.', options: ['wäre', 'bin', 'war', 'sei'], correct: 0 },
+    // Futur
+    { type: 'mc', context: '🔮 Futur', question: 'Ich _____ morgen kommen.', options: ['werde', 'wurde', 'wird', 'werden'], correct: 0 },
+    // Komparativ
+    { type: 'mc', context: '📊 Komparativ', question: 'Er ist _____ als ich. (groß)', options: ['größer', 'groß', 'am größten', 'großer'], correct: 0 },
+    // Superlativ
+    { type: 'mc', context: '📊 Superlativ', question: 'Sie ist _____ in der Klasse. (gut)', options: ['am besten', 'besser', 'gut', 'beste'], correct: 0 },
+    // Reflexivverben
+    { type: 'mc', context: '🪞 Reflexiv', question: 'Ich freue _____ auf das Wochenende.', options: ['mich', 'mir', 'sich', 'uns'], correct: 0 },
+    // Possessivpronomen
+    { type: 'mc', context: '👨‍👩‍👧 Possessiv', question: 'Das ist _____ Buch. (ich)', options: ['mein', 'meine', 'meinen', 'meinem'], correct: 0 },
+    // Verben mit Dat+Akk
+    { type: 'mc', context: '🎁 Dat+Akk', question: 'Ich gebe _____ das Buch. (du)', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    // Modalverben Prät.
+    { type: 'mc', context: '⏰ Modal Prät.', question: 'Ich _____ nicht kommen. (können)', options: ['konnte', 'könnte', 'kann', 'konnen'], correct: 0 },
+    // Plusquamperfekt
+    { type: 'mc', context: '⏪ Plusquam.', question: 'Nachdem ich gegessen _____, ging ich.', options: ['hatte', 'habe', 'bin', 'war'], correct: 0 },
+    // Relativsätze
+    { type: 'mc', context: '🔗 Relativ', question: 'Der Mann, _____ dort steht, ist mein Freund.', options: ['der', 'den', 'dem', 'dessen'], correct: 0 },
+    // Passiv
+    { type: 'mc', context: '🔄 Passiv', question: 'Das Haus _____ gebaut.', options: ['wird', 'werden', 'wurde', 'worden'], correct: 0 },
+    // Gemischt
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'habe', 'gestern', 'Deutsch', 'gelernt', '.'], correct: ['Ich', 'habe', 'gestern', 'Deutsch', 'gelernt', '.'] },
+    { type: 'match', context: '🔗 Kasus', question: 'Ordne zu:', pairs: [{ left: 'für', right: 'Akkusativ' }, { left: 'mit', right: 'Dativ' }, { left: 'in (Wohin?)', right: 'Akkusativ' }, { left: 'in (Wo?)', right: 'Dativ' }]},
+    { type: 'match', context: '🔗 Zeiten', question: 'Ordne zu:', pairs: [{ left: 'ich lerne', right: 'Präsens' }, { left: 'ich habe gelernt', right: 'Perfekt' }, { left: 'ich lernte', right: 'Präteritum' }, { left: 'ich werde lernen', right: 'Futur' }]},
+    { type: 'mc', context: '🏆 Final', question: 'Welcher Satz ist richtig?', options: ['Ich habe ihn gestern gesehen.', 'Ich habe gestern ihn gesehen.', 'Gestern ich habe ihn gesehen.', 'Ich gestern habe ihn gesehen.'], correct: 0 }
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '🏔️ Präsens', question: 'Er _____ jeden Tag zur Arbeit. (fahren)', answer: 'fährt', alternatives: ['Fährt'] },
+    { type: 'gap', context: '⛷️ Perfekt', question: 'Sie _____ gestern nach Hause _____. (gehen)', answer: 'ist', alternatives: ['Ist'] },
+    { type: 'gap', context: '🏰 Präteritum', question: 'Er _____ das Buch sehr interessant. (finden)', answer: 'fand', alternatives: ['Fand'] },
+    { type: 'mc', context: '📚 Akkusativ', question: 'Ich sehe _____ netten Kollegen.', options: ['meinen', 'mein', 'meinem', 'meiner'], correct: 0 },
+    { type: 'mc', context: '🌲 Dativ', question: 'Er hilft _____ alten Mann.', options: ['dem', 'den', 'der', 'das'], correct: 0 },
+    { type: 'mc', context: '🌊 Wechselpräp.', question: 'Die Katze springt _____ den Tisch. (Wohin?)', options: ['auf', 'auf dem', 'in', 'in dem'], correct: 0 },
+    { type: 'gap', context: '🏘️ Nebensätze', question: 'Ich weiß nicht, _____ er kommt.', answer: 'ob', alternatives: ['Ob'] },
+    { type: 'mc', context: '🎭 Konjunktiv II', question: 'Wenn ich Zeit _____, würde ich dir helfen.', options: ['hätte', 'habe', 'hatte', 'haben'], correct: 0 },
+    { type: 'mc', context: '🔮 Futur', question: 'Er _____ nächstes Jahr nach Japan reisen.', options: ['wird', 'werde', 'werden', 'wirst'], correct: 0 },
+    { type: 'gap', context: '📊 Komparativ', question: 'Dieses Buch ist _____ als das andere. (interessant)', answer: 'interessanter', alternatives: ['Interessanter'] },
+    { type: 'gap', context: '📊 Superlativ', question: 'Das ist der _____ Film, den ich je gesehen habe. (gut)', answer: 'beste', alternatives: ['Beste'] },
+    { type: 'mc', context: '🪞 Reflexiv', question: 'Er wäscht _____ die Hände.', options: ['sich', 'mich', 'mir', 'ihm'], correct: 0 },
+    { type: 'mc', context: '👨‍👩‍👧 Possessiv', question: 'Ist das _____ Auto? (du, Akk.)', options: ['dein', 'deinen', 'deinem', 'deiner'], correct: 0 },
+    { type: 'mc', context: '🎁 Dat+Akk', question: 'Er schenkt _____ Frau Blumen.', options: ['seiner', 'seine', 'seinem', 'sein'], correct: 0 },
+    { type: 'mc', context: '⏰ Modal Prät.', question: 'Sie _____ nicht mitkommen, weil sie arbeiten _____. (können, müssen)', options: ['konnte / musste', 'könnte / müsste', 'kann / muss', 'konnte / müsste'], correct: 0 },
+    { type: 'mc', context: '⏪ Plusquam.', question: 'Nachdem er angekommen _____, rief er an.', options: ['war', 'ist', 'hatte', 'hat'], correct: 0 },
+    { type: 'mc', context: '🔗 Relativ', question: 'Die Frau, _____ ich geholfen habe, ist nett.', options: ['der', 'die', 'den', 'dem'], correct: 0 },
+    { type: 'mc', context: '🔗 Relativ', question: 'Das ist das Haus, in _____ ich wohne.', options: ['dem', 'das', 'der', 'den'], correct: 0 },
+    { type: 'mc', context: '🔄 Passiv', question: 'Das Buch _____ von vielen Leuten gelesen.', options: ['wird', 'werden', 'wurde', 'worden'], correct: 0 },
+    { type: 'mc', context: '🔄 Passiv', question: 'Das Haus _____ letztes Jahr gebaut.', options: ['wurde', 'wird', 'ist', 'hat'], correct: 0 },
+    { type: 'mc', context: '🏘️ Nebensätze', question: 'Er ist müde, _____ er schlecht geschlafen hat.', options: ['weil', 'dass', 'wenn', 'ob'], correct: 0 },
+    { type: 'mc', context: '🎭 Konj. II', question: 'An deiner Stelle _____ ich zum Arzt gehen.', options: ['würde', 'werde', 'will', 'wollen'], correct: 0 },
+    { type: 'order', context: '🔀 Nebensatz', question: 'Ordne:', words: ['Ich', 'weiß', ',', 'dass', 'er', 'morgen', 'kommt', '.'], correct: ['Ich', 'weiß', ',', 'dass', 'er', 'morgen', 'kommt', '.'] },
+    { type: 'order', context: '🔀 Relativ', question: 'Ordne:', words: ['Der', 'Mann', ',', 'den', 'ich', 'kenne', ',', 'ist', 'nett', '.'], correct: ['Der', 'Mann', ',', 'den', 'ich', 'kenne', ',', 'ist', 'nett', '.'] },
+    { type: 'match', context: '🔗 Perfekt', question: 'Ordne zu:', pairs: [{ left: 'gehen', right: 'bin gegangen' }, { left: 'essen', right: 'habe gegessen' }, { left: 'fahren', right: 'bin gefahren' }, { left: 'arbeiten', right: 'habe gearbeitet' }]},
+    { type: 'match', context: '🔗 Konjugation', question: 'Ordne zu:', pairs: [{ left: 'ich (Konj. II haben)', right: 'hätte' }, { left: 'er (Konj. II sein)', right: 'wäre' }, { left: 'wir (Prät. können)', right: 'konnten' }, { left: 'du (Prät. müssen)', right: 'musstest' }]},
+    { type: 'mc', context: '🔄 Passiv Perfekt', question: 'Das Haus ist gebaut _____.', options: ['worden', 'werden', 'wurde', 'wird'], correct: 0 },
+    { type: 'mc', context: '🎁 Wortstellung', question: 'Ich gebe _____ _____.', options: ['es ihm', 'ihm es', 'ihn es', 'es ihn'], correct: 0 },
+    { type: 'mc', context: '🏆 Final', question: 'Obwohl er müde _____, arbeitete er weiter.', options: ['war', 'ist', 'sei', 'wäre'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '🏔️ Unregelmäßig', question: 'Er _____ mir gestern ein Geschenk. (geben, Prät.)', answer: 'gab', alternatives: ['Gab'] },
+    { type: 'gap', context: '⛷️ Perfekt', question: 'Nachdem wir gegessen _____, sind wir spazieren gegangen.', answer: 'hatten', alternatives: ['Hatten'] },
+    { type: 'mc', context: '📚 Genitiv', question: 'Das ist das Auto _____ Chefs.', options: ['meines', 'mein', 'meinem', 'meinen'], correct: 0 },
+    { type: 'mc', context: '🌊 Wechselpräp.', question: 'Er hängt das Bild _____ Wand. (Wohin?)', options: ['an die', 'an der', 'auf die', 'auf der'], correct: 0 },
+    { type: 'mc', context: '🏘️ Nebensätze', question: '_____ ich mehr Zeit hätte, würde ich mehr lesen.', options: ['Wenn', 'Weil', 'Dass', 'Obwohl'], correct: 0 },
+    { type: 'mc', context: '🎭 Konjunktiv II', question: 'Er tat so, als _____ er nichts.', options: ['wüsste', 'weiß', 'wusste', 'wissen'], correct: 0 },
+    { type: 'mc', context: '🪞 Reflexiv + Präp', question: 'Ich freue mich _____ die Ferien.', options: ['auf', 'über', 'an', 'für'], correct: 0 },
+    { type: 'mc', context: '🪞 Reflexiv + Präp', question: 'Er erinnert sich _____ seinen Urlaub.', options: ['an', 'auf', 'über', 'für'], correct: 0 },
+    { type: 'mc', context: '👨‍👩‍👧 Possessiv Dat', question: 'Ich helfe _____ Bruder. (mein)', options: ['meinem', 'mein', 'meinen', 'meiner'], correct: 0 },
+    { type: 'mc', context: '🎁 Dat+Akk', question: 'Kannst du _____ _____ erklären?', options: ['es mir', 'mir es', 'mich es', 'es mich'], correct: 0 },
+    { type: 'mc', context: '⏰ Modal Prät.', question: 'Er sagte, er _____ nicht kommen.', options: ['konnte', 'könnte', 'kann', 'können'], correct: 0 },
+    { type: 'mc', context: '⏪ Plusquam.', question: 'Bevor ich ankam, _____ er schon gegangen.', options: ['war', 'ist', 'hatte', 'hat'], correct: 0 },
+    { type: 'mc', context: '🔗 Relativ Gen', question: 'Der Mann, _____ Auto dort steht, ist reich.', options: ['dessen', 'der', 'dem', 'den'], correct: 0 },
+    { type: 'mc', context: '🔗 Relativ + Präp', question: 'Das ist die Stadt, aus _____ ich komme.', options: ['der', 'die', 'dem', 'den'], correct: 0 },
+    { type: 'mc', context: '🔗 was', question: 'Das ist alles, _____ ich weiß.', options: ['was', 'das', 'die', 'der'], correct: 0 },
+    { type: 'mc', context: '🔄 Passiv Modal', question: 'Das muss sofort _____ werden.', options: ['gemacht', 'machen', 'macht', 'machend'], correct: 0 },
+    { type: 'mc', context: '🔄 Zustandspassiv', question: '"Das Fenster ist geöffnet" bedeutet...', options: ['Es ist offen.', 'Jemand öffnet es jetzt.', 'Es wurde gerade geöffnet.', 'Man wird es öffnen.'], correct: 0 },
+    { type: 'mc', context: '📊 Superlativ', question: 'Das ist _____, was ich je gesehen habe.', options: ['das Schönste', 'das Schöne', 'der Schönste', 'am schönsten'], correct: 0 },
+    { type: 'gap', context: '🔄 Passiv Perf', question: 'Das Haus ist vor 10 Jahren gebaut _____.', answer: 'worden', alternatives: ['Worden'] },
+    { type: 'gap', context: '🎭 Konj. II Verg', question: 'Ich _____ das nicht gemacht. (haben, Konj. II)', answer: 'hätte', alternatives: ['Hätte'] },
+    { type: 'mc', context: '⏪ Nebensatz', question: 'Weil ich arbeiten _____, konnte ich nicht kommen.', options: ['musste', 'muss', 'müsste', 'müssen'], correct: 0 },
+    { type: 'mc', context: '🔗 Komplex', question: 'Er sagte, dass er das Buch, _____ ich ihm gegeben hatte, gelesen hat.', options: ['das', 'der', 'dem', 'den'], correct: 0 },
+    { type: 'order', context: '🔀 Komplex', question: 'Ordne:', words: ['Nachdem', 'er', 'gegessen', 'hatte', ',', 'ging', 'er', 'nach', 'Hause', '.'], correct: ['Nachdem', 'er', 'gegessen', 'hatte', ',', 'ging', 'er', 'nach', 'Hause', '.'] },
+    { type: 'order', context: '🔀 Passiv', question: 'Ordne:', words: ['Das', 'Buch', 'wird', 'von', 'vielen', 'gelesen', '.'], correct: ['Das', 'Buch', 'wird', 'von', 'vielen', 'gelesen', '.'] },
+    { type: 'match', context: '🔗 Relativ', question: 'Ordne zu:', pairs: [{ left: 'der Mann (Nom)', right: 'der' }, { left: 'der Mann (Akk)', right: 'den' }, { left: 'der Mann (Dat)', right: 'dem' }, { left: 'der Mann (Gen)', right: 'dessen' }]},
+    { type: 'match', context: '🔗 Passiv', question: 'Ordne zu:', pairs: [{ left: 'wird gemacht', right: 'Präsens' }, { left: 'wurde gemacht', right: 'Präteritum' }, { left: 'ist gemacht worden', right: 'Perfekt' }, { left: 'muss gemacht werden', right: 'mit Modalverb' }]},
+    { type: 'mc', context: '🏆 Final', question: 'Obwohl das Wetter schlecht _____, gingen wir spazieren.', options: ['war', 'ist', 'sei', 'wäre'], correct: 0 },
+    { type: 'mc', context: '🏆 Final', question: 'Ich wusste nicht, dass er schon _____ war.', options: ['gegangen', 'gehen', 'geht', 'ging'], correct: 0 },
+    { type: 'mc', context: '🏆 Final', question: 'Das ist der Film, _____ ich dir empfohlen habe.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 }
+];
+
+const QUESTIONS_DIAMANT = [
+    { type: 'gap', context: '💎 Alle Zeiten', question: 'Nachdem er das Buch gelesen _____, gab er es mir zurück.', answer: 'hatte', alternatives: ['Hatte'] },
+    { type: 'gap', context: '💎 Konjunktiv', question: 'Wenn ich das _____, hätte ich anders gehandelt. (wissen)', answer: 'gewusst hätte', alternatives: ['gewusst haette', 'Gewusst hätte'] },
+    { type: 'mc', context: '💎 Komplex', question: 'Er tat so, als ob er mich nicht _____ _____.', options: ['gesehen hätte', 'gesehen hat', 'sehen würde', 'sieht'], correct: 0 },
+    { type: 'mc', context: '💎 Komplex', question: 'Der Mann, _____ Frau Ärztin ist, arbeitet als Lehrer.', options: ['dessen', 'der', 'dem', 'den'], correct: 0 },
+    { type: 'mc', context: '💎 Passiv Konj.', question: 'Das hätte früher _____ werden sollen.', options: ['erledigt', 'erledigen', 'erledigte', 'erledige'], correct: 0 },
+    { type: 'mc', context: '💎 Indirekte Rede', question: 'Er sagte, er _____ krank.', options: ['sei', 'ist', 'war', 'wäre'], correct: 0 },
+    { type: 'mc', context: '💎 Doppel-Infinitiv', question: 'Ich habe das nicht machen _____.', options: ['können', 'gekonnt', 'konnte', 'kann'], correct: 0 },
+    { type: 'mc', context: '💎 Komplex', question: 'Wäre ich reich, _____ ich ein Haus kaufen.', options: ['würde', 'werde', 'will', 'wollte'], correct: 0 },
+    { type: 'mc', context: '💎 Präp + Relativ', question: 'Das ist etwas, _____ ich mich nicht erinnern kann.', options: ['woran', 'an das', 'worüber', 'über das'], correct: 0 },
+    { type: 'mc', context: '💎 Genitiv', question: 'Trotz _____ schlechten Wetters gingen wir raus.', options: ['des', 'dem', 'der', 'den'], correct: 0 },
+    { type: 'mc', context: '💎 Nebensatz', question: 'Je mehr ich lerne, _____ besser verstehe ich.', options: ['desto', 'dass', 'weil', 'obwohl'], correct: 0 },
+    { type: 'mc', context: '💎 Komplex', question: 'Das Buch, das er mir empfohlen _____, ist sehr gut.', options: ['hatte', 'hat', 'haben', 'hatte haben'], correct: 0 },
+    { type: 'gap', context: '💎 Passiv Plusquam', question: 'Nachdem das Haus gebaut _____ war, zogen wir ein.', answer: 'worden', alternatives: ['Worden'] },
+    { type: 'gap', context: '💎 Reflexiv', question: 'Er hat sich sehr _____ das Geschenk gefreut.', answer: 'über', alternatives: ['Über'] },
+    { type: 'mc', context: '💎 Wortstellung', question: 'Nicht nur lernt er Deutsch, _____ auch Französisch.', options: ['sondern', 'aber', 'und', 'oder'], correct: 0 },
+    { type: 'mc', context: '💎 Komplex', question: 'Angenommen, du _____ recht, was würdest du tun?', options: ['hättest', 'hast', 'hattest', 'haben'], correct: 0 },
+    { type: 'mc', context: '💎 Finalsatz', question: 'Ich lerne Deutsch, _____ in Deutschland zu arbeiten.', options: ['um', 'damit', 'weil', 'dass'], correct: 0 },
+    { type: 'mc', context: '💎 Passiv Alternat', question: '"Das Buch lässt sich gut lesen" bedeutet:', options: ['Das Buch kann gut gelesen werden.', 'Das Buch wird gut gelesen.', 'Jemand liest das Buch.', 'Das Buch wurde gelesen.'], correct: 0 },
+    { type: 'mc', context: '💎 Konzessiv', question: 'Er kam, _____ er krank war.', options: ['obwohl', 'weil', 'wenn', 'dass'], correct: 0 },
+    { type: 'mc', context: '💎 Komplex', question: 'Die Frage, _____ er kommt, ist noch offen.', options: ['ob', 'dass', 'weil', 'wenn'], correct: 0 },
+    { type: 'order', context: '🔀 Komplex', question: 'Ordne:', words: ['Hätte', 'ich', 'das', 'gewusst', ',', 'wäre', 'ich', 'nicht', 'gekommen', '.'], correct: ['Hätte', 'ich', 'das', 'gewusst', ',', 'wäre', 'ich', 'nicht', 'gekommen', '.'] },
+    { type: 'order', context: '🔀 Indirekt', question: 'Ordne:', words: ['Er', 'fragte', ',', 'ob', 'ich', 'mitkommen', 'wolle', '.'], correct: ['Er', 'fragte', ',', 'ob', 'ich', 'mitkommen', 'wolle', '.'] },
+    { type: 'match', context: '🔗 Konjunktiv', question: 'Ordne zu:', pairs: [{ left: 'ich (haben Konj.II)', right: 'hätte' }, { left: 'er (sein Konj.II)', right: 'wäre' }, { left: 'wir (werden Konj.II)', right: 'würden' }, { left: 'Konj.II Vergangen', right: 'hätte/wäre + Part.II' }]},
+    { type: 'match', context: '🔗 Nebensätze', question: 'Ordne zu:', pairs: [{ left: 'Kausal', right: 'weil' }, { left: 'Konzessiv', right: 'obwohl' }, { left: 'Final', right: 'damit / um...zu' }, { left: 'Konditional', right: 'wenn' }]},
+    { type: 'mc', context: '💎 Final', question: 'Je länger ich wartete, desto _____ wurde ich.', options: ['ungeduldiger', 'ungeduldig', 'am ungeduldigsten', 'ungeduldigen'], correct: 0 },
+    { type: 'mc', context: '💎 Final', question: 'Das ist das Beste, was mir je _____ ist.', options: ['passiert', 'passieren', 'passierte', 'passierend'], correct: 0 },
+    { type: 'mc', context: '💎 Final', question: 'Ohne deine Hilfe _____ ich das nicht geschafft.', options: ['hätte', 'habe', 'hatte', 'werde'], correct: 0 },
+    { type: 'mc', context: '🏆 MEISTER', question: 'Welcher Satz ist grammatisch korrekt?', options: ['Hätte ich das gewusst, wäre ich geblieben.', 'Wenn ich das gewusst hätte, würde ich geblieben sein.', 'Wäre ich das gewusst, hätte ich geblieben.', 'Ich hätte gewusst das, wäre geblieben ich.'], correct: 0 },
+    { type: 'mc', context: '🏆 MEISTER', question: 'Der Grammatik-Meister sagt:', options: ['Herzlichen Glückwunsch! Du hast es geschafft! 🏆', 'Du brauchst mehr Übung.', 'Versuche es nochmal.', 'Grammatik ist schwer.'], correct: 0 }
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : level === 'amethyst' ? QUESTIONS_AMETHYST : QUESTIONS_DIAMANT); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = selectedLevel === 'diamant' ? (pct >= 90 ? 50 : pct >= 70 ? 35 : pct >= 50 ? 20 : 5) : pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? '🎉 MEISTER! Du hast die Winterreise gemeistert! 🎉' : pct >= 70 ? 'Sehr gut! Fast ein Meister!' : pct >= 50 ? 'Gut gemacht! Übe weiter!' : 'Versuch es nochmal!'; document.getElementById('certificate').style.display = pct >= 70 ? 'block' : 'none'; if (pct >= 90) startConfetti(); localStorage.setItem('station18_gems', gems); localStorage.setItem('station18_completed', pct >= 50); localStorage.setItem('winterreise_master', pct >= 90); }
+function startConfetti() { const canvas = document.getElementById('confetti'); const ctx = canvas.getContext('2d'); canvas.width = window.innerWidth; canvas.height = window.innerHeight; const particles = []; const colors = ['#FFD700', '#E63946', '#06D6A0', '#9D4EDD', '#7DD3FC']; for (let i = 0; i < 150; i++) { particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height, vx: (Math.random() - 0.5) * 3, vy: Math.random() * 3 + 2, color: colors[Math.floor(Math.random() * colors.length)], size: Math.random() * 8 + 4 }); } function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.x += p.vx; p.y += p.vy; if (p.y > canvas.height) p.y = -10; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); }); requestAnimationFrame(animate); } animate(); setTimeout(() => { ctx.clearRect(0, 0, canvas.width, canvas.height); }, 8000); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; document.getElementById('certificate').style.display = 'none'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>

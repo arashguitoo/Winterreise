@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Station 2: Wintermarkt - Perfekt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ice-blue: #E0F4FF; --deep-blue: #1E3A5F; --winter-blue: #5B9BD5; --snow-white: #FFFFFF; --crystal-cyan: #7DD3FC; --warm-gold: #FFD700; --rubin: #E63946; --smaragd: #06D6A0; --amethyst: #9D4EDD; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .home-btn:hover { background: rgba(255,255,255,0.3); }
+        .section { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.2); }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; font-size: 1.4em; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .story-box em { color: #7DD3FC; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .collapsible:hover { background: rgba(255, 255, 255, 0.2); }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(255, 255, 255, 0.05); border-radius: 0 0 15px 15px; }
+        .collapsible-content.open { max-height: 4000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; transition: transform 0.2s; background: rgba(255,255,255,0.1); }
+        .level-btn:hover { transform: scale(1.05); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .level-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .dot-rubin { background: #E63946; }
+        .dot-smaragd { background: #06D6A0; }
+        .dot-amethyst { background: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .option-btn:hover { background: rgba(255,255,255,0.2); border-color: #7DD3FC; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .option-btn:disabled { cursor: not-allowed; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input:focus { outline: none; border-color: #7DD3FC; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .check-btn:hover { background: #4A8BC4; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .ordering-word:hover { background: rgba(255,215,0,0.4); }
+        .ordering-word.placed { opacity: 0.4; cursor: default; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .matching-item:hover { border-color: #7DD3FC; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); cursor: default; }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; font-weight: 500; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; font-weight: 600; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; margin-bottom: 10px; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        .results-btn:hover { transform: scale(1.05); }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+
+<button class="home-btn" onclick="goHome()">🏠</button>
+
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🎄</div>
+        <h1 class="station-title">Station 2: Wintermarkt</h1>
+        <p class="station-subtitle">Perfekt - Was ist passiert?</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Mit dem ersten Kristall in der Tasche <strong>sind</strong> die vier Freunde weitergereist. Sie <strong>sind</strong> zu einem großen <strong>Wintermarkt</strong> <strong>gekommen</strong>.</p>
+            <p><em>"Wow!"</em> <strong>hat</strong> Sara <strong>gerufen</strong>. <em>"Ich habe noch nie so einen schönen Markt <strong>gesehen</strong>!"</em></p>
+            <p>Überall <strong>haben</strong> die Menschen Geschenke <strong>gekauft</strong>. Ein Verkäufer <strong>hat</strong> heiße Getränke <strong>verkauft</strong>. Die Freunde <strong>haben</strong> Bratwurst <strong>gegessen</strong> und Kakao <strong>getrunken</strong>.</p>
+            <p><strong>Tim:</strong> <em>"Ich habe gehört, dass hier ein Kristall versteckt ist!"</em></p>
+            <p>Sie <strong>haben</strong> einen alten Verkäufer <strong>gefragt</strong>. Er <strong>hat</strong> Herr Winter <strong>geheißen</strong>.</p>
+            <p><strong>Herr Winter:</strong> <em>"Ah, ihr <strong>seid gekommen</strong>! Mein Großvater <strong>hat</strong> mir von den Kristallsuchern <strong>erzählt</strong>. Er <strong>hat</strong> den zweiten Kristall hier <strong>versteckt</strong>."</em></p>
+            <p><strong>Mia:</strong> <em>"Wir haben das Problem <strong>verstanden</strong>. Wo <strong>hat</strong> er ihn <strong>versteckt</strong>?"</em></p>
+            <p><strong>Herr Winter:</strong> <em>"Er <strong>hat</strong> ihn unter dem alten Brunnen <strong>gelegt</strong>. Aber der Brunnen <strong>ist</strong> eingefroren! Ich <strong>habe</strong> schon alles <strong>versucht</strong>."</em></p>
+            <p><strong>Leon</strong> <strong>hat</strong> warmes Wasser <strong>geholt</strong> und das Problem <strong>repariert</strong>. Sie <strong>haben</strong> das Eis <strong>geschmolzen</strong>. Darunter <strong>hat</strong> ein <strong>grüner Kristall</strong> <strong>geleuchtet</strong>!</p>
+            <p><em>"Der zweite Kristall!"</em> <strong>haben</strong> alle <strong>gerufen</strong>. Die Suche <strong>hat</strong> <strong>funktioniert</strong>!</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">
+            📚 Grammatik: Perfekt
+            <span id="grammarArrow">▼</span>
+        </button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was ist Perfekt?</h3>
+                <p>Perfekt = <strong>Vergangenheit</strong>. Was <strong>ist passiert</strong>? Was <strong>habe ich gemacht</strong>?</p>
+                
+                <h3>Die Formel</h3>
+                <div class="grammar-note">
+                    <p><strong>haben / sein</strong> + <strong>Partizip II</strong></p>
+                </div>
+
+                <h3>Regelmäßige Verben: ge- ... -t</h3>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>Partizip II</th><th>Beispiel</th></tr>
+                    <tr><td>machen</td><td><strong>ge</strong>mach<strong>t</strong></td><td>Ich habe das gemacht.</td></tr>
+                    <tr><td>kaufen</td><td><strong>ge</strong>kauf<strong>t</strong></td><td>Sie hat Geschenke gekauft.</td></tr>
+                    <tr><td>fragen</td><td><strong>ge</strong>frag<strong>t</strong></td><td>Wir haben ihn gefragt.</td></tr>
+                    <tr><td>hören</td><td><strong>ge</strong>hör<strong>t</strong></td><td>Tim hat etwas gehört.</td></tr>
+                </table>
+
+                <h3>Unregelmäßige Verben: ge- ... -en</h3>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>Partizip II</th><th>Beispiel</th></tr>
+                    <tr><td>essen</td><td><strong>ge</strong>gess<strong>en</strong></td><td>Sie haben Bratwurst gegessen.</td></tr>
+                    <tr><td>trinken</td><td><strong>ge</strong>trunk<strong>en</strong></td><td>Ich habe Kakao getrunken.</td></tr>
+                    <tr><td>finden</td><td><strong>ge</strong>fund<strong>en</strong></td><td>Wir haben den Kristall gefunden.</td></tr>
+                    <tr><td>sehen</td><td><strong>ge</strong>seh<strong>en</strong></td><td>Sie hat den Markt gesehen.</td></tr>
+                    <tr><td>geben</td><td><strong>ge</strong>geb<strong>en</strong></td><td>Er hat mir Geld gegeben.</td></tr>
+                </table>
+
+                <h3>Mit "sein" - Bewegung & Veränderung</h3>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>Partizip II</th><th>Beispiel</th></tr>
+                    <tr><td>gehen</td><td>gegangen</td><td>Ich <strong>bin</strong> zum Markt gegangen.</td></tr>
+                    <tr><td>kommen</td><td>gekommen</td><td>Sie <strong>sind</strong> gekommen.</td></tr>
+                    <tr><td>fahren</td><td>gefahren</td><td>Wir <strong>sind</strong> gefahren.</td></tr>
+                    <tr><td>sein</td><td>gewesen</td><td>Ich <strong>bin</strong> dort gewesen.</td></tr>
+                    <tr><td>werden</td><td>geworden</td><td>Es <strong>ist</strong> kalt geworden.</td></tr>
+                </table>
+
+                <h3>⚠️ AUSNAHMEN: Verben OHNE "ge-"</h3>
+                <div class="grammar-warning">
+                    <p><strong>Wichtig:</strong> Diese Verben haben <strong>KEIN ge-</strong> im Partizip II!</p>
+                </div>
+
+                <p><strong>1. Verben mit Präfix be-, er-, ver-, ent-, emp-, zer-, ge-, miss-</strong></p>
+                <table class="grammar-table">
+                    <tr><th>Präfix</th><th>Infinitiv</th><th>Partizip II</th><th>Beispiel</th></tr>
+                    <tr><td>be-</td><td>besuchen</td><td><strong>besucht</strong></td><td>Ich habe ihn besucht.</td></tr>
+                    <tr><td>be-</td><td>bezahlen</td><td><strong>bezahlt</strong></td><td>Sie hat die Rechnung bezahlt.</td></tr>
+                    <tr><td>be-</td><td>bekommen</td><td><strong>bekommen</strong></td><td>Er hat einen Brief bekommen.</td></tr>
+                    <tr><td>er-</td><td>erzählen</td><td><strong>erzählt</strong></td><td>Opa hat eine Geschichte erzählt.</td></tr>
+                    <tr><td>er-</td><td>erklären</td><td><strong>erklärt</strong></td><td>Die Lehrerin hat es erklärt.</td></tr>
+                    <tr><td>ver-</td><td>verstehen</td><td><strong>verstanden</strong></td><td>Ich habe das verstanden.</td></tr>
+                    <tr><td>ver-</td><td>verkaufen</td><td><strong>verkauft</strong></td><td>Er hat Äpfel verkauft.</td></tr>
+                    <tr><td>ver-</td><td>versuchen</td><td><strong>versucht</strong></td><td>Sie hat es versucht.</td></tr>
+                    <tr><td>ver-</td><td>vergessen</td><td><strong>vergessen</strong></td><td>Ich habe das vergessen.</td></tr>
+                    <tr><td>ent-</td><td>entscheiden</td><td><strong>entschieden</strong></td><td>Wir haben entschieden.</td></tr>
+                    <tr><td>emp-</td><td>empfehlen</td><td><strong>empfohlen</strong></td><td>Er hat das Restaurant empfohlen.</td></tr>
+                </table>
+
+                <p><strong>2. Verben auf -ieren</strong></p>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>Partizip II</th><th>Beispiel</th></tr>
+                    <tr><td>telefonieren</td><td><strong>telefoniert</strong></td><td>Ich habe telefoniert.</td></tr>
+                    <tr><td>studieren</td><td><strong>studiert</strong></td><td>Sie hat Medizin studiert.</td></tr>
+                    <tr><td>reparieren</td><td><strong>repariert</strong></td><td>Er hat das Auto repariert.</td></tr>
+                    <tr><td>funktionieren</td><td><strong>funktioniert</strong></td><td>Es hat funktioniert!</td></tr>
+                    <tr><td>interessieren</td><td><strong>interessiert</strong></td><td>Das hat mich interessiert.</td></tr>
+                    <tr><td>fotografieren</td><td><strong>fotografiert</strong></td><td>Ich habe viel fotografiert.</td></tr>
+                    <tr><td>reservieren</td><td><strong>reserviert</strong></td><td>Er hat einen Tisch reserviert.</td></tr>
+                </table>
+
+                <h3>Tipp: haben oder sein?</h3>
+                <p>🚶 <strong>Bewegung</strong> (gehen, kommen, fahren, fliegen) → <strong>sein</strong></p>
+                <p>🔄 <strong>Veränderung</strong> (werden, einschlafen, aufwachen) → <strong>sein</strong></p>
+                <p>📦 <strong>Alles andere</strong> → <strong>haben</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🎪</span><div><div class="vocab-word">der Markt</div><div class="vocab-meaning">Ort zum Kaufen und Verkaufen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🛒</span><div><div class="vocab-word">kaufen</div><div class="vocab-meaning">Geld geben, etwas bekommen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">💰</span><div><div class="vocab-word">verkaufen</div><div class="vocab-meaning">etwas geben, Geld bekommen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🎁</span><div><div class="vocab-word">das Geschenk</div><div class="vocab-meaning">etwas für eine andere Person</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🥨</span><div><div class="vocab-word">essen</div><div class="vocab-meaning">Nahrung in den Mund</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">☕</span><div><div class="vocab-word">trinken</div><div class="vocab-meaning">Flüssigkeit in den Mund</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⛲</span><div><div class="vocab-word">der Brunnen</div><div class="vocab-meaning">Wasser kommt heraus</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🔍</span><div><div class="vocab-word">finden</div><div class="vocab-meaning">suchen und dann haben</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <p style="margin-bottom: 20px; color: #E0F4FF;">30 Fragen zum Perfekt!</p>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')"><span class="level-dot dot-rubin"></span>Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')"><span class="level-dot dot-smaragd"></span>Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')"><span class="level-dot dot-amethyst"></span>Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter">Frage 1 von 30</div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore">0 / 30</div>
+        <div class="results-gems" id="resultsGems">+0 Edelsteine 💎</div>
+        <p id="resultsMessage" style="margin-bottom: 20px;"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal spielen</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    // TEXTVERSTÄNDNIS (8)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wohin sind die Freunde gekommen?', options: ['Zu einem Wintermarkt', 'Zum Berg', 'Zum Schloss', 'Zum See'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was haben die Freunde gegessen?', options: ['Bratwurst', 'Pizza', 'Brot', 'Kuchen'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie heißt der alte Verkäufer?', options: ['Herr Winter', 'Herr Sommer', 'Herr Berg', 'Herr Wald'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo war der Kristall versteckt?', options: ['Unter dem Brunnen', 'Im Baum', 'Im Geschäft', 'Auf dem Dach'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Welche Farbe hat der zweite Kristall?', options: ['Grün', 'Blau', 'Rot', 'Gelb'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was haben die Freunde getrunken?', options: ['Kakao', 'Wasser', 'Tee', 'Limonade'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wer hat warmes Wasser geholt?', options: ['Leon', 'Mia', 'Sara', 'Tim'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was war das Problem mit dem Brunnen?', options: ['Er war eingefroren', 'Er war kaputt', 'Er war leer', 'Er war zu tief'], correct: 0 },
+    // HABEN + REGELMÄSSIG (6)
+    { type: 'mc', context: '✏️ haben + Partizip II', question: 'Ich _____ das gemacht.', options: ['habe', 'bin', 'hat', 'haben'], correct: 0 },
+    { type: 'mc', context: '✏️ haben + Partizip II', question: 'Sie _____ Geschenke gekauft.', options: ['hat', 'ist', 'habe', 'sind'], correct: 0 },
+    { type: 'mc', context: '✏️ haben + Partizip II', question: 'Wir _____ ihn gefragt.', options: ['haben', 'sind', 'hat', 'ist'], correct: 0 },
+    { type: 'mc', context: '✏️ haben + Partizip II', question: 'Tim _____ etwas gehört.', options: ['hat', 'ist', 'haben', 'sind'], correct: 0 },
+    { type: 'mc', context: '✏️ haben + Partizip II', question: 'Ihr _____ gut gelernt.', options: ['habt', 'seid', 'hat', 'ist'], correct: 0 },
+    { type: 'mc', context: '✏️ haben + Partizip II', question: 'Die Kinder _____ gespielt.', options: ['haben', 'sind', 'hat', 'ist'], correct: 0 },
+    // HABEN + UNREGELMÄSSIG (6)
+    { type: 'mc', context: '✏️ Partizip II', question: 'Sie haben Bratwurst _____.', options: ['gegessen', 'geesst', 'geessen', 'esst'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'Ich habe Kakao _____.', options: ['getrunken', 'getrinkt', 'trinken', 'trunkt'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'Wir haben den Kristall _____.', options: ['gefunden', 'gefindet', 'gefinden', 'findet'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'Sara hat den Markt _____.', options: ['gesehen', 'geseht', 'sehen', 'seht'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'Alle haben laut _____.', options: ['gerufen', 'geruft', 'rufen', 'ruft'], correct: 0 },
+    { type: 'mc', context: '✏️ Partizip II', question: 'Er hat mir Geld _____.', options: ['gegeben', 'gegebt', 'geben', 'gibt'], correct: 0 },
+    // SEIN (4)
+    { type: 'mc', context: '✏️ sein + Partizip II', question: 'Ich _____ zum Markt gegangen.', options: ['bin', 'habe', 'hat', 'ist'], correct: 0 },
+    { type: 'mc', context: '✏️ sein + Partizip II', question: 'Die Freunde _____ gekommen.', options: ['sind', 'haben', 'ist', 'hat'], correct: 0 },
+    { type: 'mc', context: '✏️ sein + Partizip II', question: 'Wir _____ mit dem Zug gefahren.', options: ['sind', 'haben', 'ist', 'hat'], correct: 0 },
+    { type: 'mc', context: '✏️ sein + Partizip II', question: 'Er _____ dort gewesen.', options: ['ist', 'hat', 'haben', 'sind'], correct: 0 },
+    // HABEN ODER SEIN (4)
+    { type: 'mc', context: '✏️ haben oder sein?', question: 'Ich _____ Pizza gegessen.', options: ['habe', 'bin'], correct: 0 },
+    { type: 'mc', context: '✏️ haben oder sein?', question: 'Er _____ nach Berlin gefahren.', options: ['ist', 'hat'], correct: 0 },
+    { type: 'mc', context: '✏️ haben oder sein?', question: 'Sie _____ den Film gesehen.', options: ['hat', 'ist'], correct: 0 },
+    { type: 'mc', context: '✏️ haben oder sein?', question: 'Wir _____ spät gekommen.', options: ['sind', 'haben'], correct: 0 },
+    // ORDERING + MATCHING (2)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'habe', 'das', 'gemacht', '.'], correct: ['Ich', 'habe', 'das', 'gemacht', '.'] },
+    { type: 'match', context: '🔗 Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'machen', right: 'gemacht' }, { left: 'essen', right: 'gegessen' }, { left: 'trinken', right: 'getrunken' }, { left: 'gehen', right: 'gegangen' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    // TEXTVERSTÄNDNIS (5)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was hat Leon repariert?', options: ['Das Problem mit dem Brunnen', 'Das Auto', 'Die Tür', 'Das Fenster'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was hat der Großvater von Herr Winter gemacht?', options: ['Den Kristall versteckt', 'Den Markt gebaut', 'Das Eis gemacht', 'Den Brunnen repariert'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was hat Herr Winter erzählt?', options: ['Von den Kristallsuchern', 'Von seiner Familie', 'Vom Wetter', 'Von der Stadt'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Die Suche hat _____. (funktionieren)', answer: 'funktioniert', alternatives: ['Funktioniert'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Der Verkäufer hat Getränke _____. (verkaufen)', answer: 'verkauft', alternatives: ['Verkauft'] },
+    // REGELMÄSSIG MIT GE- (4)
+    { type: 'gap', context: '✏️ ge-...-t', question: 'Ich habe viel _____. (lernen)', answer: 'gelernt', alternatives: ['Gelernt'] },
+    { type: 'gap', context: '✏️ ge-...-t', question: 'Sie hat laut _____. (lachen)', answer: 'gelacht', alternatives: ['Gelacht'] },
+    { type: 'mc', context: '✏️ ge-...-t', question: 'Er hat lange _____. (warten)', options: ['gewartet', 'wartet', 'gewarten', 'wartete'], correct: 0 },
+    { type: 'mc', context: '✏️ ge-...-t', question: 'Wir haben das Zimmer _____. (putzen)', options: ['geputzt', 'putzen', 'geputzen', 'putzte'], correct: 0 },
+    // UNREGELMÄSSIG MIT GE- (4)
+    { type: 'gap', context: '✏️ ge-...-en', question: 'Der Hund hat viel _____. (fressen)', answer: 'gefressen', alternatives: ['Gefressen'] },
+    { type: 'mc', context: '✏️ ge-...-en', question: 'Sie hat das Buch _____. (lesen)', options: ['gelesen', 'gelest', 'lesen', 'gelesetn'], correct: 0 },
+    { type: 'mc', context: '✏️ ge-...-en', question: 'Wir haben lange _____. (schlafen)', options: ['geschlafen', 'geschlaft', 'schlafen', 'geschlaeft'], correct: 0 },
+    { type: 'gap', context: '✏️ ge-...-en', question: 'Er hat mir _____. (helfen)', answer: 'geholfen', alternatives: ['Geholfen'] },
+    // OHNE GE-: be-, er-, ver- (6)
+    { type: 'mc', context: '✏️ OHNE ge-: be-', question: 'Ich habe ihn _____. (besuchen)', options: ['besucht', 'gebesucht', 'besuchen', 'besuchte'], correct: 0 },
+    { type: 'mc', context: '✏️ OHNE ge-: be-', question: 'Sie hat die Rechnung _____. (bezahlen)', options: ['bezahlt', 'gebezahlt', 'bezahlen', 'bezahlte'], correct: 0 },
+    { type: 'gap', context: '✏️ OHNE ge-: er-', question: 'Der Lehrer hat es _____. (erklären)', answer: 'erklärt', alternatives: ['Erklärt'] },
+    { type: 'mc', context: '✏️ OHNE ge-: er-', question: 'Opa hat eine Geschichte _____. (erzählen)', options: ['erzählt', 'geerzählt', 'erzählen', 'erzählte'], correct: 0 },
+    { type: 'gap', context: '✏️ OHNE ge-: ver-', question: 'Ich habe das _____. (verstehen)', answer: 'verstanden', alternatives: ['Verstanden'] },
+    { type: 'mc', context: '✏️ OHNE ge-: ver-', question: 'Er hat Äpfel _____. (verkaufen)', options: ['verkauft', 'geverkauft', 'verkaufen', 'verkaufte'], correct: 0 },
+    // OHNE GE-: -ieren (4)
+    { type: 'mc', context: '✏️ OHNE ge-: -ieren', question: 'Ich habe lange _____. (telefonieren)', options: ['telefoniert', 'getelefoniert', 'telefonieren', 'telefoniete'], correct: 0 },
+    { type: 'gap', context: '✏️ OHNE ge-: -ieren', question: 'Er hat das Auto _____. (reparieren)', answer: 'repariert', alternatives: ['Repariert'] },
+    { type: 'mc', context: '✏️ OHNE ge-: -ieren', question: 'Sie hat Medizin _____. (studieren)', options: ['studiert', 'gestudiert', 'studieren', 'studiete'], correct: 0 },
+    { type: 'mc', context: '✏️ OHNE ge-: -ieren', question: 'Es hat _____! (funktionieren)', options: ['funktioniert', 'gefunktioniert', 'funktionieren', 'funktioniete'], correct: 0 },
+    // SEIN (3)
+    { type: 'gap', context: '✏️ sein', question: 'Er _____ schnell gelaufen.', answer: 'ist', alternatives: ['Ist'] },
+    { type: 'mc', context: '✏️ sein', question: 'Sie _____ zu Hause geblieben.', options: ['ist', 'hat', 'sind', 'haben'], correct: 0 },
+    { type: 'mc', context: '✏️ sein', question: 'Das Kind _____ eingeschlafen.', options: ['ist', 'hat', 'sind', 'haben'], correct: 0 },
+    // ORDERING + MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Sie', 'hat', 'die', 'Rechnung', 'bezahlt', '.'], correct: ['Sie', 'hat', 'die', 'Rechnung', 'bezahlt', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'habe', 'lange', 'telefoniert', '.'], correct: ['Ich', 'habe', 'lange', 'telefoniert', '.'] },
+    { type: 'match', context: '🔗 Zuordnung: OHNE ge-', question: 'Ordne zu:', pairs: [{ left: 'besuchen', right: 'besucht' }, { left: 'erzählen', right: 'erzählt' }, { left: 'verstehen', right: 'verstanden' }, { left: 'telefonieren', right: 'telefoniert' }]}
+];
+
+const QUESTIONS_AMETHYST = [
+    // KOMPLEXE TEXTFRAGEN (4)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Warum hat Herr Winter alles versucht?', options: ['Um das Eis zu schmelzen', 'Um Geld zu verdienen', 'Um nach Hause zu gehen', 'Um die Freunde zu finden'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Die Freunde haben das Problem _____. (verstehen)', answer: 'verstanden', alternatives: ['Verstanden'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Mia hat gesagt: "Wir haben das Problem _____." (verstehen)', answer: 'verstanden', alternatives: ['Verstanden'] },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was ist mit "Die Suche hat funktioniert" gemeint?', options: ['Sie haben den Kristall gefunden', 'Sie haben Geld bekommen', 'Sie sind nach Hause gegangen', 'Sie haben gegessen'], correct: 0 },
+    // OHNE GE- KOMPLEX: be- (4)
+    { type: 'gap', context: '✏️ be-', question: 'Er hat einen Brief _____. (bekommen)', answer: 'bekommen', alternatives: ['Bekommen'] },
+    { type: 'mc', context: '✏️ be-', question: 'Welches Partizip ist RICHTIG?', options: ['beantwortet', 'gebeantwortet', 'beantworten', 'geantworten'], correct: 0 },
+    { type: 'mc', context: '✏️ be-', question: 'Sie hat das Zimmer _____. (betreten)', options: ['betreten', 'gebetreten', 'betritt', 'getreten'], correct: 0 },
+    { type: 'gap', context: '✏️ be-', question: 'Wir haben das Problem _____. (besprechen)', answer: 'besprochen', alternatives: ['Besprochen'] },
+    // OHNE GE- KOMPLEX: er-, ver-, ent- (6)
+    { type: 'mc', context: '✏️ er-', question: 'Das Kind hat eine Erkältung _____. (bekommen)', options: ['bekommen', 'gebekommen', 'bekommt', 'gekommt'], correct: 0 },
+    { type: 'gap', context: '✏️ er-', question: 'Sie hat den Preis _____. (erhalten)', answer: 'erhalten', alternatives: ['Erhalten'] },
+    { type: 'mc', context: '✏️ ver-', question: 'Ich habe meinen Schlüssel _____. (vergessen)', options: ['vergessen', 'gevergessen', 'vergisst', 'gegesssen'], correct: 0 },
+    { type: 'gap', context: '✏️ ver-', question: 'Er hat alles _____. (verlieren)', answer: 'verloren', alternatives: ['Verloren'] },
+    { type: 'mc', context: '✏️ ent-', question: 'Wir haben uns _____. (entscheiden)', options: ['entschieden', 'geentschieden', 'entscheidt', 'geschieden'], correct: 0 },
+    { type: 'gap', context: '✏️ emp-', question: 'Der Kellner hat das Restaurant _____. (empfehlen)', answer: 'empfohlen', alternatives: ['Empfohlen'] },
+    // OHNE GE-: -ieren KOMPLEX (4)
+    { type: 'gap', context: '✏️ -ieren', question: 'Sie hat viel _____. (fotografieren)', answer: 'fotografiert', alternatives: ['Fotografiert'] },
+    { type: 'mc', context: '✏️ -ieren', question: 'Er hat einen Tisch _____. (reservieren)', options: ['reserviert', 'gereserviert', 'reservieren', 'reserviete'], correct: 0 },
+    { type: 'mc', context: '✏️ -ieren', question: 'Das hat mich sehr _____. (interessieren)', options: ['interessiert', 'geinteressiert', 'interessieren', 'interessiete'], correct: 0 },
+    { type: 'gap', context: '✏️ -ieren', question: 'Der Arzt hat den Patienten _____. (operieren)', answer: 'operiert', alternatives: ['Operiert'] },
+    // GEMISCHT: MIT ODER OHNE GE-? (6)
+    { type: 'mc', context: '✏️ MIT oder OHNE ge-?', question: 'kaufen → _____', options: ['gekauft', 'kauft'], correct: 0 },
+    { type: 'mc', context: '✏️ MIT oder OHNE ge-?', question: 'verkaufen → _____', options: ['verkauft', 'geverkauft'], correct: 0 },
+    { type: 'mc', context: '✏️ MIT oder OHNE ge-?', question: 'stehen → _____', options: ['gestanden', 'standen'], correct: 0 },
+    { type: 'mc', context: '✏️ MIT oder OHNE ge-?', question: 'verstehen → _____', options: ['verstanden', 'geverstanden'], correct: 0 },
+    { type: 'mc', context: '✏️ MIT oder OHNE ge-?', question: 'studieren → _____', options: ['studiert', 'gestudiert'], correct: 0 },
+    { type: 'mc', context: '✏️ MIT oder OHNE ge-?', question: 'spielen → _____', options: ['gespielt', 'spielt'], correct: 0 },
+    // WELCHER SATZ IST FALSCH? (3)
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Ich habe getelefoniert.', 'Ich habe telefoniert.', 'Er hat telefoniert.', 'Sie haben telefoniert.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Sie hat gebesucht.', 'Sie hat besucht.', 'Er hat besucht.', 'Wir haben besucht.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Er hat geverstanden.', 'Er hat verstanden.', 'Ich habe verstanden.', 'Wir haben verstanden.'], correct: 0 },
+    // ORDERING + MATCHING (3)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Er', 'hat', 'das', 'Restaurant', 'empfohlen', '.'], correct: ['Er', 'hat', 'das', 'Restaurant', 'empfohlen', '.'] },
+    { type: 'match', context: '🔗 Zuordnung: ver-', question: 'Ordne zu:', pairs: [{ left: 'vergessen', right: 'vergessen' }, { left: 'verlieren', right: 'verloren' }, { left: 'verstehen', right: 'verstanden' }, { left: 'verkaufen', right: 'verkauft' }]},
+    { type: 'match', context: '🔗 Zuordnung: -ieren', question: 'Ordne zu:', pairs: [{ left: 'telefonieren', right: 'telefoniert' }, { left: 'studieren', right: 'studiert' }, { left: 'reparieren', right: 'repariert' }, { left: 'fotografieren', right: 'fotografiert' }]}
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function toggleGrammar() {
+    const content = document.getElementById('grammarContent');
+    const arrow = document.getElementById('grammarArrow');
+    content.classList.toggle('open');
+    arrow.textContent = content.classList.contains('open') ? '▲' : '▼';
+}
+
+function startQuiz(level) {
+    selectedLevel = level;
+    currentQuestion = 0;
+    score = 0;
+    if (level === 'rubin') currentQuestions = shuffle(QUESTIONS_RUBIN);
+    else if (level === 'smaragd') currentQuestions = shuffle(QUESTIONS_SMARAGD);
+    else currentQuestions = shuffle(QUESTIONS_AMETHYST);
+    document.getElementById('levelSelection').style.display = 'none';
+    document.getElementById('quizArea').classList.add('active');
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = currentQuestions[currentQuestion];
+    const box = document.getElementById('questionBox');
+    const progress = ((currentQuestion) / currentQuestions.length) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`;
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('nextBtn').classList.remove('show');
+
+    let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`;
+
+    if (q.type === 'mc') {
+        html += '<div class="options-grid">';
+        const shuffledOptions = shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx })));
+        shuffledOptions.forEach((opt) => {
+            html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`;
+        });
+        html += '</div>';
+    } else if (q.type === 'gap') {
+        html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`;
+    } else if (q.type === 'order') {
+        const shuffledWords = shuffle([...q.words]);
+        html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">';
+        shuffledWords.forEach((word) => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; });
+        html += '</div><p style="text-align:center; color:#7DD3FC;">↓ Klicke die Wörter in der richtigen Reihenfolge ↓</p><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>';
+    } else if (q.type === 'match') {
+        const leftItems = shuffle(q.pairs.map(p => p.left));
+        const rightItems = shuffle(q.pairs.map(p => p.right));
+        html += '<div class="matching-container"><div class="matching-column"><h4>Infinitiv</h4>';
+        leftItems.forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div><div class="matching-column"><h4>Partizip II</h4>';
+        rightItems.forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div></div>';
+    }
+    box.innerHTML = html;
+}
+
+function checkMC(selected, correct, btn) {
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(b => b.disabled = true);
+    if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { btn.classList.add('wrong'); buttons.forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); }
+}
+
+function checkGap() {
+    const input = document.getElementById('gapInput');
+    const q = currentQuestions[currentQuestion];
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = q.answer.toLowerCase();
+    const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : [];
+    if (userAnswer === correctAnswer || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { input.classList.add('wrong'); showFeedback(false, `Die richtige Antwort ist: ${q.answer}`); }
+    input.disabled = true;
+}
+
+function moveWord(element, direction) {
+    if (element.classList.contains('placed')) return;
+    const source = document.getElementById('orderSource');
+    const target = document.getElementById('orderTarget');
+    if (direction === 'toTarget') {
+        const clone = element.cloneNode(true);
+        clone.onclick = function() { moveWord(this, 'toSource'); };
+        target.appendChild(clone);
+        element.classList.add('placed');
+    } else {
+        const originalWord = element.dataset.word;
+        source.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === originalWord && sw.classList.contains('placed')) sw.classList.remove('placed'); });
+        element.remove();
+    }
+}
+
+function checkOrder() {
+    const target = document.getElementById('orderTarget');
+    const words = Array.from(target.querySelectorAll('.ordering-word')).map(w => w.dataset.word);
+    const q = currentQuestions[currentQuestion];
+    if (JSON.stringify(words) === JSON.stringify(q.correct)) { showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { showFeedback(false, `Richtige Reihenfolge: ${q.correct.join(' ')}`); }
+}
+
+let selectedMatch = null, matchedPairs = 0;
+
+function selectMatch(element) {
+    if (element.classList.contains('matched')) return;
+    const type = element.dataset.type, value = element.dataset.value;
+    if (!selectedMatch) { selectedMatch = { element, type, value }; element.classList.add('selected'); }
+    else {
+        if (selectedMatch.type === type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element, type, value }; element.classList.add('selected'); }
+        else {
+            const q = currentQuestions[currentQuestion];
+            const pair = q.pairs.find(p => (p.left === selectedMatch.value && p.right === value) || (p.right === selectedMatch.value && p.left === value));
+            if (pair) {
+                element.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++;
+                if (matchedPairs === q.pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; }
+            } else { element.classList.add('wrong'); setTimeout(() => element.classList.remove('wrong'), 500); }
+            selectedMatch.element.classList.remove('selected'); selectedMatch = null;
+        }
+    }
+}
+
+function showFeedback(isCorrect, message) {
+    const feedback = document.getElementById('feedback');
+    feedback.textContent = message;
+    feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextQuestion() {
+    currentQuestion++; selectedMatch = null; matchedPairs = 0;
+    if (currentQuestion >= currentQuestions.length) showResults();
+    else showQuestion();
+}
+
+function showResults() {
+    document.getElementById('quizArea').classList.remove('active');
+    document.getElementById('resultsSection').classList.add('active');
+    const percentage = Math.round((score / currentQuestions.length) * 100);
+    let gems = 0, icon = '🏆', message = '';
+    if (percentage >= 90) { gems = selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10; icon = '🏆'; message = 'Ausgezeichnet! Du hast den zweiten Kristall gefunden! 💎'; }
+    else if (percentage >= 70) { gems = selectedLevel === 'amethyst' ? 20 : selectedLevel === 'smaragd' ? 15 : 8; icon = '⭐'; message = 'Sehr gut! Du hast viel gelernt!'; }
+    else if (percentage >= 50) { gems = selectedLevel === 'amethyst' ? 10 : selectedLevel === 'smaragd' ? 8 : 5; icon = '💪'; message = 'Gut gemacht! Übung macht den Meister!'; }
+    else { gems = 2; icon = '📚'; message = 'Lies die Grammatik nochmal und versuche es wieder!'; }
+    document.getElementById('resultsIcon').textContent = icon;
+    document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`;
+    document.getElementById('resultsGems').textContent = `+${gems} Edelsteine 💎`;
+    document.getElementById('resultsMessage').textContent = message;
+    localStorage.setItem('station2_gems', gems);
+    localStorage.setItem('station2_completed', percentage >= 50);
+}
+
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+
+</body>
+</html>

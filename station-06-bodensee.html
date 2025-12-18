@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌊 Station 6: Bodensee - Konjunktiv II</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --ice-blue: #E0F4FF; --deep-blue: #1E3A5F; --winter-blue: #5B9BD5; --snow-white: #FFFFFF; --crystal-cyan: #7DD3FC; --warm-gold: #FFD700; --rubin: #E63946; --smaragd: #06D6A0; --amethyst: #9D4EDD; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .home-btn:hover { background: rgba(255,255,255,0.3); }
+        .section { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.2); }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; font-size: 1.4em; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .story-box em { color: #7DD3FC; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .collapsible:hover { background: rgba(255, 255, 255, 0.2); }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(255, 255, 255, 0.05); border-radius: 0 0 15px 15px; }
+        .collapsible-content.open { max-height: 4000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; transition: transform 0.2s; background: rgba(255,255,255,0.1); }
+        .level-btn:hover { transform: scale(1.05); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .level-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .dot-rubin { background: #E63946; }
+        .dot-smaragd { background: #06D6A0; }
+        .dot-amethyst { background: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .option-btn:hover { background: rgba(255,255,255,0.2); border-color: #7DD3FC; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .option-btn:disabled { cursor: not-allowed; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input:focus { outline: none; border-color: #7DD3FC; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .check-btn:hover { background: #4A8BC4; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 1.1em; transition: all 0.2s; }
+        .ordering-word:hover { background: rgba(255,215,0,0.4); }
+        .ordering-word.placed { opacity: 0.4; cursor: default; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .matching-item:hover { border-color: #7DD3FC; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); cursor: default; }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; font-weight: 500; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; font-weight: 600; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; margin-bottom: 10px; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        .results-btn:hover { transform: scale(1.05); }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+
+<button class="home-btn" onclick="goHome()">🏠</button>
+
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🌊</div>
+        <h1 class="station-title">Station 6: Bodensee</h1>
+        <p class="station-subtitle">Konjunktiv II - Wünsche und Träume</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde kommen zum <strong>Bodensee</strong>. Das Wasser ist blau und ruhig. Am Ufer steht eine alte Frau. Sie heißt <strong>Frau Müller</strong>.</p>
+            <p><strong>Frau Müller:</strong> <em>"Ah, ihr seid die Kristallsucher! Ich habe auf euch gewartet."</em></p>
+            <p><strong>Sara:</strong> <em>"Woher wissen Sie das?"</em></p>
+            <p><strong>Frau Müller:</strong> <em>"Wenn ich jung <strong>wäre</strong>, <strong>würde</strong> ich mit euch suchen. Aber ich bin zu alt. Der Kristall liegt im See."</em></p>
+            <p><strong>Tim:</strong> <em>"Im See? <strong>Hätten</strong> Sie ein Boot für uns?"</em></p>
+            <p><strong>Frau Müller:</strong> <em>"Ja, ich <strong>hätte</strong> ein Boot. Aber das Wasser ist sehr kalt. Es <strong>wäre</strong> besser, wenn ihr Neoprenanzüge <strong>hättet</strong>."</em></p>
+            <p><strong>Leon:</strong> <em>"<strong>Könnten</strong> wir die Anzüge von Ihnen bekommen?"</em></p>
+            <p><strong>Frau Müller:</strong> <em>"Natürlich! Ich <strong>würde</strong> euch gern helfen. Wenn ich schwimmen <strong>könnte</strong>, <strong>würde</strong> ich selbst tauchen."</em></p>
+            <p>Die Freunde ziehen die Anzüge an und fahren mit dem Boot auf den See. <strong>Mia</strong> taucht ins Wasser.</p>
+            <p><strong>Mia:</strong> <em>"Wenn das Wasser nicht so dunkel <strong>wäre</strong>, <strong>könnte</strong> ich besser sehen!"</em></p>
+            <p>Nach einigen Minuten findet sie einen <strong>türkisen Kristall</strong> auf dem Grund des Sees!</p>
+            <p><strong>Mia:</strong> <em>"Ich habe ihn! Wenn ich das meinen Eltern erzählen <strong>würde</strong>, <strong>würden</strong> sie es nicht glauben!"</em></p>
+            <p><em>"Der sechste Kristall!"</em> rufen alle. <em>"Was <strong>wäre</strong> die Reise ohne Sie, Frau Müller?"</em></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">
+            📚 Grammatik: Konjunktiv II
+            <span id="grammarArrow">▼</span>
+        </button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Was ist Konjunktiv II?</h3>
+                <p>Konjunktiv II drückt aus:</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Wünsche</strong> (Ich wünschte, ich wäre reich!)</li>
+                    <li><strong>Irreale Situationen</strong> (Wenn ich reich wäre, würde ich reisen.)</li>
+                    <li><strong>Höfliche Bitten</strong> (Könnten Sie mir helfen?)</li>
+                    <li><strong>Ratschläge</strong> (Du solltest mehr schlafen.)</li>
+                </ul>
+
+                <h3>Die wichtigsten Formen</h3>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>ich</th><th>du</th><th>er/sie/es</th><th>wir</th><th>ihr</th><th>sie/Sie</th></tr>
+                    <tr><td><strong>sein</strong></td><td>wäre</td><td>wär(e)st</td><td>wäre</td><td>wären</td><td>wär(e)t</td><td>wären</td></tr>
+                    <tr><td><strong>haben</strong></td><td>hätte</td><td>hättest</td><td>hätte</td><td>hätten</td><td>hättet</td><td>hätten</td></tr>
+                    <tr><td><strong>werden</strong></td><td>würde</td><td>würdest</td><td>würde</td><td>würden</td><td>würdet</td><td>würden</td></tr>
+                </table>
+
+                <h3>Modalverben im Konjunktiv II</h3>
+                <table class="grammar-table">
+                    <tr><th>Infinitiv</th><th>ich</th><th>Beispiel</th></tr>
+                    <tr><td>können</td><td><strong>könnte</strong></td><td>Ich könnte dir helfen.</td></tr>
+                    <tr><td>müssen</td><td><strong>müsste</strong></td><td>Ich müsste mehr lernen.</td></tr>
+                    <tr><td>dürfen</td><td><strong>dürfte</strong></td><td>Das dürfte stimmen.</td></tr>
+                    <tr><td>sollen</td><td><strong>sollte</strong></td><td>Du solltest zum Arzt gehen.</td></tr>
+                    <tr><td>wollen</td><td><strong>wollte</strong></td><td>Ich wollte fragen...</td></tr>
+                </table>
+
+                <h3>würde + Infinitiv</h3>
+                <div class="grammar-note">
+                    <p>Für die meisten Verben benutzt man: <strong>würde + Infinitiv</strong></p>
+                    <p>Ich <strong>würde</strong> gern nach Italien <strong>fahren</strong>.</p>
+                    <p>Er <strong>würde</strong> dir <strong>helfen</strong>.</p>
+                </div>
+
+                <h3>Wenn-Sätze (Irreale Konditionalsätze)</h3>
+                <div class="grammar-warning">
+                    <p><strong>Wenn</strong> ich reich <strong>wäre</strong>, <strong>würde</strong> ich eine Weltreise <strong>machen</strong>.</p>
+                    <p><strong>Wenn</strong> ich Zeit <strong>hätte</strong>, <strong>würde</strong> ich dich <strong>besuchen</strong>.</p>
+                    <p><strong>Wenn</strong> ich fliegen <strong>könnte</strong>, <strong>würde</strong> ich jeden Tag <strong>fliegen</strong>.</p>
+                </div>
+
+                <h3>Höfliche Bitten</h3>
+                <table class="grammar-table">
+                    <tr><th>Direkt</th><th>Höflich (Konjunktiv II)</th></tr>
+                    <tr><td>Können Sie mir helfen?</td><td><strong>Könnten</strong> Sie mir helfen?</td></tr>
+                    <tr><td>Haben Sie Zeit?</td><td><strong>Hätten</strong> Sie Zeit?</td></tr>
+                    <tr><td>Ich will einen Kaffee.</td><td>Ich <strong>hätte</strong> gern einen Kaffee.</td></tr>
+                    <tr><td>Darf ich fragen?</td><td><strong>Dürfte</strong> ich fragen?</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🌊</span><div><div class="vocab-word">der See</div><div class="vocab-meaning">großes Wasser, nicht das Meer</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⛵</span><div><div class="vocab-word">das Boot</div><div class="vocab-meaning">fährt auf dem Wasser</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏊</span><div><div class="vocab-word">tauchen</div><div class="vocab-meaning">unter Wasser gehen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🥶</span><div><div class="vocab-word">kalt</div><div class="vocab-meaning">niedrige Temperatur</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🏖️</span><div><div class="vocab-word">das Ufer</div><div class="vocab-meaning">Land neben dem Wasser</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⬇️</span><div><div class="vocab-word">der Grund</div><div class="vocab-meaning">ganz unten im See</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">💭</span><div><div class="vocab-word">der Wunsch</div><div class="vocab-meaning">was man gern hätte</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🤲</span><div><div class="vocab-word">die Bitte</div><div class="vocab-meaning">höflich fragen</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <p style="margin-bottom: 20px; color: #E0F4FF;">30 Fragen zum Konjunktiv II!</p>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')"><span class="level-dot dot-rubin"></span>Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')"><span class="level-dot dot-smaragd"></span>Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')"><span class="level-dot dot-amethyst"></span>Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter">Frage 1 von 30</div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore">0 / 30</div>
+        <div class="results-gems" id="resultsGems">+0 Edelsteine 💎</div>
+        <p id="resultsMessage" style="margin-bottom: 20px;"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal spielen</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    // TEXTVERSTÄNDNIS (8)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo findet Mia den Kristall?', options: ['Im See', 'Am Ufer', 'Im Boot', 'Im Wald'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie heißt die alte Frau?', options: ['Frau Müller', 'Frau Schmidt', 'Frau Wagner', 'Frau Becker'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Welche Farbe hat der sechste Kristall?', options: ['Türkis', 'Blau', 'Grün', 'Silber'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was brauchen die Freunde zum Tauchen?', options: ['Neoprenanzüge', 'Taucherbrille', 'Flossen', 'Sauerstoffflasche'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Warum kann Frau Müller nicht selbst tauchen?', options: ['Sie kann nicht schwimmen', 'Sie ist krank', 'Sie hat keine Zeit', 'Sie hat Angst'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wie ist das Wasser?', options: ['Kalt', 'Warm', 'Heiß', 'Perfekt'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wer taucht ins Wasser?', options: ['Mia', 'Leon', 'Sara', 'Tim'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Wo liegt der Kristall genau?', options: ['Auf dem Grund des Sees', 'Am Ufer', 'Im Boot', 'Auf einer Insel'], correct: 0 },
+    // WÄRE (5)
+    { type: 'mc', context: '✏️ wäre (sein)', question: 'Ich _____ gern reich.', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre (sein)', question: 'Das _____ schön!', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre (sein)', question: 'Wenn ich du _____, würde ich das machen.', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre (sein)', question: 'Er _____ gern Arzt.', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre (sein)', question: 'Wir _____ so glücklich!', options: ['wären', 'hätten', 'würden', 'könnten'], correct: 0 },
+    // HÄTTE (5)
+    { type: 'mc', context: '✏️ hätte (haben)', question: 'Ich _____ gern ein Auto.', options: ['hätte', 'wäre', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ hätte (haben)', question: '_____ du Zeit für mich?', options: ['Hättest', 'Wärst', 'Würdest', 'Könntest'], correct: 0 },
+    { type: 'mc', context: '✏️ hätte (haben)', question: 'Wir _____ gern mehr Geld.', options: ['hätten', 'wären', 'würden', 'könnten'], correct: 0 },
+    { type: 'mc', context: '✏️ hätte (haben)', question: '_____ Sie einen Moment Zeit?', options: ['Hätten', 'Wären', 'Würden', 'Könnten'], correct: 0 },
+    { type: 'mc', context: '✏️ hätte (haben)', question: 'Er _____ gern einen Hund.', options: ['hätte', 'wäre', 'würde', 'könnte'], correct: 0 },
+    // WÜRDE (5)
+    { type: 'mc', context: '✏️ würde + Infinitiv', question: 'Ich _____ gern nach Italien fahren.', options: ['würde', 'wäre', 'hätte', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ würde + Infinitiv', question: 'Er _____ dir helfen.', options: ['würde', 'wäre', 'hätte', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ würde + Infinitiv', question: 'Wir _____ gern kommen.', options: ['würden', 'wären', 'hätten', 'könnten'], correct: 0 },
+    { type: 'mc', context: '✏️ würde + Infinitiv', question: '_____ du mir bitte helfen?', options: ['Würdest', 'Wärst', 'Hättest', 'Könntest'], correct: 0 },
+    { type: 'mc', context: '✏️ würde + Infinitiv', question: 'Sie _____ das nie machen.', options: ['würden', 'wären', 'hätten', 'könnten'], correct: 0 },
+    // KÖNNTE (3)
+    { type: 'mc', context: '✏️ könnte (können)', question: 'Ich _____ dir helfen.', options: ['könnte', 'müsste', 'sollte', 'dürfte'], correct: 0 },
+    { type: 'mc', context: '✏️ könnte (können)', question: '_____ Sie mir sagen, wo der Bahnhof ist?', options: ['Könnten', 'Müssten', 'Sollten', 'Dürften'], correct: 0 },
+    { type: 'mc', context: '✏️ könnte (können)', question: 'Das _____ stimmen.', options: ['könnte', 'müsste', 'sollte', 'dürfte'], correct: 0 },
+    // HÖFLICHKEIT (2)
+    { type: 'mc', context: '✏️ Höflichkeit', question: 'Wie fragt man höflich nach einem Kaffee?', options: ['Ich hätte gern einen Kaffee.', 'Ich will einen Kaffee.', 'Gib mir einen Kaffee.', 'Ich brauche einen Kaffee.'], correct: 0 },
+    { type: 'mc', context: '✏️ Höflichkeit', question: 'Wie fragt man höflich nach Hilfe?', options: ['Könnten Sie mir helfen?', 'Helfen Sie mir!', 'Ich brauche Hilfe.', 'Sie müssen mir helfen.'], correct: 0 },
+    // ORDERING + MATCHING (2)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Ich', 'wäre', 'gern', 'reich', '.'], correct: ['Ich', 'wäre', 'gern', 'reich', '.'] },
+    { type: 'match', context: '🔗 Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'sein', right: 'wäre' }, { left: 'haben', right: 'hätte' }, { left: 'werden', right: 'würde' }, { left: 'können', right: 'könnte' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    // TEXTVERSTÄNDNIS (5)
+    { type: 'gap', context: '📖 Textverständnis', question: 'Wenn ich jung _____, würde ich mit euch suchen.', answer: 'wäre', alternatives: ['Wäre'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Es _____ besser, wenn ihr Neoprenanzüge hättet.', answer: 'wäre', alternatives: ['Wäre'] },
+    { type: 'gap', context: '📖 Textverständnis', question: 'Wenn ich schwimmen _____, würde ich selbst tauchen.', answer: 'könnte', alternatives: ['Könnte'] },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was bedeutet "Ich hätte gern einen Kaffee"?', options: ['Höfliche Bitte', 'Befehl', 'Frage', 'Aussage'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Warum benutzt Frau Müller den Konjunktiv II?', options: ['Sie spricht über irreale Situationen', 'Sie ist unhöflich', 'Sie kann nicht gut Deutsch', 'Sie ist müde'], correct: 0 },
+    // WÄRE, HÄTTE, WÜRDE KONJUGATION (6)
+    { type: 'mc', context: '✏️ Konjugation', question: 'Wenn du mehr Zeit _____, könntest du mehr lesen.', options: ['hättest', 'wärst', 'würdest', 'könntest'], correct: 0 },
+    { type: 'mc', context: '✏️ Konjugation', question: 'Wenn sie hier _____, würde ich sie fragen.', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'gap', context: '✏️ Konjugation', question: 'Wenn wir Geld _____, würden wir reisen.', answer: 'hätten', alternatives: ['Hätten'] },
+    { type: 'gap', context: '✏️ Konjugation', question: 'Ich _____ gern in Berlin.', answer: 'wäre', alternatives: ['Wäre'] },
+    { type: 'mc', context: '✏️ Konjugation', question: 'Was _____ du an meiner Stelle machen?', options: ['würdest', 'wärst', 'hättest', 'könntest'], correct: 0 },
+    { type: 'mc', context: '✏️ Konjugation', question: 'Ihr _____ das besser machen können.', options: ['hättet', 'wäret', 'würdet', 'könntet'], correct: 0 },
+    // MODALVERBEN IM KONJUNKTIV II (6)
+    { type: 'mc', context: '✏️ Modalverben', question: 'Du _____ mehr schlafen. (Ratschlag)', options: ['solltest', 'müsstest', 'könntest', 'dürftest'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Ich _____ eigentlich lernen. (Pflicht)', options: ['müsste', 'sollte', 'könnte', 'dürfte'], correct: 0 },
+    { type: 'gap', context: '✏️ Modalverben', question: '_____ ich Sie etwas fragen? (höflich)', answer: 'Dürfte', alternatives: ['dürfte'] },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Das _____ die richtige Antwort sein. (Vermutung)', options: ['dürfte', 'müsste', 'sollte', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Er _____ mir helfen, aber er will nicht.', options: ['könnte', 'müsste', 'sollte', 'dürfte'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Wir _____ früher anfangen. (Vorschlag)', options: ['sollten', 'müssten', 'könnten', 'dürften'], correct: 0 },
+    // WENN-SÄTZE (5)
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: 'Wenn ich reich _____,  würde ich ein Haus kaufen.', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: 'Wenn er Zeit hätte, _____ er kommen.', options: ['würde', 'wäre', 'hätte', 'könnte'], correct: 0 },
+    { type: 'gap', context: '✏️ Wenn-Sätze', question: 'Wenn ich fliegen könnte, _____ ich jeden Tag fliegen.', answer: 'würde', alternatives: ['Würde'] },
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: 'Was _____ passieren, wenn es morgen regnet?', options: ['würde', 'wäre', 'hätte', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: 'Wenn ich du _____, würde ich zum Arzt gehen.', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    // HÖFLICHKEIT (4)
+    { type: 'mc', context: '✏️ Höflichkeit', question: 'Welcher Satz ist am höflichsten?', options: ['Könnten Sie mir bitte helfen?', 'Können Sie mir helfen?', 'Helfen Sie mir!', 'Ich brauche Hilfe.'], correct: 0 },
+    { type: 'mc', context: '✏️ Höflichkeit', question: 'Wie bestellt man höflich im Restaurant?', options: ['Ich hätte gern die Suppe.', 'Ich will die Suppe.', 'Geben Sie mir die Suppe.', 'Die Suppe!'], correct: 0 },
+    { type: 'mc', context: '✏️ Höflichkeit', question: '_____ Sie so freundlich sein, das Fenster zu öffnen?', options: ['Würden', 'Werden', 'Sind', 'Können'], correct: 0 },
+    { type: 'mc', context: '✏️ Höflichkeit', question: '_____ ich Sie kurz stören?', options: ['Dürfte', 'Darf', 'Kann', 'Muss'], correct: 0 },
+    // ORDERING + MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Wenn', 'ich', 'reich', 'wäre', ',', 'würde', 'ich', 'reisen', '.'], correct: ['Wenn', 'ich', 'reich', 'wäre', ',', 'würde', 'ich', 'reisen', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Könnten', 'Sie', 'mir', 'bitte', 'helfen', '?'], correct: ['Könnten', 'Sie', 'mir', 'bitte', 'helfen', '?'] },
+    { type: 'match', context: '🔗 Konjunktiv II', question: 'Ordne zu:', pairs: [{ left: 'müssen', right: 'müsste' }, { left: 'sollen', right: 'sollte' }, { left: 'dürfen', right: 'dürfte' }, { left: 'wollen', right: 'wollte' }]},
+    { type: 'match', context: '🔗 ich-Form', question: 'Ordne zu:', pairs: [{ left: 'ich bin', right: 'ich wäre' }, { left: 'ich habe', right: 'ich hätte' }, { left: 'ich kann', right: 'ich könnte' }, { left: 'ich muss', right: 'ich müsste' }]}
+];
+
+const QUESTIONS_AMETHYST = [
+    // KOMPLEXE TEXTFRAGEN (4)
+    { type: 'mc', context: '📖 Textverständnis', question: 'Was bedeutet "Wenn ich jung wäre, würde ich mit euch suchen"?', options: ['Frau Müller ist nicht mehr jung', 'Frau Müller ist jung', 'Frau Müller sucht mit', 'Frau Müller will nicht suchen'], correct: 0 },
+    { type: 'gap', context: '📖 Textverständnis', question: '"Was _____ die Reise ohne Sie, Frau Müller?"', answer: 'wäre', alternatives: ['Wäre'] },
+    { type: 'mc', context: '📖 Textverständnis', question: '"Wenn ich das meinen Eltern erzählen würde, würden sie es nicht glauben" - Was bedeutet das?', options: ['Die Geschichte ist unglaublich', 'Die Eltern sind taub', 'Mia lügt', 'Die Eltern sind nicht da'], correct: 0 },
+    { type: 'mc', context: '📖 Textverständnis', question: 'Warum sagt Frau Müller "Es wäre besser"?', options: ['Sie gibt einen Ratschlag', 'Sie befiehlt etwas', 'Sie fragt etwas', 'Sie ist wütend'], correct: 0 },
+    // KOMPLEXE WENN-SÄTZE (6)
+    { type: 'gap', context: '✏️ Wenn-Sätze', question: 'Wenn ich mehr Geld _____, könnte ich mir ein Auto kaufen.', answer: 'hätte', alternatives: ['Hätte'] },
+    { type: 'gap', context: '✏️ Wenn-Sätze', question: 'Wenn er nicht so müde _____, würde er mitkommen.', answer: 'wäre', alternatives: ['Wäre'] },
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: 'Welcher Satz ist grammatisch richtig?', options: ['Wenn ich Zeit hätte, würde ich kommen.', 'Wenn ich Zeit hätte, ich würde kommen.', 'Wenn ich Zeit habe, würde ich kommen.', 'Wenn ich Zeit hätte, komme ich.'], correct: 0 },
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: 'Welcher Satz ist grammatisch FALSCH?', options: ['Wenn ich reich wäre, kaufe ich ein Haus.', 'Wenn ich reich wäre, würde ich ein Haus kaufen.', 'Ich würde ein Haus kaufen, wenn ich reich wäre.', 'Wäre ich reich, würde ich ein Haus kaufen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: '"Wäre ich reich, würde ich reisen." = ?', options: ['Wenn ich reich wäre, würde ich reisen.', 'Ich bin reich und reise.', 'Ich war reich und bin gereist.', 'Wenn ich reich bin, reise ich.'], correct: 0 },
+    { type: 'mc', context: '✏️ Wenn-Sätze', question: 'Was drückt "Wenn ich nur mehr Zeit hätte!" aus?', options: ['Einen Wunsch', 'Eine Tatsache', 'Eine Frage', 'Einen Befehl'], correct: 0 },
+    // WÄRE VS HÄTTE VS WÜRDE (5)
+    { type: 'mc', context: '✏️ wäre/hätte/würde', question: 'Ich _____ gern Lehrer. (Beruf)', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre/hätte/würde', question: 'Ich _____ gern mehr Zeit. (Besitz)', options: ['hätte', 'wäre', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre/hätte/würde', question: 'Ich _____ gern nach Japan reisen. (Aktivität)', options: ['würde', 'wäre', 'hätte', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre/hätte/würde', question: 'Das _____ toll!', options: ['wäre', 'hätte', 'würde', 'könnte'], correct: 0 },
+    { type: 'mc', context: '✏️ wäre/hätte/würde', question: 'Ich _____ an deiner Stelle sofort gehen.', options: ['würde', 'wäre', 'hätte', 'könnte'], correct: 0 },
+    // MODALVERBEN KOMPLEX (5)
+    { type: 'mc', context: '✏️ Modalverben', question: 'Du _____ wirklich zum Arzt gehen. (dringender Rat)', options: ['solltest', 'könntest', 'müsstest', 'dürftest'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Ich _____ jetzt eigentlich arbeiten, aber ich bin zu müde.', options: ['müsste', 'sollte', 'könnte', 'dürfte'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: '"Er dürfte etwa 40 Jahre alt sein." = ?', options: ['Er ist wahrscheinlich etwa 40', 'Er darf 40 sein', 'Er muss 40 sein', 'Er will 40 sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: '"Das könnte stimmen." = ?', options: ['Es ist möglich, dass es stimmt', 'Es stimmt sicher', 'Es stimmt nicht', 'Ich weiß, dass es stimmt'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverben', question: 'Was ist der Unterschied zwischen "Er könnte kommen" und "Er sollte kommen"?', options: ['Möglichkeit vs. Empfehlung', 'Beides ist gleich', 'Vergangenheit vs. Gegenwart', 'Frage vs. Aussage'], correct: 0 },
+    // FEHLERSUCHE (4)
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Wenn ich reich bin, würde ich reisen.', 'Wenn ich reich wäre, würde ich reisen.', 'Ich würde reisen, wenn ich reich wäre.', 'Wäre ich reich, würde ich reisen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist FALSCH?', options: ['Ich würde gern reich sein.', 'Ich wäre gern reich.', 'Ich hätte gern viel Geld.', 'Ich könnte gern reich sein.'], correct: 3 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist RICHTIG?', options: ['Könnten Sie mir bitte helfen?', 'Können Sie mir bitte würden helfen?', 'Würden Sie mir bitte können helfen?', 'Könntet Sie mir bitte helfen?'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehlersuche', question: 'Welcher Satz ist grammatisch RICHTIG?', options: ['Ich hätte gern einen Kaffee.', 'Ich würde gern einen Kaffee.', 'Ich wäre gern einen Kaffee.', 'Ich könnte gern einen Kaffee.'], correct: 0 },
+    // ORDERING + MATCHING (6)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Wenn', 'ich', 'du', 'wäre', ',', 'würde', 'ich', 'das', 'nicht', 'machen', '.'], correct: ['Wenn', 'ich', 'du', 'wäre', ',', 'würde', 'ich', 'das', 'nicht', 'machen', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Hätten', 'Sie', 'vielleicht', 'einen', 'Moment', 'Zeit', '?'], correct: ['Hätten', 'Sie', 'vielleicht', 'einen', 'Moment', 'Zeit', '?'] },
+    { type: 'match', context: '🔗 Bedeutung', question: 'Ordne zu:', pairs: [{ left: 'wäre', right: 'irrealer Zustand' }, { left: 'hätte', right: 'irrealer Besitz' }, { left: 'würde', right: 'irreale Aktion' }, { left: 'könnte', right: 'Möglichkeit' }]},
+    { type: 'match', context: '🔗 Funktion', question: 'Ordne zu:', pairs: [{ left: 'sollte', right: 'Ratschlag' }, { left: 'müsste', right: 'Notwendigkeit' }, { left: 'könnte', right: 'Möglichkeit' }, { left: 'dürfte', right: 'Vermutung' }]}
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+
+function shuffle(array) { const arr = [...array]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { const content = document.getElementById('grammarContent'); const arrow = document.getElementById('grammarArrow'); content.classList.toggle('open'); arrow.textContent = content.classList.contains('open') ? '▲' : '▼'; }
+
+function startQuiz(level) {
+    selectedLevel = level; currentQuestion = 0; score = 0;
+    if (level === 'rubin') currentQuestions = shuffle(QUESTIONS_RUBIN);
+    else if (level === 'smaragd') currentQuestions = shuffle(QUESTIONS_SMARAGD);
+    else currentQuestions = shuffle(QUESTIONS_AMETHYST);
+    document.getElementById('levelSelection').style.display = 'none';
+    document.getElementById('quizArea').classList.add('active');
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = currentQuestions[currentQuestion];
+    const box = document.getElementById('questionBox');
+    document.getElementById('progressFill').style.width = ((currentQuestion) / currentQuestions.length) * 100 + '%';
+    document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`;
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('nextBtn').classList.remove('show');
+
+    let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`;
+
+    if (q.type === 'mc') {
+        html += '<div class="options-grid">';
+        shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach((opt) => {
+            html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`;
+        });
+        html += '</div>';
+    } else if (q.type === 'gap') {
+        html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`;
+    } else if (q.type === 'order') {
+        html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">';
+        shuffle([...q.words]).forEach((word) => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; });
+        html += '</div><p style="text-align:center; color:#7DD3FC;">↓ Klicke die Wörter in der richtigen Reihenfolge ↓</p><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>';
+    } else if (q.type === 'match') {
+        html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>';
+        shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div><div class="matching-column"><h4>Rechts</h4>';
+        shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; });
+        html += '</div></div>';
+    }
+    box.innerHTML = html;
+}
+
+function checkMC(selected, correct, btn) {
+    document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+    if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); }
+}
+
+function checkGap() {
+    const input = document.getElementById('gapInput');
+    const q = currentQuestions[currentQuestion];
+    const userAnswer = input.value.trim().toLowerCase();
+    const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : [];
+    if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { input.classList.add('wrong'); showFeedback(false, `Die richtige Antwort ist: ${q.answer}`); }
+    input.disabled = true;
+}
+
+function moveWord(element, direction) {
+    if (element.classList.contains('placed')) return;
+    const source = document.getElementById('orderSource'), target = document.getElementById('orderTarget');
+    if (direction === 'toTarget') { const clone = element.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; target.appendChild(clone); element.classList.add('placed'); }
+    else { source.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === element.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); element.remove(); }
+}
+
+function checkOrder() {
+    const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word);
+    if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; }
+    else { showFeedback(false, `Richtige Reihenfolge: ${currentQuestions[currentQuestion].correct.join(' ')}`); }
+}
+
+let selectedMatch = null, matchedPairs = 0;
+
+function selectMatch(element) {
+    if (element.classList.contains('matched')) return;
+    if (!selectedMatch) { selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+    else {
+        if (selectedMatch.type === element.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element, type: element.dataset.type, value: element.dataset.value }; element.classList.add('selected'); }
+        else {
+            const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === element.dataset.value) || (p.right === selectedMatch.value && p.left === element.dataset.value));
+            if (pair) { element.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } }
+            else { element.classList.add('wrong'); setTimeout(() => element.classList.remove('wrong'), 500); }
+            selectedMatch.element.classList.remove('selected'); selectedMatch = null;
+        }
+    }
+}
+
+function showFeedback(isCorrect, message) { const feedback = document.getElementById('feedback'); feedback.textContent = message; feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+
+function showResults() {
+    document.getElementById('quizArea').classList.remove('active');
+    document.getElementById('resultsSection').classList.add('active');
+    const percentage = Math.round((score / currentQuestions.length) * 100);
+    let gems = 0, icon = '🏆', message = '';
+    if (percentage >= 90) { gems = selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10; icon = '🏆'; message = 'Ausgezeichnet! Du hast den sechsten Kristall gefunden! 💎'; }
+    else if (percentage >= 70) { gems = selectedLevel === 'amethyst' ? 20 : selectedLevel === 'smaragd' ? 15 : 8; icon = '⭐'; message = 'Sehr gut!'; }
+    else if (percentage >= 50) { gems = selectedLevel === 'amethyst' ? 10 : selectedLevel === 'smaragd' ? 8 : 5; icon = '💪'; message = 'Gut gemacht!'; }
+    else { gems = 2; icon = '📚'; message = 'Lies die Grammatik nochmal!'; }
+    document.getElementById('resultsIcon').textContent = icon;
+    document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`;
+    document.getElementById('resultsGems').textContent = `+${gems} Edelsteine 💎`;
+    document.getElementById('resultsMessage').textContent = message;
+    localStorage.setItem('station6_gems', gems);
+    localStorage.setItem('station6_completed', percentage >= 50);
+}
+
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+
+</body>
+</html>

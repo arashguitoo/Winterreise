@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 Station 13: Bremen - Verben mit Dativ & Akkusativ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <script data-goatcounter="https://aguitoo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1E3A5F 0%, #2D5A8C 50%, #3B7EC4 100%); min-height: 100vh; color: #FFFFFF; padding: 20px; padding-bottom: 100px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .station-header { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; margin-bottom: 30px; text-align: center; }
+        .station-icon { font-size: 4em; margin-bottom: 10px; }
+        .station-title { font-family: 'Fredoka', sans-serif; font-size: 2.2em; color: #FFD700; margin-bottom: 5px; }
+        .station-subtitle { font-size: 1.1em; color: #E0F4FF; }
+        .home-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 10px; color: white; cursor: pointer; font-size: 1.2em; z-index: 1000; }
+        .section { background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .section h2 { font-family: 'Fredoka', sans-serif; color: #FFD700; margin-bottom: 15px; }
+        .story-box { background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 20px; border-radius: 0 15px 15px 0; line-height: 1.8; }
+        .story-box p { margin-bottom: 12px; }
+        .story-box strong { color: #FFD700; }
+        .collapsible { background: rgba(255, 255, 255, 0.1); border: none; padding: 15px 20px; width: 100%; text-align: left; color: #FFD700; font-size: 1.2em; font-family: 'Fredoka', sans-serif; cursor: pointer; border-radius: 15px; display: flex; justify-content: space-between; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .collapsible-content.open { max-height: 5000px; }
+        .collapsible-inner { padding: 20px; line-height: 1.7; }
+        .collapsible-inner h3 { color: #7DD3FC; margin: 15px 0 10px 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        .grammar-table th, .grammar-table td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: center; }
+        .grammar-table th { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .grammar-note { background: rgba(125,211,252,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #7DD3FC; }
+        .grammar-warning { background: rgba(230,57,70,0.2); padding: 10px 15px; border-radius: 10px; margin: 10px 0; border-left: 3px solid #E63946; }
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .vocab-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .vocab-emoji { font-size: 1.5em; }
+        .vocab-word { font-weight: 600; color: #FFD700; }
+        .vocab-meaning { font-size: 0.85em; color: #E0F4FF; }
+        .level-selection { text-align: center; }
+        .level-btn { display: inline-block; padding: 20px 40px; margin: 10px; border-radius: 15px; border: 3px solid; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 1.2em; background: rgba(255,255,255,0.1); }
+        .level-rubin { border-color: #E63946; color: #E63946; }
+        .level-smaragd { border-color: #06D6A0; color: #06D6A0; }
+        .level-amethyst { border-color: #9D4EDD; color: #9D4EDD; }
+        .quiz-area { display: none; }
+        .quiz-area.active { display: block; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #06D6A0, #7DD3FC); border-radius: 6px; transition: width 0.3s; }
+        .question-counter { text-align: center; margin-bottom: 15px; color: #E0F4FF; }
+        .question-box { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        .question-context { color: #7DD3FC; font-size: 0.9em; margin-bottom: 10px; }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; color: white; cursor: pointer; font-size: 1.1em; }
+        .option-btn.correct { background: rgba(6, 214, 160, 0.3); border-color: #06D6A0; }
+        .option-btn.wrong { background: rgba(230, 57, 70, 0.3); border-color: #E63946; }
+        .gap-input { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 10px; color: white; font-size: 1.2em; width: 200px; text-align: center; }
+        .gap-input.correct { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .gap-input.wrong { border-color: #E63946; background: rgba(230,57,70,0.2); }
+        .check-btn { background: #5B9BD5; border: none; padding: 12px 30px; border-radius: 10px; color: white; font-size: 1.1em; cursor: pointer; margin-top: 15px; }
+        .ordering-container { margin: 15px 0; }
+        .ordering-source, .ordering-target { display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .ordering-source { background: rgba(255,255,255,0.1); }
+        .ordering-target { background: rgba(125,211,252,0.2); border: 2px dashed rgba(125,211,252,0.5); }
+        .ordering-word { background: rgba(255,215,0,0.2); border: 2px solid #FFD700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+        .ordering-word.placed { opacity: 0.4; }
+        .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #7DD3FC; }
+        .matching-item { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .matching-item.selected { border-color: #FFD700; background: rgba(255,215,0,0.2); }
+        .matching-item.matched { border-color: #06D6A0; background: rgba(6,214,160,0.2); }
+        .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(6,214,160,0.2); border-left: 4px solid #06D6A0; }
+        .feedback.wrong { background: rgba(230,57,70,0.2); border-left: 4px solid #E63946; }
+        .next-btn { background: linear-gradient(135deg, #06D6A0, #7DD3FC); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.2em; cursor: pointer; margin-top: 20px; display: none; }
+        .next-btn.show { display: inline-block; }
+        .results-section { text-align: center; display: none; }
+        .results-section.active { display: block; }
+        .results-icon { font-size: 5em; margin-bottom: 20px; }
+        .results-score { font-family: 'Fredoka', sans-serif; font-size: 3em; color: #FFD700; }
+        .results-gems { font-size: 1.5em; color: #7DD3FC; margin-bottom: 30px; }
+        .results-btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 15px 40px; border-radius: 12px; color: white; font-size: 1.1em; cursor: pointer; margin: 10px; }
+        @media (max-width: 600px) { .options-grid, .matching-container { grid-template-columns: 1fr; } .level-btn { display: block; margin: 10px auto; } }
+    </style>
+</head>
+<body>
+<button class="home-btn" onclick="goHome()">🏠</button>
+<div class="container">
+    <div class="station-header">
+        <div class="station-icon">🎁</div>
+        <h1 class="station-title">Station 13: Bremen</h1>
+        <p class="station-subtitle">Verben mit Dativ & Akkusativ - geben, schenken, zeigen...</p>
+    </div>
+
+    <div class="section">
+        <h2>📖 Die Geschichte</h2>
+        <div class="story-box">
+            <p>Die Freunde kommen in Bremen an. Sie sehen die berühmten Bremer Stadtmusikanten!</p>
+            <p><strong>Sara:</strong> <em>"Leon, kannst du <strong>mir</strong> <strong>das Foto</strong> zeigen?"</em></p>
+            <p><strong>Leon:</strong> <em>"Klar! Ich <strong>zeige</strong> <strong>dir</strong> <strong>das Foto</strong>. Schau mal!"</em></p>
+            <p>Sie treffen eine alte Frau namens <strong>Frau Grimm</strong>. Sie verkauft Souvenirs.</p>
+            <p><strong>Frau Grimm:</strong> <em>"Guten Tag! Kann ich <strong>euch</strong> etwas <strong>anbieten</strong>?"</em></p>
+            <p><strong>Mia:</strong> <em>"Wir suchen einen Kristall. Können Sie <strong>uns</strong> <strong>den Weg</strong> erklären?"</em></p>
+            <p><strong>Frau Grimm:</strong> <em>"Ich <strong>erzähle</strong> <strong>euch</strong> <strong>eine Geschichte</strong>. Die Stadtmusikanten haben den Kristall versteckt. Ich <strong>gebe</strong> <strong>euch</strong> <strong>einen Hinweis</strong>: Schaut unter dem Esel!"</em></p>
+            <p><strong>Tim:</strong> <em>"Vielen Dank! Darf ich <strong>Ihnen</strong> <strong>etwas Geld</strong> geben?"</em></p>
+            <p><strong>Frau Grimm:</strong> <em>"Nein, danke! Aber <strong>bringt</strong> <strong>mir</strong> <strong>gute Nachrichten</strong>, wenn ihr den Kristall findet!"</em></p>
+            <p>Die Freunde schauen unter der Statue. Tim findet einen <strong>bronzenen Kristall</strong>!</p>
+            <p><strong>Sara:</strong> <em>"Ich <strong>schicke</strong> <strong>meinen Eltern</strong> <strong>ein Foto</strong>!"</em></p>
+            <p><em>"Der dreizehnte Kristall!"</em> rufen alle.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <button class="collapsible" onclick="toggleGrammar()">📚 Grammatik: Verben mit Dativ & Akkusativ <span id="grammarArrow">▼</span></button>
+        <div class="collapsible-content" id="grammarContent">
+            <div class="collapsible-inner">
+                <h3>Verben mit zwei Objekten</h3>
+                <p>Manche Verben brauchen zwei Objekte: <strong>Dativ</strong> (WEM?) und <strong>Akkusativ</strong> (WAS?).</p>
+                <div class="grammar-note">
+                    <p>Ich <strong>gebe</strong> <strong>dir</strong> (Dativ) <strong>das Buch</strong> (Akkusativ).</p>
+                    <p>WEM gebe ich? → dir</p>
+                    <p>WAS gebe ich? → das Buch</p>
+                </div>
+
+                <h3>Wichtige Verben mit Dativ + Akkusativ</h3>
+                <table class="grammar-table">
+                    <tr><th>Verb</th><th>Beispiel</th></tr>
+                    <tr><td><strong>geben</strong></td><td>Ich gebe <strong>dir</strong> <strong>das Buch</strong>.</td></tr>
+                    <tr><td><strong>schenken</strong></td><td>Er schenkt <strong>ihr</strong> <strong>Blumen</strong>.</td></tr>
+                    <tr><td><strong>zeigen</strong></td><td>Sie zeigt <strong>uns</strong> <strong>den Weg</strong>.</td></tr>
+                    <tr><td><strong>erklären</strong></td><td>Der Lehrer erklärt <strong>den Schülern</strong> <strong>die Grammatik</strong>.</td></tr>
+                    <tr><td><strong>erzählen</strong></td><td>Oma erzählt <strong>mir</strong> <strong>eine Geschichte</strong>.</td></tr>
+                    <tr><td><strong>bringen</strong></td><td>Ich bringe <strong>dir</strong> <strong>einen Kaffee</strong>.</td></tr>
+                    <tr><td><strong>schicken</strong></td><td>Sie schickt <strong>ihm</strong> <strong>eine E-Mail</strong>.</td></tr>
+                    <tr><td><strong>kaufen</strong></td><td>Er kauft <strong>seiner Frau</strong> <strong>ein Geschenk</strong>.</td></tr>
+                    <tr><td><strong>leihen</strong></td><td>Kannst du <strong>mir</strong> <strong>10 Euro</strong> leihen?</td></tr>
+                    <tr><td><strong>empfehlen</strong></td><td>Ich empfehle <strong>dir</strong> <strong>dieses Restaurant</strong>.</td></tr>
+                </table>
+
+                <h3>Wortstellung</h3>
+                <div class="grammar-warning">
+                    <p><strong>Regel:</strong> Dativ vor Akkusativ!</p>
+                    <p>Ich gebe <strong>dem Mann</strong> <strong>das Buch</strong>. ✓</p>
+                </div>
+                <div class="grammar-note">
+                    <p><strong>Ausnahme:</strong> Wenn Akkusativ = Pronomen, dann Akkusativ zuerst!</p>
+                    <p>Ich gebe <strong>es</strong> <strong>dem Mann</strong>. ✓</p>
+                    <p>Ich gebe <strong>es</strong> <strong>ihm</strong>. ✓</p>
+                </div>
+
+                <h3>Personalpronomen</h3>
+                <table class="grammar-table">
+                    <tr><th>Nominativ</th><th>Akkusativ</th><th>Dativ</th></tr>
+                    <tr><td>ich</td><td>mich</td><td>mir</td></tr>
+                    <tr><td>du</td><td>dich</td><td>dir</td></tr>
+                    <tr><td>er</td><td>ihn</td><td>ihm</td></tr>
+                    <tr><td>sie</td><td>sie</td><td>ihr</td></tr>
+                    <tr><td>es</td><td>es</td><td>ihm</td></tr>
+                    <tr><td>wir</td><td>uns</td><td>uns</td></tr>
+                    <tr><td>ihr</td><td>euch</td><td>euch</td></tr>
+                    <tr><td>sie/Sie</td><td>sie/Sie</td><td>ihnen/Ihnen</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Wortschatz</h2>
+        <div class="vocab-grid">
+            <div class="vocab-item"><span class="vocab-emoji">🎁</span><div><div class="vocab-word">schenken</div><div class="vocab-meaning">als Geschenk geben</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">👆</span><div><div class="vocab-word">zeigen</div><div class="vocab-meaning">sehen lassen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📖</span><div><div class="vocab-word">erklären</div><div class="vocab-meaning">verständlich machen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📬</span><div><div class="vocab-word">schicken</div><div class="vocab-meaning">senden</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🛒</span><div><div class="vocab-word">kaufen</div><div class="vocab-meaning">mit Geld bekommen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">🤝</span><div><div class="vocab-word">leihen</div><div class="vocab-meaning">kurz geben/nehmen</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">📦</span><div><div class="vocab-word">bringen</div><div class="vocab-meaning">transportieren zu</div></div></div>
+            <div class="vocab-item"><span class="vocab-emoji">⭐</span><div><div class="vocab-word">empfehlen</div><div class="vocab-meaning">als gut vorschlagen</div></div></div>
+        </div>
+    </div>
+
+    <div class="section level-selection" id="levelSelection">
+        <h2>🎮 Wähle dein Level</h2>
+        <button class="level-btn level-rubin" onclick="startQuiz('rubin')">🔴 Rubin<br><small>Einfach</small></button>
+        <button class="level-btn level-smaragd" onclick="startQuiz('smaragd')">🟢 Smaragd<br><small>Mittel</small></button>
+        <button class="level-btn level-amethyst" onclick="startQuiz('amethyst')">🟣 Amethyst<br><small>Schwer</small></button>
+    </div>
+
+    <div class="section quiz-area" id="quizArea">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="question-counter" id="questionCounter"></div>
+        <div class="question-box" id="questionBox"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+
+    <div class="section results-section" id="resultsSection">
+        <div class="results-icon" id="resultsIcon">🏆</div>
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-gems" id="resultsGems"></div>
+        <p id="resultsMessage"></p>
+        <button class="results-btn" onclick="restartQuiz()">🔄 Nochmal</button>
+        <button class="results-btn" onclick="goHome()">🏠 Zur Karte</button>
+    </div>
+</div>
+
+<script>
+const QUESTIONS_RUBIN = [
+    { type: 'mc', context: '📖 Text', question: 'Welche Farbe hat der dreizehnte Kristall?', options: ['Bronze', 'Gold', 'Silber', 'Rot'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Wo ist der Kristall versteckt?', options: ['Unter dem Esel', 'Im Brunnen', 'Auf dem Dach', 'Im Baum'], correct: 0 },
+    { type: 'mc', context: '📖 Text', question: 'Was macht Sara am Ende?', options: ['Sie schickt ein Foto', 'Sie singt', 'Sie tanzt', 'Sie schläft'], correct: 0 },
+    { type: 'mc', context: '✏️ geben', question: 'Ich gebe _____ das Buch. (du)', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ geben', question: 'Er gibt _____ einen Kaffee. (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ geben', question: 'Sie gibt _____ das Geld. (er)', options: ['ihm', 'ihn', 'er', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ schenken', question: 'Er schenkt _____ Blumen. (sie Sg.)', options: ['ihr', 'sie', 'ihre', 'ihren'], correct: 0 },
+    { type: 'mc', context: '✏️ schenken', question: 'Ich schenke _____ ein Buch. (er)', options: ['ihm', 'ihn', 'er', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ zeigen', question: 'Kannst du _____ den Weg zeigen? (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ zeigen', question: 'Sie zeigt _____ das Foto. (wir)', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ erklären', question: 'Der Lehrer erklärt _____ die Grammatik. (die Schüler)', options: ['den Schülern', 'die Schüler', 'der Schüler', 'des Schülers'], correct: 0 },
+    { type: 'mc', context: '✏️ erzählen', question: 'Oma erzählt _____ eine Geschichte. (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ bringen', question: 'Ich bringe _____ einen Kaffee. (du)', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ schicken', question: 'Sie schickt _____ eine E-Mail. (er)', options: ['ihm', 'ihn', 'er', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ kaufen', question: 'Er kauft _____ ein Geschenk. (seine Frau)', options: ['seiner Frau', 'seine Frau', 'sein Frau', 'seinen Frau'], correct: 0 },
+    { type: 'mc', context: '✏️ leihen', question: 'Kannst du _____ 10 Euro leihen? (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ', question: 'Welcher Kasus? → Ich gebe dem Mann...', options: ['Dativ', 'Akkusativ', 'Nominativ', 'Genitiv'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Welcher Kasus? → Ich gebe ... das Buch.', options: ['Akkusativ', 'Dativ', 'Nominativ', 'Genitiv'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Dativ von "ich"?', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Dativ von "du"?', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Dativ von "er"?', options: ['ihm', 'ihn', 'er', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Dativ von "sie" (Sg.)?', options: ['ihr', 'sie', 'ihre', 'ihren'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Dativ von "wir"?', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Dativ von "ihr"?', options: ['euch', 'ihr', 'euer', 'eure'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Dativ von "sie" (Pl.)?', options: ['ihnen', 'sie', 'ihre', 'ihren'], correct: 0 },
+    { type: 'mc', context: '✏️ Wortstellung', question: 'Was kommt zuerst? Dativ oder Akkusativ?', options: ['Dativ', 'Akkusativ', 'Egal', 'Nominativ'], correct: 0 },
+    { type: 'mc', context: '✏️ Frage', question: 'WEM gebe ich das Buch?', options: ['Dativ-Frage', 'Akkusativ-Frage', 'Nominativ-Frage', 'Genitiv-Frage'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'gebe', 'dir', 'das', 'Buch', '.'], correct: ['Ich', 'gebe', 'dir', 'das', 'Buch', '.'] },
+    { type: 'match', context: '🔗 Dativ', question: 'Ordne zu:', pairs: [{ left: 'ich', right: 'mir' }, { left: 'du', right: 'dir' }, { left: 'er', right: 'ihm' }, { left: 'sie', right: 'ihr' }]},
+    { type: 'match', context: '🔗 Verben', question: 'Ordne zu:', pairs: [{ left: 'geben', right: 'Dat + Akk' }, { left: 'schenken', right: 'Dat + Akk' }, { left: 'zeigen', right: 'Dat + Akk' }, { left: 'erklären', right: 'Dat + Akk' }]}
+];
+
+const QUESTIONS_SMARAGD = [
+    { type: 'gap', context: '📖 Text', question: 'Ich zeige _____ das Foto. (du)', answer: 'dir', alternatives: ['Dir'] },
+    { type: 'gap', context: '📖 Text', question: 'Ich gebe _____ einen Hinweis. (ihr)', answer: 'euch', alternatives: ['Euch'] },
+    { type: 'gap', context: '📖 Text', question: 'Bringt _____ gute Nachrichten! (ich)', answer: 'mir', alternatives: ['Mir'] },
+    { type: 'mc', context: '✏️ Nomen', question: 'Ich gebe _____ das Buch. (der Mann)', options: ['dem Mann', 'den Mann', 'der Mann', 'des Mannes'], correct: 0 },
+    { type: 'mc', context: '✏️ Nomen', question: 'Sie zeigt _____ den Weg. (die Frau)', options: ['der Frau', 'die Frau', 'den Frau', 'des Frau'], correct: 0 },
+    { type: 'mc', context: '✏️ Nomen', question: 'Er erklärt _____ die Aufgabe. (das Kind)', options: ['dem Kind', 'das Kind', 'den Kind', 'des Kindes'], correct: 0 },
+    { type: 'gap', context: '✏️ Nomen', question: 'Ich schicke _____ einen Brief. (meine Mutter)', answer: 'meiner Mutter', alternatives: ['Meiner Mutter'] },
+    { type: 'gap', context: '✏️ Nomen', question: 'Er kauft _____ Blumen. (seine Freundin)', answer: 'seiner Freundin', alternatives: ['Seiner Freundin'] },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Ich gebe es _____. (er)', options: ['ihm', 'ihn', 'er', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Kannst du es _____ zeigen? (wir)', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ Wortstellung', question: 'Ich gebe dem Mann _____. (das Buch)', options: ['das Buch', 'dem Buch', 'den Buch', 'des Buches'], correct: 0 },
+    { type: 'mc', context: '✏️ Wortstellung', question: 'Ich gebe _____ dem Mann. (es)', options: ['es', 'ihm', 'ihn', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Wortstellung', question: 'Ich gebe _____ ihm. (es)', options: ['es', 'das', 'den', 'dem'], correct: 0 },
+    { type: 'mc', context: '✏️ empfehlen', question: 'Ich empfehle _____ dieses Restaurant. (du)', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ empfehlen', question: 'Der Arzt empfiehlt _____ mehr Sport. (der Patient)', options: ['dem Patienten', 'den Patienten', 'der Patient', 'des Patienten'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Er erzählt _____ eine lustige Geschichte. (wir)', answer: 'uns', alternatives: ['Uns'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Sie leiht _____ ihr Auto. (ich)', answer: 'mir', alternatives: ['Mir'] },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich gebe das Buch dir.', 'Ich gebe dir das Buch.', 'Ich gebe es dir.', 'Ich gebe ihm das Buch.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er schenkt ihr Blumen.', 'Er schenkt sie Blumen.', 'Er schenkt Blumen ihr.', 'Er schenkt ihr Blumen sie.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Ich zeige es ihm.', 'Ich zeige ihm es.', 'Ich zeige es ihn.', 'Ich zeige ihn es.'], correct: 0 },
+    { type: 'mc', context: '✏️ Perfekt', question: 'Ich habe _____ das Buch gegeben. (er)', options: ['ihm', 'ihn', 'er', 'sein'], correct: 0 },
+    { type: 'mc', context: '✏️ Perfekt', question: 'Sie hat _____ eine E-Mail geschickt. (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Ich möchte _____ etwas zeigen. (du)', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ Modalverb', question: 'Kannst du _____ das erklären? (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Er', 'schenkt', 'seiner', 'Frau', 'Blumen', '.'], correct: ['Er', 'schenkt', 'seiner', 'Frau', 'Blumen', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'gebe', 'es', 'ihm', '.'], correct: ['Ich', 'gebe', 'es', 'ihm', '.'] },
+    { type: 'match', context: '🔗 Artikel Dativ', question: 'Ordne zu:', pairs: [{ left: 'der Mann', right: 'dem Mann' }, { left: 'die Frau', right: 'der Frau' }, { left: 'das Kind', right: 'dem Kind' }, { left: 'die Kinder', right: 'den Kindern' }]},
+    { type: 'match', context: '🔗 Wortstellung', question: 'Ordne zu:', pairs: [{ left: 'Nomen + Nomen', right: 'Dativ vor Akkusativ' }, { left: 'Pronomen + Nomen', right: 'Pronomen zuerst' }, { left: 'Akk-Pron + Dat-Pron', right: 'Akkusativ zuerst' }, { left: 'Nomen + Pronomen', right: 'Pronomen zuerst' }]},
+    { type: 'mc', context: '✏️ Komplex', question: 'Ich habe es _____ gestern gegeben. (sie Pl.)', options: ['ihnen', 'sie', 'ihr', 'ihre'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Können Sie _____ _____ zeigen? (ich, der Weg)', options: ['mir den Weg', 'mich den Weg', 'mir dem Weg', 'mich dem Weg'], correct: 0 }
+];
+
+const QUESTIONS_AMETHYST = [
+    { type: 'gap', context: '📖 Text', question: 'Ich schicke _____ _____ ein Foto. (meine Eltern)', answer: 'meinen Eltern', alternatives: ['Meinen Eltern'] },
+    { type: 'mc', context: '✏️ Komplex', question: 'Der Kellner bringt _____ _____ . (die Gäste, das Essen)', options: ['den Gästen das Essen', 'die Gäste das Essen', 'den Gästen dem Essen', 'die Gäste dem Essen'], correct: 0 },
+    { type: 'mc', context: '✏️ Komplex', question: 'Sie erklärt _____ _____. (ihr Sohn, die Aufgabe)', options: ['ihrem Sohn die Aufgabe', 'ihren Sohn die Aufgabe', 'ihrem Sohn der Aufgabe', 'ihr Sohn die Aufgabe'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Der Lehrer gibt _____ die Hausaufgaben zurück. (die Schüler)', answer: 'den Schülern', alternatives: ['Den Schülern'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Ich leihe _____ mein Auto. (mein Bruder)', answer: 'meinem Bruder', alternatives: ['Meinem Bruder'] },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Gibst du _____ _____? (ich, es)', options: ['es mir', 'mir es', 'mich es', 'es mich'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Ich zeige _____ _____. (sie, es)', options: ['es ihr', 'ihr es', 'sie es', 'es sie'], correct: 0 },
+    { type: 'mc', context: '✏️ Pronomen', question: 'Er gibt _____ _____. (wir, es)', options: ['es uns', 'uns es', 'wir es', 'es wir'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Ich hoffe, dass du _____ das Buch gibst. (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Weil er _____ nichts gesagt hat, weiß ich es nicht. (ich)', options: ['mir', 'mich', 'ich', 'mein'], correct: 0 },
+    { type: 'gap', context: '✏️ Nebensatz', question: 'Obwohl sie _____ einen Brief geschickt hat, habe ich ihn nicht bekommen. (ich)', answer: 'mir', alternatives: ['Mir'] },
+    { type: 'mc', context: '✏️ Infinitiv', question: 'Ich versuche, _____ alles zu erklären. (du)', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ Infinitiv', question: 'Er verspricht, _____ zu helfen. (wir)', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ anbieten', question: 'Darf ich _____ etwas anbieten? (Sie)', options: ['Ihnen', 'Sie', 'Ihr', 'Ihre'], correct: 0 },
+    { type: 'mc', context: '✏️ anbieten', question: 'Er bietet _____ seine Hilfe an. (wir)', options: ['uns', 'wir', 'unser', 'unsere'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich gebe ihm es.', 'Ich gebe es ihm.', 'Ich gebe ihm das Buch.', 'Ich gebe dem Mann das Buch.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Er schenkt seiner Frau sie.', 'Er schenkt ihr Blumen.', 'Er schenkt sie seiner Frau.', 'Er schenkt seiner Frau Blumen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Ich habe es ihr gegeben.', 'Ich habe ihr es gegeben.', 'Ich habe sie es gegeben.', 'Ich habe es sie gegeben.'], correct: 0 },
+    { type: 'mc', context: '✏️ mitbringen', question: 'Ich bringe _____ etwas mit. (du)', options: ['dir', 'dich', 'du', 'dein'], correct: 0 },
+    { type: 'mc', context: '✏️ wünschen', question: 'Ich wünsche _____ alles Gute. (Sie)', options: ['Ihnen', 'Sie', 'Ihr', 'Ihre'], correct: 0 },
+    { type: 'gap', context: '✏️ Komplex', question: 'Können Sie _____ bitte _____ erklären? (ich, das)', answer: 'mir', alternatives: ['Mir'] },
+    { type: 'gap', context: '✏️ Komplex', question: 'Ich möchte _____ _____ schenken. (meine Freundin, Blumen)', answer: 'meiner Freundin', alternatives: ['Meiner Freundin'] },
+    { type: 'mc', context: '✏️ Perfekt', question: 'Er hat _____ _____ erzählt. (ich, eine Geschichte)', options: ['mir eine Geschichte', 'mich eine Geschichte', 'mir einer Geschichte', 'mich einer Geschichte'], correct: 0 },
+    { type: 'mc', context: '✏️ Perfekt', question: 'Haben Sie _____ _____ geschickt? (er, die E-Mail)', options: ['ihm die E-Mail', 'ihn die E-Mail', 'ihm der E-Mail', 'ihn der E-Mail'], correct: 0 },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'habe', 'es', 'ihr', 'gestern', 'gegeben', '.'], correct: ['Ich', 'habe', 'es', 'ihr', 'gestern', 'gegeben', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Kannst', 'du', 'mir', 'das', 'erklären', '?'], correct: ['Kannst', 'du', 'mir', 'das', 'erklären', '?'] },
+    { type: 'match', context: '🔗 Wortstellung', question: 'Ordne richtig:', pairs: [{ left: 'Ich gebe...', right: 'ihm das Buch' }, { left: 'Ich gebe...', right: 'es ihm' }, { left: 'Ich gebe...', right: 'es dem Mann' }, { left: 'Ich gebe dem Mann...', right: 'das Buch' }]},
+    { type: 'match', context: '🔗 Höflich', question: 'Ordne zu:', pairs: [{ left: 'Können Sie mir...', right: 'helfen?' }, { left: 'Darf ich Ihnen...', right: 'etwas anbieten?' }, { left: 'Ich wünsche Ihnen...', right: 'alles Gute!' }, { left: 'Ich empfehle Ihnen...', right: 'dieses Restaurant.' }]},
+    { type: 'mc', context: '✏️ Schwer', question: 'Weil ich _____ _____ nicht gegeben habe, ist er traurig. (er, es)', options: ['es ihm', 'ihm es', 'ihn es', 'es ihn'], correct: 0 },
+    { type: 'mc', context: '✏️ Schwer', question: 'Ich freue mich, dass du _____ _____ geschenkt hast. (sie, Blumen)', options: ['ihr Blumen', 'sie Blumen', 'ihr Blume', 'sie Blume'], correct: 0 }
+];
+
+let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
+function shuffle(a) { const arr = [...a]; for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function toggleGrammar() { document.getElementById('grammarContent').classList.toggle('open'); document.getElementById('grammarArrow').textContent = document.getElementById('grammarContent').classList.contains('open') ? '▲' : '▼'; }
+function startQuiz(level) { selectedLevel = level; currentQuestion = 0; score = 0; currentQuestions = shuffle(level === 'rubin' ? QUESTIONS_RUBIN : level === 'smaragd' ? QUESTIONS_SMARAGD : QUESTIONS_AMETHYST); document.getElementById('levelSelection').style.display = 'none'; document.getElementById('quizArea').classList.add('active'); showQuestion(); }
+function showQuestion() { const q = currentQuestions[currentQuestion]; const box = document.getElementById('questionBox'); document.getElementById('progressFill').style.width = (currentQuestion / currentQuestions.length) * 100 + '%'; document.getElementById('questionCounter').textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`; document.getElementById('feedback').className = 'feedback'; document.getElementById('feedback').style.display = 'none'; document.getElementById('nextBtn').classList.remove('show'); let html = `<div class="question-context">${q.context}</div><div class="question-text">${q.question}</div>`; if (q.type === 'mc') { html += '<div class="options-grid">'; shuffle(q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }))).forEach(opt => { html += `<button class="option-btn" onclick="checkMC(${opt.originalIdx}, ${q.correct}, this)">${opt.text}</button>`; }); html += '</div>'; } else if (q.type === 'gap') { html += `<input type="text" class="gap-input" id="gapInput" placeholder="..." onkeypress="if(event.key==='Enter')checkGap()"><br><button class="check-btn" onclick="checkGap()">Prüfen</button>`; } else if (q.type === 'order') { html += '<div class="ordering-container"><div class="ordering-source" id="orderSource">'; shuffle([...q.words]).forEach(word => { html += `<span class="ordering-word" onclick="moveWord(this, 'toTarget')" data-word="${word}">${word}</span>`; }); html += '</div><div class="ordering-target" id="orderTarget"></div><button class="check-btn" onclick="checkOrder()">Prüfen</button></div>'; } else if (q.type === 'match') { html += '<div class="matching-container"><div class="matching-column"><h4>Links</h4>'; shuffle(q.pairs.map(p => p.left)).forEach(item => { html += `<div class="matching-item" data-type="left" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div><div class="matching-column"><h4>Rechts</h4>'; shuffle(q.pairs.map(p => p.right)).forEach(item => { html += `<div class="matching-item" data-type="right" data-value="${item}" onclick="selectMatch(this)">${item}</div>`; }); html += '</div></div>'; } box.innerHTML = html; }
+function checkMC(selected, correct, btn) { document.querySelectorAll('.option-btn').forEach(b => b.disabled = true); if (selected === correct) { btn.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { btn.classList.add('wrong'); document.querySelectorAll('.option-btn').forEach(b => { const idx = parseInt(b.getAttribute('onclick').match(/checkMC\((\d+)/)[1]); if (idx === correct) b.classList.add('correct'); }); showFeedback(false, 'Leider falsch.'); } }
+function checkGap() { const input = document.getElementById('gapInput'); const q = currentQuestions[currentQuestion]; const userAnswer = input.value.trim().toLowerCase(); const alternatives = q.alternatives ? q.alternatives.map(a => a.toLowerCase()) : []; if (userAnswer === q.answer.toLowerCase() || alternatives.includes(userAnswer)) { input.classList.add('correct'); showFeedback(true, 'Richtig! 🎉'); score++; } else { input.classList.add('wrong'); showFeedback(false, `Richtig: ${q.answer}`); } input.disabled = true; }
+function moveWord(el, dir) { if (el.classList.contains('placed')) return; const src = document.getElementById('orderSource'), tgt = document.getElementById('orderTarget'); if (dir === 'toTarget') { const clone = el.cloneNode(true); clone.onclick = function() { moveWord(this, 'toSource'); }; tgt.appendChild(clone); el.classList.add('placed'); } else { src.querySelectorAll('.ordering-word').forEach(sw => { if (sw.dataset.word === el.dataset.word && sw.classList.contains('placed')) sw.classList.remove('placed'); }); el.remove(); } }
+function checkOrder() { const words = Array.from(document.getElementById('orderTarget').querySelectorAll('.ordering-word')).map(w => w.dataset.word); if (JSON.stringify(words) === JSON.stringify(currentQuestions[currentQuestion].correct)) { showFeedback(true, 'Richtig! 🎉'); score++; } else { showFeedback(false, `Richtig: ${currentQuestions[currentQuestion].correct.join(' ')}`); } }
+let selectedMatch = null, matchedPairs = 0;
+function selectMatch(el) { if (el.classList.contains('matched')) return; if (!selectedMatch) { selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { if (selectedMatch.type === el.dataset.type) { selectedMatch.element.classList.remove('selected'); selectedMatch = { element: el, type: el.dataset.type, value: el.dataset.value }; el.classList.add('selected'); } else { const pair = currentQuestions[currentQuestion].pairs.find(p => (p.left === selectedMatch.value && p.right === el.dataset.value) || (p.right === selectedMatch.value && p.left === el.dataset.value)); if (pair) { el.classList.add('matched'); selectedMatch.element.classList.remove('selected'); selectedMatch.element.classList.add('matched'); matchedPairs++; if (matchedPairs === currentQuestions[currentQuestion].pairs.length) { showFeedback(true, 'Alle richtig! 🎉'); score++; matchedPairs = 0; } } else { el.classList.add('wrong'); setTimeout(() => el.classList.remove('wrong'), 500); } selectedMatch.element.classList.remove('selected'); selectedMatch = null; } } }
+function showFeedback(isCorrect, msg) { const fb = document.getElementById('feedback'); fb.textContent = msg; fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong'); document.getElementById('nextBtn').classList.add('show'); }
+function nextQuestion() { currentQuestion++; selectedMatch = null; matchedPairs = 0; if (currentQuestion >= currentQuestions.length) showResults(); else showQuestion(); }
+function showResults() { document.getElementById('quizArea').classList.remove('active'); document.getElementById('resultsSection').classList.add('active'); const pct = Math.round((score / currentQuestions.length) * 100); let gems = pct >= 90 ? (selectedLevel === 'amethyst' ? 30 : selectedLevel === 'smaragd' ? 20 : 10) : pct >= 70 ? (selectedLevel === 'amethyst' ? 20 : 15) : pct >= 50 ? 8 : 2; document.getElementById('resultsIcon').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📚'; document.getElementById('resultsScore').textContent = `${score} / ${currentQuestions.length}`; document.getElementById('resultsGems').textContent = `+${gems} 💎`; document.getElementById('resultsMessage').textContent = pct >= 90 ? 'Ausgezeichnet! Kristall gefunden!' : pct >= 50 ? 'Gut gemacht!' : 'Nochmal versuchen!'; localStorage.setItem('station13_gems', gems); localStorage.setItem('station13_completed', pct >= 50); }
+function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }
+function goHome() { window.location.href = 'winterreise-index.html'; }
+</script>
+</body>
+</html>
