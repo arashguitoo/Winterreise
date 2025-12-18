@@ -138,11 +138,25 @@
             text-decoration: none;
             color: white;
             display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Schneebedeckungs-Effekt oben auf den Karten */
+        .station-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            border-radius: 20px 20px 0 0;
+            pointer-events: none;
         }
         .station-card:hover {
             transform: translateY(-5px);
             border-color: #FFD700;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2), inset 0 2px 8px rgba(255,255,255,0.2);
         }
         .station-card.completed {
             border-color: #06D6A0;
@@ -441,9 +455,9 @@
         <a href="station-01-muenchen.html" class="station-card" data-station="1">
             <div class="station-header">
                 <div class="station-number">1</div>
-                <div class="station-icon">🏔️</div>
+                <div class="station-icon">🏡</div>
             </div>
-            <div class="station-title">München</div>
+            <div class="station-title">Bergdorf</div>
             <div class="station-topic">Präsens</div>
             <div class="station-desc">Lerne die Gegenwart! Was machst du? Was isst er?</div>
             <div class="level-badges" id="badges1">
@@ -456,9 +470,9 @@
         <a href="station-02-alpen.html" class="station-card" data-station="2">
             <div class="station-header">
                 <div class="station-number">2</div>
-                <div class="station-icon">⛷️</div>
+                <div class="station-icon">🎄</div>
             </div>
-            <div class="station-title">Alpen</div>
+            <div class="station-title">Wintermarkt</div>
             <div class="station-topic">Perfekt</div>
             <div class="station-desc">Was hast du gemacht? Wohin bist du gefahren?</div>
             <div class="level-badges" id="badges2"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
@@ -469,20 +483,20 @@
                 <div class="station-number">3</div>
                 <div class="station-icon">🏰</div>
             </div>
-            <div class="station-title">Nürnberg</div>
-            <div class="station-topic">Präteritum</div>
-            <div class="station-desc">Es war einmal... Die schriftliche Vergangenheit!</div>
+            <div class="station-title">Schloss</div>
+            <div class="station-topic">Lokalpräpositionen</div>
+            <div class="station-desc">Wo? In, an, auf, vor, hinter, neben, zwischen, über, unter!</div>
             <div class="level-badges" id="badges3"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-04-heidelberg.html" class="station-card" data-station="4">
             <div class="station-header">
                 <div class="station-number">4</div>
-                <div class="station-icon">📚</div>
+                <div class="station-icon">🚂</div>
             </div>
-            <div class="station-title">Heidelberg</div>
-            <div class="station-topic">Akkusativ</div>
-            <div class="station-desc">Wen oder was? Der direkte Fall!</div>
+            <div class="station-title">Zug</div>
+            <div class="station-topic">Modalverben</div>
+            <div class="station-desc">können, müssen, wollen, dürfen, sollen, mögen!</div>
             <div class="level-badges" id="badges4"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
@@ -492,8 +506,8 @@
                 <div class="station-icon">🌲</div>
             </div>
             <div class="station-title">Schwarzwald</div>
-            <div class="station-topic">Dativ</div>
-            <div class="station-desc">Wem? Der indirekte Fall!</div>
+            <div class="station-topic">Feste Präpositionen</div>
+            <div class="station-desc">Verben mit Präpositionen: warten auf, denken an...</div>
             <div class="level-badges" id="badges5"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
@@ -503,17 +517,17 @@
                 <div class="station-icon">🌊</div>
             </div>
             <div class="station-title">Bodensee</div>
-            <div class="station-topic">Wechselpräpositionen</div>
-            <div class="station-desc">Wo oder wohin? Akkusativ oder Dativ?</div>
+            <div class="station-topic">Konjunktiv II</div>
+            <div class="station-desc">Wenn ich reich wäre... Wünsche und Träume!</div>
             <div class="level-badges" id="badges6"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-07-rothenburg.html" class="station-card" data-station="7">
             <div class="station-header">
                 <div class="station-number">7</div>
-                <div class="station-icon">🏘️</div>
+                <div class="station-icon">🏔️</div>
             </div>
-            <div class="station-title">Rothenburg</div>
+            <div class="station-title">Alpen</div>
             <div class="station-topic">Nebensätze</div>
             <div class="station-desc">weil, dass, wenn - Verb am Ende!</div>
             <div class="level-badges" id="badges7"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
@@ -522,31 +536,31 @@
         <a href="station-08-leipzig.html" class="station-card" data-station="8">
             <div class="station-header">
                 <div class="station-number">8</div>
-                <div class="station-icon">🎭</div>
+                <div class="station-icon">🔗</div>
             </div>
-            <div class="station-title">Leipzig</div>
-            <div class="station-topic">Konjunktiv II</div>
-            <div class="station-desc">Wenn ich reich wäre... Wünsche und Träume!</div>
+            <div class="station-title">Nürnberg</div>
+            <div class="station-topic">Konnektoren</div>
+            <div class="station-desc">deshalb, trotzdem, außerdem - Verbindungen!</div>
             <div class="level-badges" id="badges8"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-09-potsdam.html" class="station-card" data-station="9">
             <div class="station-header">
                 <div class="station-number">9</div>
-                <div class="station-icon">🏛️</div>
+                <div class="station-icon">🎨</div>
             </div>
-            <div class="station-title">Potsdam</div>
-            <div class="station-topic">Futur I</div>
-            <div class="station-desc">Ich werde... Die Zukunft!</div>
+            <div class="station-title">Kunstmuseum</div>
+            <div class="station-topic">Adjektivdeklination</div>
+            <div class="station-desc">der große, ein großer, großer - Endungen!</div>
             <div class="level-badges" id="badges9"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-10-luebeck.html" class="station-card" data-station="10">
             <div class="station-header">
                 <div class="station-number">10</div>
-                <div class="station-icon">🧱</div>
+                <div class="station-icon">🔄</div>
             </div>
-            <div class="station-title">Lübeck</div>
+            <div class="station-title">Leipzig</div>
             <div class="station-topic">Komparativ & Superlativ</div>
             <div class="station-desc">Größer, am größten! Vergleiche!</div>
             <div class="level-badges" id="badges10"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
@@ -773,18 +787,18 @@ function resetProgress() {
 // ❄️ SCHNEEFLOCKEN ANIMATION ❄️
 function createSnowflakes() {
     const snowfall = document.getElementById('snowfall');
-    const snowflakeChars = ['❄', '❅', '❆', '✻', '✼', '❉', '✽', '•'];
-    const count = 50;
+    const snowflakeChars = ['❄', '❅', '❆', '✻', '✼', '❉', '✽', '•', '⁕', '⁂'];
+    const count = 100; // Mehr Schnee!
     
     for (let i = 0; i < count; i++) {
         const flake = document.createElement('div');
         flake.className = 'snowflake';
         flake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
         flake.style.left = Math.random() * 100 + 'vw';
-        flake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
-        flake.style.opacity = Math.random() * 0.6 + 0.4;
-        flake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        flake.style.animationDelay = (Math.random() * 10) + 's';
+        flake.style.fontSize = (Math.random() * 2 + 0.3) + 'em'; // Größere Variation
+        flake.style.opacity = Math.random() * 0.7 + 0.3;
+        flake.style.animationDuration = (Math.random() * 10 + 8) + 's'; // Langsamerer Fall
+        flake.style.animationDelay = (Math.random() * 15) + 's';
         snowfall.appendChild(flake);
     }
 }
