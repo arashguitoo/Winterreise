@@ -477,32 +477,33 @@ const QUESTIONS_AMETHYST = [
     { type: 'gap', context: '✏️ sein/haben', question: 'Wir _____ leider keine Zeit heute.', answer: 'haben', alternatives: ['Haben'] },
     { type: 'mc', context: '✏️ sein/haben', question: '_____ Sie aus Deutschland?', options: ['Sind', 'Haben', 'Ist', 'Hat'], correct: 0 },
     { type: 'mc', context: '✏️ sein/haben', question: 'Das Buch _____ sehr interessant.', options: ['ist', 'hat', 'sind', 'haben'], correct: 0 },
-    // KOMPLEXE UNREGELMÄSSIGE (8)
+    // KOMPLEXE UNREGELMÄSSIGE (6)
     { type: 'gap', context: '✏️ Vokalwechsel', question: 'Der Lehrer _____ die Aufgabe. (geben)', answer: 'gibt', alternatives: ['Gibt'] },
     { type: 'gap', context: '✏️ Vokalwechsel', question: 'Das Kind _____ ein Eis. (nehmen)', answer: 'nimmt', alternatives: ['Nimmt'] },
     { type: 'mc', context: '✏️ Vokalwechsel', question: 'Die Katze _____ die Maus. (fressen)', options: ['frisst', 'fresst', 'fresse', 'fressen'], correct: 0 },
-    { type: 'mc', context: '✏️ Vokalwechsel', question: 'Der Vogel _____ davon. (fliegen)', options: ['fliegt', 'fliegst', 'fliege', 'fliegen'], correct: 0 },
     { type: 'gap', context: '✏️ Vokalwechsel', question: '_____ du das Bild dort? (sehen)', answer: 'Siehst', alternatives: ['siehst'] },
     { type: 'mc', context: '✏️ Vokalwechsel', question: 'Das Essen _____ sehr gut! (riechen)', options: ['riecht', 'riechst', 'rieche', 'riechen'], correct: 0 },
     { type: 'gap', context: '✏️ Vokalwechsel', question: 'Er _____ immer die Wahrheit. (sprechen)', answer: 'spricht', alternatives: ['Spricht'] },
-    { type: 'mc', context: '✏️ Vokalwechsel', question: 'Der Dieb _____ das Geld. (stehlen)', options: ['stiehlt', 'stehlt', 'stehle', 'stehlen'], correct: 0 },
     // WISSEN VS KENNEN (3)
     { type: 'mc', context: '✏️ wissen/kennen', question: 'Ich _____ seinen Namen nicht.', options: ['weiß', 'kenne', 'weißt', 'kennst'], correct: 0 },
     { type: 'mc', context: '✏️ wissen/kennen', question: '_____ du Berlin?', options: ['Kennst', 'Weißt', 'Kennt', 'Weiß'], correct: 0 },
     { type: 'mc', context: '✏️ wissen/kennen', question: 'Er _____ nicht, wo sie wohnt.', options: ['weiß', 'kennt', 'weißt', 'kennst'], correct: 0 },
-    // GEMISCHTE SCHWERE (7)
+    // ADJEKTIVDEKLINATION NEU (5)
+    { type: 'mc', context: '✏️ Adjektivdeklination', question: 'Das ist ein schön___ Dorf.', options: ['es', 'e', 'en', 'er'], correct: 0 },
+    { type: 'mc', context: '✏️ Adjektivdeklination', question: 'Die Freunde besuchen das klein___ Dorf.', options: ['e', 'en', 'es', 'er'], correct: 0 },
+    { type: 'gap', context: '✏️ Adjektivdeklination', question: 'Er gibt mir einen gut___ Rat.', answer: 'en', alternatives: ['En'] },
+    { type: 'mc', context: '✏️ Adjektivdeklination', question: 'Sie wohnt in einer groß___ Stadt.', options: ['en', 'e', 'es', 'er'], correct: 0 },
+    { type: 'mc', context: '✏️ Adjektivdeklination', question: 'Der alt___ Baum steht im Park.', options: ['e', 'en', 'es', 'er'], correct: 0 },
+    // GEMISCHTE SCHWERE (4)
     { type: 'gap', context: '✏️ gemischt', question: 'Der Zug _____ um 8 Uhr. (abfahren)', answer: 'fährt ab', alternatives: ['fährt ab', 'Fährt ab'] },
-    { type: 'gap', context: '✏️ gemischt', question: 'Sie _____ das Fenster. (aufmachen)', answer: 'macht auf', alternatives: ['macht auf', 'Macht auf'] },
     { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist richtig?', options: ['Er liest gern Bücher.', 'Er lest gern Bücher.', 'Er lesen gern Bücher.', 'Er lese gern Bücher.'], correct: 0 },
-    { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist richtig?', options: ['Du fährst zu schnell!', 'Du fahrst zu schnell!', 'Du fahrt zu schnell!', 'Du fahren zu schnell!'], correct: 0 },
     { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist FALSCH?', options: ['Er sprecht Deutsch.', 'Er spricht Deutsch.', 'Sie spricht Deutsch.', 'Wir sprechen Deutsch.'], correct: 0 },
-    { type: 'mc', context: '✏️ gemischt', question: 'Welcher Satz ist FALSCH?', options: ['Das Kind schlaft.', 'Das Kind schläft.', 'Die Kinder schlafen.', 'Ich schlafe.'], correct: 0 },
     { type: 'mc', context: '✏️ gemischt', question: 'Er _____ jeden Morgen früh _____. (aufstehen)', options: ['steht ... auf', 'steht ... auf', 'aufsteht', 'stehen ... auf'], correct: 0 },
     // ORDERING + MATCHING (4)
     { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Der', 'Zug', 'fährt', 'um', '8', 'Uhr', 'ab', '.'], correct: ['Der', 'Zug', 'fährt', 'um', '8', 'Uhr', 'ab', '.'] },
     { type: 'order', context: '🔀 Satzstellung', question: 'Bringe die Wörter in die richtige Reihenfolge:', words: ['Siehst', 'du', 'das', 'Haus', 'dort', '?'], correct: ['Siehst', 'du', 'das', 'Haus', 'dort', '?'] },
     { type: 'match', context: '🔗 a→ä Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'fahren', right: 'fährt' }, { left: 'schlafen', right: 'schläft' }, { left: 'tragen', right: 'trägt' }, { left: 'laufen', right: 'läuft' }]},
-    { type: 'match', context: '🔗 e→ie Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'lesen', right: 'liest' }, { left: 'sehen', right: 'sieht' }, { left: 'stehlen', right: 'stiehlt' }, { left: 'empfehlen', right: 'empfiehlt' }]}
+    { type: 'match', context: '🔗 e→ie Zuordnung', question: 'Ordne zu:', pairs: [{ left: 'lesen', right: 'liest' }, { left: 'sehen', right: 'sieht' }, { left: 'geben', right: 'gibt' }, { left: 'nehmen', right: 'nimmt' }]}
 ];
 
 let currentQuestion = 0;

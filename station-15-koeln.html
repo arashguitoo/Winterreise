@@ -266,35 +266,40 @@ const QUESTIONS_SMARAGD = [
 ];
 
 const QUESTIONS_AMETHYST = [
+    // EINFACHES PLUSQUAMPERFEKT mit haben (10)
     { type: 'gap', context: '📖 Text', question: 'Nachdem wir so viel erlebt _____, ist das ein besonderer Moment!', answer: 'hatten', alternatives: ['Hatten'] },
-    { type: 'mc', context: '✏️ Komplex', question: 'Nachdem sie _____ _____, machte sie sich auf den Weg.', options: ['gefrühstückt hatte', 'gefrühstückt hat', 'frühstücken war', 'gefrühstückt war'], correct: 0 },
-    { type: 'mc', context: '✏️ Komplex', question: 'Bevor das Konzert begann, _____ die Musiker schon zwei Stunden _____.', options: ['hatten / geprobt', 'haben / geprobt', 'waren / geprobt', 'sind / geprobt'], correct: 0 },
-    { type: 'mc', context: '✏️ Komplex', question: 'Als ich ihn traf, _____ er gerade aus Paris _____.', options: ['war / zurückgekommen', 'ist / zurückgekommen', 'hatte / zurückgekommen', 'hat / zurückgekommen'], correct: 0 },
-    { type: 'gap', context: '✏️ Komplex', question: 'Nachdem die Sonne untergegangen _____, wurde es kalt.', answer: 'war', alternatives: ['War'] },
-    { type: 'gap', context: '✏️ Komplex', question: 'Bevor ich den Job bekam, _____ ich viele Bewerbungen geschrieben.', answer: 'hatte', alternatives: ['Hatte'] },
-    { type: 'mc', context: '✏️ Kausal', question: 'Er war traurig, weil seine Freundin _____ _____.', options: ['weggegangen war', 'weggegangen ist', 'weggehen hatte', 'weggegangen hatte'], correct: 0 },
-    { type: 'mc', context: '✏️ Kausal', question: 'Sie freute sich, weil sie die Prüfung _____ _____.', options: ['bestanden hatte', 'bestanden hat', 'bestanden war', 'bestehen hatte'], correct: 0 },
-    { type: 'mc', context: '✏️ Indirekte Rede', question: 'Er sagte, dass er schon _____ _____.', options: ['gegessen hatte', 'gegessen hat', 'essen war', 'gegessen war'], correct: 0 },
-    { type: 'mc', context: '✏️ Indirekte Rede', question: 'Sie erzählte, dass sie vorher nie in Deutschland _____ _____.', options: ['gewesen war', 'gewesen ist', 'sein hatte', 'gewesen hatte'], correct: 0 },
-    { type: 'gap', context: '✏️ Indirekte Rede', question: 'Er fragte, ob ich den Film schon gesehen _____.', answer: 'hatte', alternatives: ['Hatte'] },
-    { type: 'mc', context: '✏️ Passiv Plusquamperfekt', question: 'Das Haus _____ schon _____ worden, als wir ankamen.', options: ['war / verkauft', 'hatte / verkauft', 'ist / verkauft', 'hat / verkauft'], correct: 0 },
-    { type: 'mc', context: '✏️ Passiv Plusquamperfekt', question: 'Der Brief _____ schon _____ worden, bevor er kam.', options: ['war / geschrieben', 'hatte / geschrieben', 'ist / geschrieben', 'hat / geschrieben'], correct: 0 },
-    { type: 'mc', context: '✏️ Modalverben', question: 'Er _____ nicht kommen _____, weil er arbeiten musste.', options: ['hatte / können', 'war / können', 'hatte / gekonnt', 'war / gekonnt'], correct: 0 },
-    { type: 'mc', context: '✏️ Modalverben', question: 'Sie _____ es nicht _____, obwohl sie es versucht hatte.', options: ['hatte / schaffen können', 'war / schaffen können', 'hatte / geschafft können', 'war / geschafft können'], correct: 0 },
-    { type: 'mc', context: '✏️ Doppelte Vergangenheit', question: 'Nachdem ich erfahren hatte, dass er gegangen war, _____ ich traurig.', options: ['war', 'bin', 'wurde', 'werde'], correct: 0 },
-    { type: 'mc', context: '✏️ Doppelte Vergangenheit', question: 'Bevor ich wusste, dass sie angekommen war, _____ ich sie schon gesehen.', options: ['hatte', 'habe', 'war', 'bin'], correct: 0 },
+    { type: 'mc', context: '✏️ Grundlagen', question: 'Nachdem sie _____ _____, machte sie sich auf den Weg.', options: ['gefrühstückt hatte', 'gefrühstückt hat', 'frühstückt hatte', 'gefrühstückt wird'], correct: 0 },
+    { type: 'mc', context: '✏️ Grundlagen', question: 'Bevor das Konzert begann, _____ die Musiker schon lange _____.', options: ['hatten / geprobt', 'haben / geprobt', 'werden / proben', 'sind / geprobt'], correct: 0 },
+    { type: 'gap', context: '✏️ Grundlagen', question: 'Bevor ich den Job bekam, _____ ich viele Bewerbungen geschrieben.', answer: 'hatte', alternatives: ['Hatte'] },
+    { type: 'mc', context: '✏️ Sätze mit weil', question: 'Sie freute sich, weil sie die Prüfung _____ _____.', options: ['bestanden hatte', 'bestanden hat', 'bestehen hatte', 'bestehen wird'], correct: 0 },
+    { type: 'gap', context: '✏️ Sätze mit weil', question: 'Er war müde, weil er wenig _____.', answer: 'geschlafen hatte', alternatives: ['geschlafen hatte', 'Geschlafen hatte'] },
+    { type: 'mc', context: '✏️ Sätze mit dass', question: 'Ich wusste nicht, dass er schon _____ _____.', options: ['gegessen hatte', 'gegessen hat', 'essen hatte', 'essen wird'], correct: 0 },
+    { type: 'gap', context: '✏️ Sätze mit dass', question: 'Sie erzählte, dass sie den Film schon _____.', answer: 'gesehen hatte', alternatives: ['gesehen hatte', 'Gesehen hatte'] },
+    { type: 'mc', context: '✏️ Kombination', question: 'Obwohl er viel _____ _____, bestellte er noch ein Bier.', options: ['getrunken hatte', 'getrunken hat', 'trinken hatte', 'trinken wird'], correct: 0 },
+    { type: 'gap', context: '✏️ Kombination', question: 'Nachdem ich das Buch gelesen _____, gab ich es zurück.', answer: 'hatte', alternatives: ['Hatte'] },
+    // PLUSQUAMPERFEKT mit sein (10)
+    { type: 'mc', context: '✏️ sein-Verben', question: 'Als ich ihn traf, _____ er gerade aus Paris _____.', options: ['war / zurückgekommen', 'ist / zurückgekommen', 'hatte / zurückgekommen', 'wird / zurückkommen'], correct: 0 },
+    { type: 'gap', context: '✏️ sein-Verben', question: 'Nachdem die Sonne untergegangen _____, wurde es kalt.', answer: 'war', alternatives: ['War'] },
+    { type: 'mc', context: '✏️ sein-Verben', question: 'Er war traurig, weil seine Freundin _____ _____.', options: ['weggegangen war', 'weggegangen ist', 'weggehen war', 'weggehen wird'], correct: 0 },
+    { type: 'gap', context: '✏️ sein-Verben', question: 'Als ich aufwachte, _____ der Schnee schon geschmolzen.', answer: 'war', alternatives: ['War'] },
+    { type: 'mc', context: '✏️ sein-Verben', question: 'Nachdem der Zug _____ _____, kam ich am Bahnhof an.', options: ['abgefahren war', 'abgefahren ist', 'abfahren war', 'abfahren wird'], correct: 0 },
+    { type: 'gap', context: '✏️ sein-Verben', question: 'Bevor ich kam, _____ sie schon gegangen.', answer: 'war', alternatives: ['War'] },
+    { type: 'mc', context: '✏️ Bewegung', question: 'Nachdem wir _____ _____, waren wir müde.', options: ['gelaufen waren', 'gelaufen sind', 'laufen waren', 'laufen werden'], correct: 0 },
+    { type: 'gap', context: '✏️ Bewegung', question: 'Bevor das Taxi kam, _____ wir schon losgefahren.', answer: 'waren', alternatives: ['Waren'] },
+    { type: 'mc', context: '✏️ Zustand', question: 'Als ich ins Zimmer kam, _____ er schon _____.', options: ['war / aufgewacht', 'ist / aufgewacht', 'hatte / aufgewacht', 'wird / aufwachen'], correct: 0 },
+    { type: 'gap', context: '✏️ Zustand', question: 'Nachdem ich aufgestanden _____, frühstückte ich.', answer: 'war', alternatives: ['War'] },
+    // ZEITFOLGE & FEHLERSUCHE (6)
+    { type: 'mc', context: '✏️ Zeitfolge', question: 'Was passierte ZUERST? "Nachdem ich gegessen hatte, ging ich spazieren."', options: ['Ich hatte gegessen', 'Ich ging spazieren', 'Beides gleichzeitig', 'Unklar'], correct: 0 },
+    { type: 'mc', context: '✏️ Zeitfolge', question: 'Was passierte DANACH? "Bevor sie anrief, war sie angekommen."', options: ['Sie rief an', 'Sie war angekommen', 'Beides gleichzeitig', 'Unklar'], correct: 0 },
     { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Nachdem ich angekommen war, hatte ich angerufen.', 'Nachdem ich angekommen war, rief ich an.', 'Bevor ich anrief, war ich angekommen.', 'Ich war angekommen, bevor ich anrief.'], correct: 0 },
-    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er war müde, weil er schlecht geschlafen hatte.', 'Er war müde, weil er schlecht geschlafen war.', 'Er war müde, weil er schlecht hatte geschlafen.', 'Er war müde, weil er schlecht schlafen hatte.'], correct: 0 },
-    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Nachdem der Zug abgefahren war, kam ich am Bahnhof an.', 'Nachdem der Zug abgefahren hatte, kam ich am Bahnhof an.', 'Nachdem der Zug abfuhr, war ich angekommen.', 'Nachdem der Zug abfahren war, kam ich an.'], correct: 0 },
-    { type: 'gap', context: '✏️ Schwer', question: 'Obwohl er schon viel getrunken _____, bestellte er noch ein Bier.', answer: 'hatte', alternatives: ['Hatte'] },
-    { type: 'gap', context: '✏️ Schwer', question: 'Als ich aufwachte, _____ der Schnee schon geschmolzen.', answer: 'war', alternatives: ['War'] },
-    { type: 'mc', context: '✏️ Schwer', question: 'Ich hätte nicht so viel gegessen, wenn ich _____, dass es noch Dessert gibt.', options: ['gewusst hätte', 'gewusst hatte', 'wissen hätte', 'gewusst habe'], correct: 0 },
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Er war müde, weil er schlecht geschlafen hatte.', 'Er war müde, weil er schlecht geschlafen war.', 'Er war müde, weil er schlecht hatte geschlafen.', 'Er war müde, weil er hatte schlecht geschlafen.'], correct: 0 },
+    { type: 'mc', context: '✏️ haben oder sein?', question: 'Welches ist richtig?', options: ['Ich war nach Hause gegangen.', 'Ich hatte nach Hause gegangen.', 'Ich war nach Hause gehabt.', 'Ich hatte nach Hause gefahren.'], correct: 0 },
+    { type: 'mc', context: '✏️ haben oder sein?', question: 'Welches ist richtig?', options: ['Er hatte gut geschlafen.', 'Er war gut geschlafen.', 'Er war gut gehabt.', 'Er hatte gut gewesen.'], correct: 0 },
+    // ORDERING & MATCHING (4)
     { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Nachdem', 'er', 'angekommen', 'war', ',', 'rief', 'er', 'seine', 'Mutter', 'an', '.'], correct: ['Nachdem', 'er', 'angekommen', 'war', ',', 'rief', 'er', 'seine', 'Mutter', 'an', '.'] },
     { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Er', 'war', 'traurig', ',', 'weil', 'sie', 'gegangen', 'war', '.'], correct: ['Er', 'war', 'traurig', ',', 'weil', 'sie', 'gegangen', 'war', '.'] },
     { type: 'match', context: '🔗 Zeitfolge', question: 'Ordne zu:', pairs: [{ left: 'Er hatte gegessen', right: 'Zuerst' }, { left: 'Er ging spazieren', right: 'Danach' }, { left: 'Sie war angekommen', right: 'Zuerst' }, { left: 'Sie rief an', right: 'Danach' }]},
-    { type: 'match', context: '🔗 Verben mit sein', question: 'Plusquamperfekt mit "war":', pairs: [{ left: 'gehen', right: 'war gegangen' }, { left: 'fahren', right: 'war gefahren' }, { left: 'sterben', right: 'war gestorben' }, { left: 'aufwachen', right: 'war aufgewacht' }]},
-    { type: 'mc', context: '✏️ Sehr schwer', question: 'Nachdem ich erfahren _____, dass er die Prüfung bestanden _____, gratulierte ich ihm.', options: ['hatte / hatte', 'hatte / war', 'habe / hat', 'war / hatte'], correct: 0 },
-    { type: 'mc', context: '✏️ Sehr schwer', question: 'Bevor sie nach Hause ging, _____ sie noch einkaufen _____.', options: ['war / gegangen', 'hatte / gegangen', 'ist / gegangen', 'hat / gegangen'], correct: 0 }
+    { type: 'match', context: '🔗 Verben mit sein', question: 'Plusquamperfekt mit "war":', pairs: [{ left: 'gehen', right: 'war gegangen' }, { left: 'fahren', right: 'war gefahren' }, { left: 'kommen', right: 'war gekommen' }, { left: 'aufwachen', right: 'war aufgewacht' }]}
 ];
 
 let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];

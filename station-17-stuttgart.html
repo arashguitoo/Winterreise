@@ -270,35 +270,48 @@ const QUESTIONS_SMARAGD = [
 ];
 
 const QUESTIONS_AMETHYST = [
-    { type: 'gap', context: '📖 Text', question: 'Kann er uns _____ werden? (zeigen)', answer: 'gezeigt', alternatives: ['Gezeigt'] },
-    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Präsens: Das Haus _____ gebaut.', options: ['wird', 'wurde', 'ist...worden', 'war...worden'], correct: 0 },
-    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Präteritum: Das Haus _____ gebaut.', options: ['wurde', 'wird', 'ist...worden', 'war...worden'], correct: 0 },
-    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Perfekt: Das Haus _____ gebaut _____.', options: ['ist / worden', 'hat / worden', 'wird / worden', 'wurde / worden'], correct: 0 },
-    { type: 'mc', context: '✏️ Alle Zeiten', question: 'Passiv Plusquamperfekt: Das Haus _____ gebaut _____.', options: ['war / worden', 'ist / worden', 'hatte / worden', 'wurde / worden'], correct: 0 },
-    { type: 'gap', context: '✏️ Perfekt', question: 'Das Problem ist gelöst _____. (Perfekt Passiv)', answer: 'worden', alternatives: ['Worden'] },
-    { type: 'gap', context: '✏️ Plusquamperfekt', question: 'Das Haus war schon gebaut _____, als wir kamen.', answer: 'worden', alternatives: ['Worden'] },
-    { type: 'mc', context: '✏️ Nebensatz', question: 'Ich weiß, dass das Buch _____ wird.', options: ['gelesen', 'lesen', 'liest', 'lesend'], correct: 0 },
-    { type: 'mc', context: '✏️ Nebensatz', question: 'Weil das Auto _____ wurde, funktioniert es jetzt.', options: ['repariert', 'reparieren', 'repariert werden', 'reparierend'], correct: 0 },
-    { type: 'mc', context: '✏️ Nebensatz', question: 'Obwohl die Arbeit erledigt _____ musste, hat er es nicht gemacht.', options: ['werden', 'worden', 'wird', 'wurde'], correct: 0 },
-    { type: 'gap', context: '✏️ Nebensatz', question: 'Er sagte, dass die E-Mail schon geschickt _____ ist.', answer: 'worden', alternatives: ['Worden'] },
-    { type: 'mc', context: '✏️ Passiv + Konjunktiv', question: 'Das könnte _____ werden.', options: ['gemacht', 'machen', 'macht', 'machend'], correct: 0 },
-    { type: 'mc', context: '✏️ Passiv + Konjunktiv', question: 'Das sollte sofort _____ werden.', options: ['erledigt', 'erledigen', 'erledigt werden', 'erledige'], correct: 0 },
-    { type: 'mc', context: '✏️ Zustandspassiv', question: 'Das Fenster ist geöffnet. (= Zustandspassiv) Das bedeutet...', options: ['Das Fenster ist offen.', 'Jemand öffnet das Fenster jetzt.', 'Das Fenster wurde gerade geöffnet.', 'Man wird das Fenster öffnen.'], correct: 0 },
-    { type: 'mc', context: '✏️ Zustandspassiv', question: 'Die Arbeit ist erledigt. (= Zustandspassiv) Das bedeutet...', options: ['Die Arbeit ist fertig.', 'Jemand erledigt die Arbeit jetzt.', 'Die Arbeit wurde gerade erledigt.', 'Man wird die Arbeit erledigen.'], correct: 0 },
+    // PASSIV PRÄSENS (10)
+    { type: 'mc', context: '✏️ Präsens', question: 'Das Haus _____ jedes Jahr renoviert.', options: ['wird', 'wurde', 'ist worden', 'war worden'], correct: 0 },
+    { type: 'gap', context: '✏️ Präsens', question: 'Die Hausaufgaben _____ heute gemacht. (Präsens Passiv)', answer: 'werden', alternatives: ['Werden'] },
+    { type: 'mc', context: '✏️ Präsens', question: 'Das Buch _____ von vielen Menschen gelesen.', options: ['wird', 'wurde', 'ist', 'war'], correct: 0 },
+    { type: 'gap', context: '✏️ Präsens', question: 'Das Problem _____ gerade gelöst.', answer: 'wird', alternatives: ['Wird'] },
+    { type: 'mc', context: '✏️ Präsens', question: 'Die Briefe _____ jeden Tag geschrieben.', options: ['werden', 'wurden', 'sind', 'waren'], correct: 0 },
+    { type: 'gap', context: '✏️ Präsens', question: 'Das Auto _____ in der Werkstatt repariert.', answer: 'wird', alternatives: ['Wird'] },
+    { type: 'mc', context: '✏️ Präsens mit von', question: 'Das Essen _____ von meiner Mutter gekocht.', options: ['wird', 'wurde', 'ist', 'war'], correct: 0 },
+    { type: 'mc', context: '✏️ Präsens mit von', question: 'Der Film _____ von einem berühmten Regisseur gedreht.', options: ['wird', 'wurde', 'ist worden', 'war worden'], correct: 0 },
+    { type: 'gap', context: '✏️ Präsens Plural', question: 'Die Zimmer _____ jeden Tag geputzt.', answer: 'werden', alternatives: ['Werden'] },
+    { type: 'mc', context: '✏️ Präsens komplex', question: 'In Deutschland _____ viele Autos produziert.', options: ['werden', 'wurden', 'sind', 'waren'], correct: 0 },
+    // PASSIV PRÄTERITUM (10)
+    { type: 'mc', context: '✏️ Präteritum', question: 'Das Haus _____ letztes Jahr gebaut.', options: ['wurde', 'wird', 'ist worden', 'war worden'], correct: 0 },
+    { type: 'gap', context: '✏️ Präteritum', question: 'Der Brief _____ gestern geschrieben.', answer: 'wurde', alternatives: ['Wurde'] },
+    { type: 'mc', context: '✏️ Präteritum', question: 'Die Aufgabe _____ schnell erledigt.', options: ['wurde', 'wird', 'ist worden', 'war'], correct: 0 },
+    { type: 'gap', context: '✏️ Präteritum', question: 'Das Problem _____ sofort gelöst.', answer: 'wurde', alternatives: ['Wurde'] },
+    { type: 'mc', context: '✏️ Präteritum Plural', question: 'Die Bücher _____ in der Bibliothek gefunden.', options: ['wurden', 'werden', 'sind worden', 'waren'], correct: 0 },
+    { type: 'gap', context: '✏️ Präteritum mit von', question: 'Das Lied _____ von einem Künstler gesungen.', answer: 'wurde', alternatives: ['Wurde'] },
+    { type: 'mc', context: '✏️ Präteritum mit von', question: 'Der Text _____ von der Lehrerin korrigiert.', options: ['wurde', 'wird', 'ist', 'war'], correct: 0 },
+    { type: 'mc', context: '✏️ Präteritum komplex', question: '1990 _____ die Mauer abgerissen.', options: ['wurde', 'wird', 'ist worden', 'war worden'], correct: 0 },
+    { type: 'gap', context: '✏️ Präteritum komplex', question: 'Im 19. Jahrhundert _____ viele Kirchen gebaut.', answer: 'wurden', alternatives: ['Wurden'] },
+    { type: 'mc', context: '✏️ Präteritum Negation', question: 'Das Auto _____ nicht repariert.', options: ['wurde', 'wird', 'ist', 'war'], correct: 0 },
+    // PRÄSENS VS. PRÄTERITUM (4)
+    { type: 'mc', context: '✏️ Zeit erkennen', question: 'Welcher Satz ist PRÄSENS?', options: ['Das Buch wird gelesen.', 'Das Buch wurde gelesen.', 'Das Buch ist gelesen worden.', 'Das Buch war gelesen worden.'], correct: 0 },
+    { type: 'mc', context: '✏️ Zeit erkennen', question: 'Welcher Satz ist PRÄTERITUM?', options: ['Das Haus wurde gebaut.', 'Das Haus wird gebaut.', 'Das Haus ist gebaut worden.', 'Das Haus war gebaut worden.'], correct: 0 },
+    { type: 'mc', context: '✏️ Kontext', question: 'Heute _____ das Zimmer geputzt.', options: ['wird', 'wurde', 'ist worden', 'war worden'], correct: 0 },
+    { type: 'mc', context: '✏️ Kontext', question: 'Gestern _____ die Tür repariert.', options: ['wurde', 'wird', 'ist worden', 'war'], correct: 0 },
+    // NEBENSÄTZE MIT PASSIV (4)
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Ich weiß, dass das Buch gerade _____.', options: ['gelesen wird', 'gelesen wurde', 'lesen wird', 'liest'], correct: 0 },
+    { type: 'mc', context: '✏️ Nebensatz', question: 'Er sagte, dass das Auto gestern _____.', options: ['repariert wurde', 'repariert wird', 'reparieren wurde', 'repariert'], correct: 0 },
+    { type: 'gap', context: '✏️ Nebensatz mit weil', question: 'Das Auto funktioniert jetzt, weil es gestern repariert _____.', answer: 'wurde', alternatives: ['Wurde'] },
+    { type: 'mc', context: '✏️ Nebensatz mit wenn', question: 'Wenn das Haus _____, sieht es besser aus.', options: ['renoviert wird', 'renoviert wurde', 'renovieren wird', 'renoviert'], correct: 0 },
+    // FEHLERSUCHE & ZUSTANDSPASSIV (4)
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das Auto wird gehabt.', 'Das Auto wird repariert.', 'Das Auto wird verkauft.', 'Das Auto wird gewaschen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Zustandspassiv', question: 'Das Fenster ist geöffnet. Das bedeutet...', options: ['Das Fenster ist offen.', 'Jemand öffnet das Fenster jetzt.', 'Das Fenster wurde gerade geöffnet.', 'Man wird das Fenster öffnen.'], correct: 0 },
+    { type: 'mc', context: '✏️ Zustandspassiv', question: 'Die Arbeit ist erledigt. Das bedeutet...', options: ['Die Arbeit ist fertig.', 'Jemand erledigt die Arbeit jetzt.', 'Die Arbeit wurde gerade erledigt.', 'Man wird die Arbeit erledigen.'], correct: 0 },
     { type: 'mc', context: '✏️ Vorgangs- vs Zustandspassiv', question: '"Das Fenster wird geöffnet" ist...', options: ['Vorgangspassiv', 'Zustandspassiv', 'Aktiv', 'Kein Passiv'], correct: 0 },
-    { type: 'mc', context: '✏️ Vorgangs- vs Zustandspassiv', question: '"Das Fenster ist geöffnet" ist...', options: ['Zustandspassiv', 'Vorgangspassiv', 'Aktiv', 'Kein Passiv'], correct: 0 },
-    { type: 'mc', context: '✏️ Komplex', question: 'Das Haus, das letztes Jahr _____ _____, ist schön.', options: ['gebaut wurde', 'gebaut wird', 'bauen wurde', 'gebaut werden'], correct: 0 },
-    { type: 'mc', context: '✏️ Komplex', question: 'Nachdem die Arbeit _____ _____ war, gingen alle nach Hause.', options: ['erledigt worden', 'erledigt werden', 'erledigen worden', 'erledigt wurde'], correct: 0 },
-    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das Haus ist gebaut geworden.', 'Das Haus ist gebaut worden.', 'Das Haus wurde gebaut.', 'Das Haus wird gebaut.'], correct: 0 },
-    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Ich werde gehabt.', 'Ich werde gefragt.', 'Ich werde eingeladen.', 'Ich werde angerufen.'], correct: 0 },
-    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Die Aufgabe muss heute erledigt werden.', 'Die Aufgabe muss heute werden erledigt.', 'Die Aufgabe erledigt werden muss heute.', 'Die Aufgabe muss heute erledigen werden.'], correct: 0 },
-    { type: 'gap', context: '✏️ Schwer', question: 'Das Problem hätte früher gelöst werden _____. (sollen, Konj. II)', answer: 'sollen', alternatives: ['Sollen'] },
-    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'Buch', 'ist', 'von', 'dem', 'Autor', 'geschrieben', 'worden', '.'], correct: ['Das', 'Buch', 'ist', 'von', 'dem', 'Autor', 'geschrieben', 'worden', '.'] },
-    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Ich', 'weiß', ',', 'dass', 'das', 'Problem', 'gelöst', 'wurde', '.'], correct: ['Ich', 'weiß', ',', 'dass', 'das', 'Problem', 'gelöst', 'wurde', '.'] },
-    { type: 'match', context: '🔗 Zeiten', question: 'Ordne zu:', pairs: [{ left: 'wird gebaut', right: 'Präsens' }, { left: 'wurde gebaut', right: 'Präteritum' }, { left: 'ist gebaut worden', right: 'Perfekt' }, { left: 'war gebaut worden', right: 'Plusquamperfekt' }]},
-    { type: 'match', context: '🔗 Passivarten', question: 'Ordne zu:', pairs: [{ left: 'wird geöffnet', right: 'Vorgangspassiv' }, { left: 'ist geöffnet', right: 'Zustandspassiv' }, { left: 'muss gemacht werden', right: 'Passiv mit Modalverb' }, { left: 'von + Dativ', right: 'Agens (Handelnder)' }]},
-    { type: 'mc', context: '✏️ Sehr schwer', question: 'Nachdem das Auto _____ _____ war, konnte ich wieder fahren.', options: ['repariert worden', 'repariert werden', 'reparieren worden', 'repariert wurde'], correct: 0 },
-    { type: 'mc', context: '✏️ Sehr schwer', question: 'Die Arbeit hätte _____ _____ sollen.', options: ['früher erledigt werden', 'früher erledigt worden', 'früher erledigen werden', 'erledigt früher werden'], correct: 0 }
+    // ORDERING & MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'Buch', 'wird', 'von', 'vielen', 'gelesen', '.'], correct: ['Das', 'Buch', 'wird', 'von', 'vielen', 'gelesen', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'Haus', 'wurde', 'letztes', 'Jahr', 'gebaut', '.'], correct: ['Das', 'Haus', 'wurde', 'letztes', 'Jahr', 'gebaut', '.'] },
+    { type: 'match', context: '🔗 Zeiten', question: 'Ordne zu:', pairs: [{ left: 'wird gemacht', right: 'Präsens' }, { left: 'wurde gemacht', right: 'Präteritum' }, { left: 'ist gemacht', right: 'Zustandspassiv' }, { left: 'von + Dativ', right: 'Agens' }]},
+    { type: 'match', context: '🔗 Verben', question: 'Häufig im Passiv:', pairs: [{ left: 'bauen', right: 'wird gebaut' }, { left: 'schreiben', right: 'wird geschrieben' }, { left: 'reparieren', right: 'wird repariert' }, { left: 'öffnen', right: 'wird geöffnet' }]}
 ];
 
 let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];

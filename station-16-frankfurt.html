@@ -267,35 +267,45 @@ const QUESTIONS_SMARAGD = [
 ];
 
 const QUESTIONS_AMETHYST = [
-    { type: 'gap', context: '📖 Text', question: 'Der Kristall wurde von einem Künstler versteckt, _____ Name vergessen wurde.', answer: 'dessen', alternatives: ['Dessen'] },
-    { type: 'mc', context: '✏️ Genitiv Komplex', question: 'Die Firma, _____ Chef ich kenne, ist erfolgreich.', options: ['deren', 'die', 'der', 'dessen'], correct: 0 },
-    { type: 'mc', context: '✏️ Genitiv Komplex', question: 'Die Studenten, _____ Arbeiten ich korrigiert habe, haben gut geschrieben.', options: ['deren', 'denen', 'die', 'dessen'], correct: 0 },
-    { type: 'mc', context: '✏️ Genitiv Komplex', question: 'Das ist das Land, _____ Hauptstadt sehr schön ist.', options: ['dessen', 'das', 'dem', 'deren'], correct: 0 },
-    { type: 'gap', context: '✏️ Genitiv', question: 'Die Autorin, _____ Bücher ich liebe, kommt morgen.', answer: 'deren', alternatives: ['Deren'] },
-    { type: 'gap', context: '✏️ Genitiv', question: 'Der Politiker, _____ Rede ich gehört habe, war überzeugend.', answer: 'dessen', alternatives: ['Dessen'] },
-    { type: 'mc', context: '✏️ Präp + Gen', question: 'Das ist der Mann, wegen _____ ich gekommen bin.', options: ['dessen', 'dem', 'den', 'der'], correct: 0 },
-    { type: 'mc', context: '✏️ Präp + Gen', question: 'Das ist die Frau, wegen _____ er den Job verloren hat.', options: ['deren', 'der', 'die', 'dessen'], correct: 0 },
-    { type: 'mc', context: '✏️ was nach Superlativ', question: 'Das ist das Schönste, _____ ich je erlebt habe.', options: ['was', 'das', 'die', 'der'], correct: 0 },
-    { type: 'mc', context: '✏️ was nach Pronomen', question: 'Es gibt vieles, _____ ich nicht verstehe.', options: ['was', 'das', 'die', 'der'], correct: 0 },
-    { type: 'mc', context: '✏️ was nach Satz', question: 'Er kam zu spät, _____ mich sehr geärgert hat.', options: ['was', 'das', 'die', 'der'], correct: 0 },
-    { type: 'gap', context: '✏️ was', question: 'Alles, _____ er sagte, war gelogen.', answer: 'was', alternatives: ['Was'] },
-    { type: 'mc', context: '✏️ Verschachtelt', question: 'Der Mann, den die Frau, _____ dort steht, kennt, ist Arzt.', options: ['die', 'der', 'den', 'dem'], correct: 0 },
-    { type: 'mc', context: '✏️ Verschachtelt', question: 'Das Buch, das der Autor, _____ ich bewundere, geschrieben hat, ist toll.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 },
-    { type: 'mc', context: '✏️ wo/in dem', question: 'Das Zimmer, _____ ich schlafe, ist klein. (beide möglich?)', options: ['wo / in dem', 'nur wo', 'nur in dem', 'keins'], correct: 0 },
-    { type: 'mc', context: '✏️ worauf/auf das', question: 'Das ist das, _____ ich mich freue. (umgangssprachlich)', options: ['worauf', 'auf das', 'auf dem', 'was'], correct: 0 },
-    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Der Mann, dessen ich kenne, ist nett.', 'Der Mann, dessen Auto rot ist, ist reich.', 'Der Mann, den ich kenne, ist nett.', 'Der Mann, dem ich helfe, ist alt.'], correct: 0 },
-    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Das ist alles, das ich weiß.', 'Das ist alles, was ich weiß.', 'Das ist nichts, was mich interessiert.', 'Er kam zu spät, was mich ärgerte.'], correct: 0 },
+    // NOMINATIV RELATIVSÄTZE (8)
+    { type: 'mc', context: '✏️ Nominativ', question: 'Der Mann, _____ dort steht, ist mein Lehrer.', options: ['der', 'den', 'dem', 'dessen'], correct: 0 },
+    { type: 'gap', context: '✏️ Nominativ', question: 'Die Frau, _____ dort singt, ist sehr bekannt.', answer: 'die', alternatives: ['Die'] },
+    { type: 'mc', context: '✏️ Nominativ', question: 'Das Kind, _____ dort spielt, ist fünf Jahre alt.', options: ['das', 'den', 'dem', 'der'], correct: 0 },
+    { type: 'gap', context: '✏️ Nominativ', question: 'Die Leute, _____ dort tanzen, sind aus Spanien.', answer: 'die', alternatives: ['Die'] },
+    { type: 'mc', context: '✏️ Nominativ mit Perfekt', question: 'Der Student, _____ die Prüfung bestanden hat, ist glücklich.', options: ['der', 'den', 'dem', 'das'], correct: 0 },
+    { type: 'mc', context: '✏️ Nominativ mit sein', question: 'Die Tasche, _____ auf dem Tisch ist, gehört mir.', options: ['die', 'der', 'den', 'dem'], correct: 0 },
+    { type: 'gap', context: '✏️ Nominativ komplex', question: 'Das ist der Kollege, _____ mir immer hilft.', answer: 'der', alternatives: ['Der'] },
+    { type: 'mc', context: '✏️ Nominativ komplex', question: 'Kennst du die Lehrerin, _____ gestern krank war?', options: ['die', 'der', 'den', 'dem'], correct: 0 },
+    // AKKUSATIV RELATIVSÄTZE (8)
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Der Mann, _____ ich gestern getroffen habe, ist sehr nett.', options: ['den', 'der', 'dem', 'dessen'], correct: 0 },
+    { type: 'gap', context: '✏️ Akkusativ', question: 'Das Buch, _____ ich gelesen habe, war spannend.', answer: 'das', alternatives: ['Das'] },
+    { type: 'mc', context: '✏️ Akkusativ', question: 'Die Frau, _____ du kennst, wohnt in Berlin.', options: ['die', 'der', 'den', 'dem'], correct: 0 },
+    { type: 'gap', context: '✏️ Akkusativ', question: 'Die Filme, _____ wir gesehen haben, waren toll.', answer: 'die', alternatives: ['Die'] },
+    { type: 'mc', context: '✏️ Akkusativ komplex', question: 'Das ist der Computer, _____ mein Bruder mir geschenkt hat.', options: ['den', 'der', 'dem', 'das'], correct: 0 },
+    { type: 'mc', context: '✏️ Akkusativ komplex', question: 'Wo ist die Zeitung, _____ ich heute Morgen gekauft habe?', options: ['die', 'der', 'den', 'dem'], correct: 0 },
+    { type: 'gap', context: '✏️ Akkusativ Passiv', question: 'Das Haus, _____ letztes Jahr gebaut wurde, ist schön.', answer: 'das', alternatives: ['Das'] },
+    { type: 'mc', context: '✏️ Akkusativ Passiv', question: 'Der Brief, _____ gestern geschrieben wurde, ist wichtig.', options: ['der', 'den', 'dem', 'dessen'], correct: 0 },
+    // DATIV RELATIVSÄTZE (8)
+    { type: 'mc', context: '✏️ Dativ', question: 'Der Freund, _____ ich geholfen habe, war sehr dankbar.', options: ['dem', 'den', 'der', 'dessen'], correct: 0 },
+    { type: 'gap', context: '✏️ Dativ', question: 'Die Lehrerin, _____ ich danken möchte, ist hier.', answer: 'der', alternatives: ['Der'] },
+    { type: 'mc', context: '✏️ Dativ', question: 'Das Kind, _____ der Ball gehört, weint.', options: ['dem', 'den', 'der', 'das'], correct: 0 },
+    { type: 'gap', context: '✏️ Dativ Plural', question: 'Die Leute, _____ ich gratuliert habe, waren froh.', answer: 'denen', alternatives: ['Denen'] },
+    { type: 'mc', context: '✏️ Dativ mit Präposition', question: 'Die Stadt, in _____ ich wohne, ist schön.', options: ['der', 'die', 'den', 'dem'], correct: 0 },
+    { type: 'gap', context: '✏️ Dativ mit Präposition', question: 'Das ist der Park, in _____ wir oft spazieren gehen.', answer: 'dem', alternatives: ['Dem'] },
+    { type: 'mc', context: '✏️ Dativ komplex', question: 'Die Kollegin, mit _____ ich arbeite, ist sehr nett.', options: ['der', 'die', 'den', 'dem'], correct: 0 },
+    { type: 'mc', context: '✏️ Dativ komplex', question: 'Wo ist das Restaurant, in _____ wir gestern gegessen haben?', options: ['dem', 'den', 'der', 'das'], correct: 0 },
+    // FEHLERSUCHE & KOMBINIERT (6)
+    { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist FALSCH?', options: ['Der Mann, den dort steht, ist nett.', 'Der Mann, der dort steht, ist nett.', 'Der Mann, den ich kenne, ist nett.', 'Der Mann, dem ich helfe, ist alt.'], correct: 0 },
     { type: 'mc', context: '✏️ Fehler', question: 'Welcher Satz ist RICHTIG?', options: ['Die Leute, denen ich gratuliert habe, waren froh.', 'Die Leute, die ich gratuliert habe, waren froh.', 'Die Leute, den ich gratuliert habe, waren froh.', 'Die Leute, der ich gratuliert habe, waren froh.'], correct: 0 },
-    { type: 'mc', context: '✏️ Passiv', question: 'Das ist das Haus, das letztes Jahr _____ wurde.', options: ['gebaut', 'bauen', 'gebauen', 'baut'], correct: 0 },
-    { type: 'mc', context: '✏️ Passiv', question: 'Der Brief, der gestern _____ wurde, ist wichtig.', options: ['geschrieben', 'schreiben', 'geschreiben', 'schreibt'], correct: 0 },
-    { type: 'gap', context: '✏️ Komplex', question: 'Die Stadt, in _____ ich aufgewachsen bin, hat sich sehr verändert.', answer: 'der', alternatives: ['Der'] },
-    { type: 'gap', context: '✏️ Komplex', question: 'Das ist der Kollege, ohne _____ Hilfe ich das nicht geschafft hätte.', answer: 'dessen', alternatives: ['Dessen'] },
-    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Der', 'Mann', ',', 'dessen', 'Auto', 'rot', 'ist', ',', 'wohnt', 'hier', '.'], correct: ['Der', 'Mann', ',', 'dessen', 'Auto', 'rot', 'ist', ',', 'wohnt', 'hier', '.'] },
-    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Das', 'ist', 'alles', ',', 'was', 'ich', 'weiß', '.'], correct: ['Das', 'ist', 'alles', ',', 'was', 'ich', 'weiß', '.'] },
-    { type: 'match', context: '🔗 Genitiv', question: 'Ordne zu:', pairs: [{ left: 'der Mann', right: 'dessen' }, { left: 'die Frau', right: 'deren' }, { left: 'das Kind', right: 'dessen' }, { left: 'die Leute', right: 'deren' }]},
-    { type: 'match', context: '🔗 was/wo', question: 'Ordne zu:', pairs: [{ left: 'nach alles/nichts/etwas', right: 'was' }, { left: 'nach Superlativ', right: 'was' }, { left: 'für Orte', right: 'wo' }, { left: 'nach ganzen Sätzen', right: 'was' }]},
-    { type: 'mc', context: '✏️ Sehr schwer', question: 'Die Frau, mit _____ Mann ich gesprochen habe, ist Lehrerin.', options: ['deren', 'dessen', 'der', 'dem'], correct: 0 },
-    { type: 'mc', context: '✏️ Sehr schwer', question: 'Das ist etwas, _____ ich mich nicht erinnern kann.', options: ['woran', 'an das', 'was', 'Alle richtig'], correct: 0 }
+    { type: 'mc', context: '✏️ Kombiniert Nom/Akk', question: 'Das ist die Frau, _____ mich gestern angerufen hat.', options: ['die', 'der', 'den', 'dem'], correct: 0 },
+    { type: 'mc', context: '✏️ Kombiniert Akk/Dat', question: 'Der Arzt, _____ ich vertraue, ist sehr gut.', options: ['dem', 'den', 'der', 'die'], correct: 0 },
+    { type: 'mc', context: '✏️ Alle Fälle', question: 'Welcher Fall? "Das Buch, das ich lese, ist spannend."', options: ['Akkusativ', 'Nominativ', 'Dativ', 'Genitiv'], correct: 0 },
+    { type: 'mc', context: '✏️ Alle Fälle', question: 'Welcher Fall? "Die Frau, der ich helfe, ist alt."', options: ['Dativ', 'Nominativ', 'Akkusativ', 'Genitiv'], correct: 0 },
+    // ORDERING & MATCHING (4)
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Der', 'Mann', ',', 'den', 'ich', 'kenne', ',', 'ist', 'sehr', 'nett', '.'], correct: ['Der', 'Mann', ',', 'den', 'ich', 'kenne', ',', 'ist', 'sehr', 'nett', '.'] },
+    { type: 'order', context: '🔀 Satzstellung', question: 'Ordne:', words: ['Die', 'Frau', ',', 'der', 'ich', 'geholfen', 'habe', ',', 'war', 'dankbar', '.'], correct: ['Die', 'Frau', ',', 'der', 'ich', 'geholfen', 'habe', ',', 'war', 'dankbar', '.'] },
+    { type: 'match', context: '🔗 Fälle', question: 'Ordne zu:', pairs: [{ left: 'der/die/das (Subjekt)', right: 'Nominativ' }, { left: 'den/die/das (Objekt)', right: 'Akkusativ' }, { left: 'dem/der/dem (indirektes Objekt)', right: 'Dativ' }, { left: 'denen (Plural)', right: 'Dativ Plural' }]},
+    { type: 'match', context: '🔗 Verben', question: 'Ordne den Fall zu:', pairs: [{ left: 'kennen', right: 'Akkusativ' }, { left: 'helfen', right: 'Dativ' }, { left: 'gehören', right: 'Dativ' }, { left: 'sehen', right: 'Akkusativ' }]}
 ];
 
 let currentQuestion = 0, score = 0, selectedLevel = '', currentQuestions = [];
