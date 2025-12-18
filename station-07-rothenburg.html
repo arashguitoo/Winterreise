@@ -443,6 +443,7 @@ function showResults() {
     document.getElementById('resultsMessage').textContent = message;
     localStorage.setItem('station7_gems', gems);
     localStorage.setItem('station7_completed', percentage >= 50);
+    localStorage.setItem('station7_' + selectedLevel, percentage >= 50);
 }
 
 function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }

@@ -757,6 +757,7 @@ function showResults() {
     
     localStorage.setItem('station1_gems', gems);
     localStorage.setItem('station1_completed', percentage >= 50);
+    localStorage.setItem('station1_' + selectedLevel, percentage >= 50);
 }
 
 function restartQuiz() {

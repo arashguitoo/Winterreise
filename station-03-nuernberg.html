@@ -453,6 +453,7 @@ function showResults() {
     document.getElementById('resultsMessage').textContent = message;
     localStorage.setItem('station3_gems', gems);
     localStorage.setItem('station3_completed', percentage >= 50);
+    localStorage.setItem('station3_' + selectedLevel, percentage >= 50);
 }
 
 function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }

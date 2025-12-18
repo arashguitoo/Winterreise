@@ -438,6 +438,7 @@ function showResults() {
     document.getElementById('resultsMessage').textContent = message;
     localStorage.setItem('station9_gems', gems);
     localStorage.setItem('station9_completed', percentage >= 50);
+    localStorage.setItem('station9_' + selectedLevel, percentage >= 50);
 }
 
 function restartQuiz() { document.getElementById('resultsSection').classList.remove('active'); document.getElementById('levelSelection').style.display = 'block'; }

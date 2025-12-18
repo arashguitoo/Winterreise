@@ -248,13 +248,161 @@
             margin-top: 20px;
         }
         .reset-btn:hover { background: rgba(230, 57, 70, 0.3); }
+        
+        /* Name Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal-overlay.hidden { display: none; }
+        .modal-box {
+            background: linear-gradient(135deg, #1a3a5c, #2d5a87);
+            border: 3px solid #FFD700;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(255,215,0,0.3);
+        }
+        .modal-box h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #FFD700;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .modal-box p { color: #E0F4FF; margin-bottom: 20px; }
+        .name-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .name-input::placeholder { color: rgba(255,255,255,0.5); }
+        .start-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            color: #1a1a2e;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,165,0,0.1));
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .welcome-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3em;
+            color: #FFD700;
+        }
+        .change-name-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 8px;
+            color: #E0F4FF;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        /* Level Badges */
+        .level-badges {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        .level-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .level-badge.rubin { background: #E63946; }
+        .level-badge.smaragd { background: #06D6A0; }
+        .level-badge.amethyst { background: #9D4EDD; }
+        .level-badge.diamant { background: linear-gradient(135deg, #FFD700, #FFF); color: #1a1a2e; }
+        .level-badge.empty { background: rgba(255,255,255,0.2); }
+        
+        /* Certificate */
+        .certificate-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,165,0,0.1));
+            border: 3px solid #FFD700;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            display: none;
+        }
+        .certificate-section.show { display: block; }
+        .certificate-section h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #FFD700;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        .certificate-name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5em;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+            margin: 20px 0;
+        }
+        .certificate-date { color: #7DD3FC; margin-top: 15px; }
     </style>
 </head>
 <body>
+<!-- Name Modal -->
+<div class="modal-overlay" id="nameModal">
+    <div class="modal-box">
+        <h2>❄️ Willkommen zur Winterreise! ❄️</h2>
+        <p>Wie heißt du, junger Abenteurer?</p>
+        <input type="text" class="name-input" id="playerName" placeholder="Dein Name..." maxlength="20">
+        <br>
+        <button class="start-btn" id="startBtn" onclick="saveName()" disabled>🚀 Reise starten!</button>
+    </div>
+</div>
+
 <!-- ❄️ Schneeflocken Container -->
 <div class="snowfall" id="snowfall"></div>
 
 <div class="container">
+    
+    <!-- Welcome Banner -->
+    <div class="welcome-banner" id="welcomeBanner" style="display: none;">
+        <span class="welcome-text">👋 Hallo, <span id="displayName"></span>!</span>
+        <button class="change-name-btn" onclick="changeName()">✏️ Name ändern</button>
+    </div>
     <div class="header">
         <div class="header-icon">❄️🗺️❄️</div>
         <h1>Die Winterreise</h1>
@@ -298,7 +446,11 @@
             <div class="station-title">München</div>
             <div class="station-topic">Präsens</div>
             <div class="station-desc">Lerne die Gegenwart! Was machst du? Was isst er?</div>
-            <div class="crystal-badge locked">💎 Blauer Kristall</div>
+            <div class="level-badges" id="badges1">
+                <span class="level-badge empty">R</span>
+                <span class="level-badge empty">S</span>
+                <span class="level-badge empty">A</span>
+            </div>
         </a>
         
         <a href="station-02-alpen.html" class="station-card" data-station="2">
@@ -309,7 +461,7 @@
             <div class="station-title">Alpen</div>
             <div class="station-topic">Perfekt</div>
             <div class="station-desc">Was hast du gemacht? Wohin bist du gefahren?</div>
-            <div class="crystal-badge locked">❄️ Eiskristall</div>
+            <div class="level-badges" id="badges2"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-03-nuernberg.html" class="station-card" data-station="3">
@@ -320,7 +472,7 @@
             <div class="station-title">Nürnberg</div>
             <div class="station-topic">Präteritum</div>
             <div class="station-desc">Es war einmal... Die schriftliche Vergangenheit!</div>
-            <div class="crystal-badge locked">🔶 Oranger Kristall</div>
+            <div class="level-badges" id="badges3"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-04-heidelberg.html" class="station-card" data-station="4">
@@ -331,7 +483,7 @@
             <div class="station-title">Heidelberg</div>
             <div class="station-topic">Akkusativ</div>
             <div class="station-desc">Wen oder was? Der direkte Fall!</div>
-            <div class="crystal-badge locked">💜 Violetter Kristall</div>
+            <div class="level-badges" id="badges4"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-05-schwarzwald.html" class="station-card" data-station="5">
@@ -342,7 +494,7 @@
             <div class="station-title">Schwarzwald</div>
             <div class="station-topic">Dativ</div>
             <div class="station-desc">Wem? Der indirekte Fall!</div>
-            <div class="crystal-badge locked">💚 Grüner Kristall</div>
+            <div class="level-badges" id="badges5"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-06-bodensee.html" class="station-card" data-station="6">
@@ -353,7 +505,7 @@
             <div class="station-title">Bodensee</div>
             <div class="station-topic">Wechselpräpositionen</div>
             <div class="station-desc">Wo oder wohin? Akkusativ oder Dativ?</div>
-            <div class="crystal-badge locked">💙 Aquamarin</div>
+            <div class="level-badges" id="badges6"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-07-rothenburg.html" class="station-card" data-station="7">
@@ -364,7 +516,7 @@
             <div class="station-title">Rothenburg</div>
             <div class="station-topic">Nebensätze</div>
             <div class="station-desc">weil, dass, wenn - Verb am Ende!</div>
-            <div class="crystal-badge locked">❤️ Roter Kristall</div>
+            <div class="level-badges" id="badges7"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-08-leipzig.html" class="station-card" data-station="8">
@@ -375,7 +527,7 @@
             <div class="station-title">Leipzig</div>
             <div class="station-topic">Konjunktiv II</div>
             <div class="station-desc">Wenn ich reich wäre... Wünsche und Träume!</div>
-            <div class="crystal-badge locked">💛 Gelber Kristall</div>
+            <div class="level-badges" id="badges8"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-09-potsdam.html" class="station-card" data-station="9">
@@ -386,7 +538,7 @@
             <div class="station-title">Potsdam</div>
             <div class="station-topic">Futur I</div>
             <div class="station-desc">Ich werde... Die Zukunft!</div>
-            <div class="crystal-badge locked">💚 Jade-Kristall</div>
+            <div class="level-badges" id="badges9"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-10-luebeck.html" class="station-card" data-station="10">
@@ -397,7 +549,7 @@
             <div class="station-title">Lübeck</div>
             <div class="station-topic">Komparativ & Superlativ</div>
             <div class="station-desc">Größer, am größten! Vergleiche!</div>
-            <div class="crystal-badge locked">🩷 Rosa Kristall</div>
+            <div class="level-badges" id="badges10"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-11-dresden.html" class="station-card" data-station="11">
@@ -408,7 +560,7 @@
             <div class="station-title">Dresden</div>
             <div class="station-topic">Reflexivverben</div>
             <div class="station-desc">Ich freue mich! Ich wasche mir die Hände!</div>
-            <div class="crystal-badge locked">🥇 Goldener Kristall</div>
+            <div class="level-badges" id="badges11"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-12-hamburg.html" class="station-card" data-station="12">
@@ -419,7 +571,7 @@
             <div class="station-title">Hamburg</div>
             <div class="station-topic">Possessivpronomen</div>
             <div class="station-desc">Mein, dein, sein - wem gehört das?</div>
-            <div class="crystal-badge locked">🩶 Silberner Kristall</div>
+            <div class="level-badges" id="badges12"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-13-bremen.html" class="station-card" data-station="13">
@@ -430,7 +582,7 @@
             <div class="station-title">Bremen</div>
             <div class="station-topic">Verben mit Dativ & Akkusativ</div>
             <div class="station-desc">Ich gebe dir das Buch. Zwei Objekte!</div>
-            <div class="crystal-badge locked">🥉 Bronze-Kristall</div>
+            <div class="level-badges" id="badges13"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-14-hannover.html" class="station-card" data-station="14">
@@ -441,7 +593,7 @@
             <div class="station-title">Hannover</div>
             <div class="station-topic">Modalverben Präteritum</div>
             <div class="station-desc">konnte, musste, wollte - ohne Umlaut!</div>
-            <div class="crystal-badge locked">🧡 Kupfer-Kristall</div>
+            <div class="level-badges" id="badges14"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-15-koeln.html" class="station-card" data-station="15">
@@ -452,7 +604,7 @@
             <div class="station-title">Köln</div>
             <div class="station-topic">Plusquamperfekt</div>
             <div class="station-desc">Nachdem ich gegessen hatte... Vorvergangenheit!</div>
-            <div class="crystal-badge locked">🟠 Bernstein-Kristall</div>
+            <div class="level-badges" id="badges15"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-16-frankfurt.html" class="station-card" data-station="16">
@@ -463,7 +615,7 @@
             <div class="station-title">Frankfurt</div>
             <div class="station-topic">Relativsätze</div>
             <div class="station-desc">Der Mann, der dort steht... Zusatzinfos!</div>
-            <div class="crystal-badge locked">🩵 Türkis-Kristall</div>
+            <div class="level-badges" id="badges16"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-17-stuttgart.html" class="station-card" data-station="17">
@@ -474,7 +626,7 @@
             <div class="station-title">Stuttgart</div>
             <div class="station-topic">Passiv</div>
             <div class="station-desc">Das Haus wird gebaut. Die Handlung zählt!</div>
-            <div class="crystal-badge locked">⬜ Platin-Kristall</div>
+            <div class="level-badges" id="badges17"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span></div>
         </a>
         
         <a href="station-18-berlin.html" class="station-card finale" data-station="18">
@@ -485,8 +637,20 @@
             <div class="station-title">Berlin - Das Große Finale!</div>
             <div class="station-topic">Meisterprüfung - Alle Themen!</div>
             <div class="station-desc">Die ultimative Herausforderung! Teste dein Wissen aus allen 17 Stationen und werde zum Grammatik-Meister!</div>
-            <div class="crystal-badge locked">💎 Diamant der deutschen Sprache</div>
+            <div class="level-badges" id="badges18"><span class="level-badge empty">R</span><span class="level-badge empty">S</span><span class="level-badge empty">A</span><span class="level-badge empty">D</span></div>
         </a>
+    </div>
+    
+    <!-- Zertifikat -->
+    <div class="certificate-section" id="certificateSection">
+        <h2>🎓 ZERTIFIKAT 🎓</h2>
+        <p>Hiermit wird bestätigt, dass</p>
+        <div class="certificate-name" id="certName"></div>
+        <p>die <strong>Winterreise</strong> erfolgreich abgeschlossen</p>
+        <p>und alle 18 Kristalle gesammelt hat!</p>
+        <p style="font-size: 2em; margin: 20px 0;">💎🏆💎</p>
+        <p><strong>Grammatik-Meister der deutschen Sprache</strong></p>
+        <p class="certificate-date" id="certDate"></p>
     </div>
     
     <div class="footer">
@@ -497,42 +661,95 @@
 </div>
 
 <script>
+// Check if name exists
+document.addEventListener('DOMContentLoaded', function() {
+    const playerName = localStorage.getItem('winterreise_player');
+    
+    if (playerName) {
+        document.getElementById('nameModal').classList.add('hidden');
+        document.getElementById('welcomeBanner').style.display = 'flex';
+        document.getElementById('displayName').textContent = playerName;
+    }
+    
+    // Enable start button when name entered
+    document.getElementById('playerName').addEventListener('input', function() {
+        document.getElementById('startBtn').disabled = this.value.trim().length < 2;
+    });
+    
+    // Enter key to submit
+    document.getElementById('playerName').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && this.value.trim().length >= 2) {
+            saveName();
+        }
+    });
+    
+    updateStats();
+    createSnowflakes();
+});
+
+function saveName() {
+    const name = document.getElementById('playerName').value.trim();
+    if (name.length >= 2) {
+        localStorage.setItem('winterreise_player', name);
+        document.getElementById('nameModal').classList.add('hidden');
+        document.getElementById('welcomeBanner').style.display = 'flex';
+        document.getElementById('displayName').textContent = name;
+    }
+}
+
+function changeName() {
+    const newName = prompt('Neuer Name:', localStorage.getItem('winterreise_player') || '');
+    if (newName && newName.trim().length >= 2) {
+        localStorage.setItem('winterreise_player', newName.trim());
+        document.getElementById('displayName').textContent = newName.trim();
+    }
+}
+
 function updateStats() {
     let completed = 0;
     let gems = 0;
-    let crystals = 0;
     
     for (let i = 1; i <= 18; i++) {
-        const isCompleted = localStorage.getItem(`station${i}_completed`) === 'true';
         const stationGems = parseInt(localStorage.getItem(`station${i}_gems`) || 0);
-        
-        if (isCompleted) {
-            completed++;
-            crystals++;
-        }
         gems += stationGems;
         
-        // Update card styling
-        const card = document.querySelector(`[data-station="${i}"]`);
-        if (card) {
-            if (isCompleted) {
-                card.classList.add('completed');
-                const badge = card.querySelector('.crystal-badge');
-                if (badge) {
-                    badge.classList.remove('locked');
-                    badge.classList.add('unlocked');
-                    badge.textContent = '✅ ' + badge.textContent.replace('💎 ', '').replace('❄️ ', '').replace('🔶 ', '').replace('💜 ', '').replace('💚 ', '').replace('💙 ', '').replace('❤️ ', '').replace('💛 ', '').replace('🩷 ', '').replace('🥇 ', '').replace('🩶 ', '').replace('🥉 ', '').replace('🧡 ', '').replace('🟠 ', '').replace('🩵 ', '').replace('⬜ ', '');
-                }
-            }
+        // Check levels completed
+        const rubinDone = localStorage.getItem(`station${i}_rubin`) === 'true';
+        const smaragdDone = localStorage.getItem(`station${i}_smaragd`) === 'true';
+        const amethystDone = localStorage.getItem(`station${i}_amethyst`) === 'true';
+        const diamantDone = localStorage.getItem(`station${i}_diamant`) === 'true';
+        
+        // Update badges
+        const badgesEl = document.getElementById(`badges${i}`);
+        if (badgesEl) {
+            const badges = badgesEl.querySelectorAll('.level-badge');
+            if (badges[0] && rubinDone) { badges[0].classList.remove('empty'); badges[0].classList.add('rubin'); }
+            if (badges[1] && smaragdDone) { badges[1].classList.remove('empty'); badges[1].classList.add('smaragd'); }
+            if (badges[2] && amethystDone) { badges[2].classList.remove('empty'); badges[2].classList.add('amethyst'); }
+            if (badges[3] && diamantDone) { badges[3].classList.remove('empty'); badges[3].classList.add('diamant'); }
+        }
+        
+        // Count as completed if any level done
+        if (rubinDone || smaragdDone || amethystDone || diamantDone) {
+            completed++;
+            // Mark card as completed
+            const card = document.querySelector(`[data-station="${i}"]`);
+            if (card) card.classList.add('completed');
         }
     }
     
     document.getElementById('completedCount').textContent = completed;
     document.getElementById('totalGems').textContent = gems + ' 💎';
-    document.getElementById('crystalCount').textContent = crystals + '/18';
+    document.getElementById('crystalCount').textContent = completed + '/18';
     
-    // Check for master status
-    if (localStorage.getItem('winterreise_master') === 'true') {
+    // Show certificate if all 18 completed
+    const playerName = localStorage.getItem('winterreise_player');
+    if (completed >= 18 && playerName) {
+        document.getElementById('certificateSection').classList.add('show');
+        document.getElementById('certName').textContent = playerName;
+        document.getElementById('certDate').textContent = new Date().toLocaleDateString('de-DE', { 
+            year: 'numeric', month: 'long', day: 'numeric' 
+        });
         document.querySelector('.header h1').textContent = '🏆 Die Winterreise 🏆';
     }
 }
@@ -542,17 +759,16 @@ function resetProgress() {
         for (let i = 1; i <= 18; i++) {
             localStorage.removeItem(`station${i}_completed`);
             localStorage.removeItem(`station${i}_gems`);
+            localStorage.removeItem(`station${i}_rubin`);
+            localStorage.removeItem(`station${i}_smaragd`);
+            localStorage.removeItem(`station${i}_amethyst`);
+            localStorage.removeItem(`station${i}_diamant`);
         }
         localStorage.removeItem('winterreise_master');
+        // Keep player name
         location.reload();
     }
 }
-
-// Initialize on load
-document.addEventListener('DOMContentLoaded', function() {
-    updateStats();
-    createSnowflakes();
-});
 
 // ❄️ SCHNEEFLOCKEN ANIMATION ❄️
 function createSnowflakes() {
